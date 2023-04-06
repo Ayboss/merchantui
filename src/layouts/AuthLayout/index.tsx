@@ -7,6 +7,7 @@ import {
   AuthHero,
   Title,
   Subtitle,
+  AuthLine,
 } from "./styles";
 
 type AuthLayoutProps = {
@@ -19,12 +20,14 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       <AuthHeader />
       <AuthBody>
         <AuthHero>
+          <AuthLine />
           <Title>
-            Endless possibilities for online and offline payments in Africa
+            Endless <br /> possibilities for <br /> online and offline <br />{" "}
+            payments in Africa
           </Title>
           <Subtitle>
-            OnUs finacial services enable African businesses to be paid by
-            anyone, anywhere in the world.
+            OnUs finacial services enable African businesses to be <br /> paid
+            by anyone, anywhere in the world.
           </Subtitle>
         </AuthHero>
         {children}
