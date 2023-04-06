@@ -1,10 +1,11 @@
 import { useState } from "react";
+import Login from "./views/Auth/Login";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="font-bold underline">Merchants UI</h1>
-    </div>
+    <>
+      <Login />
+    </>
   );
 }
 
