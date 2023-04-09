@@ -1,12 +1,8 @@
 import { useState } from "react";
-import Login from "./views/Auth/Login";
+import { AppRouter } from "./routes";
 
 function App() {
-  return (
-    <>
-      <Login />
-    </>
-  );
+  return <AppRouter />;
 }
 
 export default App;

@@ -8,6 +8,7 @@ justify-between
 `
 export const AuthBody = tw.div`
 h-full
+w-full
 bg-[#F9FAFA]
  px-[100px]
  flex
