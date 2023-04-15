@@ -5,6 +5,7 @@ h-screen
 flex
 flex-col
 justify-between
+flex-nowrap
 `
 export const AuthBody = tw.div`
 h-full
@@ -13,11 +14,15 @@ bg-[#F9FAFA]
  px-[100px]
  flex
  justify-between
+ 
 `
 export const AuthHero = tw.div`
 max-w-[50%]
-pt-[80px]
+pt-[130px]
 mb-[20px]
+flex
+flex-col
+justify-center
 `
 export const AuthLine = tw.div`
 w-[150px]

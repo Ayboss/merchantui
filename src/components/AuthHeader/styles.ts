@@ -20,11 +20,13 @@ color: #FFFFFF
 `
 
 export const AuthLink = tw.button`
-h-[59px]
+h-[56px]
 w-[185px]
 bg-[#6231F4]
 text-[#fff]
 text-[16px]
 leading-[20px]
+font-semibold
+rounded-sm
 `
 

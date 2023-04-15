@@ -13,6 +13,7 @@ background-position: right;
 background-size: contain;
 padding: 72px 100px 0px  100px ;
 color: #fff;
+flex-shrink: 0;
 `
 
 export const AuthFooterText = tw.p` 

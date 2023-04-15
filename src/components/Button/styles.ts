@@ -9,4 +9,5 @@ text-[16px]
 leading-[20px]
 font-bold
 mt-10
+rounded-sm
 `

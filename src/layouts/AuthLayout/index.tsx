@@ -9,15 +9,18 @@ import {
   Subtitle,
   AuthLine,
 } from "./styles";
+import { useLocation } from "react-router-dom";
 
-type AuthLayoutProps = {
+interface AuthLayoutProps {
   children: React.ReactNode;
-};
+}
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
+  const location = useLocation();
+
   return (
     <AuthLayoutContainer>
-      <AuthHeader />
+      <AuthHeader ctaUrl={location.pathname} />
       <AuthBody>
         <AuthHero>
           <AuthLine />

@@ -1,23 +1,23 @@
 import tw from "tailwind-styled-components"
 
 
-export const LoginContainer = tw.div`
+export const AuthContainer = tw.div`
 w-[50%]
 relative
-mt-10
 flex
 justify-end
-
 `
 
-export const LoginForm = tw.form`
+export const AuthForm = tw.form`
 bg-[#fff]
-h-auto
 w-[500px]
 absolute
+z-10
+top-[90px]
 rounded
 p-[50px]
 `
+
 export const FormHeader = tw.div`
 text-left
 `
@@ -44,3 +44,10 @@ export const FormLink = tw.p`
     mt-5
     leading-[17px]
 `
+
+export const FormGroup = tw.div` 
+flex 
+justify-between
+items-center
+gap-5
+ `

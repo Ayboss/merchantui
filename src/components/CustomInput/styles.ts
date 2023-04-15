@@ -1,16 +1,13 @@
-import React from "react";
+
 import tw from "tailwind-styled-components";
 
-interface IProps {
-  activeInput: any;
-}
 
 export const FormGroup = tw.div`
-
+mt-5
 `;
 
-export const InputLabel = tw.label<IProps>`
-text-[${(props) => (props.activeInput ? "#333333" : "#6231F4")}]
+export const InputLabel = tw.label`
+text-[#333333]
 text-[16px]
 leading-[17px]
 font-medium

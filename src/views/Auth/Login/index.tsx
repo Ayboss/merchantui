@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
-  LoginContainer,
-  LoginForm,
+  AuthContainer,
+  AuthForm,
   FormHeader,
   Title,
   Subtitle,
   FormBody,
   FormLink,
-} from "./styles";
+} from "../styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -15,10 +15,9 @@ import AuthLayout from "../../../layouts/AuthLayout";
 import CustomInput from "../../../components/CustomInput";
 import PasswordInput from "../../../components/PasswordInput";
 import Button from "../../../components/Button";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   const loginSchema = yup.object().shape({
@@ -35,13 +34,13 @@ const Login = () => {
   });
 
   const submitForm = async (data: any) => {
-    console.log(data);
+    console.log("LOGIN FORM", data);
   };
 
   return (
     <AuthLayout>
-      <LoginContainer>
-        <LoginForm onSubmit={handleSubmit(submitForm)}>
+      <AuthContainer>
+        <AuthForm onSubmit={handleSubmit(submitForm)}>
           <FormHeader>
             <Title>Log in</Title>
             <Subtitle>
@@ -53,23 +52,23 @@ const Login = () => {
               label="Email Address"
               type="email"
               placeholder="e.g yourmail@mail.com"
-              name="email"
-              ref={register}
+              {...register("email")}
             />
             <PasswordInput
               label="Password"
               placeholder="Password"
-              name="password"
-              ref={register}
+              {...register("password")}
             />
             <Button name="Login" isBusy={loading} onClick={() => {}} />
             <FormLink>
               Don’t have an account ?{" "}
-              <span className="font-bold">Sign Up now !</span>{" "}
+              <Link to="/signup" className="font-bold">
+                Sign Up now !
+              </Link>{" "}
             </FormLink>
           </FormBody>
-        </LoginForm>
-      </LoginContainer>
+        </AuthForm>
+      </AuthContainer>
     </AuthLayout>
   );
 };

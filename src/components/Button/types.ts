@@ -4,5 +4,5 @@ export type ButtonPropsType = {
   name: string | JSX.Element;
   className?: string;
   isBusy?: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 };
