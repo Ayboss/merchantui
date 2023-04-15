@@ -11,10 +11,10 @@ import {
   LinkIcon,
 } from "./styles";
 import DashboardLayout from "../../layouts/DashboardLayout";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { NavLinks } from "../../constants";
 import DashboardTopbar from "../../components/DashboardTopbar";
-import { DashboardRoutes } from "../../routes";
+import GetStarted from "./GetStarted";
 
 const MerchantsDashboard = () => {
   return (
@@ -36,7 +36,7 @@ const MerchantsDashboard = () => {
       </DashboardSidebar>
       <DashboardBody>
         <DashboardTopbar />
-        <DashboardRoutes />
+        <Outlet />
       </DashboardBody>
     </DashboardLayout>
   );

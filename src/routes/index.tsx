@@ -7,22 +7,12 @@ import GetStarted from "../views/Dashboard/GetStarted";
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="dashboard" element={<Dashboard />}>
-        <Route path="getstarted" element={<GetStarted />} />
+      <Route path="/" element={<Dashboard />}>
+        <Route path="/business-activation" element={<GetStarted />} />
       </Route>
-
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
-      <Route path="getstarted" element={<GetStarted />} />
-    </Routes>
-  );
-};
-
-export const DashboardRoutes = () => {
-  return (
-    <Routes>
-      {/* <Route path="getstarted" element={<GetStarted />} /> */}
     </Routes>
   );
 };
