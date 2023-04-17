@@ -5,4 +5,5 @@ export type ButtonPropsType = {
   className?: string;
   isBusy?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  disabled?: boolean;
 };

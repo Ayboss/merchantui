@@ -7,6 +7,9 @@ import StorefrontIcon from "../assets/icons/storefront-icon.svg";
 import DevelopersIcon from "../assets/icons/developers-icon.svg";
 import SettingsIcon from "../assets/icons/settings-icon.svg";
 
+import SelectButtonIcon1 from "../assets/icons/selectButton-icon1.svg";
+import SelectButtonIcon2 from "../assets/icons/selectButton-icon2.svg";
+
 export const NavLinks = [
   {
     url: "/",
@@ -47,5 +50,19 @@ export const NavLinks = [
     url: "/settings",
     title: "Settings",
     icon: SettingsIcon,
+  },
+];
+
+export const BusinessTypes = [
+  {
+    selectIcon: SelectButtonIcon1,
+    title: "Registered Business",
+    subtitle:
+      "For business that are registered with a valid identification number",
+  },
+  {
+    selectIcon: SelectButtonIcon2,
+    title: "Starter Business",
+    subtitle: "For  Freelancers and other unregistered businesses",
   },
 ];

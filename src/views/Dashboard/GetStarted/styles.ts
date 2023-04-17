@@ -1,12 +1,11 @@
 import tw from "tailwind-styled-components";
 
 export const BusinessActivation = tw.section`
-h-full
 w-full
 flex 
-items-center
 justify-center
-
+pt-[60px]
+pb-[20px]
 `;
 
 export const Container = tw.div`
@@ -30,4 +29,9 @@ leading-[21px]
 mt-2
 `;
 
-export const FormWrapper = tw.div``;
+export const FormWrapper = tw.div`
+flex
+flex-col
+gap-[24px]
+mt-[30px]
+`;

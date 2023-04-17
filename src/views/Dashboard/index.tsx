@@ -9,6 +9,7 @@ import {
   SidebarNav,
   NavItems,
   LinkIcon,
+  DashboardContent,
 } from "./styles";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { NavLink, Outlet } from "react-router-dom";
@@ -36,7 +37,9 @@ const MerchantsDashboard = () => {
       </DashboardSidebar>
       <DashboardBody>
         <DashboardTopbar />
-        <Outlet />
+        <DashboardContent>
+          <Outlet />
+        </DashboardContent>
       </DashboardBody>
     </DashboardLayout>
   );
