@@ -8,7 +8,7 @@ import {
   BasicInformationForm,
 } from "./styles";
 
-const BasicInformation = () => {
+const BasicInformation = ({ onNext }: any) => {
   return (
     <BasicInformationContainer>
       <Title>BASIC INFORMATION</Title>
@@ -31,6 +31,7 @@ const BasicInformation = () => {
         <Button
           name="Save & Continue"
           className="bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold"
+          onClick={onNext}
         />
       </BasicInformationForm>
       <div className="text-center my-5">

@@ -1,5 +1,6 @@
 import MultiStepContainer from "../../../../../components/MultiStepContainer";
 import StepProgress from "../../../../../components/StepProgress";
+import AddressInformation from "./Steps/AddressInformation";
 import BasicInformation from "./Steps/BasicInformation";
 import {
   BusinessInformationContainer,
@@ -19,6 +20,7 @@ const BusinessInformation = () => {
         <StepProgress activeStep="1" />
         <MultiStepContainer>
           <BasicInformation />
+          <AddressInformation />
         </MultiStepContainer>
       </StepsContainer>
     </BusinessInformationContainer>
