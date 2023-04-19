@@ -66,3 +66,26 @@ export const BusinessTypes = [
     subtitle: "For  Freelancers and other unregistered businesses",
   },
 ];
+
+export const RegisteredBusinessInformation = [
+  {
+    title: "Business Information",
+    url: "business-information",
+  },
+  {
+    title: "Account Information",
+    url: "account-information",
+  },
+  {
+    title: "Business Registration Documents",
+    url: "registration-documents",
+  },
+  {
+    title: "BVN of Primary Officer",
+    url: "bvn-primary-officer",
+  },
+  {
+    title: "Others",
+    url: "others",
+  },
+];

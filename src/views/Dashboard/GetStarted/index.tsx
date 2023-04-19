@@ -10,12 +10,18 @@ import { BusinessTypes } from "../../../constants";
 import { useState } from "react";
 import SelectInput from "../../../components/SelectInput";
 import Button from "../../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const GetStarted = () => {
+  const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
   const busineesCategoryList = [{ title: "Businees1" }, { title: "Businees2" }];
+
+  const handleProceed = () => {
+    navigate("/registered-business/business-information");
+  };
 
   return (
     <BusinessActivation>
@@ -42,7 +48,11 @@ const GetStarted = () => {
             defaultOption="Ex: Financial Services "
             options={busineesCategoryList}
           />
-          <Button name="Save & Proceed" disabled={true} />
+          <Button
+            name="Save & Proceed"
+            disabled={false}
+            onClick={handleProceed}
+          />
         </FormWrapper>
       </Container>
     </BusinessActivation>
