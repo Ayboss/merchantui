@@ -16,3 +16,5 @@ text-[#152A38A6]
 leading-[16px]
 mt-2
 `;
+
+export const StepsContainer = tw.div``;
