@@ -1,5 +1,6 @@
 import MultiStepContainer from "../../../../../components/MultiStepContainer";
 import StepProgress from "../../../../../components/StepProgress";
+import BasicInformation from "./Steps/BasicInformation";
 import {
   BusinessInformationContainer,
   Header,
@@ -16,7 +17,9 @@ const BusinessInformation = () => {
       </Header>
       <StepsContainer>
         <StepProgress activeStep="1" />
-        <MultiStepContainer></MultiStepContainer>
+        <MultiStepContainer>
+          <BasicInformation />
+        </MultiStepContainer>
       </StepsContainer>
     </BusinessInformationContainer>
   );
