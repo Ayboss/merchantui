@@ -5,9 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Button: React.FC<ButtonPropsType> = (props) => {
-  const { name, onClick, isBusy, disabled } = props;
+  const { name, onClick, isBusy, disabled, className } = props;
   return (
-    <CustomButton onClick={isBusy ? undefined : onClick} disabled={disabled}>
+    <CustomButton
+      onClick={isBusy ? undefined : onClick}
+      disabled={disabled}
+      className={className}
+    >
       {isBusy ? <FontAwesomeIcon icon={faSpinner} spinPulse /> : name}
     </CustomButton>
   );
