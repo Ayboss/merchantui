@@ -3,6 +3,7 @@ import StepProgress from "../../../../../components/StepProgress";
 import AddressInformation from "./Steps/AddressInformation";
 import BasicInformation from "./Steps/BasicInformation";
 import LogoInformation from "./Steps/Logo";
+import SocialInformation from "./Steps/Socials";
 import {
   BusinessInformationContainer,
   Header,
@@ -23,6 +24,7 @@ const BusinessInformation = () => {
           <BasicInformation />
           <AddressInformation />
           <LogoInformation />
+          <SocialInformation />
         </MultiStepContainer>
       </StepsContainer>
     </BusinessInformationContainer>
