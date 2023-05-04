@@ -10,7 +10,7 @@ import { PasswrodInputProps } from "./types";
 import PasswordIcon from "../../assets/icons/eye-slash.svg";
 
 const PasswordInput: React.FC<PasswrodInputProps> = (props) => {
-  const { label, name, placeholder } = props;
+  const { label, name, placeholder, register, ...rest } = props;
   const [activeInput, setActiveInput] = useState<boolean>(false);
   const [passType, setPassType] = useState<string>("password");
 
@@ -22,7 +22,13 @@ const PasswordInput: React.FC<PasswrodInputProps> = (props) => {
     <FormGroup>
       <InputLabel>{label}</InputLabel>
       <InputWrapper>
-        <Input name={name} type={passType} placeholder={placeholder} />
+        <Input
+          name={name}
+          type={passType}
+          placeholder={placeholder}
+          {...register(name)}
+          {...rest}
+        />
         <InputIcon src={PasswordIcon} onClick={passToggle} />
       </InputWrapper>
     </FormGroup>

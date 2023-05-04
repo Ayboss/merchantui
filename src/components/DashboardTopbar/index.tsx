@@ -18,7 +18,7 @@ const DashboardTopbar = () => {
   return (
     <Topbar>
       <WelcomeContainer>
-        <WelcomeNote>Welcome Adewole !</WelcomeNote>
+        <WelcomeNote>Welcome Abdulhafiz !</WelcomeNote>
         <Breadcrumb>
           <span> Dashboard</span>
           <FontAwesomeIcon
@@ -32,7 +32,7 @@ const DashboardTopbar = () => {
         <Notification src={bellIcon} />
         <MerchantsAvatar />
         <FlexContainer>
-          <NameTag>Adewole Ampitan</NameTag>
+          <NameTag>Abdulhafiz Ibrahim</NameTag>
           <LogoutButton>Log out</LogoutButton>
         </FlexContainer>
       </CTAContainer>

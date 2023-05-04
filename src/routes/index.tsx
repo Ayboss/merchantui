@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import Dashboard from "../views/Dashboard";
 import Login from "../views/Auth/Login";
 import Signup from "../views/Auth/Signup";
@@ -9,25 +10,34 @@ import AccountInformation from "../views/Dashboard/RegisteredBusinessFlow/Flows/
 import Bvn from "../views/Dashboard/RegisteredBusinessFlow/Flows/Bvn";
 import Others from "../views/Dashboard/RegisteredBusinessFlow/Flows/Others";
 import RegistrationDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/RegistrationDocuments";
+import RequireAuth from "../views/Auth/RequireAuth";
 
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />}>
-        <Route index element={<GetStarted />} />
-        <Route path="/business-activation" element={<GetStarted />} />
-        <Route path="/registered-business" element={<RegisteredBusinessFlow />}>
+      <Route element={<RequireAuth />}>
+        <Route path="/" element={<Dashboard />}>
+          <Route index element={<GetStarted />} />
+          <Route path="/business-activation" element={<GetStarted />} />
           <Route
-            path="business-information"
-            element={<BusinessInformation />}
-          />
-          <Route path="account-information" element={<AccountInformation />} />
-          <Route
-            path="registration-documents"
-            element={<RegistrationDocuments />}
-          />
-          <Route path="bvn-primary-officer" element={<Bvn />} />
-          <Route path="others" element={<Others />} />
+            path="/registered-business"
+            element={<RegisteredBusinessFlow />}
+          >
+            <Route
+              path="business-information"
+              element={<BusinessInformation />}
+            />
+            <Route
+              path="account-information"
+              element={<AccountInformation />}
+            />
+            <Route
+              path="registration-documents"
+              element={<RegistrationDocuments />}
+            />
+            <Route path="bvn-primary-officer" element={<Bvn />} />
+            <Route path="others" element={<Others />} />
+          </Route>
         </Route>
       </Route>
       <Route path="login" element={<Login />} />
