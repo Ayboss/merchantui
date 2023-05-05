@@ -18,8 +18,8 @@ import Button from "../../../components/Button";
 import { useSignIn } from "react-auth-kit";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../../../services/axios";
-import { TEMP_KEY } from "./constant";
 import useAuth from "../../../hooks/useAuth";
+import { setToSession } from "../../../utils/storageInstance";
 
 const LOGIN_URL = "/accounts/login";
 
@@ -59,10 +59,11 @@ const Login = () => {
       });
       console.log(response.data.data);
       const accessToken = response?.data?.data?.token;
-      setAuth({ data, accessToken });
+      setToSession("token", accessToken);
+      setAuth({ data });
       navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      console.log(err?.response);
       if (!err?.response) {
         console.log("No server response");
       } else if (err.response?.status === 400) {
