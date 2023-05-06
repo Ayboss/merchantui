@@ -7,8 +7,11 @@ import {
   Subtitle,
   CheckboxIcon,
   activeStyle,
+  FlexContainer,
+  checkboxActive,
 } from "./styles";
 import { useState } from "react";
+import activeCheckIcon from "../../assets/icons/checked-icon.svg";
 
 const SelectButton: React.FC<SelectButtonProps> = ({
   title,
@@ -22,12 +25,21 @@ const SelectButton: React.FC<SelectButtonProps> = ({
       className={activeButton === title ? activeStyle : ""}
       onClick={onSelect}
     >
-      <SelectButtonIcon src={selectBtnIcon} />
-      <ContentWrapper>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
-      </ContentWrapper>
-      <CheckboxIcon></CheckboxIcon>
+      <FlexContainer>
+        <SelectButtonIcon src={selectBtnIcon} />
+        <ContentWrapper>
+          <Title>{title}</Title>
+          <Subtitle>{subtitle}</Subtitle>
+        </ContentWrapper>
+      </FlexContainer>
+      <CheckboxIcon
+        // className={activeButton === title ? checkboxActive : ""}
+        style={{
+          backgroundImage:
+            activeButton === title ? `url(${activeCheckIcon})` : "none",
+          backgroundPosition: "center",
+        }}
+      ></CheckboxIcon>
     </SelectButtonContainer>
   );
 };

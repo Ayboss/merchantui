@@ -1,4 +1,5 @@
 import tw from "tailwind-styled-components";
+import activeCheckIcon from "../../assets/icons/checked-icon.svg";
 
 export const SelectButtonContainer = tw.button`
 w-full
@@ -8,7 +9,14 @@ rounded-[10px]
 shadow-md
 flex
 items-center
-justify-start
+justify-between
+gap-[20px]
+border-[1.5px]
+border-transparent
+`;
+
+export const FlexContainer = tw.div`
+flex
 gap-[20px]
 `;
 
@@ -35,4 +43,12 @@ text-left
 leading-[17px]
 mt-[8px]
 `;
-export const CheckboxIcon = tw.div``;
+export const CheckboxIcon = tw.div`
+w-[18px]
+h-[18px]
+border-[1px] border-[#D9D8D8]
+rounded-full
+
+`;
+
+export const checkboxActive = "bg-[url('../../assets/icons/checked-icon.svg')]";
