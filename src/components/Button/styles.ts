@@ -11,6 +11,7 @@ font-bold
 mt-10
 rounded-sm
 cursor-[pointer]
+disabled:bg-[#6231F44D]
 `;
 
 // bg-${(props) => (props.disabled === true ? "#6231F44D" : "#6231F4")}

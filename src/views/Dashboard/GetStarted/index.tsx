@@ -50,7 +50,7 @@ const GetStarted = () => {
           />
           <Button
             name="Save & Proceed"
-            disabled={false}
+            disabled={selectedOption.length > 0 ? false : true}
             onClick={handleProceed}
           />
         </FormWrapper>
