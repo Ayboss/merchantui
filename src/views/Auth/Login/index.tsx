@@ -48,9 +48,8 @@ const Login = () => {
   // });
 
   const submitForm = async (data: any, e: any) => {
-    console.log("testSubmitForm");
     e.preventDefault();
-    console.log({ data });
+
     try {
       setLoading(true);
       const response = await axios.post(LOGIN_URL, data, {
