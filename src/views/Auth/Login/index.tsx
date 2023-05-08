@@ -15,12 +15,12 @@ import AuthLayout from "../../../layouts/AuthLayout";
 import CustomInput from "../../../components/CustomInput";
 import PasswordInput from "../../../components/PasswordInput";
 import Button from "../../../components/Button";
-import { useSignIn } from "react-auth-kit";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../../../services/axios";
 import useAuth from "../../../hooks/useAuth";
-import { setToSession } from "../../../utils/storageInstance";
-
+import { setToLocal } from "../../../utils/storageInstance";
+import { Toast } from "react-toastify/dist/components";
+import { toast } from "react-toastify";
 const LOGIN_URL = "/accounts/login";
 
 // Validation schema
@@ -52,26 +52,30 @@ const Login = () => {
     e.preventDefault();
     console.log({ data });
     try {
+      setLoading(true);
       const response = await axios.post(LOGIN_URL, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data.data);
-      const accessToken = response?.data?.data?.token;
-      setToSession("token", accessToken);
-      setAuth({ data });
+
+      const result = response?.data?.data;
+      const accessToken = result?.token;
+      setToLocal("user", JSON.stringify(result));
+      setAuth(result);
+      setLoading(false);
+      toast.success(response.data.message);
       navigate(from, { replace: true });
     } catch (err: any) {
-      console.log(err?.response);
+      setLoading(false);
       if (!err?.response) {
-        console.log("No server response");
+        toast.error("No server response");
       } else if (err.response?.status === 400) {
-        console.log("Invalid credentials");
+        toast.error(err.response?.data?.message);
       } else if (err.response?.status === 401) {
-        console.log("Unauthorized");
+        toast.error(err.response?.data?.message);
       } else {
-        console.log("Login failed");
+        toast.error("Login failed");
       }
     }
   };
@@ -100,15 +104,6 @@ const Login = () => {
               placeholder="Password"
               register={register}
             />
-
-            {/* <input
-              style={{ border: "1px solid black" }}
-              {...register("username")}
-            />
-            <input
-              style={{ border: "1px solid black" }}
-              {...register("password")}
-            /> */}
 
             <Button name="Login" isBusy={loading} type="submit" />
             <FormLink>

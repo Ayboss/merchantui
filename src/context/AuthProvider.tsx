@@ -1,12 +1,13 @@
 import { createContext, useState } from "react";
+import { AuthType } from "./types";
 
 export type AuthContextProviderTypes = {
-  auth: unknown;
+  auth: AuthType | null;
   setAuth: React.Dispatch<any>;
 };
 
 const AuthContext = createContext<AuthContextProviderTypes>({
-  auth: {},
+  auth: null,
   setAuth: () => {},
 });
 
@@ -15,7 +16,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [auth, setAuth] = useState<any>({});
+  const [auth, setAuth] = useState<AuthType | null>(null);
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
