@@ -9,7 +9,7 @@ import BusinessInformation from "../views/Dashboard/RegisteredBusinessFlow/Flows
 import AccountInformation from "../views/Dashboard/RegisteredBusinessFlow/Flows/AccountInformation";
 import Bvn from "../views/Dashboard/RegisteredBusinessFlow/Flows/Bvn";
 import Others from "../views/Dashboard/RegisteredBusinessFlow/Flows/Others";
-import RegistrationDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/RegistrationDocuments";
+import BusinessDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/BusinessDocuments";
 import RequireAuth from "../views/Auth/RequireAuth";
 
 export const AppRouter = () => {
@@ -33,7 +33,7 @@ export const AppRouter = () => {
             />
             <Route
               path="registration-documents"
-              element={<RegistrationDocuments />}
+              element={<BusinessDocuments />}
             />
             <Route path="bvn-primary-officer" element={<Bvn />} />
             <Route path="others" element={<Others />} />
