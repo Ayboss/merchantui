@@ -23,10 +23,12 @@ const AccountInformation = () => {
       <AccountInformationForm>
         <SelectInput label="Bank Name" defaultOption="Select your bank" />
         <CustomInput
+          name="accountNumber"
           label="Account Number"
           placeholder="Enter your account number"
         />
         <CustomInput
+          name="accountName"
           label="Account Name"
           placeholder="Enter your account name"
         />
