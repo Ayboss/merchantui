@@ -23,5 +23,26 @@ mt-[8px]
 export const DocumentList = tw.div`
 mt-5
 `;
+export const DocumentPreviewBtn = tw.button`
+flex
+items-center
+gap-3
+mt-4
+text-[#504F4F]
+font-medium
+text-[14px]
+leading-[17px]
+`;
+
+export const UploadLabel = tw.p`
+    text-[#333333]
+    text-[14px]
+    leading-[17px]
+    font-semibold
+    uppercase
+    mt-8
+`;
+
+export const PreviewIcon = tw.img``;
 
 export const FormWrapper = tw.form``;
