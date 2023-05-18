@@ -16,11 +16,19 @@ import Button from '../../../components/Button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { setToLocal } from '../../../utils/storageInstance';
+<<<<<<< HEAD
+=======
+import { Toast } from 'react-toastify/dist/components';
+>>>>>>> dea8c96 (forget password updates with new branch initialization)
 import { toast } from 'react-toastify';
 import {
   LoginRequestPayloadType,
   useLoginMuation,
+<<<<<<< HEAD
 } from '../../../services/hooks/useAuthMutation';
+=======
+} from '../../../services/hooks/useLoginMutation';
+>>>>>>> dea8c96 (forget password updates with new branch initialization)
 
 const Login = () => {
   const { setAuth } = useAuth();
