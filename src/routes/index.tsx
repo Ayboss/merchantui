@@ -44,11 +44,18 @@ export const AppRouter = () => {
         </Route>
         <Route path='/transactions' element={<></>} />
       </Route>
+<<<<<<< HEAD
       <Route path='login' element={<Login />} />
       <Route path='forget-password' element={<ForgetPassword />} />
       <Route path='reset-password/:tokenId' element={<ResetPassword />} />
       <Route path='signup' element={<Signup />} />
       <Route path='*' element={<Navigate to='/login' replace />} />
+=======
+      <Route path="login" element={<Login />} />
+      <Route path="forgetpassword" element={<ForgetPassword />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
+>>>>>>> 5869871 (forget password updates with new branch initialization)
     </Routes>
   );
 };
