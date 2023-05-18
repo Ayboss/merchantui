@@ -3,5 +3,4 @@ export type CustomInputProps = {
   name: string;
   type?: string;
   placeholder: string;
-  register?: any;
 };

@@ -9,80 +9,47 @@ import {
   FormLink,
 } from "../styles";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import AuthLayout from "../../../layouts/AuthLayout";
 import CustomInput from "../../../components/CustomInput";
 import PasswordInput from "../../../components/PasswordInput";
 import Button from "../../../components/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "../../../services/axios";
 import useAuth from "../../../hooks/useAuth";
 import { setToLocal } from "../../../utils/storageInstance";
 import { Toast } from "react-toastify/dist/components";
 import { toast } from "react-toastify";
-const LOGIN_URL = "/accounts/login";
-
-// Validation schema
-// const loginSchema = yup.object().shape({
-//   email: yup.string().email().required(),
-//   password: yup.string().required(),
-// });
+import {
+  LoginRequestPayloadType,
+  useLoginMuation,
+} from "../../../services/hooks/useLoginMutation";
 
 const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
   const { register, handleSubmit } = useForm();
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: yupResolver(loginSchema),
-  // });
+  const { isLoading, mutateAsync } = useLoginMuation();
 
-  const submitForm = async (data: any, e: any) => {
-    e.preventDefault();
-
+  const onSubmit = (values: unknown) => {
     try {
-      setLoading(true);
-      const response = await axios.post(LOGIN_URL, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      mutateAsync(values as LoginRequestPayloadType).then((data) => {
+        setToLocal("user", JSON.stringify(data?.data));
+        setAuth(data?.data);
+        toast.success(data?.message);
+        navigate(from, { replace: true });
       });
-
-      const result = response?.data?.data;
-      const accessToken = result?.token;
-      setToLocal("user", JSON.stringify(result));
-      setAuth(result);
-      setLoading(false);
-      toast.success(response.data.message);
-      navigate(from, { replace: true });
-    } catch (err: any) {
-      setLoading(false);
-      if (!err?.response) {
-        toast.error("No server response");
-      } else if (err.response?.status === 400) {
-        toast.error(err.response?.data?.message);
-      } else if (err.response?.status === 401) {
-        toast.error(err.response?.data?.message);
-      } else {
-        toast.error("Login failed");
-      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Opppsss");
     }
   };
 
   return (
     <AuthLayout>
       <AuthContainer>
-        <AuthForm onSubmit={handleSubmit(submitForm)}>
+        <AuthForm onSubmit={handleSubmit(onSubmit)}>
           <FormHeader>
             <Title>Log in</Title>
             <Subtitle>
@@ -93,18 +60,16 @@ const Login = () => {
             <CustomInput
               label="Email Address"
               type="email"
-              name="username"
               placeholder="e.g yourmail@mail.com"
-              register={register}
+              {...register("username")}
             />
             <PasswordInput
               label="Password"
-              name="password"
               placeholder="Password"
-              register={register}
+              {...register("password")}
             />
 
-            <Button name="Login" isBusy={loading} type="submit" />
+            <Button name="Login" isBusy={isLoading} type="submit" />
             <FormLink>
               Don’t have an account ?{" "}
               <Link to="/signup" className="font-bold">
