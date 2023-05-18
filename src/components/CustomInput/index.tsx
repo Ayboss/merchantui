@@ -2,31 +2,16 @@ import React, { useState, forwardRef } from "react";
 import { FormGroup, InputLabel, Input } from "./styles";
 import { CustomInputProps } from "./types";
 
-const CustomInput: React.FC<CustomInputProps> = (props) => {
-  const { label, name, type, placeholder, register, ...rest } = props;
-  const [activeInput, setActiveInput] = useState<Boolean>(false);
-
-  if (!register) {
-    return (
-      <FormGroup>
-        <InputLabel>{label}</InputLabel>
-        <Input name={name} type={type} placeholder={placeholder} {...rest} />
-      </FormGroup>
-    );
-  }
+const CustomInput: React.FC<CustomInputProps> = forwardRef((props, ref) => {
+  const { label, type, placeholder, ...rest } = props;
 
   return (
     <FormGroup>
       <InputLabel>{label}</InputLabel>
-      <Input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        {...register(name)}
-        {...rest}
-      />
+      {/* @ts-ignore no overload matches for the ref */}
+      <Input type={type} placeholder={placeholder} ref={ref} {...rest} />
     </FormGroup>
   );
-};
+});
 
 export default CustomInput;

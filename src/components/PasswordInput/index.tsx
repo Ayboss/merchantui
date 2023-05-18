@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   FormGroup,
   InputLabel,
@@ -9,9 +9,8 @@ import {
 import { PasswrodInputProps } from "./types";
 import PasswordIcon from "../../assets/icons/eye-slash.svg";
 
-const PasswordInput: React.FC<PasswrodInputProps> = (props) => {
-  const { label, name, placeholder, register, ...rest } = props;
-  const [activeInput, setActiveInput] = useState<boolean>(false);
+const PasswordInput: React.FC<PasswrodInputProps> = forwardRef((props, ref) => {
+  const { label, placeholder, ...rest } = props;
   const [passType, setPassType] = useState<string>("password");
 
   const passToggle = () => {
@@ -22,17 +21,12 @@ const PasswordInput: React.FC<PasswrodInputProps> = (props) => {
     <FormGroup>
       <InputLabel>{label}</InputLabel>
       <InputWrapper>
-        <Input
-          name={name}
-          type={passType}
-          placeholder={placeholder}
-          {...register(name)}
-          {...rest}
-        />
+        {/* @ts-ignore no overload matches for the ref */}
+        <Input type={passType} placeholder={placeholder} ref={ref} {...rest} />
         <InputIcon src={PasswordIcon} onClick={passToggle} />
       </InputWrapper>
     </FormGroup>
   );
-};
+});
 
 export default PasswordInput;
