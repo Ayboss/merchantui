@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Button from "../../../components/Button";
-import CustomInput from "../../../components/CustomInput";
-import AuthLayout from "../../../layouts/AuthLayout";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../../components/Button';
+import CustomInput from '../../../components/CustomInput';
+import AuthLayout from '../../../layouts/AuthLayout';
 import {
   AuthContainer,
   AuthForm,
@@ -11,7 +11,7 @@ import {
   FormLink,
   Subtitle,
   Title,
-} from "../styles";
+} from '../styles';
 
 const ForgetPassword = () => {
   const [loading, setLoading] = useState();
@@ -27,17 +27,17 @@ const ForgetPassword = () => {
           </FormHeader>
           <FormBody>
             <CustomInput
-              label="Email Address"
-              type="email"
-              name="username"
-              placeholder="e.g yourmail@mail.com"
+              label='Email Address'
+              type='email'
+              name='username'
+              placeholder='e.g yourmail@mail.com'
             />
 
-            <Button name="Reset Password" isBusy={loading} type="submit" />
+            <Button name='Reset Password' isBusy={loading} type='submit' />
             <FormLink>
-              <Link to="/login" className="font-semibold">
+              <Link to='/login' className='font-semibold'>
                 Login
-              </Link>{" "}
+              </Link>{' '}
             </FormLink>
           </FormBody>
         </AuthForm>

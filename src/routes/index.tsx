@@ -12,7 +12,10 @@ import Others from "../views/Dashboard/RegisteredBusinessFlow/Flows/Others";
 import BusinessDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/BusinessDocuments";
 import RequireAuth from "../views/Auth/RequireAuth";
 import ForgetPassword from "../views/Auth/ForgetPassword";
+<<<<<<< HEAD
 import ResetPassword from "../views/Auth/ResetPassword";
+=======
+>>>>>>> efd4b2a (forget password updates with new branch initialization)
 
 export const AppRouter = () => {
   return (
@@ -44,8 +47,12 @@ export const AppRouter = () => {
         <Route path="/transactions" element={<></>} />
       </Route>
       <Route path="login" element={<Login />} />
+<<<<<<< HEAD
       <Route path="forget-password" element={<ForgetPassword />} />
       <Route path="reset-password/:tokenId" element={<ResetPassword />} />
+=======
+      <Route path="forgetpassword" element={<ForgetPassword />} />
+>>>>>>> efd4b2a (forget password updates with new branch initialization)
       <Route path="signup" element={<Signup />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
