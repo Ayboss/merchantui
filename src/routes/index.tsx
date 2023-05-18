@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+<<<<<<< HEAD
 import Dashboard from '../views/Dashboard';
 import Login from '../views/Auth/Login';
 import Signup from '../views/Auth/Signup';
@@ -13,6 +14,20 @@ import BusinessDocuments from '../views/Dashboard/Onboarding/RegisteredBusinessF
 import RequireAuth from '../views/Auth/RequireAuth';
 import ForgetPassword from '../views/Auth/ForgetPassword';
 import ResetPassword from '../views/Auth/ResetPassword';
+=======
+import Dashboard from "../views/Dashboard";
+import Login from "../views/Auth/Login";
+import Signup from "../views/Auth/Signup";
+import GetStarted from "../views/Dashboard/GetStarted";
+import RegisteredBusinessFlow from "../views/Dashboard/RegisteredBusinessFlow";
+import BusinessInformation from "../views/Dashboard/RegisteredBusinessFlow/Flows/BusinessInformation";
+import AccountInformation from "../views/Dashboard/RegisteredBusinessFlow/Flows/AccountInformation";
+import Bvn from "../views/Dashboard/RegisteredBusinessFlow/Flows/Bvn";
+import Others from "../views/Dashboard/RegisteredBusinessFlow/Flows/Others";
+import BusinessDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/BusinessDocuments";
+import RequireAuth from "../views/Auth/RequireAuth";
+import ForgetPassword from "../views/Auth/ForgetPassword";
+>>>>>>> 11a1553 (forget password updates with new branch initialization)
 
 export const AppRouter = () => {
   return (
@@ -44,11 +59,18 @@ export const AppRouter = () => {
         </Route>
         <Route path="/transactions" element={<></>} />
       </Route>
+<<<<<<< HEAD
       <Route path='login' element={<Login />} />
       <Route path='forget-password' element={<ForgetPassword />} />
       <Route path='reset-password' element={<ResetPassword />} />
       <Route path='signup' element={<Signup />} />
       <Route path='*' element={<Navigate to='/login' replace />} />
+=======
+      <Route path="login" element={<Login />} />
+      <Route path="forgetpassword" element={<ForgetPassword />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
+>>>>>>> 11a1553 (forget password updates with new branch initialization)
     </Routes>
   );
 };
