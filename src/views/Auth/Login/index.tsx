@@ -68,6 +68,13 @@ const Login = () => {
               {...register("password")}
             />
 
+            <Link
+              to=""
+              className="flex justify-end mt-3 text-[14px] text-[#6231F4]"
+            >
+              Forget Password
+            </Link>
+
             <Button name="Login" isBusy={isLoading} type="submit" />
             <FormLink>
               Don’t have an account ?{" "}

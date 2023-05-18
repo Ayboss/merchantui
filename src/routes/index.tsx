@@ -11,6 +11,7 @@ import Bvn from "../views/Dashboard/RegisteredBusinessFlow/Flows/Bvn";
 import Others from "../views/Dashboard/RegisteredBusinessFlow/Flows/Others";
 import BusinessDocuments from "../views/Dashboard/RegisteredBusinessFlow/Flows/BusinessDocuments";
 import RequireAuth from "../views/Auth/RequireAuth";
+import ForgetPassword from "../views/Auth/ForgetPassword";
 
 export const AppRouter = () => {
   return (
@@ -42,6 +43,7 @@ export const AppRouter = () => {
         <Route path="/transactions" element={<></>} />
       </Route>
       <Route path="login" element={<Login />} />
+      <Route path="forgetpassword" element={<ForgetPassword />} />
       <Route path="signup" element={<Signup />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
