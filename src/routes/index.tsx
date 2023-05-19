@@ -67,7 +67,7 @@ export const AppRouter = () => {
       <Route path='*' element={<Navigate to='/login' replace />} />
 =======
       <Route path="login" element={<Login />} />
-      <Route path="forgetpassword" element={<ForgetPassword />} />
+      <Route path="forget-password" element={<ForgetPassword />} />
       <Route path="signup" element={<Signup />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
 >>>>>>> 11a1553 (forget password updates with new branch initialization)
