@@ -68,7 +68,12 @@ const Login = () => {
               placeholder="Password"
               {...register("password")}
             />
-
+            <Link
+              to="/forget-password"
+              className="text-[#6231F4] font-semibold flex justify-end mt-3"
+            >
+              Forgot Password?
+            </Link>{" "}
             <Button name="Login" isBusy={isLoading} type="submit" />
             <FormLink>
               Don’t have an account ?{" "}
