@@ -35,9 +35,8 @@ const ForgetPassword = () => {
 
             <Button name="Reset Password" isBusy={loading} type="submit" />
             <FormLink>
-              Don’t have an account ?{" "}
-              <Link to="/signup" className="font-bold">
-                Sign Up now !
+              <Link to="/login" className="font-semibold">
+                Login
               </Link>{" "}
             </FormLink>
           </FormBody>
