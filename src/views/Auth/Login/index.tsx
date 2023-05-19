@@ -33,17 +33,16 @@ const Login = () => {
   const { isLoading, mutateAsync } = useLoginMuation();
 
   const onSubmit = (values: unknown) => {
-    try {
-      mutateAsync(values as LoginRequestPayloadType).then((data) => {
+    mutateAsync(values as LoginRequestPayloadType)
+      .then((data) => {
         setToLocal("user", JSON.stringify(data?.data));
         setAuth(data?.data);
         toast.success(data?.message);
         navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
       });
-    } catch (error) {
-      console.log(error);
-      toast.error("Opppsss");
-    }
   };
 
   return (
