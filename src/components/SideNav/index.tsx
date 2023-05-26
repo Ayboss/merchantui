@@ -20,8 +20,9 @@ const DashboardSideNav = () => {
         <MerchantsBalance>₦ 00.000</MerchantsBalance>
       </SidebarHeader>
       <SidebarNav>
-        {NavLinks.map((link) => (
+        {NavLinks.map((link, id) => (
           <NavLink
+            key={id}
             className={({ isActive }) =>
               isActive ? NavItems.active : NavItems.styles
             }

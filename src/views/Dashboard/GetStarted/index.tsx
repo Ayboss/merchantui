@@ -34,8 +34,9 @@ const GetStarted = () => {
           Select the business types that suits your current need.
         </SubTitle>
         <FormWrapper>
-          {BusinessTypes.map((businessType) => (
+          {BusinessTypes.map((businessType, id) => (
             <SelectButton
+              key={id}
               selectBtnIcon={businessType.selectIcon}
               title={businessType.title}
               subtitle={businessType.subtitle}
