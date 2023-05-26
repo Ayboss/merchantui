@@ -10,8 +10,8 @@ const SelectInput: React.FC<SelectInputProps> = ({
       <InputLabel>{label}</InputLabel>
       <Select>
         <option>{defaultOption}</option>
-        {options?.map((option) => (
-          <option>{option.title}</option>
+        {options?.map((option, id) => (
+          <option key={id}>{option.title}</option>
         ))}
       </Select>
     </FormGroup>
