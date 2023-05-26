@@ -12,12 +12,8 @@ export type LoginRequestPayloadType = {
 
 export const useLoginMuation = () => {
   const request = useCallback(async (data: LoginRequestPayloadType) => {
-    try {
-      const response = await apiInstance.post("/accounts/login", data);
-      return response.data as LoginResponseType;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await apiInstance.post("/accounts/login", data);
+    return response.data as LoginResponseType;
   }, []);
 
   return useMutation({
