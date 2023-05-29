@@ -16,12 +16,11 @@ import Button from '../../../components/Button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { setToLocal } from '../../../utils/storageInstance';
-import { Toast } from 'react-toastify/dist/components';
 import { toast } from 'react-toastify';
 import {
   LoginRequestPayloadType,
   useLoginMuation,
-} from '../../../services/hooks/useLoginMutation';
+} from '../../../services/hooks/useAuthMutation';
 
 const Login = () => {
   const { setAuth } = useAuth();
