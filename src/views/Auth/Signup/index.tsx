@@ -40,7 +40,7 @@ const Signup = () => {
         navigate('/login', { replace: true });
       })
       .catch((error) => {
-        toast.error(error?.message);
+        toast.error(error?.response?.data?.message);
       });
   };
 
