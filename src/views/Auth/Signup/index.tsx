@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   AuthContainer,
   AuthForm,
@@ -25,10 +25,14 @@ import { toast } from 'react-toastify';
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState, watch } = useForm();
   const { isLoading, mutateAsync } = useSignupMutation();
   const navigate = useNavigate();
+  const { errors } = formState;
+  const password = useRef({});
+  password.current = watch('password', '');
 
+  //submit request
   const onSubmit = (values: unknown) => {
     mutateAsync(values as SignupRequestPayloadType)
       .then((data) => {
@@ -90,7 +94,11 @@ const Signup = () => {
               label='Confirm Password'
               placeholder='confirm password'
               {...register('passwordConfirmation', { required: true })}
+              // ref={register({
+              //   validate: value => value === password.current || "The passwords do not match"
+              // })}
             />
+
             <CheckboxInput />
             <Button name='Create account' isBusy={isLoading} type='submit' />
             <FormLink>

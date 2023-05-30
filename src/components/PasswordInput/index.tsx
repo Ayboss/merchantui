@@ -1,24 +1,24 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState } from 'react';
 import {
   FormGroup,
   InputLabel,
   InputWrapper,
   Input,
   InputIcon,
-} from "./styles";
-import { PasswrodInputProps } from "./types";
-import PasswordIcon from "../../assets/icons/eye-slash.svg";
+} from './styles';
+import { PasswrodInputProps } from './types';
+import PasswordIcon from '../../assets/icons/eye-slash.svg';
 
 const PasswordInput: React.FC<PasswrodInputProps> = forwardRef((props, ref) => {
-  const { label, placeholder, ...rest } = props;
-  const [passType, setPassType] = useState<string>("password");
+  const { label, placeholder, className, ...rest } = props;
+  const [passType, setPassType] = useState<string>('password');
 
   const passToggle = () => {
-    setPassType(passType === "password" ? "text" : "password");
+    setPassType(passType === 'password' ? 'text' : 'password');
   };
 
   return (
-    <FormGroup>
+    <FormGroup className={className}>
       <InputLabel>{label}</InputLabel>
       <InputWrapper>
         {/* @ts-ignore no overload matches for the ref */}
