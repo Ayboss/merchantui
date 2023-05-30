@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useForm } from 'react-hook-form';
 import PasswordInput from '../../../components/PasswordInput';
@@ -19,11 +19,14 @@ import {
 } from '../../../services/hooks/useAuthMutation';
 
 const ResetPassword = () => {
-  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
+  const { userId } = useParams();
+
+  console.log({ userId });
 
   const onSubmit = (values: unknown) => {
+    console.log(values);
     mutateAsync(values as ResetPasswordPayloadType)
       .then((data) => {
         console.log();
@@ -52,9 +55,9 @@ const ResetPassword = () => {
             <PasswordInput
               label='Confirm New Password'
               placeholder='Password'
-              {...register('password')}
+              {...register('password2')}
             />
-            <Button name='Reset Password' isBusy={loading} type='submit' />
+            <Button name='Reset Password' isBusy={isLoading} type='submit' />
           </FormBody>
         </AuthForm>
       </AuthContainer>

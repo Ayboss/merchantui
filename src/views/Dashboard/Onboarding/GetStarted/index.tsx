@@ -1,33 +1,33 @@
-import SelectButton from "../../../components/SelectButton";
+import SelectButton from '@/components/SelectButton';
 import {
   BusinessActivation,
   Container,
   Title,
   SubTitle,
   FormWrapper,
-} from "./styles";
-import { BusinessTypes } from "../../../constants";
-import { useState } from "react";
-import SelectInput from "../../../components/SelectInput";
-import Button from "../../../components/Button";
-import { useNavigate } from "react-router-dom";
+} from './styles';
+import { BusinessTypes } from '@/constants';
+import { useState } from 'react';
+import SelectInput from '@/components/SelectInput';
+import Button from '@/components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const GetStarted = () => {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState('');
 
-  const busineesCategoryList = [{ title: "Businees1" }, { title: "Businees2" }];
+  const busineesCategoryList = [{ title: 'Businees1' }, { title: 'Businees2' }];
 
   const handleProceed = () => {
-    navigate("/registered-business/business-information");
+    navigate('/registered-business/business-information');
   };
 
   return (
     <BusinessActivation>
       <Container>
         <Title>
-          What <span className="text-[#6231F4]">Business type</span> do you
+          What <span className='text-[#6231F4]'>Business type</span> do you
           operate ?
         </Title>
         <SubTitle>
@@ -45,12 +45,12 @@ const GetStarted = () => {
             />
           ))}
           <SelectInput
-            label="Business Category"
-            defaultOption="Ex: Financial Services "
+            label='Business Category'
+            defaultOption='Ex: Financial Services '
             options={busineesCategoryList}
           />
           <Button
-            name="Save & Proceed"
+            name='Save & Proceed'
             disabled={selectedOption.length > 0 ? false : true}
             onClick={handleProceed}
           />

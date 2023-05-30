@@ -1,16 +1,16 @@
-import MultiStepContainer from "../../../../../components/MultiStepContainer";
-import StepProgress from "../../../../../components/StepProgress";
-import AddressInformation from "./Steps/AddressInformation";
-import BasicInformation from "./Steps/BasicInformation";
-import LogoInformation from "./Steps/Logo";
-import SocialInformation from "./Steps/Socials";
+import MultiStepContainer from '@/components/MultiStepContainer';
+import StepProgress from '@/components/StepProgress';
+import AddressInformation from './Steps/AddressInformation';
+import BasicInformation from './Steps/BasicInformation';
+import LogoInformation from './Steps/Logo';
+import SocialInformation from './Steps/Socials';
 import {
   BusinessInformationContainer,
   Header,
   Title,
   SubTitle,
   StepsContainer,
-} from "./styles";
+} from './styles';
 const BusinessInformation = () => {
   return (
     <BusinessInformationContainer>
@@ -19,7 +19,7 @@ const BusinessInformation = () => {
         <SubTitle>Manage your Business Information here</SubTitle>
       </Header>
       <StepsContainer>
-        <StepProgress activeStep="1" />
+        <StepProgress activeStep='1' />
         <MultiStepContainer>
           <BasicInformation />
           <AddressInformation />
