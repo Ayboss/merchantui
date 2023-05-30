@@ -6,10 +6,7 @@ import { LoginResponseType } from './types';
 export const LOGIN_MUTATION_KEY = ['login'];
 export const SIGNUP_MUTATION_KEY = ['signup'];
 export const FORGOT_PASSWORD_MUTATION_KEY = ['forgotPassword'];
-<<<<<<< HEAD
 export const RESET_PASSWORD_MUTATION_KEY = ['resetPassword'];
-=======
->>>>>>> ceb3283 (UPDATES: forgot-password endpoint connection)
 
 export type LoginRequestPayloadType = {
   username: string;
@@ -30,7 +27,6 @@ export type ForgotPasswordPayloadType = {
   email: string;
 };
 
-<<<<<<< HEAD
 export type ResetPasswordPayloadType = {
   token: string;
   password: string;
@@ -38,8 +34,6 @@ export type ResetPasswordPayloadType = {
   currentPassword: string;
 };
 
-=======
->>>>>>> ceb3283 (UPDATES: forgot-password endpoint connection)
 export const useLoginMuation = () => {
   const request = useCallback(async (data: LoginRequestPayloadType) => {
     const response = await LoginApiInstance.post('/accounts/login', data);
