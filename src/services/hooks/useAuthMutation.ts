@@ -6,6 +6,7 @@ import { LoginResponseType } from './types';
 export const LOGIN_MUTATION_KEY = ['login'];
 export const SIGNUP_MUTATION_KEY = ['signup'];
 export const FORGOT_PASSWORD_MUTATION_KEY = ['forgotPassword'];
+export const RESET_PASSWORD_MUTATION_KEY = ['resetPassword'];
 
 export type LoginRequestPayloadType = {
   username: string;
@@ -24,6 +25,13 @@ export type SignupRequestPayloadType = {
 
 export type ForgotPasswordPayloadType = {
   email: string;
+};
+
+export type ResetPasswordPayloadType = {
+  token: string;
+  password: string;
+  password2: string;
+  currentPassword: string;
 };
 
 export const useLoginMuation = () => {
@@ -61,5 +69,20 @@ export const useForgotPasswordMutation = () => {
   return useMutation({
     mutationFn: request,
     mutationKey: FORGOT_PASSWORD_MUTATION_KEY,
+  });
+};
+
+export const useResetPasswordMutation = () => {
+  const request = useCallback(async (data: ResetPasswordPayloadType) => {
+    const response = await LoginApiInstance.post(
+      '/accounts/reset-password',
+      data
+    );
+    return response.data;
+  }, []);
+
+  return useMutation({
+    mutationFn: request,
+    mutationKey: RESET_PASSWORD_MUTATION_KEY,
   });
 };
