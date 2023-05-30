@@ -21,6 +21,9 @@ import {
 const ResetPassword = () => {
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
+  const { userId } = useParams();
+
+  console.log({ userId });
 
   const query = new URLSearchParams(useLocation().search);
 
