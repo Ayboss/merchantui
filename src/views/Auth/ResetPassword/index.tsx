@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useForm } from 'react-hook-form';
 import PasswordInput from '../../../components/PasswordInput';
@@ -21,9 +21,10 @@ import {
 const ResetPassword = () => {
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
-  const { userId } = useParams();
 
-  console.log({ userId });
+  const query = new URLSearchParams(useLocation().search);
+
+  console.log(query.get('_key'));
 
   const onSubmit = (values: unknown) => {
     console.log(values);

@@ -45,7 +45,7 @@ export const AppRouter = () => {
       </Route>
       <Route path='login' element={<Login />} />
       <Route path='forget-password' element={<ForgetPassword />} />
-      <Route path='reset-password_key=:userId' element={<ResetPassword />} />
+      <Route path='reset-password' element={<ResetPassword />} />
       <Route path='signup' element={<Signup />} />
       <Route path='*' element={<Navigate to='/login' replace />} />
     </Routes>
