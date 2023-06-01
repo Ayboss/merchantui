@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useForm } from 'react-hook-form';
 import PasswordInput from '../../../components/PasswordInput';
@@ -19,9 +19,13 @@ import {
 } from '../../../services/hooks/useAuthMutation';
 
 const ResetPassword = () => {
+  const key = new URLSearchParams(useLocation().search);
+
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
+
+  console.log(key);
 
   const onSubmit = (values: unknown) => {
     const fields = {
