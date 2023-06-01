@@ -26,10 +26,6 @@ const ResetPassword = () => {
 
   console.log(query.get('_key'));
 
-  const query = new URLSearchParams(useLocation().search);
-
-  console.log(query.get('_key'));
-
   const onSubmit = (values: unknown) => {
     console.log(values);
     mutateAsync(values as ResetPasswordPayloadType)

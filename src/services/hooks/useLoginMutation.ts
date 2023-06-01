@@ -1,9 +1,9 @@
-import { useCallback } from "react";
-import { apiInstance } from "..";
-import { useMutation } from "react-query";
-import { LoginResponseType } from "./types";
+import { useCallback } from 'react';
+import { LoginApiInstance } from '';
+import { useMutation } from 'react-query';
+import { LoginResponseType } from './types';
 
-export const LOGIN_MUTATION_KEY = ["login"];
+export const LOGIN_MUTATION_KEY = ['login'];
 
 export type LoginRequestPayloadType = {
   username: string;
@@ -12,7 +12,7 @@ export type LoginRequestPayloadType = {
 
 export const useLoginMuation = () => {
   const request = useCallback(async (data: LoginRequestPayloadType) => {
-    const response = await apiInstance.post("/accounts/login", data);
+    const response = await apiInstance.post('/accounts/login', data);
     return response.data as LoginResponseType;
   }, []);
 
