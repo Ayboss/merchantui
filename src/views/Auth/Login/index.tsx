@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react';
 import {
   AuthContainer,
   AuthForm,
@@ -7,27 +7,26 @@ import {
   Subtitle,
   FormBody,
   FormLink,
-} from "../styles";
-import { useForm } from "react-hook-form";
-import AuthLayout from "../../../layouts/AuthLayout";
-import CustomInput from "../../../components/CustomInput";
-import PasswordInput from "../../../components/PasswordInput";
-import Button from "../../../components/Button";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
-import { setToLocal } from "../../../utils/storageInstance";
-import { Toast } from "react-toastify/dist/components";
-import { toast } from "react-toastify";
+} from '../styles';
+import { useForm } from 'react-hook-form';
+import AuthLayout from '../../../layouts/AuthLayout';
+import CustomInput from '../../../components/CustomInput';
+import PasswordInput from '../../../components/PasswordInput';
+import Button from '../../../components/Button';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import { setToLocal } from '../../../utils/storageInstance';
+import { toast } from 'react-toastify';
 import {
   LoginRequestPayloadType,
   useLoginMuation,
-} from "../../../services/hooks/useLoginMutation";
+} from '../../../services/hooks/useAuthMutation';
 
 const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || '/';
   const { register, handleSubmit } = useForm();
 
   const { isLoading, mutateAsync } = useLoginMuation();
@@ -35,7 +34,7 @@ const Login = () => {
   const onSubmit = (values: unknown) => {
     mutateAsync(values as LoginRequestPayloadType)
       .then((data) => {
-        setToLocal("user", JSON.stringify(data?.data));
+        setToLocal('user', JSON.stringify(data?.data));
         setAuth(data?.data);
         toast.success(data?.message);
         navigate(from, { replace: true });
@@ -57,23 +56,28 @@ const Login = () => {
           </FormHeader>
           <FormBody>
             <CustomInput
-              label="Email Address"
-              type="email"
-              placeholder="e.g yourmail@mail.com"
-              {...register("username")}
+              label='Email Address'
+              type='email'
+              placeholder='e.g yourmail@mail.com'
+              {...register('username')}
             />
             <PasswordInput
-              label="Password"
-              placeholder="Password"
-              {...register("password")}
+              label='Password'
+              placeholder='Password'
+              {...register('password')}
             />
-
-            <Button name="Login" isBusy={isLoading} type="submit" />
+            <Link
+              to='/forget-password'
+              className='text-[#6231F4] font-semibold flex justify-end mt-3'
+            >
+              Forgot Password?
+            </Link>{' '}
+            <Button name='Login' isBusy={isLoading} type='submit' />
             <FormLink>
-              Don’t have an account ?{" "}
-              <Link to="/signup" className="font-bold">
+              Don’t have an account ?{' '}
+              <Link to='/signup' className='font-bold'>
                 Sign Up now !
-              </Link>{" "}
+              </Link>{' '}
             </FormLink>
           </FormBody>
         </AuthForm>
