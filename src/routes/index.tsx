@@ -43,7 +43,10 @@ export const AppRouter = () => {
           <Route path='/transactions' element={<></>} />
         </Route>
       </Route>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 33d066d (route paths fix updates)
       <Route path='login' element={<Login />} />
       <Route path='forget-password' element={<ForgetPassword />} />
       <Route path='reset-password' element={<ResetPassword />} />
