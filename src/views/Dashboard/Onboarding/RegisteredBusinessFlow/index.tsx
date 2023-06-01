@@ -12,10 +12,10 @@ import {
   HeaderNote,
   NavigatorsContainer,
 } from './styles';
-import { RegisteredBusinessInformation } from '../../../../constants';
+import { RegisteredBusinessInformation } from '@/constants';
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import NavigatorButton from '../../../../components/NavigatorButton';
+import NavigatorButton from '@/components/NavigatorButton';
 
 const RegisteredBusinessFlow = () => {
   const navigate = useNavigate();

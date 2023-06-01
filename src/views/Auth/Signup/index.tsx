@@ -11,16 +11,16 @@ import {
 } from '../styles';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import AuthLayout from '../../../layouts/AuthLayout';
-import CustomInput from '../../../components/CustomInput';
-import PasswordInput from '../../../components/PasswordInput';
-import Button from '../../../components/Button';
-import CheckboxInput from '../../../components/CheckboxInput';
+import AuthLayout from '@/layouts/AuthLayout';
+import CustomInput from '@/components/CustomInput';
+import PasswordInput from '@/components/PasswordInput';
+import Button from '@/components/Button';
+import CheckboxInput from '@/components/CheckboxInput';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   SignupRequestPayloadType,
   useSignupMutation,
-} from '../../../services/hooks/useAuthMutation';
+} from '@/services/hooks/useAuthMutation';
 import { toast } from 'react-toastify';
 
 const Signup = () => {

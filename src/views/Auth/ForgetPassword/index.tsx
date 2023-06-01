@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../../components/Button';
-import CustomInput from '../../../components/CustomInput';
-import AuthLayout from '../../../layouts/AuthLayout';
+import Button from '@/components/Button';
+import CustomInput from '@/components/CustomInput';
+import AuthLayout from '@/layouts/AuthLayout';
 import {
   AuthContainer,
   AuthForm,
@@ -15,7 +15,7 @@ import {
 import {
   ForgotPasswordPayloadType,
   useForgotPasswordMutation,
-} from '../../../services/hooks/useAuthMutation';
+} from '@/services/hooks/useAuthMutation';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 

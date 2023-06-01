@@ -9,18 +9,18 @@ import {
   FormLink,
 } from '../styles';
 import { useForm } from 'react-hook-form';
-import AuthLayout from '../../../layouts/AuthLayout';
-import CustomInput from '../../../components/CustomInput';
-import PasswordInput from '../../../components/PasswordInput';
-import Button from '../../../components/Button';
+import AuthLayout from '@/layouts/AuthLayout';
+import CustomInput from '@/components/CustomInput';
+import PasswordInput from '@/components/PasswordInput';
+import Button from '@/components/Button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
-import { setToLocal } from '../../../utils/storageInstance';
+import useAuth from '@/hooks/useAuth';
+import { setToLocal } from '@/utils/storageInstance';
 import { toast } from 'react-toastify';
 import {
   LoginRequestPayloadType,
   useLoginMuation,
-} from '../../../services/hooks/useAuthMutation';
+} from '@/services/hooks/useAuthMutation';
 
 const Login = () => {
   const { setAuth } = useAuth();
