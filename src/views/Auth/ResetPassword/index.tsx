@@ -24,7 +24,11 @@ const ResetPassword = () => {
   const { isLoading, mutateAsync } = useResetPasswordMutation();
 
   const onSubmit = (values: unknown) => {
-    mutateAsync(values as ResetPasswordPayloadType)
+    const fields = {
+      ...(values as ResetPasswordPayloadType),
+      name: 'clint',
+    };
+    mutateAsync(fields as ResetPasswordPayloadType)
       .then((data) => {
         console.log();
       })
