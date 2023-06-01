@@ -43,7 +43,7 @@ export const AppRouter = () => {
         </Route>
         <Route path='/transactions' element={<></>} />
       </Route>
-      <Route path='./login' element={<Login />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/forget-password' element={<ForgetPassword />} />
       <Route path='/reset-password' element={<ResetPassword />} />
       <Route path='signup' element={<Signup />} />

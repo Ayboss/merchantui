@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useForm } from 'react-hook-form';
 import PasswordInput from '../../../components/PasswordInput';
@@ -17,27 +17,28 @@ import {
   ResetPasswordPayloadType,
   useResetPasswordMutation,
 } from '../../../services/hooks/useAuthMutation';
+import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
   const key = new URLSearchParams(useLocation().search);
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
-
-  console.log(key);
+  const tokenId = key.get('_key');
 
   const onSubmit = (values: unknown) => {
     const fields = {
       ...(values as ResetPasswordPayloadType),
-      name: 'clint',
+      token: tokenId,
     };
     mutateAsync(fields as ResetPasswordPayloadType)
       .then((data) => {
-        console.log();
+        toast.success(data?.data);
+        navigate('/login', { replace: true });
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error?.response?.data?.message);
       });
   };
 
@@ -60,9 +61,9 @@ const ResetPassword = () => {
             <PasswordInput
               label='Confirm New Password'
               placeholder='Password'
-              {...register('password')}
+              {...register('password2')}
             />
-            <Button name='Reset Password' isBusy={loading} type='submit' />
+            <Button name='Reset Password' isBusy={isLoading} type='submit' />
           </FormBody>
         </AuthForm>
       </AuthContainer>
