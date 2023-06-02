@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Others = () => {
+export const Others = () => {
   return <div>Others</div>;
 };
 

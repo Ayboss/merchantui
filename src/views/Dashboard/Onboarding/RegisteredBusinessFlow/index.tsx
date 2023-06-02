@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { RegisteredBusinessInformation } from '../../../../constants';
+import { NavigatorButton } from '../../../../components';
 import {
   RegisteredBusinessContainer,
   RegisteredBusinessFlowNavigator,
@@ -10,14 +14,10 @@ import {
   ProgressBar,
   HeaderCardBody,
   HeaderNote,
-  NavigatorsContainer,
+  NavigatorsContainer
 } from './styles';
-import { RegisteredBusinessInformation } from '@/constants';
-import { useEffect, useState } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import NavigatorButton from '@/components/NavigatorButton';
 
-const RegisteredBusinessFlow = () => {
+export const RegisteredBusinessFlow = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState('business-information');
 
@@ -43,9 +43,9 @@ const RegisteredBusinessFlow = () => {
           </TitleContainer>
           <HeaderCardBody>
             <HeaderNote>
-              Kindly provide the information requested below about your business
-              for our review and verification. Your account will be activated
-              once requested information is completely provided and verified.
+              Kindly provide the information requested below about your business for our review and
+              verification. Your account will be activated once requested information is completely
+              provided and verified.
             </HeaderNote>
           </HeaderCardBody>
         </HeaderCard>

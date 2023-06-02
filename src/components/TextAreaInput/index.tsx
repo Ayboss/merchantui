@@ -1,11 +1,8 @@
-import { FormGroup, InputLabel, TextArea } from "./styles";
-import { TextAreaInputProps } from "./type";
+import React from 'react';
+import { FormGroup, InputLabel, TextArea } from './styles';
+import { TextAreaInputProps } from './type';
 
-const TextAreaInput: React.FC<TextAreaInputProps> = ({
-  label,
-  name,
-  placeholder,
-}) => {
+export const TextAreaInput: React.FC<TextAreaInputProps> = ({ label, name, placeholder }) => {
   return (
     <FormGroup>
       <InputLabel htmlFor={name}>{label}</InputLabel>

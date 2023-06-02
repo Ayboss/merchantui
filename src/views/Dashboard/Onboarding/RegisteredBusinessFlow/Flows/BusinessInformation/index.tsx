@@ -1,16 +1,11 @@
-import MultiStepContainer from '@/components/MultiStepContainer';
-import StepProgress from '@/components/StepProgress';
+import React from 'react';
+import { MultiStepContainer, StepProgress } from '../../../../../../components';
 import AddressInformation from './Steps/AddressInformation';
 import BasicInformation from './Steps/BasicInformation';
 import LogoInformation from './Steps/Logo';
 import SocialInformation from './Steps/Socials';
-import {
-  BusinessInformationContainer,
-  Header,
-  Title,
-  SubTitle,
-  StepsContainer,
-} from './styles';
+import { BusinessInformationContainer, Header, Title, SubTitle, StepsContainer } from './styles';
+
 const BusinessInformation = () => {
   return (
     <BusinessInformationContainer>

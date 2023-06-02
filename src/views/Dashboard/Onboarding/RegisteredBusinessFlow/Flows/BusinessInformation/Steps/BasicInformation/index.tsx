@@ -1,12 +1,7 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@/components/Button';
-import CustomInput from '@/components/CustomInput';
-import TextAreaInput from '@/components/TextAreaInput';
-import {
-  BasicInformationContainer,
-  Title,
-  BasicInformationForm,
-} from './styles';
+import { Button, CustomInput, TextAreaInput } from '../../../../../../../../components';
+import { BasicInformationContainer, Title, BasicInformationForm } from './styles';
 
 const BasicInformation = ({ onNext }: any) => {
   return (

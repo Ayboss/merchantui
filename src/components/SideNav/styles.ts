@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const DashboardSidebar = tw.div`
 h-full
@@ -36,9 +36,9 @@ export const SidebarNav = tw.nav`
 
 export const NavItems = {
   styles:
-    "flex items-center gap-5 text-left h-[49px] hover:bg-[#6231F4] border-b-[1px] border-b-transparent px-5 ",
+    'flex items-center gap-5 text-left h-[49px] hover:bg-[#6231F4] border-b-[1px] border-b-transparent px-5 ',
   active:
-    "bg-[#6231F4] flex items-center gap-5 text-left h-[49px] hover:bg-[#6231F4] border-b-[1px] border-b-white px-5",
+    'bg-[#6231F4] flex items-center gap-5 text-left h-[49px] hover:bg-[#6231F4] border-b-[1px] border-b-white px-5'
 };
 
 export const LinkIcon = tw.img` 

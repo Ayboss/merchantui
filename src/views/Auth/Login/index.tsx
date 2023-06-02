@@ -1,4 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   AuthContainer,
   AuthForm,
@@ -6,23 +9,15 @@ import {
   Title,
   Subtitle,
   FormBody,
-  FormLink,
+  FormLink
 } from '../styles';
-import { useForm } from 'react-hook-form';
-import AuthLayout from '@/layouts/AuthLayout';
-import CustomInput from '@/components/CustomInput';
-import PasswordInput from '@/components/PasswordInput';
-import Button from '@/components/Button';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import useAuth from '@/hooks/useAuth';
-import { setToLocal } from '@/utils/storageInstance';
-import { toast } from 'react-toastify';
-import {
-  LoginRequestPayloadType,
-  useLoginMuation,
-} from '@/services/hooks/useAuthMutation';
+import { useAuth } from '../../../hooks';
+import { LoginRequestPayloadType, useLoginMuation } from '../../../services/hooks';
+import { setToLocal } from '../../../utils';
+import { AuthLayout } from '../../../layouts';
+import { Button, CustomInput, PasswordInput } from '../../../components';
 
-const Login = () => {
+export const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,13 +28,13 @@ const Login = () => {
 
   const onSubmit = (values: unknown) => {
     mutateAsync(values as LoginRequestPayloadType)
-      .then((data) => {
+      .then((data: any) => {
         setToLocal('user', JSON.stringify(data?.data));
         setAuth(data?.data);
         toast.success(data?.message);
         navigate(from, { replace: true });
       })
-      .catch((error) => {
+      .catch((error: any) => {
         toast.error(error?.response?.data?.message);
       });
   };
@@ -50,9 +45,7 @@ const Login = () => {
         <AuthForm onSubmit={handleSubmit(onSubmit)}>
           <FormHeader>
             <Title>Log in</Title>
-            <Subtitle>
-              Provide Credentials below to login to your account
-            </Subtitle>
+            <Subtitle>Provide Credentials below to login to your account</Subtitle>
           </FormHeader>
           <FormBody>
             <CustomInput
@@ -61,11 +54,7 @@ const Login = () => {
               placeholder='e.g yourmail@mail.com'
               {...register('username')}
             />
-            <PasswordInput
-              label='Password'
-              placeholder='Password'
-              {...register('password')}
-            />
+            <PasswordInput label='Password' placeholder='Password' {...register('password')} />
             <Link
               to='/forget-password'
               className='text-[#6231F4] font-semibold flex justify-end mt-3'

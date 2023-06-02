@@ -1,4 +1,7 @@
-import BusinessDocument from '@/components/BusinessDocument';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import IconPreview from '../../../../../../assets/icons/preview-icon.svg';
+import { BusinessDocument, Button, UploadInput } from '../../../../../../components';
 import {
   RegistrationDocumentsWrapper,
   Header,
@@ -8,12 +11,8 @@ import {
   DocumentList,
   DocumentPreviewBtn,
   PreviewIcon,
-  UploadLabel,
+  UploadLabel
 } from './styles';
-import IconPreview from '@/assets/icons/preview-icon.svg';
-import UploadInput from '@/components/UploadInput';
-import Button from '@/components/Button';
-import { Link } from 'react-router-dom';
 
 const BusinessDocuments = () => {
   return (
@@ -23,10 +22,7 @@ const BusinessDocuments = () => {
         <Subtitle>Manage your Business Registration Documents</Subtitle>
       </Header>
       <DocumentList>
-        <BusinessDocument
-          label='board resolution'
-          name='Board Resolution Document'
-        />
+        <BusinessDocument label='board resolution' name='Board Resolution Document' />
       </DocumentList>
       <DocumentPreviewBtn>
         <PreviewIcon src={IconPreview} />

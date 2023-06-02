@@ -1,5 +1,4 @@
-import tw from "tailwind-styled-components";
-
+import tw from 'tailwind-styled-components';
 
 export const FormGroup = tw.div`
 mt-5
@@ -24,7 +23,7 @@ justify-between
 items-center
 px-5
 mt-2
-`
+`;
 
 export const Input = tw.input`
 h-full
@@ -40,4 +39,4 @@ export const InputIcon = tw.img`
 w-[24px]
 h-[24px]
 cursor-pointer
-`
+`;

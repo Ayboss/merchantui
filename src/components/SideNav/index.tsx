@@ -1,3 +1,6 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { NavLinks } from '../../constants';
 import {
   DashboardSidebar,
   SidebarHeader,
@@ -6,12 +9,10 @@ import {
   MerchantsBalance,
   SidebarNav,
   NavItems,
-  LinkIcon,
-} from "./styles";
-import { NavLink, Outlet } from "react-router-dom";
-import { NavLinks } from "../../constants";
+  LinkIcon
+} from './styles';
 
-const DashboardSideNav = () => {
+export const DashboardSideNav = () => {
   return (
     <DashboardSidebar>
       <SidebarHeader>
@@ -23,9 +24,7 @@ const DashboardSideNav = () => {
         {NavLinks.map((link, id) => (
           <NavLink
             key={id}
-            className={({ isActive }) =>
-              isActive ? NavItems.active : NavItems.styles
-            }
+            className={({ isActive }) => (isActive ? NavItems.active : NavItems.styles)}
             to={link.url}
           >
             <LinkIcon src={link.icon} />

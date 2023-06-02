@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Button from '@/components/Button';
-import CustomInput from '@/components/CustomInput';
-import AuthLayout from '@/layouts/AuthLayout';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import {
   AuthContainer,
   AuthForm,
@@ -10,25 +9,22 @@ import {
   FormHeader,
   FormLink,
   Subtitle,
-  Title,
+  Title
 } from '../styles';
-import {
-  ForgotPasswordPayloadType,
-  useForgotPasswordMutation,
-} from '@/services/hooks/useAuthMutation';
-import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
+import { ForgotPasswordPayloadType, useForgotPasswordMutation } from '../../../services/hooks';
+import AuthLayout from '../../../layouts/AuthLayout';
+import { Button, CustomInput } from '../../../components';
 
-const ForgetPassword = () => {
+export const ForgetPassword = () => {
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useForgotPasswordMutation();
 
   const onSubmit = (values: unknown) => {
     mutateAsync(values as ForgotPasswordPayloadType)
-      .then((data) => {
+      .then((data: any) => {
         toast.success(data.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         toast.error(error?.response?.data?.message);
       });
   };
@@ -39,9 +35,7 @@ const ForgetPassword = () => {
         <AuthForm onSubmit={handleSubmit(onSubmit)}>
           <FormHeader>
             <Title>Forget Password</Title>
-            <Subtitle>
-              Provide Credentials below to reset to your account
-            </Subtitle>
+            <Subtitle>Provide Credentials below to reset to your account</Subtitle>
           </FormHeader>
           <FormBody>
             <CustomInput
