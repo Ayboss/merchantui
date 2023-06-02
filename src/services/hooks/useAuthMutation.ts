@@ -31,7 +31,6 @@ export type ResetPasswordPayloadType = {
   token: string;
   password: string;
   password2: string;
-  currentPassword: string;
 };
 
 export const useLoginMuation = () => {

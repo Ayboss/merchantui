@@ -1,4 +1,4 @@
-import BusinessDocument from "../../../../../components/BusinessDocument";
+import BusinessDocument from '@/components/BusinessDocument';
 import {
   RegistrationDocumentsWrapper,
   Header,
@@ -9,11 +9,11 @@ import {
   DocumentPreviewBtn,
   PreviewIcon,
   UploadLabel,
-} from "./styles";
-import IconPreview from "../../../../../assets/icons/preview-icon.svg";
-import UploadInput from "../../../../../components/UploadInput";
-import Button from "../../../../../components/Button";
-import { Link } from "react-router-dom";
+} from './styles';
+import IconPreview from '@/assets/icons/preview-icon.svg';
+import UploadInput from '@/components/UploadInput';
+import Button from '@/components/Button';
+import { Link } from 'react-router-dom';
 
 const BusinessDocuments = () => {
   return (
@@ -24,8 +24,8 @@ const BusinessDocuments = () => {
       </Header>
       <DocumentList>
         <BusinessDocument
-          label="board resolution"
-          name="Board Resolution Document"
+          label='board resolution'
+          name='Board Resolution Document'
         />
       </DocumentList>
       <DocumentPreviewBtn>
@@ -36,13 +36,13 @@ const BusinessDocuments = () => {
         <UploadLabel>Company Profile*</UploadLabel>
         <UploadInput />
         <Button
-          name="Save & Continue"
-          className="bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold"
+          name='Save & Continue'
+          className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
           onClick={() => {}}
         />
       </FormWrapper>
-      <div className="text-center my-5">
-        <Link to="/" className="text-[16px] font-semibold leading-[20px] ">
+      <div className='text-center my-5'>
+        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
           Do this later
         </Link>
       </div>

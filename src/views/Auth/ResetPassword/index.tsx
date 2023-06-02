@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Button from '../../../components/Button';
+import Button from '@/components/Button';
 import { useForm } from 'react-hook-form';
-import PasswordInput from '../../../components/PasswordInput';
-import AuthLayout from '../../../layouts/AuthLayout';
+import PasswordInput from '@/components/PasswordInput';
+import AuthLayout from '@/layouts/AuthLayout';
 import {
   AuthContainer,
   AuthForm,
@@ -16,7 +16,7 @@ import {
 import {
   ResetPasswordPayloadType,
   useResetPasswordMutation,
-} from '../../../services/hooks/useAuthMutation';
+} from '@/services/hooks/useAuthMutation';
 import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
@@ -26,6 +26,10 @@ const ResetPassword = () => {
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useResetPasswordMutation();
   const tokenId = key.get('_key');
+
+  const query = new URLSearchParams(useLocation().search);
+
+  console.log(query.get('_key'));
 
   const onSubmit = (values: unknown) => {
     const fields = {

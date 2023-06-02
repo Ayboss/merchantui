@@ -11,15 +11,15 @@ import {
   HeaderCardBody,
   HeaderNote,
   NavigatorsContainer,
-} from "./styles";
-import { RegisteredBusinessInformation } from "../../../constants";
-import { useEffect, useState } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import NavigatorButton from "../../../components/NavigatorButton";
+} from './styles';
+import { RegisteredBusinessInformation } from '@/constants';
+import { useEffect, useState } from 'react';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import NavigatorButton from '@/components/NavigatorButton';
 
 const RegisteredBusinessFlow = () => {
   const navigate = useNavigate();
-  const [active, setActive] = useState("business-information");
+  const [active, setActive] = useState('business-information');
 
   const handleNavigator = (info: any) => {
     navigate(info.url);
@@ -27,14 +27,14 @@ const RegisteredBusinessFlow = () => {
   };
 
   useEffect(() => {
-    <Navigate to="business-information" />;
+    <Navigate to='business-information' />;
   }, []);
 
   return (
     <RegisteredBusinessContainer>
       <RegisteredBusinessFlowNavigator>
         <HeaderCard>
-          <TitleContainer className="headerCardBoxShadow">
+          <TitleContainer className='headerCardBoxShadow'>
             <FlexContainer>
               <Title>Registered Business Activation</Title>
               <ProgressTracker>20% COMPLETED</ProgressTracker>
