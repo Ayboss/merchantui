@@ -53,14 +53,6 @@ module.exports = {
           {
             pattern: 'react',
             group: 'builtin'
-          },
-          {
-            pattern: '@superside/**',
-            group: 'external'
-          },
-          {
-            pattern: '@konsus/**',
-            group: 'internal'
           }
         ],
         pathGroupsExcludedImportTypes: ['builtin']
@@ -80,5 +72,15 @@ module.exports = {
       }
     }
   ],
-  ignorePatterns: ['**/node_modules/', '**/coverage/**/*']
+  ignorePatterns: ['**/node_modules/', '**/coverage/**/*'],
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: ['@', './src']
+      }
+    },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    }
+  }
 };

@@ -1,4 +1,6 @@
-import { SelectButtonProps } from "./types";
+import React from 'react';
+import activeCheckIcon from '../../assets/icons/checked-icon.svg';
+import { SelectButtonProps } from './types';
 import {
   SelectButtonContainer,
   SelectButtonIcon,
@@ -7,24 +9,18 @@ import {
   Subtitle,
   CheckboxIcon,
   activeStyle,
-  FlexContainer,
-  checkboxActive,
-} from "./styles";
-import { useState } from "react";
-import activeCheckIcon from "../../assets/icons/checked-icon.svg";
+  FlexContainer
+} from './styles';
 
-const SelectButton: React.FC<SelectButtonProps> = ({
+export const SelectButton: React.FC<SelectButtonProps> = ({
   title,
   subtitle,
   onSelect,
   selectBtnIcon,
-  activeButton,
+  activeButton
 }) => {
   return (
-    <SelectButtonContainer
-      className={activeButton === title ? activeStyle : ""}
-      onClick={onSelect}
-    >
+    <SelectButtonContainer className={activeButton === title ? activeStyle : ''} onClick={onSelect}>
       <FlexContainer>
         <SelectButtonIcon src={selectBtnIcon} />
         <ContentWrapper>
@@ -35,9 +31,8 @@ const SelectButton: React.FC<SelectButtonProps> = ({
       <CheckboxIcon
         // className={activeButton === title ? checkboxActive : ""}
         style={{
-          backgroundImage:
-            activeButton === title ? `url(${activeCheckIcon})` : "none",
-          backgroundPosition: "center",
+          backgroundImage: activeButton === title ? `url(${activeCheckIcon})` : 'none',
+          backgroundPosition: 'center'
         }}
       ></CheckboxIcon>
     </SelectButtonContainer>

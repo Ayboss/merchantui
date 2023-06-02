@@ -1,5 +1,4 @@
-import tw from "tailwind-styled-components";
-import activeCheckIcon from "../../assets/icons/checked-icon.svg";
+import tw from 'tailwind-styled-components';
 
 export const SelectButtonContainer = tw.button`
 w-full
@@ -20,7 +19,7 @@ flex
 gap-[20px]
 `;
 
-export const activeStyle = "border-[1.5px] border-[#6231F4] transition";
+export const activeStyle = 'border-[1.5px] border-[#6231F4] transition';
 
 export const SelectButtonIcon = tw.img`
 h-[47px]

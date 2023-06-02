@@ -1,18 +1,18 @@
-import CustomInput from '@/components/CustomInput';
-import URLInput from '@/components/URLInput';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Title } from '../BasicInformation/styles';
+import { Button, CustomInput, URLInput } from '../../../../../../../../components';
 import {
   SocialInformationContainer,
   SocialInformationForm,
   Container,
-  FlexWrapper,
+  FlexWrapper
 } from './styles';
-import LinkedInIcon from '@/assets/icons/linkedIn-icon.svg';
-import TwitterIcon from '@/assets/icons/twitter-icon.svg';
-import InstagramIcon from '@/assets/icons/instagram-icon.svg';
-import FacebookIcon from '@/assets/icons/facebook-icon.svg';
-import Button from '@/components/Button';
-import { Link } from 'react-router-dom';
+
+import LinkedInIcon from './icons/linkedIn-icon.svg';
+import TwitterIcon from './icons/twitter-icon.svg';
+import InstagramIcon from './icons/instagram-icon.svg';
+import FacebookIcon from './icons/facebook-icon.svg';
 
 const SocialInformation = () => {
   return (
@@ -20,37 +20,17 @@ const SocialInformation = () => {
       <SocialInformationForm>
         <Container>
           <Title>WEBSITE</Title>
-          <CustomInput
-            label='website'
-            name=''
-            placeholder='Type your business website here'
-          />
+          <CustomInput label='website' name='' placeholder='Type your business website here' />
         </Container>
         <Container>
           <Title className='mt-10'>SOCIAL MEDIA</Title>
           <FlexWrapper>
-            <URLInput
-              label='LinkedIn'
-              placeholder='input link here'
-              icon={LinkedInIcon}
-            />
-            <URLInput
-              label='Twiter'
-              placeholder='input link here'
-              icon={TwitterIcon}
-            />
+            <URLInput label='LinkedIn' placeholder='input link here' icon={LinkedInIcon} />
+            <URLInput label='Twiter' placeholder='input link here' icon={TwitterIcon} />
           </FlexWrapper>
           <FlexWrapper>
-            <URLInput
-              label='Instagram'
-              placeholder='input link here'
-              icon={InstagramIcon}
-            />
-            <URLInput
-              label='Facebook'
-              placeholder='input link here'
-              icon={FacebookIcon}
-            />
+            <URLInput label='Instagram' placeholder='input link here' icon={InstagramIcon} />
+            <URLInput label='Facebook' placeholder='input link here' icon={FacebookIcon} />
           </FlexWrapper>
         </Container>
         <Button

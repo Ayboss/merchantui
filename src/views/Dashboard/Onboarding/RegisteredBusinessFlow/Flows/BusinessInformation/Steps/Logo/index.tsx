@@ -1,7 +1,7 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@/components/Button';
-import UploadInput from '@/components/UploadInput';
 import { Title } from '../BasicInformation/styles';
+import { Button, UploadInput } from '../../../../../../../../components';
 import { LogoInformationContainer, LogoInformationForm } from './styles';
 
 const LogoInformation = ({ onNext }: any) => {

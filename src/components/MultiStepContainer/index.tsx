@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 interface MultiStepContainerProps {
   children: React.ReactNode | undefined;
 }
 
-const MultiStepContainer: React.FC<MultiStepContainerProps> = ({
-  children,
-}) => {
+export const MultiStepContainer: React.FC<MultiStepContainerProps> = ({ children }) => {
   const [position, setPosition] = useState(0);
 
   const onNext = () => {
@@ -22,9 +20,10 @@ const MultiStepContainer: React.FC<MultiStepContainerProps> = ({
   if (React.isValidElement(currentForm)) {
     return React.cloneElement(currentForm, {
       onPrev,
-      onNext,
+      onNext
     } as React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>);
   }
+
   return <></>;
 };
 

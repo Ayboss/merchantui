@@ -1,3 +1,9 @@
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
+import bellIcon from '../../assets/icons/bell-icon.svg';
+import { getFromLocal } from '../../utils';
 import {
   Topbar,
   WelcomeContainer,
@@ -8,22 +14,16 @@ import {
   MerchantsAvatar,
   FlexContainer,
   NameTag,
-  LogoutButton,
-} from "./styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
-import bellIcon from "../../assets/icons/bell-icon.svg";
-import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { getFromLocal } from "../../utils/storageInstance";
+  LogoutButton
+} from './styles';
 
-const DashboardTopbar = () => {
+export const DashboardTopbar = () => {
   const navigate = useNavigate();
-  const currentUser = JSON.parse(getFromLocal("user"));
+  const currentUser = JSON.parse(getFromLocal('user') as string);
 
   const handleLogOut = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
+    localStorage.removeItem('user');
+    navigate('/login');
   };
 
   return (
@@ -34,7 +34,7 @@ const DashboardTopbar = () => {
           <span> Dashboard</span>
           <FontAwesomeIcon
             icon={faGreaterThan}
-            className="font-light mx-2 text-[10px] text-[#3A3A3AB2]"
+            className='font-light mx-2 text-[10px] text-[#3A3A3AB2]'
           />
           <span>Business activation</span>
         </Breadcrumb>
@@ -43,9 +43,7 @@ const DashboardTopbar = () => {
         <Notification src={bellIcon} />
         <MerchantsAvatar />
         <FlexContainer>
-          <NameTag>
-            {currentUser?.firstName + " " + currentUser?.lastName}
-          </NameTag>
+          <NameTag>{currentUser?.firstName + ' ' + currentUser?.lastName}</NameTag>
           <LogoutButton onClick={handleLogOut}>Log out</LogoutButton>
         </FlexContainer>
       </CTAContainer>

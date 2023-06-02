@@ -1,9 +1,8 @@
-import React from "react";
-import { DashboardBody, DashboardContent } from "./styles";
-import DashboardLayout from "../../layouts/DashboardLayout";
-import DashboardTopbar from "../../components/DashboardTopbar";
-import DashboardSideNav from "../../components/SideNav";
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { DashboardLayout } from '../../layouts';
+import { DashboardSideNav, DashboardTopbar } from '../../components';
+import { DashboardBody, DashboardContent } from './styles';
 
 const MerchantsDashboard = () => {
   return (

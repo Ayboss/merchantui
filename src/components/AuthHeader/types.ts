@@ -1,3 +1,3 @@
 export interface AuthHeaderProps {
-    ctaUrl: string;
+  ctaUrl: string;
 }

@@ -1,15 +1,9 @@
 import React, { forwardRef, useState } from 'react';
-import {
-  FormGroup,
-  InputLabel,
-  InputWrapper,
-  Input,
-  InputIcon,
-} from './styles';
-import { PasswrodInputProps } from './types';
 import PasswordIcon from '../../assets/icons/eye-slash.svg';
+import { FormGroup, InputLabel, InputWrapper, Input, InputIcon } from './styles';
+import { PasswrodInputProps } from './types';
 
-const PasswordInput: React.FC<PasswrodInputProps> = forwardRef((props, ref) => {
+export const PasswordInput: React.FC<PasswrodInputProps> = forwardRef((props, ref) => {
   const { label, placeholder, className, ...rest } = props;
   const [passType, setPassType] = useState<string>('password');
 

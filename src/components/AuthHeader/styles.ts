@@ -1,6 +1,4 @@
-import tw from "tailwind-styled-components"
-import styled from "styled-components"
-
+import tw from 'tailwind-styled-components';
 
 export const AuthHeaderContainer = tw.div`
 w-full
@@ -13,11 +11,11 @@ px-[100px]
 py-[36px]
 shadow-[0px_4px_25px_rgba(218, 218, 218, 0.1)]
 
-`
+`;
 
 export const Brand = tw.div`
 color: #FFFFFF
-`
+`;
 
 export const AuthLink = tw.button`
 h-[56px]
@@ -28,5 +26,4 @@ text-[16px]
 leading-[20px]
 font-semibold
 rounded-sm
-`
-
+`;

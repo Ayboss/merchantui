@@ -15,11 +15,19 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
   },
   "include": ["src", "custom.d.ts"],
+  "baseUrl": "/",
+  "paths": {
+    "@/*": ["src/*"],
+    "@context/*": ["src/context/*"],
+    "@view/*": ["src/view/*"],
+    "@components/*": ["src/view/components/*"],
+    "@services/*": ["src/view/services/*"],
+    "@utils/*": ["src/view/utils/*"],
+    "@constants/*": ["src/view/constants/*"],
+
+  },
+  "exclude": ["node_modules", "public"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const BasicInformationContainer = tw.div``;
 export const Title = tw.h2`

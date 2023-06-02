@@ -1,4 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   AuthContainer,
   AuthForm,
@@ -7,39 +10,24 @@ import {
   Subtitle,
   FormBody,
   FormLink,
-  FormGroup,
+  FormGroup
 } from '../styles';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import AuthLayout from '@/layouts/AuthLayout';
-import CustomInput from '@/components/CustomInput';
-import PasswordInput from '@/components/PasswordInput';
-import Button from '@/components/Button';
-import CheckboxInput from '@/components/CheckboxInput';
-import { Link, useNavigate } from 'react-router-dom';
-import {
-  SignupRequestPayloadType,
-  useSignupMutation,
-} from '@/services/hooks/useAuthMutation';
-import { toast } from 'react-toastify';
+import { SignupRequestPayloadType, useSignupMutation } from '../../../services/hooks';
+import { AuthLayout } from '../../../layouts';
+import { Button, CheckboxInput, CustomInput, PasswordInput } from '../../../components';
 
-const Signup = () => {
-  const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, formState, watch } = useForm();
+export const Signup = () => {
+  const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useSignupMutation();
   const navigate = useNavigate();
-  const { errors } = formState;
-  const password = useRef({});
-  password.current = watch('password', '');
 
-  //submit request
   const onSubmit = (values: unknown) => {
     mutateAsync(values as SignupRequestPayloadType)
-      .then((data) => {
+      .then((data: any) => {
         toast.success(data?.responseMessage);
         navigate('/login', { replace: true });
       })
-      .catch((error) => {
+      .catch((error: any) => {
         toast.error(error?.response?.data?.message);
       });
   };
@@ -94,9 +82,6 @@ const Signup = () => {
               label='Confirm Password'
               placeholder='confirm password'
               {...register('passwordConfirmation', { required: true })}
-              // ref={register({
-              //   validate: value => value === password.current || "The passwords do not match"
-              // })}
             />
 
             <CheckboxInput />

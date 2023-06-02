@@ -1,10 +1,7 @@
-import { FormGroup, InputLabel, Select } from "./styles";
-import { SelectInputProps } from "./types";
-const SelectInput: React.FC<SelectInputProps> = ({
-  label,
-  defaultOption,
-  options,
-}) => {
+import React from 'react';
+import { FormGroup, InputLabel, Select } from './styles';
+import { SelectInputProps } from './types';
+export const SelectInput: React.FC<SelectInputProps> = ({ label, defaultOption, options }) => {
   return (
     <FormGroup>
       <InputLabel>{label}</InputLabel>

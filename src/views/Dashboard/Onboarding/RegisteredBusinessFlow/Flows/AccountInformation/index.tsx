@@ -1,15 +1,14 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button, CustomInput, SelectInput } from '../../../../../../components';
 import {
   AccountInformationWrapper,
   Header,
   Title,
   SubTitle,
   FormLabel,
-  AccountInformationForm,
+  AccountInformationForm
 } from './styles';
-import CustomInput from '@/components/CustomInput';
-import SelectInput from '@/components/SelectInput';
-import Button from '@/components/Button';
-import { Link } from 'react-router-dom';
 
 const AccountInformation = () => {
   return (
