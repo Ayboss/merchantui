@@ -6,21 +6,24 @@ flex
 flex-col
 justify-between
 flex-nowrap
+px-5
+lg:px-0
 `;
 export const AuthBody = tw.div`
 h-full
 w-full
 bg-[#F9FAFA]
- px-[100px]
- flex
- justify-between
- 
+ lg:px-[100px]
+ lg:flex
+ lg:justify-between
+ block
 `;
 export const AuthHero = tw.div`
+hidden
 max-w-[50%]
 pt-[130px]
 mb-[20px]
-flex
+lg:flex
 flex-col
 justify-center
 `;
