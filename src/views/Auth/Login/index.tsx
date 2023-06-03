@@ -61,7 +61,12 @@ export const Login = () => {
             >
               Forgot Password?
             </Link>{' '}
-            <Button name='Login' isBusy={isLoading} type='submit' />
+            <Button
+              name='Login'
+              isBusy={isLoading}
+              type='submit'
+              className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
+            />
             <FormLink>
               Don’t have an account ?{' '}
               <Link to='/signup' className='font-bold'>

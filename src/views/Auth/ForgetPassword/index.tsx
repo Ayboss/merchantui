@@ -45,7 +45,12 @@ export const ForgetPassword = () => {
               {...register('email')}
             />
 
-            <Button name='Reset Password' isBusy={isLoading} type='submit' />
+            <Button
+              name='Reset Password'
+              isBusy={isLoading}
+              type='submit'
+              className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
+            />
             <FormLink>
               <Link to='/login' className='font-semibold'>
                 Login

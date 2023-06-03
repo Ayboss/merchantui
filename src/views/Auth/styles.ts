@@ -1,20 +1,23 @@
 import tw from 'tailwind-styled-components';
 
 export const AuthContainer = tw.div`
-w-[50%]
+lg:w-[50%]
+w-full
 relative
-flex
-justify-end
+lg:flex
+lg:justify-end
+
 `;
 
 export const AuthForm = tw.form`
 bg-[#fff]
-w-[500px]
+w-full
+lg:w-[500px]
 absolute
 z-10
 top-[90px]
 rounded
-p-[50px]
+lg:p-[50px]
 `;
 
 export const FormHeader = tw.div`
@@ -34,6 +37,8 @@ leading-[26px]
 `;
 export const FormBody = tw.div`
 mt-5
+mb-[60px]
+lg:mb-0
 `;
 
 export const FormLink = tw.p`
