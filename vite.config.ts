@@ -23,8 +23,10 @@ export default defineConfig({
     setupFiles: './setupTests.js'
   },
   server: {
+    hmr:{overlay: false},
     watch: {
-      usePolling: true,
+      usePolling: true
+      ,
     },
     host: true,
     staticPort:true,
