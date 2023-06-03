@@ -21,5 +21,13 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './setupTests.js'
+  },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    host: true,
+    staticPort:true,
+    port: 5173, // This is the port which we will use in docker
   }
 } as VitestConfigExport);
