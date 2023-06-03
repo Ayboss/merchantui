@@ -47,7 +47,12 @@ export const ResetPassword = () => {
               placeholder='Password'
               {...register('password2')}
             />
-            <Button name='Reset Password' isBusy={isLoading} type='submit' />
+            <Button
+              name='Reset Password'
+              isBusy={isLoading}
+              type='submit'
+              className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
+            />
           </FormBody>
         </AuthForm>
       </AuthContainer>

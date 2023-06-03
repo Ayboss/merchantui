@@ -85,7 +85,12 @@ export const Signup = () => {
             />
 
             <CheckboxInput />
-            <Button name='Create account' isBusy={isLoading} type='submit' />
+            <Button
+              name='Create account'
+              isBusy={isLoading}
+              type='submit'
+              className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
+            />
             <FormLink>
               Already have an account ?{' '}
               <Link to='/login' className='font-bold'>

@@ -6,6 +6,7 @@ w-full
 relative
 lg:flex
 lg:justify-end
+
 `;
 
 export const AuthForm = tw.form`
@@ -36,6 +37,8 @@ leading-[26px]
 `;
 export const FormBody = tw.div`
 mt-5
+mb-[60px]
+lg:mb-0
 `;
 
 export const FormLink = tw.p`
