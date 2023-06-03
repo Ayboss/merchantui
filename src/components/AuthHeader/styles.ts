@@ -9,7 +9,7 @@ justify-between
 items-center
 lg:px-[100px]
 lg:py-[36px]
-p-5
+py-5
 shadow-[0px_4px_25px_rgba(218, 218, 218, 0.1)]
 `;
 
