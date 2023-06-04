@@ -16,7 +16,6 @@ COPY . .
 # Set the environment variables
 ENV NODE_ENV=production
 
-
 #commenting out prod build command
 # Build the React app
 RUN yarn build
