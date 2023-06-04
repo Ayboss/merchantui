@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import type { InlineConfig } from 'vitest';
 import type { UserConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
+
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 interface VitestConfigExport extends UserConfig {
