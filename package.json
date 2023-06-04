@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "node server.js",
+    "express": "^4.18.2",
+
     "test": "vitest",
     "preview": "vite preview",
     "postinstall": "husky install",
