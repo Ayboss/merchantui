@@ -9,10 +9,12 @@ import {
   FlexWrapper
 } from './styles';
 
+
 import LinkedInIcon from '@/assets/icons/linkedIn-icon.svg';
 import TwitterIcon from '@/assets/icons/twitter-icon.svg';
 import InstagramIcon from '@/assets/icons/instagram-icon.svg';
 import FacebookIcon from '@/assets/icons/facebook-icon.svg';
+
 
 const SocialInformation = () => {
   return (
