@@ -16,6 +16,8 @@ import { LoginRequestPayloadType, useLoginMuation } from '../../../services/hook
 import { setToLocal } from '../../../utils';
 import { AuthLayout } from '../../../layouts';
 import { Button, CustomInput, PasswordInput } from '../../../components';
+import { REGULAR_PATHS } from '../../../routes/paths';
+import { LoginResponseType } from '../../../services/hooks/types';
 
 export const Login = () => {
   const { setAuth } = useAuth();
@@ -28,8 +30,8 @@ export const Login = () => {
 
   const onSubmit = (values: unknown) => {
     mutateAsync(values as LoginRequestPayloadType)
-      .then((data: any) => {
-        setToLocal('user', JSON.stringify(data?.data));
+      .then((data: LoginResponseType) => {
+        setToLocal('key', JSON.stringify(data?.data.token));
         setAuth(data?.data);
         toast.success(data?.message);
         navigate(from, { replace: true });
@@ -56,7 +58,7 @@ export const Login = () => {
             />
             <PasswordInput label='Password' placeholder='Password' {...register('password')} />
             <Link
-              to='/forget-password'
+              to={REGULAR_PATHS.FORGOT_PASSWORD}
               className='text-[#6231F4] font-semibold flex justify-end mt-3'
             >
               Forgot Password?

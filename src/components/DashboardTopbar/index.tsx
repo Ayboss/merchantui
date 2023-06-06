@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import bellIcon from '../../assets/icons/bell-icon.svg';
 import { getFromLocal } from '../../utils';
+import { REGULAR_PATHS } from '../../routes/paths';
 import {
   Topbar,
   WelcomeContainer,
@@ -22,8 +23,8 @@ export const DashboardTopbar = () => {
   const currentUser = JSON.parse(getFromLocal('user') as string);
 
   const handleLogOut = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
+    localStorage.removeItem('key');
+    navigate(REGULAR_PATHS.LOGIN);
   };
 
   return (
