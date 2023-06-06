@@ -9,4 +9,5 @@ export const DashboardContent = tw.div`
 overflow-scroll
 py-[23px]
 px-[80px]
+bg-[#FAFAFA]
 `;

@@ -59,7 +59,7 @@ export const Login = () => {
             <PasswordInput label='Password' placeholder='Password' {...register('password')} />
             <Link
               to={REGULAR_PATHS.FORGOT_PASSWORD}
-              className='text-[#6231F4] font-semibold flex justify-end mt-3'
+              className='text-[#6231F4]  font-semi-bold flex justify-end mt-3'
             >
               Forgot Password?
             </Link>{' '}

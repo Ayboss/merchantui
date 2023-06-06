@@ -2,7 +2,13 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      tableLastOfType: {
+        '&:last-of-type': {
+          borderBottom: 'none'
+        }
+      }
+    },
     fontFamily: {
       'semi-bold': ['ClashDisplay-Semibold'],
       medium: ['ClashDisplay-Medium'],
