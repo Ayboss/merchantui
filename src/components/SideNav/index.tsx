@@ -16,7 +16,7 @@ export const DashboardSideNav = () => {
   return (
     <DashboardSidebar>
       <SidebarHeader>
-        <SidebarTitle>Merchants Name</SidebarTitle>
+        <SidebarTitle>Organisation Name</SidebarTitle>
         <SidebarSubtitle>ID : #92836312</SidebarSubtitle>
         <MerchantsBalance>₦ 00.000</MerchantsBalance>
       </SidebarHeader>

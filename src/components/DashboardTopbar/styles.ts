@@ -4,10 +4,9 @@ export const Topbar = tw.div`
 flex
 justify-between
 bg-[#F9FAFA]
-h-[87px]
 w-full
-px-10
-py-3
+px-[80px]
+py-[16px]
 `;
 
 export const WelcomeContainer = tw.div``;
@@ -18,10 +17,10 @@ gap-7
 items-center
 `;
 
-export const WelcomeNote = tw.h2`
+export const WelcomeNote = tw.h1`
 text-[24px]
 text-[#0C1C24]
-font-semibold
+font-semi-bold
 leading-[28px]
 `;
 
@@ -41,7 +40,11 @@ w-[48px]
 bg-[#D9D9D9]
 rounded-full
 `;
-export const FlexContainer = tw.div``;
+export const FlexContainer = tw.div`
+  flex
+  flex-col
+  items-start
+`;
 export const NameTag = tw.p`
 text-[#696969]
 text-[14px]
@@ -53,7 +56,7 @@ export const LogoutButton = tw.button`
 bg-transparent
 text-[#6231F4]
 text-[12px]
-font-semibold
+font-semi-bold
 h-[16px]
 m-0
 `;

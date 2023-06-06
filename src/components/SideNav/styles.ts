@@ -5,7 +5,7 @@ h-full
 w-[250px]
 bg-[#16181D]
 text-[#fff]
-py-7
+pt-[29px]
 
 `;
 export const SidebarHeader = tw.div`
@@ -16,19 +16,19 @@ px-5
 export const SidebarTitle = tw.h1`
 text-[15px]
 leading-[19px]
-font-[medium]
+font-medium
 `;
 export const SidebarSubtitle = tw.p`
 text-[13px]
-my-2
-pb-3
+py-[8px]
 border-b-[0.5px]
 border-[#F9FAFA80]
+font-normal
 `;
 export const MerchantsBalance = tw.p`
 text-[15px]
 text-[#EBB746]
-font-[bold]
+font-semi-bold
 mt-4
 `;
 export const SidebarNav = tw.nav`

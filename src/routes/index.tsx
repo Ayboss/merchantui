@@ -1,6 +1,5 @@
-import React from 'react';
-import { RequireAuth } from 'react-auth-kit';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { PropsWithChildren, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Dashboard from '../views/Dashboard';
 import GetStarted from '../views/Dashboard/Onboarding/GetStarted';
 import { RegisteredBusinessFlow } from '../views/Dashboard/Onboarding/RegisteredBusinessFlow';
@@ -12,30 +11,69 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
+import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
+  const {
+    ACCOUNT_INFORMATION,
+    BVN_PRIMARY_OFFICER,
+    OTHERS,
+    REGISTERED_BUSINESS,
+    REGISTERED_DOCUMENTS,
+    SETTINGS,
+    TRANSACTIONS,
+    BUSINESS_ACTIVATION,
+    BUSINESS_INFORMATION,
+    HOME
+  } = PRIVATE_PATHS;
+
+  const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
+
   return (
     <Routes>
-      {/* @ts-ignore - Missing properties for RequireAuth */}
-      <Route element={<RequireAuth loginPath='/login'></RequireAuth>}></Route>
-      <Route path='/' element={<Dashboard />}>
+      <Route
+        path={HOME}
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
+      >
         <Route index element={<GetStarted />} />
-        <Route path='/business-activation' element={<GetStarted />} />
-        <Route path='/registered-business' element={<RegisteredBusinessFlow />}>
-          <Route path='business-information' element={<BusinessInformation />} />
-          <Route path='account-information' element={<AccountInformation />} />
-          <Route path='registration-documents' element={<BusinessDocuments />} />
-          <Route path='bvn-primary-officer' element={<Bvn />} />
-          <Route path='others' element={<Others />} />
+        <Route path={BUSINESS_ACTIVATION} element={<GetStarted />} />
+        <Route path={REGISTERED_BUSINESS} element={<RegisteredBusinessFlow />}>
+          <Route path={BUSINESS_INFORMATION} element={<BusinessInformation />} />
+          <Route path={ACCOUNT_INFORMATION} element={<AccountInformation />} />
+          <Route path={REGISTERED_DOCUMENTS} element={<BusinessDocuments />} />
+          <Route path={BVN_PRIMARY_OFFICER} element={<Bvn />} />
+          <Route path={OTHERS} element={<Others />} />
         </Route>
-        <Route path='/transactions' element={<Transactions />} />
-        <Route path='/Settings' element={<Settings />} />
+        <Route path={TRANSACTIONS} element={<Transactions />} />
+        <Route path={SETTINGS} element={<Settings />} />
       </Route>
-      <Route path='/login' element={<Login />} />
-      <Route path='/forget-password' element={<ForgetPassword />} />
-      <Route path='/reset-password' element={<ResetPassword />} />
-      <Route path='signup' element={<Signup />} />
-      <Route path='*' element={<Navigate to='/login' replace />} />
+      <Route path={LOGIN} element={<Login />} />
+      <Route path={FORGOT_PASSWORD} element={<ForgetPassword />} />
+      <Route path={RESET_PASSWORD} element={<ResetPassword />} />
+      <Route path={SIGN_UP} element={<Signup />} />
+      <Route path='*' element={<Navigate to={LOGIN} replace />} />
     </Routes>
   );
+};
+
+export const PrivateRoute: React.FC<PropsWithChildren> = ({ children }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAccessToken = () => {
+      const accessToken = localStorage.getItem('key');
+
+      if (!accessToken) {
+        navigate(REGULAR_PATHS.LOGIN);
+      }
+    };
+
+    checkAccessToken();
+  }, [navigate]);
+
+  return <>{children}</>;
 };

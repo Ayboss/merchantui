@@ -6,7 +6,7 @@ w-full
 `;
 
 export const DashboardContent = tw.div`
-h-[89%]
 overflow-scroll
-
+py-[23px]
+px-[80px]
 `;
