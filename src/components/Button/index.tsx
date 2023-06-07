@@ -5,7 +5,7 @@ import { ButtonPropsType } from './types';
 import { CustomButton } from './styles';
 
 export const Button: React.FC<ButtonPropsType> = (props) => {
-  const { name, onClick, isBusy, disabled, className, type } = props;
+  const { name, onClick, isBusy, disabled, className, type, icon } = props;
 
   return (
     <CustomButton
@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonPropsType> = (props) => {
       className={className}
       type={type}
     >
-      {isBusy ? <FontAwesomeIcon icon={faSpinner} spinPulse /> : name}
+      {isBusy ? <FontAwesomeIcon icon={icon ?? faSpinner} spinPulse /> : name}
     </CustomButton>
   );
 };

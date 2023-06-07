@@ -7,4 +7,5 @@ export type ButtonPropsType = {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
   type?: any;
+  icon?: any;
 };
