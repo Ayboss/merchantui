@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import bellIcon from '../../assets/icons/bell-icon.svg';
-import { getFromLocal } from '../../utils';
 import { REGULAR_PATHS } from '../../routes/paths';
+import { useAuth } from '../../hooks';
 import {
   Topbar,
   WelcomeContainer,
@@ -20,7 +20,7 @@ import {
 
 export const DashboardTopbar = () => {
   const navigate = useNavigate();
-  const currentUser = JSON.parse(getFromLocal('user') as string);
+  const { auth } = useAuth();
 
   const handleLogOut = () => {
     localStorage.removeItem('key');
@@ -30,7 +30,7 @@ export const DashboardTopbar = () => {
   return (
     <Topbar>
       <WelcomeContainer>
-        <WelcomeNote>Welcome {currentUser?.firstName} !</WelcomeNote>
+        <WelcomeNote>Welcome {auth?.firstName} !</WelcomeNote>
         <Breadcrumb>
           <span> Dashboard</span>
           <FontAwesomeIcon
@@ -44,7 +44,7 @@ export const DashboardTopbar = () => {
         <Notification src={bellIcon} />
         <MerchantsAvatar />
         <FlexContainer>
-          <NameTag>{currentUser?.firstName + ' ' + currentUser?.lastName}</NameTag>
+          <NameTag>{auth?.firstName + ' ' + auth?.lastName}</NameTag>
           <LogoutButton onClick={handleLogOut}>Log out</LogoutButton>
         </FlexContainer>
       </CTAContainer>
