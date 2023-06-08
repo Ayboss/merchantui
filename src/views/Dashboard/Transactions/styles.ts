@@ -17,3 +17,11 @@ export const DashboardCardContainer = tw.div`
     flex
     gap-[20px]
 `;
+
+export const TransactionsTableTitleWithFilter = tw.div`
+    mt-[40px]
+    mb-[24px]
+    w-full
+    flex
+    justify-between
+`;

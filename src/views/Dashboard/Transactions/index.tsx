@@ -1,11 +1,12 @@
 import React from 'react';
-import { DashboardContentHeader } from '../../../components';
+import { CustomTable, DashboardContentHeader } from '../../../components';
 import {
   DashboardCardContainer,
   TransactionsContainer,
+  TransactionsTableTitleWithFilter,
   TransactionsTopFlexWrapper
 } from './styles';
-import { MockTransactionCardDetails } from './mock';
+import { MockTransactionCardDetails, MockTransactionsData, MockTransactionsHeader } from './mock';
 import { TransactionCard } from './components';
 
 const Transactions: React.FC = () => {
@@ -19,6 +20,10 @@ const Transactions: React.FC = () => {
           <TransactionCard key={detail.text} {...detail} />
         ))}
       </DashboardCardContainer>
+      <TransactionsTableTitleWithFilter>
+        <h3 className='text-[#000000] text-[20px] font-semi-bold'>All Transactions</h3>
+      </TransactionsTableTitleWithFilter>
+      <CustomTable data={MockTransactionsData} headers={MockTransactionsHeader} />
     </TransactionsContainer>
   );
 };

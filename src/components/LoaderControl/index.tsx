@@ -4,7 +4,7 @@ import { faArrowRotateRight } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import { ReactComponent as Spinner } from '../../assets/icons/spinner.svg';
 
-import './style.css';
+import './styles.css';
 
 interface LoaderProps {
   loading: boolean;

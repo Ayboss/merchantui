@@ -17,3 +17,5 @@ export * from './TextAreaInput';
 export * from './URLInput';
 export * from './UploadInput';
 export * from './DashboardContentHeader';
+export * from './CustomTable';
+export * from './LoaderControl';

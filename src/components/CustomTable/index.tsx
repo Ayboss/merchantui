@@ -1,5 +1,6 @@
 import React from 'react';
-import { TableWrapper } from './style';
+
+import './styles.css';
 
 export type HeadersPropsType = {
   title: string;
@@ -17,12 +18,15 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
   const { data, headers, emptyLayout, tableWrapperClassName } = props;
 
   return (
-    <TableWrapper className={tableWrapperClassName}>
+    <div className={`${tableWrapperClassName} table-wrapper`}>
       <table className='w-full border-collapse border-[0]'>
         <thead>
           <tr className='bg-[unset]'>
             {headers.map(({ responseMatch, title }) => (
-              <th className='text-left font-medium py-[17px]' key={responseMatch}>
+              <th
+                className='text-left font-medium pb-[17px] text-[14px] text-[#11071A]'
+                key={responseMatch}
+              >
                 {title}
               </th>
             ))}
@@ -31,10 +35,7 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
         <tbody className='w-full bg-[#FFFFFF]'>
           {data.length
             ? data.map((item: T, index) => (
-                <tr
-                  key={index}
-                  className='tableLastOfType text-[14px] font-normal border-b-[1px solid #DDE0E2]'
-                >
+                <tr key={index} className='tableLastOfType text-[14px] font-normal table-body-tr'>
                   {headers
                     .map((item: HeadersPropsType) => item.responseMatch)
                     .map((value: string) => (
@@ -48,6 +49,6 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
         </tbody>
       </table>
       {!data.length && emptyLayout}
-    </TableWrapper>
+    </div>
   );
 };
