@@ -24,6 +24,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "jsdom": "^21.1.1",
     "path": "^0.12.7",
     "rc-pagination": "^3.5.0",

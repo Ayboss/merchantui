@@ -18,7 +18,7 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
   const { data, headers, emptyLayout, tableWrapperClassName } = props;
 
   return (
-    <div className={`${tableWrapperClassName} table-wrapper`}>
+    <div className={`${tableWrapperClassName ?? ''} table-wrapper`}>
       <table className='w-full border-collapse border-[0]'>
         <thead>
           <tr className='bg-[unset]'>
