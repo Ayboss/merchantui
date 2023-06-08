@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomTable, DashboardContentHeader } from '../../../components';
+import { CustomTable, DashboardContentHeader, LoaderControl, Paginator } from '../../../components';
 import {
   DashboardCardContainer,
   TransactionsContainer,
@@ -23,7 +23,18 @@ const Transactions: React.FC = () => {
       <TransactionsTableTitleWithFilter>
         <h3 className='text-[#000000] text-[20px] font-semi-bold'>All Transactions</h3>
       </TransactionsTableTitleWithFilter>
-      <CustomTable data={MockTransactionsData} headers={MockTransactionsHeader} />
+      <LoaderControl
+        loading={false}
+        error={false}
+        overlay={false}
+        errorTitle='Something went wrong'
+        errorSubTitle="Sorry, we couldn't load your transactions, try reloading"
+        minHeight={'400px'}
+        errorControlOnClick={() => {}}
+      >
+        <CustomTable data={MockTransactionsData} headers={MockTransactionsHeader} />
+      </LoaderControl>
+      <Paginator />
     </TransactionsContainer>
   );
 };

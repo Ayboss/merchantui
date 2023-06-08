@@ -19,3 +19,4 @@ export * from './UploadInput';
 export * from './DashboardContentHeader';
 export * from './CustomTable';
 export * from './LoaderControl';
+export * from './Paginator';

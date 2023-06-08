@@ -22,7 +22,7 @@ interface LoaderProps {
   errorControlOnClick?: () => void;
 }
 
-const LoaderControl = (props: LoaderProps) => {
+export const LoaderControl = (props: LoaderProps) => {
   const {
     loading,
     children,
@@ -69,16 +69,17 @@ const LoaderControl = (props: LoaderProps) => {
             {errorTitle}
           </div>
 
-          <div className='max-w-[315px] text-[14px] leading-normal text-center text-[rgba(0, 0, 0, 0.4)] mb-[30px]'>
+          <div className='max-w-[315px] text-[14px] leading-normal text-center text-[rgba(0, 0, 0, 0.4)] mb-[10px]'>
             {errorSubTitle}
           </div>
 
           {errorControlOnClick !== undefined && (
-            <div className='control'>
+            <div className=''>
               <Button
-                name={errorControlText || 'Reload'}
+                name={errorControlText || 'Refresh'}
                 icon={errorControlShowIcon ? faArrowRotateRight : undefined}
                 onClick={errorControlOnClick}
+                className='m-0 w-[200px] h-[40px] rounded-[4px] text-[13px]'
               />
             </div>
           )}
@@ -89,5 +90,3 @@ const LoaderControl = (props: LoaderProps) => {
     </div>
   );
 };
-
-export default LoaderControl;
