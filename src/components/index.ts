@@ -20,3 +20,4 @@ export * from './DashboardContentHeader';
 export * from './CustomTable';
 export * from './LoaderControl';
 export * from './Paginator';
+export * from './Popup';

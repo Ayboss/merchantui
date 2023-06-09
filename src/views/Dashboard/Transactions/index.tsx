@@ -1,9 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { CustomTable, DashboardContentHeader, LoaderControl, Paginator } from '../../../components';
+import {
+  CustomTable,
+  DashboardContentHeader,
+  LoaderControl,
+  Paginator
+  // Popup
+} from '../../../components';
 import {
   TransactionItemType,
   TransactionsQueryParamsType,
-  useGetTransactionsQuery
+  useGetTransactionsQuery,
+  useTransactionsSummaryQuery
 } from '../../../services/hooks';
 import { formatDate, formatNumber } from '../../../utils';
 import {
@@ -12,15 +19,41 @@ import {
   TransactionsTableTitleWithFilter,
   TransactionsTopFlexWrapper
 } from './styles';
-import { MockTransactionCardDetails } from './mock';
-import { TransactionCard } from './components';
+import { TransactionCard, TransactionCardPropsType } from './components';
 import { TransactionsHeader } from './constants';
 
 const Transactions: React.FC = () => {
+  // const [openTransactionItemDetail, setShowTransactionItemDetail] = useState(false);
+
+  const { data: summaryData } = useTransactionsSummaryQuery();
+
+  const transactionSummaryData: TransactionCardPropsType[] = [
+    {
+      amount: `₦${formatNumber(summaryData?.data?.transactionValue ?? 0)}`,
+      title: 'Transaction Value',
+      text: 'All Transactions volume for a specific duration'
+    },
+    {
+      amount: formatNumber(summaryData?.data?.transactionVolume ?? 0),
+      title: 'Transaction Volume',
+      text: 'All Transactions value for a specific duration'
+    },
+    {
+      amount: formatNumber(summaryData?.data?.succesfulTransaction ?? 0),
+      title: 'Successful Transaction',
+      text: 'All payment that was successfully transacted'
+    },
+    {
+      amount: formatNumber(summaryData?.data?.failedTransaction ?? 0),
+      title: 'Failed Transaction',
+      text: 'All payment that was unsuccessfully transacted'
+    }
+  ];
+
   const [query, setQuery] = useState<TransactionsQueryParamsType>({
     page: 0
   });
-  const { data, isLoading, isError, refetch } = useGetTransactionsQuery({ ...query });
+  const { data, isError, refetch, isFetching } = useGetTransactionsQuery({ ...query });
 
   const handlePageChange = (current: number) => {
     setQuery({ ...query, page: current - 1 });
@@ -49,7 +82,7 @@ const Transactions: React.FC = () => {
         <DashboardContentHeader title='Transactions' subtitle='All  This Week Transactions' />
       </TransactionsTopFlexWrapper>
       <DashboardCardContainer>
-        {MockTransactionCardDetails.map((detail) => (
+        {transactionSummaryData.map((detail) => (
           <TransactionCard key={detail.text} {...detail} />
         ))}
       </DashboardCardContainer>
@@ -57,15 +90,15 @@ const Transactions: React.FC = () => {
         <h3 className='text-[#000000] text-[20px] font-semi-bold'>All Transactions</h3>
       </TransactionsTableTitleWithFilter>
       <LoaderControl
-        loading={isLoading}
+        loading={isFetching}
         error={isError}
-        overlay={isLoading}
+        overlay={isFetching}
         errorTitle='Something went wrong'
         errorSubTitle="Sorry, we couldn't load your transactions, try reloading"
         minHeight={'400px'}
         errorControlOnClick={() => refetch()}
       >
-        <CustomTable data={transformData} headers={TransactionsHeader} />
+        <CustomTable onRowClick={() => {}} data={transformData} headers={TransactionsHeader} />
       </LoaderControl>
       {!isError && (
         <Paginator
@@ -74,6 +107,7 @@ const Transactions: React.FC = () => {
           onChange={handlePageChange}
         />
       )}
+      {/* {openTransactionItemDetail && <Popup onClose={() => setShowTransactionItemDetail(false)} />} */}
     </TransactionsContainer>
   );
 };

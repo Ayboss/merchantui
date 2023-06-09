@@ -8,6 +8,7 @@ justify-between
 flex-nowrap
 px-5
 lg:px-0
+fade-in
 `;
 export const AuthBody = tw.div`
 h-full

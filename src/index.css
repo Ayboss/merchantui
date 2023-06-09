@@ -119,3 +119,17 @@ p {
     0px 9.14073px 10.0172px rgba(0, 0, 0, 0.0377087),
     0px 3.30602px 3.62304px rgba(0, 0, 0, 0.0290472);
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.2s linear;
+}
