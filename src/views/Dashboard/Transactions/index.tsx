@@ -18,6 +18,7 @@ import { TransactionsHeader } from './constants';
 
 const Transactions: React.FC = () => {
   const [openTransactionItemDetail, setShowTransactionItemDetail] = useState(false);
+  const [currentDetails, setCurrentDetails] = useState<TransactionItemType | null>(null);
 
   const { data: summaryData } = useTransactionsSummaryQuery();
 
@@ -93,7 +94,11 @@ const Transactions: React.FC = () => {
         errorControlOnClick={() => refetch()}
       >
         <CustomTable
-          onRowClick={() => setShowTransactionItemDetail(true)}
+          onRowClick={(detail) => {
+            // @ts-ignore incompatible amount and created type
+            setCurrentDetails(detail);
+            setShowTransactionItemDetail(true);
+          }}
           data={transformData}
           headers={TransactionsHeader}
         />
@@ -106,7 +111,7 @@ const Transactions: React.FC = () => {
         />
       )}
       {openTransactionItemDetail && (
-        <TransactionItem onClose={() => setShowTransactionItemDetail(false)} />
+        <TransactionItem {...currentDetails} onClose={() => setShowTransactionItemDetail(false)} />
       )}
     </TransactionsContainer>
   );

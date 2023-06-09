@@ -17,13 +17,10 @@ export const Popup: React.FC<PropsWithChildren<PopupPropsType>> = ({ children, o
   return (
     <div className='fixed flex items-center justify-center h-full w-full z-[100] inset-0 popup fade-in'>
       <div className='flex max-w-[535px] w-full  justify-center'>
-        <div
-          className='relative p-[32px]  w-full rounded-[4px] bg-[#fff]  h-full max-h-[577px] '
-          ref={ref}
-        >
+        <div className='relative p-[32px]  w-full rounded-[4px] bg-[#fff]   h-full  ' ref={ref}>
           <FontAwesomeIcon
             onClick={onClose}
-            className='absolute cursor-pointer top-[32px] right-[32px]'
+            className='absolute font-[25px] text-[rgba(144, 148, 158, 0.5)] cursor-pointer top-[32px] right-[32px]'
             icon={faXmark}
           />
           {children}

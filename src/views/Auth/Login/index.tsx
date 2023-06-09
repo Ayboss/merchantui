@@ -32,6 +32,7 @@ export const Login = () => {
     mutateAsync(values as LoginRequestPayloadType)
       .then((data: LoginResponseType) => {
         setToLocal('key', JSON.stringify(data?.data.token));
+        setToLocal('user', JSON.stringify(data?.data));
         setAuth(data?.data);
         toast.success(data?.message);
         navigate(from, { replace: true });

@@ -30,7 +30,7 @@ export const setToSession = (key: string, value: any) => {
 
 export const formatDate = (date: string | null, dateFormat?: string) => {
   if (!date) {
-    return 0;
+    return 'Nil';
   }
   const parsedDate = parseISO(date);
 
