@@ -8,14 +8,11 @@ thead tr th {
 .table-wrapper{
     position: relative;
     overflow-x: auto;
+    max-height: 600px;
 }
 
 .table-wrapper::-webkit-scrollbar{
     height: 8px;
-}
-
-.table-wrapper::-webkit-scrollbar-track{
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
 }
 
 .table-body-tr{
@@ -24,4 +21,19 @@ thead tr th {
 
 .table-body-tr td{
     padding: 20px;
+}
+
+.table-body-tr td[data-value='SUCCESSFUL'],
+.table-body-tr td[data-value='SUCCESS']
+{
+    color: rgba(33, 150, 83, 1);
+    font-weight: 500;
+}
+.table-body-tr td[data-value='PENDING']{
+    color: #D6A32E;
+    font-weight: 500;
+}
+.table-body-tr td[data-value='FAILED']{
+    color: #DC362E;
+    font-weight: 500;
 }

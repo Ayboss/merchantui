@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
-import { LoginApiInstance, SignupApiInstance } from '..';
+import { SignupApiInstance, apiInstance } from '..';
 import { LoginResponseType } from './types';
 
 export const LOGIN_MUTATION_KEY = ['login'];
@@ -35,7 +35,7 @@ export type ResetPasswordPayloadType = {
 
 export const useLoginMuation = () => {
   const request = useCallback(async (data: LoginRequestPayloadType) => {
-    const response = await LoginApiInstance.post('/accounts/login', data);
+    const response = await apiInstance('auth').post('/accounts/login', data);
 
     return response.data as LoginResponseType;
   }, []);
@@ -61,7 +61,7 @@ export const useSignupMutation = () => {
 
 export const useForgotPasswordMutation = () => {
   const request = useCallback(async (data: ForgotPasswordPayloadType) => {
-    const response = await LoginApiInstance.post(`/accounts/forgot-password/${data.email}`);
+    const response = await apiInstance('auth').post(`/accounts/forgot-password/${data.email}`);
 
     return response.data;
   }, []);
@@ -74,7 +74,7 @@ export const useForgotPasswordMutation = () => {
 
 export const useResetPasswordMutation = () => {
   const request = useCallback(async (data: ResetPasswordPayloadType) => {
-    const response = await LoginApiInstance.post('/accounts/reset-password', data);
+    const response = await apiInstance('auth').post('/accounts/reset-password', data);
 
     return response.data;
   }, []);

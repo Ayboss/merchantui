@@ -5,4 +5,5 @@ h-screen
 width-full
 min-h-full
 flex
+fade-in
 `;
