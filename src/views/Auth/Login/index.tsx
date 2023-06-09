@@ -55,15 +55,19 @@ export const Login = () => {
               label='Email Address'
               type='email'
               placeholder='e.g yourmail@mail.com'
-              {...register('username')}
+              {...register('username', { required: true })}
             />
-            <PasswordInput label='Password' placeholder='Password' {...register('password')} />
-            <Link
-              to={REGULAR_PATHS.FORGOT_PASSWORD}
-              className='text-[#6231F4]  font-semi-bold flex justify-end mt-3'
-            >
-              Forgot Password?
-            </Link>{' '}
+            <PasswordInput
+              label='Password'
+              placeholder='Password'
+              {...register('password', { required: true })}
+            />
+            <div className='text-right mt-3'>
+              <Link to={REGULAR_PATHS.FORGOT_PASSWORD} className='text-[#6231F4]'>
+                Forgot Password?
+              </Link>
+            </div>
+
             <Button
               name='Login'
               isBusy={isLoading}
@@ -72,7 +76,7 @@ export const Login = () => {
             />
             <FormLink>
               Don’t have an account ?{' '}
-              <Link to='/signup' className='font-bold'>
+              <Link to='/sign-up' className='font-bold'>
                 Sign Up now !
               </Link>{' '}
             </FormLink>
