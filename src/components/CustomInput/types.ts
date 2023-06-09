@@ -4,4 +4,5 @@ export type CustomInputProps = {
   type?: string;
   placeholder: string;
   className?: string;
+  value?: string;
 };

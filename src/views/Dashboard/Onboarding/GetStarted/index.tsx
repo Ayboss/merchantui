@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BusinessTypes } from '../../../../constants';
+import { BusinessTypes, MerchantCategories } from '../../../../constants';
 import { Button, SelectButton, SelectInput } from '../../../../components';
+import { useKycDataContext } from '../../../../context/MerchantKycProvider';
 import { BusinessActivation, Container, Title, SubTitle, FormWrapper } from './styles';
 
 const GetStarted = () => {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState('');
+  const { setKycData } = useKycDataContext();
+  const [merchchantBusinessType, setMerchchantBusinessType] = useState('');
+  const [merchantBusinessCategory, setMerchantBusinessCategory] = useState('');
 
-  const busineesCategoryList = [{ title: 'Businees1' }, { title: 'Businees2' }];
-
-  const handleProceed = () => {
+  const handleOnSubmit = () => {
+    setKycData({
+      businessType: merchchantBusinessType,
+      businessCategory: merchantBusinessCategory
+    });
     navigate('/registered-business/business-information');
   };
 
@@ -28,19 +33,21 @@ const GetStarted = () => {
               selectBtnIcon={businessType.selectIcon}
               title={businessType.title}
               subtitle={businessType.subtitle}
-              onSelect={() => setSelectedOption(businessType.title)}
-              activeButton={selectedOption}
+              onSelect={() => setMerchchantBusinessType(businessType.title)}
+              activeButton={merchchantBusinessType}
             />
           ))}
           <SelectInput
             label='Business Category'
             defaultOption='Ex: Financial Services '
-            options={busineesCategoryList}
+            options={MerchantCategories}
+            value={merchantBusinessCategory}
+            onChange={(e) => setMerchantBusinessCategory(e.target.value)}
           />
           <Button
             name='Save & Proceed'
-            disabled={!(selectedOption.length > 0)}
-            onClick={handleProceed}
+            disabled={!(merchchantBusinessType.length > 0 && merchantBusinessCategory.length > 0)}
+            onClick={handleOnSubmit}
           />
         </FormWrapper>
       </Container>

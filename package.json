@@ -25,8 +25,12 @@
     "@testing-library/react": "^14.0.0",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
+<<<<<<< HEAD
     "date-fns": "^2.30.0",
     "express": "^4.18.2",
+=======
+    "country-react-select": "^1.0.1",
+>>>>>>> 2221ec5 (refactor: apiInstance setup with profile endpoints mutation)
     "jsdom": "^21.1.1",
     "path": "^0.12.7",
     "rc-pagination": "^3.5.0",
@@ -35,6 +39,7 @@
     "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.10.0",
+    "react-select": "^5.7.3",
     "react-toastify": "^9.1.2",
     "standard": "^17.1.0",
     "styled-components": "^5.3.9",

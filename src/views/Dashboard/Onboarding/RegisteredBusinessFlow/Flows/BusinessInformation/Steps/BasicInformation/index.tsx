@@ -1,38 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { Button, CustomInput, TextAreaInput } from '../../../../../../../../components';
+import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
 import { BasicInformationContainer, Title, BasicInformationForm } from './styles';
 
 const BasicInformation = ({ onNext }: any) => {
+  const { kycData, setKycData } = useKycDataContext();
+  const { register, handleSubmit } = useForm();
+
+  interface IBasicInformation {
+    businessInformation?: string;
+    tin?: string;
+  }
+
+  const handelOnSubmit = (values: IBasicInformation) => {
+    const { businessInformation, tin } = values;
+
+    setKycData({ ...kycData, businessInformation, tin });
+    onNext();
+  };
+
   return (
     <BasicInformationContainer>
       <Title>BASIC INFORMATION</Title>
-      <BasicInformationForm>
+      <BasicInformationForm onSubmit={handleSubmit(handelOnSubmit)}>
         <TextAreaInput
-          name=''
           label='Tell us about your business'
-          placeholder='Type your business Name Here'
+          placeholder='Type your business name here'
+          {...register('businessInformation')}
         />
         <CustomInput
-          label='Support Email'
-          name=''
-          placeholder='Type your businees support mail Here'
+          label='Tax Identification Number'
+          placeholder='Enter your tax identification number'
+          {...register('tin')}
         />
-        <CustomInput
-          label='Chargeback Email'
-          name=''
-          placeholder='Type your business chargeback mail Here'
-        />
+
         <Button
           name='Save & Continue'
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
-          onClick={onNext}
+          type='submit'
         />
       </BasicInformationForm>
       <div className='text-center my-5'>
-        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
+        {/* Currently not inline with the design and flow of the apis */}
+        {/* <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
           Do this later
-        </Link>
+        </Link> */}
       </div>
     </BasicInformationContainer>
   );

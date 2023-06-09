@@ -1,5 +1,5 @@
 export interface TextAreaInputProps {
   label: string;
-  name: string;
+  name?: string;
   placeholder: string;
 }
