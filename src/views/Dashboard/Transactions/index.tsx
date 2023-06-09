@@ -1,11 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import {
-  CustomTable,
-  DashboardContentHeader,
-  LoaderControl,
-  Paginator
-  // Popup
-} from '../../../components';
+import { CustomTable, DashboardContentHeader, LoaderControl, Paginator } from '../../../components';
 import {
   TransactionItemType,
   TransactionsQueryParamsType,
@@ -19,11 +13,11 @@ import {
   TransactionsTableTitleWithFilter,
   TransactionsTopFlexWrapper
 } from './styles';
-import { TransactionCard, TransactionCardPropsType } from './components';
+import { TransactionCard, TransactionCardPropsType, TransactionItem } from './components';
 import { TransactionsHeader } from './constants';
 
 const Transactions: React.FC = () => {
-  // const [openTransactionItemDetail, setShowTransactionItemDetail] = useState(false);
+  const [openTransactionItemDetail, setShowTransactionItemDetail] = useState(false);
 
   const { data: summaryData } = useTransactionsSummaryQuery();
 
@@ -98,7 +92,11 @@ const Transactions: React.FC = () => {
         minHeight={'400px'}
         errorControlOnClick={() => refetch()}
       >
-        <CustomTable onRowClick={() => {}} data={transformData} headers={TransactionsHeader} />
+        <CustomTable
+          onRowClick={() => setShowTransactionItemDetail(true)}
+          data={transformData}
+          headers={TransactionsHeader}
+        />
       </LoaderControl>
       {!isError && (
         <Paginator
@@ -107,7 +105,9 @@ const Transactions: React.FC = () => {
           onChange={handlePageChange}
         />
       )}
-      {/* {openTransactionItemDetail && <Popup onClose={() => setShowTransactionItemDetail(false)} />} */}
+      {openTransactionItemDetail && (
+        <TransactionItem onClose={() => setShowTransactionItemDetail(false)} />
+      )}
     </TransactionsContainer>
   );
 };
