@@ -62,20 +62,28 @@ export type TransactionsQueryParamsType = { page?: number; size?: number; sort?:
 export const transactionsQueryKey = ['transactions-results'];
 
 export const useGetTransactionsQuery = (query?: TransactionsQueryParamsType, config?: any) => {
-  const load = useCallback(async () => {
-    const response = await apiInstance('pay').get('/transactions', {
-      params: query,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
-      }
-    });
+  const load = useCallback(
+    async (signal: AbortSignal) => {
+      const response = await apiInstance('pay').get('/transactions', {
+        params: query,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+        },
+        signal
+      });
 
-    return response.data as TransactionsResponseType;
-  }, [query]);
+      return response.data as TransactionsResponseType;
+    },
+    [query]
+  );
 
-  return useQuery([...transactionsQueryKey, query?.page], load, {
-    ...config,
-    refetchOnWindowFocus: false,
-    keepPreviousData: true
-  });
+  return useQuery(
+    [...transactionsQueryKey, query?.page],
+    ({ signal }) => load(signal as AbortSignal),
+    {
+      ...config,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true
+    }
+  );
 };
