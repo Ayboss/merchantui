@@ -37,7 +37,7 @@ export const DashboardTopbar = () => {
             icon={faGreaterThan}
             className='font-light mx-2 text-[10px] text-[#3A3A3AB2]'
           />
-          <span>Business activation</span>
+          <span className='font-medium text-[#6231F4]'>Business activation</span>
         </Breadcrumb>
       </WelcomeContainer>
       <CTAContainer>
