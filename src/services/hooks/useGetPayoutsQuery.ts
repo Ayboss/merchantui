@@ -1,46 +1,73 @@
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { apiInstance } from '..';
-import { CommonTableQueryType } from './types';
 
-export type PayoutItemType = {
-  beneficiaryAccountNumber: string;
-  beneficiaryBank: string;
-  beneficiaryBankCode: string;
-  created: string;
-  currencyCode: string;
-  id: string;
-  lastTransactionRequeryTimestamp: string;
-  narration: string;
-  transactionAmount: number;
-  transactionReference: string;
-  transactionStatus: string;
-  transactionStatusVerified: boolean;
-};
+// export type TransactionItemType = {
+//   accountNumber: null | number;
+//   amount: number;
+//   amountPaid: number;
+//   balanceToPay: number;
+//   channel: null | string;
+//   code: null | string | number;
+//   created: string | null;
+//   currency: string;
+//   customerEmail: string | null;
+//   customerMobile: string | null;
+//   customerName: string;
+//   excessPayment: number;
+//   id: string;
+//   onusReference: string;
+//   paymentStatus: 'PENDING' | 'SUCCESSFUL' | 'FAILED';
+//   reference: string;
+//   vat: null | number;
+// };
 
-export type PayoutHistoryResponseType = CommonTableQueryType<PayoutItemType>;
+// export type TransactionsResponseType = {
+//   responseCode: string;
+//   responseMessage: string;
+//   success: boolean;
+//   data: {
+//     content: TransactionItemType[];
+//     empty: boolean;
+//     first: boolean;
+//     last: boolean;
+//     number: boolean;
+//     numberOfElements: number;
+//     pageable: {
+//       offset: number;
+//       pageNumber: number;
+//       pageSize: number;
+//       paged: boolean;
+//       sort: {
+//         empty: boolean;
+//         sorted: boolean;
+//         unsorted: boolean;
+//       };
+//       unpaged: boolean;
+//     };
+//     size: number;
+//     totalElements: number;
+//     totalPages: number;
+//   };
+// };
 
 export type PayoutQueryParamsType = { page?: number; size?: number; sort?: Array<string> };
 
 export const payoutQueryKey = ['payout-results'];
 
 export const useGetPayoutsQuery = (query?: PayoutQueryParamsType, config?: any) => {
-  const load = useCallback(
-    async (signal: AbortSignal) => {
-      const response = await apiInstance('settlement').get('/merchant-payouts', {
-        params: query,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
-        },
-        signal
-      });
+  const load = useCallback(async () => {
+    const response = await apiInstance('settlement').get('/merchant-payouts', {
+      params: query,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+      }
+    });
 
-      return response.data as PayoutHistoryResponseType;
-    },
-    [query]
-  );
+    return response.data;
+  }, [query]);
 
-  return useQuery([...payoutQueryKey, query?.page], ({ signal }) => load(signal as AbortSignal), {
+  return useQuery([...payoutQueryKey, query?.page], load, {
     ...config,
     refetchOnWindowFocus: false,
     keepPreviousData: true

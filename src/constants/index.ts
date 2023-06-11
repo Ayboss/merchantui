@@ -27,7 +27,7 @@ export const NavLinks = [
     icon: TransactionsIcon
   },
   {
-    url: '/payouts',
+    url: '/payouts/options',
     title: 'Payouts',
     icon: PaymentsIcon
   },

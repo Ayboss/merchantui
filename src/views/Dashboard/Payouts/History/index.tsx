@@ -1,11 +1,14 @@
 import React from 'react';
 import { formatNumber } from '../../../../utils';
 import { CustomTable, LoaderControl, TableEmptyLayout } from '../../../../components';
+// import { useGetPayoutsQuery } from '../../../../services/hooks';
 import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
 import { ReactComponent as Icon } from './icons/balance.svg';
 import { MOCK_PAYOUT_DATA, MOCK_PAYOUT_HISTORY_HEADER } from './mock';
 
 export const PayoutHistory: React.FC = () => {
+  //   const { data } = useGetPayoutsQuery();
+
   const payoutCardsData: Array<PayoutSummaryCardPropsType> = [
     {
       amount: `₦${formatNumber(0)}`,
