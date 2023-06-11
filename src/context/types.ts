@@ -44,3 +44,14 @@ export type AuthType = {
   username: string;
   verified: boolean;
 };
+
+export type KycType = {
+  businessType: string;
+  businessCategory: string;
+  businessInformation: string;
+  businessAddress: string;
+  tin: string;
+  country: string;
+  state: string;
+  lga: string;
+};

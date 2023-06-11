@@ -88,3 +88,19 @@ export const RegisteredBusinessInformation = [
     url: 'others'
   }
 ];
+
+export const MerchantCategories = [
+  { id: 1, title: 'Agriculture' },
+  { id: 2, title: 'Commerce' },
+  { id: 3, title: 'Education' },
+  { id: 3, title: 'Financial Services' },
+  { id: 4, title: 'Gaming' },
+  { id: 5, title: 'Hospitality' },
+  { id: 6, title: 'Health' },
+  { id: 7, title: 'Liesure & Enterainment' },
+  { id: 8, title: 'Logistics' },
+  { id: 9, title: 'Travel' },
+  { id: 10, title: 'Non Profits' },
+  { id: 11, title: 'Utilities' },
+  { id: 12, title: 'Others' }
+];

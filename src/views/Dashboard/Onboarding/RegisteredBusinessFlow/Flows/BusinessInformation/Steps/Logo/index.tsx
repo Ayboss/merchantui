@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Title } from '../BasicInformation/styles';
 import { Button, UploadInput } from '../../../../../../../../components';
 import { LogoInformationContainer, LogoInformationForm } from './styles';
+// import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
 
 const LogoInformation = ({ onNext }: any) => {
+  // const { kycData } = useKycDataContext();
+
   return (
     <LogoInformationContainer>
       <Title>BUSINESS LOGO</Title>
