@@ -10,7 +10,11 @@ export enum PRIVATE_PATHS {
   OTHERS = '/registered-business/others',
   //   ---------------------- //
   TRANSACTIONS = '/transactions',
-  SETTINGS = '/settings'
+  SETTINGS = '/settings',
+  PAYOUTS = '/payouts',
+  PAYOUT_OPTIONS = '/payouts/options',
+  PAYOUT__HISTORY = '/payouts/history',
+  PAYOUT_BENEFICIARIES = '/payouts/beneficaries'
 }
 
 export enum REGULAR_PATHS {

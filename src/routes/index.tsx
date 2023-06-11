@@ -11,6 +11,8 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
+import { Payouts } from '../views/Dashboard/Payouts';
+import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -24,7 +26,10 @@ export const AppRouter = () => {
     TRANSACTIONS,
     BUSINESS_ACTIVATION,
     BUSINESS_INFORMATION,
-    HOME
+    HOME,
+    PAYOUTS,
+    PAYOUT__HISTORY,
+    PAYOUT_OPTIONS
   } = PRIVATE_PATHS;
 
   const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
@@ -50,6 +55,11 @@ export const AppRouter = () => {
         </Route>
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
+        <Route path={PAYOUTS} element={<Payouts />} />
+        <Route path={PAYOUTS} element={<Payouts />}>
+          <Route path={PAYOUT__HISTORY} element={<PayoutHistory />} />
+          <Route path={PAYOUT_OPTIONS} element={<PayoutHistory />} />
+        </Route>
       </Route>
       <Route path={LOGIN} element={<Login />} />
       <Route path={FORGOT_PASSWORD} element={<ForgetPassword />} />

@@ -22,3 +22,4 @@ export * from './LoaderControl';
 export * from './Paginator';
 export * from './Popup';
 export * from './TableEmptyLayout';
+export * from './Tabs';
