@@ -14,6 +14,8 @@ import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import Overview from '../views/Dashboard/Overview';
+import { Payouts } from '../views/Dashboard/Payouts';
+import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
