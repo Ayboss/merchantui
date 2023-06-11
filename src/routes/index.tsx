@@ -64,6 +64,7 @@ export const AppRouter = () => {
         </Route>
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
+        <Route path={PAYOUTS} element={<Payouts />} />
         <Route path={PAYOUTS} element={<Payouts />}>
           {/* <Route path={PAYOUT__HISTORY} element={<PayoutHistory />} /> */}
           <Route path={PAYOUT_OPTIONS} element={<PayoutHistory />} />
