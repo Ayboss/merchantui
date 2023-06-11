@@ -76,7 +76,7 @@ export const Login = () => {
             />
             <FormLink>
               Don’t have an account ?{' '}
-              <Link to='/sign-up' className='font-bold'>
+              <Link to='/signup' className='font-bold'>
                 Sign Up now !
               </Link>{' '}
             </FormLink>
