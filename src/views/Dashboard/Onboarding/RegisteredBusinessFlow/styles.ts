@@ -3,7 +3,6 @@ import tw from 'tailwind-styled-components';
 export const RegisteredBusinessContainer = tw.section`
 w-full
 flex
-px-10
 py-5
 `;
 export const RegisteredBusinessFlowNavigator = tw.div`

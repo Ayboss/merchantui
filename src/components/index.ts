@@ -21,3 +21,4 @@ export * from './CustomTable';
 export * from './LoaderControl';
 export * from './Paginator';
 export * from './Popup';
+export * from './TableEmptyLayout';

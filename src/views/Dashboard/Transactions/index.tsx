@@ -1,5 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { CustomTable, DashboardContentHeader, LoaderControl, Paginator } from '../../../components';
+import {
+  CustomTable,
+  DashboardContentHeader,
+  LoaderControl,
+  Paginator,
+  TableEmptyLayout
+} from '../../../components';
 import {
   TransactionItemType,
   TransactionsQueryParamsType,
@@ -101,6 +107,15 @@ const Transactions: React.FC = () => {
           }}
           data={transformData}
           headers={TransactionsHeader}
+          emptyLayout={
+            <TableEmptyLayout
+              containerHeight='400px'
+              buttonText='Reload'
+              title='Empty Transactions'
+              subTitle="Sorry you don't have any transactions yet. "
+              onControlClick={() => refetch()}
+            />
+          }
         />
       </LoaderControl>
       {!isError && (

@@ -26,10 +26,6 @@ export const RegisteredBusinessFlow = () => {
     setActive(info.title);
   };
 
-  // useEffect(() => {
-  //   <Navigate to='/business-information' />;
-  // }, []);
-
   return (
     <RegisteredBusinessContainer>
       <RegisteredBusinessFlowNavigator>
