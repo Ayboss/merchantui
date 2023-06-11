@@ -62,13 +62,8 @@ export const AppRouter = () => {
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
-<<<<<<< HEAD
           {/* <Route path={PAYOUT__HISTORY} element={<PayoutHistory />} /> */}
           <Route path={PAYOUT_OPTIONS} element={<PayoutHistory />} />
-=======
-          <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
-          <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
->>>>>>> dc37e22 (feat: hooked up send money endpoint)
         </Route>
       </Route>
       <Route path={LOGIN} element={<Login />} />
