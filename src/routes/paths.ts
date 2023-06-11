@@ -17,5 +17,5 @@ export enum REGULAR_PATHS {
   LOGIN = '/login',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',
-  SIGN_UP = '/sign-up'
+  SIGN_UP = '/signup'
 }

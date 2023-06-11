@@ -17,7 +17,8 @@ import { AuthLayout } from '../../../layouts';
 import { Button, CheckboxInput, CustomInput, PasswordInput } from '../../../components';
 
 export const Signup = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
+
   const { isLoading, mutateAsync } = useSignupMutation();
   const navigate = useNavigate();
 
@@ -81,7 +82,16 @@ export const Signup = () => {
             <PasswordInput
               label='Confirm Password'
               placeholder='confirm password'
-              {...register('passwordConfirmation', { required: true })}
+              {...register('passwordConfirmation', {
+                required: true,
+                validate: (val: string) => {
+                  if (watch('password') !== val) {
+                    toast.error('Password do not match');
+
+                    return '';
+                  }
+                }
+              })}
             />
 
             <CheckboxInput />
