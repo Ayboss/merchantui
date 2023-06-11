@@ -23,3 +23,4 @@ export * from './Paginator';
 export * from './Popup';
 export * from './TableEmptyLayout';
 export * from './Card';
+export * from './Tabs';
