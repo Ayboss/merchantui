@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { RegisteredBusinessInformation } from '../../../../constants';
 import { NavigatorButton } from '../../../../components';
 import {
@@ -25,10 +25,6 @@ export const RegisteredBusinessFlow = () => {
     navigate(info.url);
     setActive(info.title);
   };
-
-  useEffect(() => {
-    <Navigate to='business-information' />;
-  }, []);
 
   return (
     <RegisteredBusinessContainer>
