@@ -14,8 +14,8 @@ export enum PRIVATE_PATHS {
   TRANSACTIONS = '/transactions',
   SETTINGS = '/settings',
   PAYOUTS = '/payouts',
-  PAYOUT_OPTIONS = '/payouts',
-  PAYOUT_HISTORY = '/payouts/history',
+  PAYOUT_OPTIONS = '/payouts/options',
+  PAYOUT__HISTORY = '/payouts/history',
   PAYOUT_BENEFICIARIES = '/payouts/beneficaries'
 }
 

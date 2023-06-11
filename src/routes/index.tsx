@@ -11,10 +11,8 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
-import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
-import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -31,7 +29,7 @@ export const AppRouter = () => {
     BUSINESS_INFORMATION,
     HOME,
     PAYOUTS,
-    PAYOUT_HISTORY,
+    PAYOUT__HISTORY,
     PAYOUT_OPTIONS
   } = PRIVATE_PATHS;
 
@@ -59,9 +57,10 @@ export const AppRouter = () => {
         </Route>
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
+        <Route path={PAYOUTS} element={<Payouts />} />
         <Route path={PAYOUTS} element={<Payouts />}>
-          <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
-          <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
+          <Route path={PAYOUT__HISTORY} element={<PayoutHistory />} />
+          <Route path={PAYOUT_OPTIONS} element={<PayoutHistory />} />
         </Route>
       </Route>
       <Route path={LOGIN} element={<Login />} />

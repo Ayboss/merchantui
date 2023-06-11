@@ -6,11 +6,11 @@ export const PAYOUTS_TAB_ITEMS = [
     label: 'Payout Options'
   },
   {
-    url: PRIVATE_PATHS.PAYOUT_HISTORY,
+    url: PRIVATE_PATHS.PAYOUT__HISTORY,
     label: 'Payout History'
+  },
+  {
+    url: PRIVATE_PATHS.PAYOUT_BENEFICIARIES,
+    label: 'Manage Beneficiaries'
   }
-  // {
-  //   url: PRIVATE_PATHS.PAYOUT_BENEFICIARIES,
-  //   label: 'Manage Beneficiaries'
-  // }
 ];

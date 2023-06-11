@@ -28,3 +28,4 @@ export * from './StateSelect';
 export * from './Card';
 export * from './Tabs';
 export * from './AccordionItem';
+export * from './Tabs';
