@@ -9,8 +9,10 @@ interface overviewType {
 
 export interface CardContainerType {
   loading: boolean;
-  summaryData?: TransactionSummaryResponseType;
+  data?: overviewType;
 }
 
 export type CardItemType = { amount: string; title: string }[];
 export type TabItemType = { key: selectType; title: string }[];
+
+export type formatMoneyType = string | '0';

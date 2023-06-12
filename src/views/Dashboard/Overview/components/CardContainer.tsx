@@ -1,39 +1,58 @@
 import React from 'react';
 import { Card } from '../../../../components';
 import { Amount, Container, Title } from './styles';
-import { CardContainerType, CardItemType } from './types';
+import { CardContainerType } from './types';
 import { Loading } from './Loading';
 
 export const CardContainer: React.FC<CardContainerType> = (props) => {
-  const { loading, summaryData } = props;
+  const { loading, data } = props;
 
-  const TransactionsOverviews: CardItemType = [
-    {
-      amount: formatNumber(summaryData?.data?.transactionValue ?? 0),
-      title: 'Transaction Value'
-    },
-    {
-      amount: formatNumber(summaryData?.data?.transactionVolume ?? 0),
-      title: 'Transaction Volume'
-    },
-    {
-      amount: formatNumber(summaryData?.data?.successfulTransaction ?? 0),
-      title: 'Wallet Balance'
-    },
-    {
-      amount: formatNumber(summaryData?.data?.failedTransaction ?? 0),
-      title: 'Next Settlement'
-    }
-  ];
+  const formatMoney = (amount: string | undefined) => {
+    return `₦${String(amount).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
+  };
 
   return (
     <Container>
-      {items.map(({ amount, title }, id) => (
-        <Card key={id}>
-          <Amount>{amount}</Amount>
-          <Title>{title}</Title>
-        </Card>
-      ))}
+      <Card>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Amount>{formatMoney(data?.transactionValue)}</Amount>
+            <Title>Transaction Value</Title>
+          </>
+        )}
+      </Card>
+      <Card>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Amount>{formatMoney(data?.transactionVolume)}</Amount>
+            <Title>Transaction Volume</Title>
+          </>
+        )}
+      </Card>
+      <Card>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Amount>{formatMoney(data?.successfulTransaction)}</Amount>
+            <Title>Wallet Balance</Title>
+          </>
+        )}
+      </Card>
+      <Card>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Amount>{formatMoney(data?.failedTransaction)}</Amount>
+            <Title>Next Settlement</Title>
+          </>
+        )}
+      </Card>
     </Container>
   );
 };

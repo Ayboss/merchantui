@@ -1,4 +1,5 @@
 import React from 'react';
+import { LineChart } from './LineChart';
 import { Amount, Title, Wrapper } from './styles';
 
 export const CardTransaction = () => {
@@ -22,6 +23,8 @@ export const CardTransaction = () => {
           <Title>Failed</Title>
         </Wrapper>
       </Wrapper>
-    </Wrapper>
+
+      <LineChart />
+    </>
   );
 };
