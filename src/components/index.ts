@@ -31,3 +31,4 @@ export * from './AccordionItem';
 export * from './CountrySelect';
 export * from './LgaSelect';
 export * from './StateSelect';
+export * from './Card';
