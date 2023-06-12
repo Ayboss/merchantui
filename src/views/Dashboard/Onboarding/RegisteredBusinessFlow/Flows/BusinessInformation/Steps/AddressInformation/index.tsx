@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Title } from '../BasicInformation/styles';
-import { Button, TextAreaInput } from '../../../../../../../../components';
+import {
+  Button,
+  TextAreaInput,
+  CountrySelectInput,
+  StateSelectInput,
+  LgaSelect
+} from '../../../../../../../../components';
 import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
-import CountrySelect from '../../../../../../../../components/CountrySelect';
-import StateSelect from '../../../../../../../../components/StateSelect';
-import LgaSelect from '../../../../../../../../components/LgaSelect';
+
 import {
   useProfileMutation,
   ProfileRequestPayloadType
@@ -58,13 +62,13 @@ const AddressInformation = ({ onNext }: any) => {
     <AddressInformationContainer>
       <Title>ADDRESS</Title>
       <AddressInformationForm onSubmit={handleSubmit}>
-        <CountrySelect
+        <CountrySelectInput
           label='Select country'
           placeholder='Enter your country'
           value={selectedCountry}
           onChange={(e) => handleCountryChange(e.id, e.name)}
         />
-        <StateSelect
+        <StateSelectInput
           label='Select State'
           placeholder='Enter your state'
           value={selectedState}
