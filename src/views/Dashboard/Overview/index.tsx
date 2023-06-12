@@ -51,7 +51,7 @@ const Overview = () => {
 
         <Card>
           <Title>Activity</Title>
-          <WrapperRelative>
+          <WrapperRelative className={'my-18'}>
             <VictoryPie
               width={400}
               height={400}
