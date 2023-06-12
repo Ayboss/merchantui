@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
 import { Card } from '../../../components';
-import { overviewQuery } from '../../../services/hooks';
+import { useTransactionsSummaryQuery } from '../../../services/hooks';
 import { CardContainer, CardTransaction, PieCart } from './components';
 import { TabItems } from './mock';
 import {
@@ -17,15 +16,14 @@ import {
   FlexWrapper
 } from './styles';
 import { selectType } from './types';
-
 const Overview = () => {
   const [selected, setSelected] = useState<selectType>('card');
 
-  const { data, isLoading } = useQuery(overviewQuery());
+  const { data: summaryData, isLoading } = useTransactionsSummaryQuery();
 
   return (
     <>
-      <CardContainer loading={isLoading} data={data} />
+      <CardContainer loading={isLoading} summaryData={summaryData} />
       <Wrapper className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
         <WrapperGrid>
           <Card>
