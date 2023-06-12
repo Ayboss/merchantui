@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { apiInstance } from '..';
+import { CommonTableQueryType } from './types';
 
 export type TransactionsRequestType = {
   page: number;
@@ -23,39 +24,12 @@ export type TransactionItemType = {
   excessPayment: number;
   id: string;
   onusReference: string;
-  paymentStatus: 'PENDING' | 'SUCCESSFUL' | 'FAILED';
+  paymentStatus: 'PENDING' | 'SUCCESSFUL' | 'FAILED' | 'Successful';
   reference: string;
   vat: null | number;
 };
 
-export type TransactionsResponseType = {
-  responseCode: string;
-  responseMessage: string;
-  success: boolean;
-  data: {
-    content: TransactionItemType[];
-    empty: boolean;
-    first: boolean;
-    last: boolean;
-    number: boolean;
-    numberOfElements: number;
-    pageable: {
-      offset: number;
-      pageNumber: number;
-      pageSize: number;
-      paged: boolean;
-      sort: {
-        empty: boolean;
-        sorted: boolean;
-        unsorted: boolean;
-      };
-      unpaged: boolean;
-    };
-    size: number;
-    totalElements: number;
-    totalPages: number;
-  };
-};
+export type TransactionsResponseType = CommonTableQueryType<TransactionItemType>;
 
 export type TransactionsQueryParamsType = { page?: number; size?: number; sort?: Array<string> };
 

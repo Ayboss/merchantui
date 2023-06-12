@@ -7,7 +7,6 @@ export type PopupTransactionItemType = Partial<TransactionItemType> & { onClose:
 export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
   const {
     onClose,
-    id,
     paymentStatus,
     channel,
     customerName,
@@ -21,6 +20,7 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
   const statusColor = useMemo(() => {
     switch (paymentStatus) {
       case 'SUCCESSFUL':
+      case 'Successful':
         return 'text-[#3DA536]';
       case 'FAILED':
         return 'text-[#DC362E]';
@@ -42,22 +42,16 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
         </p>
         <div className='flex flex-col gap-[20px] w-full mt-[40px] mb-[50px]'>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
-            <TwoRowInfo topText='Transaction ID' bottomText={id} align='items-start' />
+            <TwoRowInfo
+              topText='Transaction Reference'
+              bottomText={onusReference}
+              align='items-start'
+            />
+          </div>
+          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo
               element={<p className={`${statusColor} text-[14px] font-medium`}>{paymentStatus}</p>}
             />
-          </div>
-          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
-            <TwoRowInfo topText='Transaction type' bottomText={channel ?? ''} align='items-start' />
-            <TwoRowInfo topText='Customer Name' bottomText={customerName} align='items-end' />
-          </div>
-          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
-            <TwoRowInfo
-              topText='Email Address'
-              bottomText={customerEmail ?? ''}
-              align='items-start'
-            />
-            <TwoRowInfo topText='Transaction Date' bottomText={created ?? ''} align='items-end' />
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo
@@ -72,11 +66,16 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
             />
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
+            <TwoRowInfo topText='Transaction type' bottomText={channel ?? ''} align='items-start' />
+            <TwoRowInfo topText='Customer Name' bottomText={customerName} align='items-end' />
+          </div>
+          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo
-              topText='Transaction Reference'
-              bottomText={onusReference}
+              topText='Email Address'
+              bottomText={customerEmail ?? ''}
               align='items-start'
             />
+            <TwoRowInfo topText='Transaction Date' bottomText={created ?? ''} align='items-end' />
           </div>
         </div>
       </div>
@@ -101,7 +100,13 @@ export const TwoRowInfo: React.FC<TwoRowInfoPropType> = (props) => {
           <p className='text-[#959595] overflow-ellipsis max-w-[200px] text-[14px] whitespace-nowrap font-normal'>
             {topText}
           </p>
-          <p className='text-[#252122] font-medium text-[14px]'>{bottomText}</p>
+          <p
+            className={`text-[#252122] ${
+              align === 'items-end' ? 'text-right' : 'text-left'
+            } font-medium text-[14px]`}
+          >
+            {bottomText}
+          </p>
         </div>
       ) : (
         element
