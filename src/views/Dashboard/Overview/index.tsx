@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { VictoryPie } from 'victory';
+import { useQuery } from 'react-query';
 import { Card } from '../../../components';
-import { CardContainer, CardTransaction } from './components';
-import { TabItems, TransactionsOverviews } from './mock';
+import { overviewQuery } from '../../../services/hooks';
+import { CardContainer, CardTransaction, PieCart } from './components';
+import { TabItems } from './mock';
 import {
-  Percentage,
-  PercentageTitle,
   Tab,
   TabItem,
   TabWrapper,
   Title,
   Wrapper,
   WrapperGrid,
-  WrapperOverlay,
-  WrapperRelative,
   Box,
   BoxPercentageTitle,
   BoxPercentage,
@@ -24,9 +21,11 @@ import { selectType } from './types';
 const Overview = () => {
   const [selected, setSelected] = useState<selectType>('card');
 
+  const { data, isLoading } = useQuery(overviewQuery());
+
   return (
     <>
-      <CardContainer items={TransactionsOverviews} />
+      <CardContainer loading={isLoading} data={data} />
       <Wrapper className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
         <WrapperGrid>
           <Card>
@@ -51,28 +50,7 @@ const Overview = () => {
 
         <Card>
           <Title>Activity</Title>
-          <WrapperRelative className={'my-18'}>
-            <VictoryPie
-              width={400}
-              height={400}
-              colorScale={['#6231F4', '#F09636', '#F5C544', '#EB5757']}
-              padding={50}
-              data={[
-                { x: 'Card Payment', y: 34 },
-                { x: 'Bank Transfer', y: 32 },
-                { x: 'Qr Code', y: 24 },
-                { x: 'USSD', y: 10 }
-              ]}
-              labelRadius={({ innerRadius }) => (innerRadius ? +innerRadius + 5 : 0)}
-              radius={({ datum }) => (datum.x === 'Card Payment' ? datum.y * 5.2 : 160)}
-              innerRadius={110}
-              style={{ labels: { display: 'none' } }}
-            />
-            <WrapperOverlay>
-              <Percentage>34%</Percentage>
-              <PercentageTitle>Card Transaction</PercentageTitle>
-            </WrapperOverlay>
-          </WrapperRelative>
+          <PieCart />
 
           <Wrapper>
             <Wrapper className='grid grid-cols-2 gap-6'>
