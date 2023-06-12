@@ -30,6 +30,8 @@ const Overview = () => {
     setSelectedDate(newValue);
   };
 
+  const { data, isLoading } = useQuery(overviewQuery());
+
   return (
     <>
       <TopWrapper>
