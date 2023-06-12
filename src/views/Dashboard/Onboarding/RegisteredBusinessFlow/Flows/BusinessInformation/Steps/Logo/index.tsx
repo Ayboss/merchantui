@@ -1,29 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Title } from '../BasicInformation/styles';
 import { Button, UploadInput } from '../../../../../../../../components';
 import { LogoInformationContainer, LogoInformationForm } from './styles';
-// import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
 
 const LogoInformation = ({ onNext }: any) => {
-  // const { kycData } = useKycDataContext();
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
+  // eslint-disable-next-line no-console
+  console.log(uploadedFile);
+
+  const handleFileSelect = (file: File | null) => {
+    setUploadedFile(file);
+  };
 
   return (
     <LogoInformationContainer>
       <Title>BUSINESS LOGO</Title>
       <LogoInformationForm>
-        <UploadInput />
+        <UploadInput name='businessLogo' onFileSelect={handleFileSelect} />
         <Button
           name='Save & Continue'
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
           onClick={onNext}
         />
       </LogoInformationForm>
-      <div className='text-center my-5'>
-        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
-          Do this later
-        </Link>
-      </div>
     </LogoInformationContainer>
   );
 };
