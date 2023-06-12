@@ -17,17 +17,18 @@ export type TransactionSummaryResponseType = {
 };
 
 export const useTransactionsSummaryQuery = (config?: any) => {
-  const load = useCallback(async () => {
+  const load = useCallback(async (signal: AbortSignal) => {
     const res = await apiInstance('pay').get('/transaction-stats', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
-      }
+      },
+      signal
     });
 
     return res.data as TransactionSummaryResponseType;
   }, []);
 
-  return useQuery(transactionsSummaryQueryKey, load, {
+  return useQuery(transactionsSummaryQueryKey, ({ signal }) => load(signal as AbortSignal), {
     refetchOnWindowFocus: false,
     initialData: {
       data: {

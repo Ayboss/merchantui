@@ -56,3 +56,31 @@ export interface overViewChartParams {
   startDate?: string;
   endDate?: string;
 }
+export interface CommonTableQueryType<T> {
+  responseCode: string;
+  responseMessage: string;
+  success: boolean;
+  data: {
+    content: T[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: boolean;
+    numberOfElements: number;
+    pageable: {
+      offset: number;
+      pageNumber: number;
+      pageSize: number;
+      paged: boolean;
+      sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+      };
+      unpaged: boolean;
+    };
+    size: number;
+    totalElements: number;
+    totalPages: number;
+  };
+}

@@ -30,7 +30,7 @@ export const AppRouter = () => {
     BUSINESS_INFORMATION,
     HOME,
     PAYOUTS,
-    PAYOUT__HISTORY,
+    PAYOUT_HISTORY,
     PAYOUT_OPTIONS
   } = PRIVATE_PATHS;
 
@@ -59,8 +59,8 @@ export const AppRouter = () => {
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
-          <Route path={PAYOUT__HISTORY} element={<PayoutHistory />} />
-          <Route path={PAYOUT_OPTIONS} element={<PayoutHistory />} />
+          <Route path={PAYOUT_OPTIONS} element={<div>Hello</div>} />
+          <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
         </Route>
       </Route>
       <Route path={LOGIN} element={<Login />} />
