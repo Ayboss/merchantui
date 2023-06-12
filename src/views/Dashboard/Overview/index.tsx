@@ -30,7 +30,7 @@ const Overview = () => {
     setSelectedDate(newValue);
   };
 
-  const { data, isLoading } = useQuery(overviewQuery());
+  const { data: summaryData, isLoading } = useTransactionsSummaryQuery();
 
   return (
     <>

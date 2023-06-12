@@ -19,6 +19,7 @@ export const apiInstance = (instance: string) => {
     baseURL: `https://sandbox.payonus.com/${instance}/api/v1`
   });
 };
+
 export const DashboardApiInstance = axios.create({
   baseURL: 'https://sandbox.payonus.com/pay/api/v1',
   headers: {
