@@ -8,7 +8,7 @@ export type TransactionSummaryResponseType = {
   data: {
     transactionValue: number;
     transactionVolume: number;
-    succesfulTransaction: number;
+    successfulTransaction: number;
     failedTransaction: number;
   };
   responseCode?: string;
@@ -33,7 +33,7 @@ export const useTransactionsSummaryQuery = (config?: any) => {
       data: {
         transactionValue: 0,
         transactionVolume: 0,
-        succesfulTransaction: 0,
+        successfulTransaction: 0,
         failedTransaction: 0
       }
     },
