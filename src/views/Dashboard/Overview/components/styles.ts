@@ -1,15 +1,11 @@
 import tw from 'tailwind-styled-components';
 
 export const Container = tw.div`
-  bg-[#FFFFFF]
-  rounded-[8px]
-  border-[1px solid rgba(221, 224, 226, 0.25)]
-  flex
-  flex-col
-  items-left
-  gap-[2px]
-  py-[34px]
-  px-[34px]
+  grid
+  grid-cols-2
+  md:grid-cols-4
+  gap-4
+  mb-5
 `;
 
 export const Amount = tw.h3`
@@ -22,4 +18,7 @@ export const Title = tw.p`
     text-[#16181D]
     font-medium
     text-[14px]
+`;
+
+export const Wrapper = tw.div`
 `;
