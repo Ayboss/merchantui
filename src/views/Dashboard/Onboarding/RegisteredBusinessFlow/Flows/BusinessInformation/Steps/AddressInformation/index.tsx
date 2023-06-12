@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Title } from '../BasicInformation/styles';
 import { Button, TextAreaInput } from '../../../../../../../../components';
 import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
@@ -21,8 +21,6 @@ const AddressInformation = ({ onNext }: any) => {
   const [selectedStateId, setSelectedStateId] = useState('');
   const [selectedLga, setSelectedLga] = useState('');
   const [address, setAddress] = useState('');
-  // console.log(kycData);
-  // console.log();
 
   const handleCountryChange = (id: string, values: string) => {
     setSelectedCountry(values);
@@ -36,13 +34,13 @@ const AddressInformation = ({ onNext }: any) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateAsync(kycData as ProfileRequestPayloadType)
-      .then(() => {
-        // console.log(data);
+      .then((data) => {
+        toast.success(`Data entry ${data?.responseMessage}`);
+        onNext();
       })
-      .catch(() => {
-        // console.log(error);
+      .catch((error) => {
+        toast.error(error?.response?.data?.responseMessage);
       });
-    onNext();
   };
 
   useEffect(() => {
@@ -53,7 +51,8 @@ const AddressInformation = ({ onNext }: any) => {
       state: selectedState,
       lga: selectedLga
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCountry, selectedState, selectedLga, address]);
 
   return (
     <AddressInformationContainer>
@@ -91,15 +90,10 @@ const AddressInformation = ({ onNext }: any) => {
           name='Save & Continue'
           isBusy={isLoading}
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
-          // onClick={onNext}
           type='submit'
+          disabled={!(selectedCountry.length > 0 && selectedState.length > 0 && address.length > 0)}
         />
       </AddressInformationForm>
-      <div className='text-center my-5'>
-        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
-          Do this later
-        </Link>
-      </div>
     </AddressInformationContainer>
   );
 };

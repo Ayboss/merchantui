@@ -57,12 +57,14 @@ export const BusinessTypes = [
   {
     selectIcon: SelectButtonIcon1,
     title: 'Registered Business',
-    subtitle: 'For business that are registered with a valid identification number'
+    subtitle: 'For business that are registered with a valid identification number',
+    value: 'REGISTERED'
   },
   {
     selectIcon: SelectButtonIcon2,
     title: 'Starter Business',
-    subtitle: 'For  Freelancers and other unregistered businesses'
+    subtitle: 'For  Freelancers and other unregistered businesses',
+    value: 'STARTER'
   }
 ];
 
