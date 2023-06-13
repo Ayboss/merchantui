@@ -50,3 +50,9 @@ export type LoginResponseType = {
   statusCode: 200;
   validation: unknown;
 };
+
+export interface overViewChartParams {
+  type: string;
+  startDate?: string;
+  endDate?: string;
+}

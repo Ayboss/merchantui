@@ -17,6 +17,11 @@ export const NavLinks = [
     icon: HomeIcon
   },
   {
+    url: '/overview',
+    title: 'Dashboard',
+    icon: HomeIcon
+  },
+  {
     url: '/transactions',
     title: 'Transactions',
     icon: TransactionsIcon

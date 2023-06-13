@@ -1,5 +1,7 @@
 export enum PRIVATE_PATHS {
   HOME = '/',
+  DASHBOARD = '/dashboard',
+  OVERVIEW = '/overview',
   BUSINESS_ACTIVATION = '/business-activation',
   REGISTERED_BUSINESS = '/registered-business',
   //   Under REGISTERED_BUSINESS

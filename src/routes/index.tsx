@@ -11,6 +11,7 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
+import Overview from '../views/Dashboard/Overview';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -18,6 +19,7 @@ export const AppRouter = () => {
     ACCOUNT_INFORMATION,
     BVN_PRIMARY_OFFICER,
     OTHERS,
+    OVERVIEW,
     REGISTERED_BUSINESS,
     REGISTERED_DOCUMENTS,
     SETTINGS,
@@ -41,6 +43,7 @@ export const AppRouter = () => {
       >
         <Route index element={<GetStarted />} />
         <Route path={BUSINESS_ACTIVATION} element={<GetStarted />} />
+        <Route path={OVERVIEW} element={<Overview />} />
         <Route path={REGISTERED_BUSINESS} element={<RegisteredBusinessFlow />}>
           <Route path={BUSINESS_INFORMATION} element={<BusinessInformation />} />
           <Route path={ACCOUNT_INFORMATION} element={<AccountInformation />} />
