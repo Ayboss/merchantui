@@ -1,6 +1,7 @@
 import React from 'react';
 import { useOverviewChartQuery } from '../../../../services/hooks/useOverviewQuery';
 import { ReactComponent as Spinner } from '../../../../assets/icons/spinner.svg';
+import { formatNumber } from '../../../../utils';
 import { LineChart } from './LineChart';
 import { Amount, Title, Wrapper, WrapperRelative } from './styles';
 import { CardTransactionType } from './types';
@@ -29,19 +30,19 @@ export const CardTransaction: React.FC<CardTransactionType> = (props) => {
           <Wrapper className={'py-[34px]'}>
             <Wrapper className={'flex'}>
               <Wrapper className={'pr-[34px]'}>
-                <Amount>N 0</Amount>
+                <Amount>N {formatNumber(data?.data?.totalVolume ?? 0)}</Amount>
                 <Title>Volume</Title>
               </Wrapper>
               <Wrapper className={'px-[34px] border-y-1 border-[#000000]'}>
-                <Amount>N 0</Amount>
+                <Amount>N {formatNumber(data?.data?.totalValue ?? 0)}</Amount>
                 <Title>Value</Title>
               </Wrapper>
               <Wrapper className={'px-[34px] border-y-1 border-[#000000]'}>
-                <Amount>0</Amount>
+                <Amount>{formatNumber(data?.data?.successfulTransactions ?? 0)}</Amount>
                 <Title>Successful</Title>
               </Wrapper>
               <Wrapper className={'px-[34px]'}>
-                <Amount>0</Amount>
+                <Amount>{formatNumber(data?.data?.failedTransactions ?? 0)}</Amount>
                 <Title>Failed</Title>
               </Wrapper>
             </Wrapper>
