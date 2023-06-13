@@ -16,7 +16,8 @@ import {
 } from '../../../../../../../../services/hooks/useProfileMutation';
 import { AddressInformationContainer, AddressInformationForm } from './styles';
 
-const AddressInformation = ({ onNext }: any) => {
+const AddressInformation = ({ onNext, setCurrentStep }: any) => {
+  setCurrentStep('2');
   const { kycData, setKycData } = useKycDataContext();
   const { isLoading, mutateAsync } = useProfileMutation();
   const [selectedCountry, setSelectedCountry] = useState('');

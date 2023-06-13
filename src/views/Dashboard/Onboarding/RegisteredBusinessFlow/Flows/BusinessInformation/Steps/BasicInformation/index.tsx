@@ -4,7 +4,8 @@ import { Button, CustomInput, TextAreaInput } from '../../../../../../../../comp
 import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
 import { BasicInformationContainer, Title, BasicInformationForm } from './styles';
 
-const BasicInformation = ({ onNext }: any) => {
+const BasicInformation = ({ onNext, setCurrentStep }: any) => {
+  setCurrentStep('1');
   const { kycData, setKycData } = useKycDataContext();
   const { register, handleSubmit, formState } = useForm();
 

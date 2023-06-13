@@ -7,7 +7,8 @@ import {
 } from '../../../../../../../../services/hooks/useUploadMutationsQuery';
 import { LogoInformationContainer, LogoInformationForm } from './styles';
 
-const LogoInformation = ({ onNext }: any) => {
+const LogoInformation = ({ onNext, setCurrentStep }: any) => {
+  setCurrentStep('2');
   const { isLoading, mutateAsync } = useUploadMutationsQuery();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 

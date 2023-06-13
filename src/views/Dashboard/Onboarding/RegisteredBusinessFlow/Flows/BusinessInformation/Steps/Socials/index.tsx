@@ -20,7 +20,8 @@ import TwitterIcon from '@/assets/icons/twitter-icon.svg';
 import InstagramIcon from '@/assets/icons/instagram-icon.svg';
 import FacebookIcon from '@/assets/icons/facebook-icon.svg';
 
-const SocialInformation = () => {
+const SocialInformation = ({ setCurrentStep }: any) => {
+  setCurrentStep('4');
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { isLoading, mutateAsync } = useSettingsMutation();
