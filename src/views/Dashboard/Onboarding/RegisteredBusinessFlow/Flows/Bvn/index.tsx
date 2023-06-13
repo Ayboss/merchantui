@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button, CustomInput } from '../../../../../../components';
 import { BvnWrapper, Header, Title, SubTitle, FormLabel, BvnForm } from './styles';
 
@@ -20,11 +19,6 @@ const Bvn = () => {
           onClick={() => {}}
         />
       </BvnForm>
-      <div className='text-center my-5'>
-        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
-          Do this later
-        </Link>
-      </div>
     </BvnWrapper>
   );
 };

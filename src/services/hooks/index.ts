@@ -6,4 +6,5 @@ export * from './useGetPayoutsQuery';
 export * from './useVerifyBankAccount';
 export * from './useGetBanksQuery';
 export * from './useSendMoney';
-export * from './useSettingsQuery';
+export * from './useSettingsMutation';
+export * from './useBvnMutation';

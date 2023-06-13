@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import { Button, CustomInput, SelectInput } from '../../../../../../components';
 // import { useGetBanksQuery } from '../../../../../../services/hooks/useGetBanksQuery';
 import { naijaBanks } from '../../../../../../constants/naijaBanks';
@@ -39,11 +39,6 @@ const AccountInformation = () => {
           onClick={() => {}}
         />
       </AccountInformationForm>
-      <div className='text-center my-5'>
-        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
-          Do this later
-        </Link>
-      </div>
     </AccountInformationWrapper>
   );
 };
