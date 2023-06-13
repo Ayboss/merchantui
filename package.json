@@ -38,6 +38,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.10.0",
     "react-tailwindcss-datepicker": "^1.6.1",
+    "react-select": "^5.7.3",
     "react-toastify": "^9.1.2",
     "standard": "^17.1.0",
     "styled-components": "^5.3.9",

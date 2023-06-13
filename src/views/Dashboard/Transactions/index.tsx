@@ -80,7 +80,7 @@ const Transactions: React.FC = () => {
   return (
     <TransactionsContainer>
       <TransactionsTopFlexWrapper>
-        <DashboardContentHeader title='Transactions' subtitle='All  This Week Transactions' />
+        <DashboardContentHeader title='Transactions' subtitle='All Transactions' />
       </TransactionsTopFlexWrapper>
       <DashboardCardContainer>
         {transactionSummaryData.map((detail) => (
@@ -111,8 +111,8 @@ const Transactions: React.FC = () => {
             <TableEmptyLayout
               containerHeight='400px'
               buttonText='Reload'
-              title='Empty Transactions'
-              subTitle="Sorry you don't have any transactions yet. "
+              title='No recent transactions'
+              subTitle='Looks like you haven’t made any transaction, no worries! '
               onControlClick={() => refetch()}
             />
           }
