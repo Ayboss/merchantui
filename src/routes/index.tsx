@@ -14,6 +14,7 @@ import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
+import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -59,7 +60,7 @@ export const AppRouter = () => {
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
-          <Route path={PAYOUT_OPTIONS} element={<div>Hello</div>} />
+          <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
         </Route>
       </Route>

@@ -7,7 +7,7 @@ export const TransactionsHeader: Array<HeadersPropsType> = [
   },
   {
     title: 'Transaction ID',
-    responseMatch: 'id'
+    responseMatch: 'onusReference'
   },
   {
     title: 'Channel',

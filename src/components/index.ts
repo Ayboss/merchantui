@@ -24,3 +24,4 @@ export * from './Popup';
 export * from './TableEmptyLayout';
 export * from './Card';
 export * from './Tabs';
+export * from './AccordionItem';
