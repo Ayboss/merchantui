@@ -11,6 +11,10 @@ export type ChartResponseType = {
   responseMessage: string;
   success: boolean;
   data: {
+    totalVolume: number;
+    totalValue: number;
+    successfulTransactions: number;
+    failedTransactions: number;
     data: { x: string; y: string }[];
     channel: string;
     endDate: string;
@@ -36,7 +40,7 @@ export const useOverviewChartQuery = (params: overViewChartParams, config?: any)
       {
         params,
         headers: {
-          Authorization: `Bearer sk_test_LRO3MDXJXAULVOFEMPBOMXTKW0FX`
+          Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
         }
       }
     );
@@ -55,7 +59,7 @@ export const useOverviewPieChartQuery = (config?: any) => {
   const load = useCallback(async () => {
     const { data } = await apiInstance('settlement').get(`/get-merchant-transactions-pie-chart`, {
       headers: {
-        Authorization: `Bearer sk_test_LRO3MDXJXAULVOFEMPBOMXTKW0FX`
+        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }
     });
 
