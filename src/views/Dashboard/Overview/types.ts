@@ -9,4 +9,8 @@ export interface TabItemType {
   $selected: string;
 }
 
-export type selectType = 'card' | 'bank_transfer' | 'ussd' | 'qr_code';
+export type selectType = 'card' | 'banktransfer' | 'ussd' | 'qrcode';
+export interface selectedDateType {
+  startDate: string;
+  endDate: string;
+}
