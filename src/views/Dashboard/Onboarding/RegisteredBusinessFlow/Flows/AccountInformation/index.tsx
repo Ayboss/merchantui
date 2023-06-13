@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, CustomInput, SelectInput } from '../../../../../../components';
+// import { useGetBanksQuery } from '../../../../../../services/hooks/useGetBanksQuery';
+import { naijaBanks } from '../../../../../../constants/naijaBanks';
 import {
   AccountInformationWrapper,
   Header,
@@ -20,7 +22,7 @@ const AccountInformation = () => {
 
       <FormLabel>CORPORATE BANK ACCOUNT</FormLabel>
       <AccountInformationForm>
-        <SelectInput label='Bank Name' defaultOption='Select your bank' />
+        <SelectInput label='Bank Name' defaultOption='Select your bank' options={naijaBanks} />
         <CustomInput
           name='accountNumber'
           label='Account Number'
