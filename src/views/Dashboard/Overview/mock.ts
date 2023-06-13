@@ -2,19 +2,19 @@ import { TabItemType } from './components/types';
 
 export const TabItems: TabItemType = [
   {
-    key: 'card',
-    title: 'Card'
+    key: 'banktransfer',
+    title: 'Bank Transfer'
   },
   {
-    key: 'bank_transfer',
-    title: 'Bank Transfer'
+    key: 'card',
+    title: 'Card'
   },
   {
     key: 'ussd',
     title: 'USSD'
   },
   {
-    key: 'qr_code',
+    key: 'qrcode',
     title: 'QR Code'
   }
 ];
