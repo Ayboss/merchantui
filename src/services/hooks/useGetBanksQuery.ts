@@ -1,20 +1,22 @@
+import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { apiInstance } from '..';
 
-export const GetBanksQueryKey = ['get-banks-query'];
-
-export const getBanks = async () => {
-  try {
-    const response = await apiInstance('pay').get('/get-banks');
-
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-};
+export const getBankQueryKey = ['getBanks'];
 
 export const useGetBanksQuery = () => {
-  return useQuery(GetBanksQueryKey, getBanks, {
-    refetchOnWindowFocus: false
+  const load = useCallback(async () => {
+    const response = await apiInstance('settlement').get('/get-list-of-banks', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+      }
+    });
+
+    return response.data;
+  }, []);
+
+  return useQuery(getBankQueryKey, load, {
+    refetchOnWindowFocus: false,
+    cacheTime: 20000000
   });
 };

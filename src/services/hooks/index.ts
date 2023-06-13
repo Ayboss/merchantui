@@ -4,3 +4,6 @@ export * from './useTransactionsSummaryQuery';
 export * from './useSettingsQuery';
 export * from './dashboard';
 export * from './useGetPayoutsQuery';
+export * from './useVerifyBankAccount';
+export * from './useGetBanksQuery';
+export * from './useSendMoney';
