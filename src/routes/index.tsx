@@ -15,6 +15,7 @@ import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
+import { useRedirect } from '../hooks';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -36,6 +37,8 @@ export const AppRouter = () => {
   } = PRIVATE_PATHS;
 
   const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
+
+  useRedirect();
 
   return (
     <Routes>

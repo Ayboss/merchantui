@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { formatDate, formatNumber } from '../../../../utils';
 import { CustomTable, LoaderControl, Paginator, TableEmptyLayout } from '../../../../components';
 import { PayoutItemType, useGetPayoutsQuery } from '../../../../services/hooks';
+import { PRIVATE_PATHS } from '../../../../routes/paths';
 import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
 import { ReactComponent as Icon } from './icons/balance.svg';
 import { PAYOUT_HISTORY_HEADER } from './constants';
@@ -37,6 +39,7 @@ export const PayoutHistory: React.FC = () => {
   const [currentDetails, setCurrentDetails] = useState<PayoutItemType | null>(null);
   const [showPayoutDetails, setShowPayoutDetails] = useState(false);
   const { data, isError, refetch, isFetching } = useGetPayoutsQuery();
+  const navigate = useNavigate();
 
   const handlePageChange = (current: number) => {
     setQuery({ ...query, page: current - 1 });
@@ -89,10 +92,10 @@ export const PayoutHistory: React.FC = () => {
           emptyLayout={
             <TableEmptyLayout
               containerHeight='300px'
-              buttonText='Reload'
+              buttonText='Make Payout'
               title='No recent payouts'
               subTitle='Looks like you haven’t made any payout, no worries! '
-              onControlClick={() => {}}
+              onControlClick={() => navigate(PRIVATE_PATHS.PAYOUT_OPTIONS)}
             />
           }
         />
