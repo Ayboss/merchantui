@@ -8,3 +8,4 @@ export * from './useGetBanksQuery';
 export * from './useSendMoney';
 export * from './useSettingsMutation';
 export * from './useBvnMutation';
+export * from './useCreateSettlementMutation';

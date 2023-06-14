@@ -5,10 +5,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Select from 'react-select';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 import { Button, CustomInput } from '../../../../../../components';
-// import { useGetBanksQuery } from '../../../../../../services/hooks/useGetBanksQuery';
 
-import { useGetBanksQuery, useVerifyBankAccount } from '../../../../../../services/hooks';
+import {
+  useGetBanksQuery,
+  useVerifyBankAccount,
+  useCreateSettlementMutation
+} from '../../../../../../services/hooks';
 import {
   AccountInformationWrapper,
   Header,
@@ -23,6 +27,7 @@ interface FormValues {
 }
 
 const AccountInformation = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<FormValues>();
   const { mutateAsync, isLoading, data: bankDetails } = useVerifyBankAccount();
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
@@ -31,6 +36,8 @@ const AccountInformation = () => {
     bankName: '',
     bankCode: ''
   });
+  const { mutateAsync: settlementMutate, isLoading: settlementLoading } =
+    useCreateSettlementMutation();
 
   const { accountNumber, bankName } = detailsToVerify;
 
@@ -57,11 +64,22 @@ const AccountInformation = () => {
   }, [banksData]);
 
   const onSubmit: SubmitHandler<FormValues> = (values) => {
-    // const { accountNumber } = values;
-    // const { bankCode, bankName } = detailsToVerify;
+    const { accountNumber } = values;
+    const { bankCode, bankName } = detailsToVerify;
 
-    // eslint-disable-next-line no-console
-    console.log(values);
+    settlementMutate({
+      accountName: bankDetails?.data?.accountName,
+      accountNumber,
+      bank: bankName,
+      bankCode
+    })
+      .then((data) => {
+        toast.success(`Settlement account creation ${data?.responseMessage}`);
+        navigate('registered-business/documents');
+      })
+      .catch(() => {
+        toast.error('An error occurred');
+      });
   };
 
   return (
@@ -123,13 +141,15 @@ const AccountInformation = () => {
             label='Account Name'
             placeholder='Your account name'
             value={bankDetails?.data?.accountName}
+            readOnly={true}
           />
         )}
 
         <Button
           name='Save & Continue'
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
-          onClick={() => {}}
+          type='submit'
+          isBusy={settlementLoading}
         />
       </AccountInformationForm>
     </AccountInformationWrapper>
