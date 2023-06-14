@@ -1,4 +1,4 @@
-import { TabItemType } from './components/types';
+import { CardItemType, TabItemType } from './components/types';
 
 export const TabItems: TabItemType = [
   {

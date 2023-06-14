@@ -22,15 +22,3 @@ export const Title = tw.p`
 
 export const Wrapper = tw.div`
 `;
-
-export const WrapperRelative = tw.div`
-relative
-`;
-
-export const WrapperOverlayLeft = tw.div`
-absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center rotate-90
-`;
-
-export const WrapperOverlayBottom = tw.div`
-absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center
-`;

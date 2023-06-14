@@ -4,23 +4,15 @@ import { TabItemType } from './types';
 export const Wrapper = tw.div`
 `;
 
-export const DateWrapper = tw.div`
-w-[380px]
-`;
-
-export const TopWrapper = tw.div`
-grid grid-cols-2 gap-4 mb-8
-`;
-
 export const FlexWrapper = tw.div`
 flex
  items-center mb-4
 `;
 
 export const Box = tw.div`
-w-[20px]
-h-[20px]
-mr-3
+w-[24px]
+h-[24px]
+mr-4
 border-radius-[2px];
 `;
 

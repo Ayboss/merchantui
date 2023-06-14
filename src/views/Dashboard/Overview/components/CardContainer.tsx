@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from '../../../../components';
-import { formatNumber } from '../../../../utils';
 import { Amount, Container, Title } from './styles';
 import { CardContainerType, CardItemType } from './types';
 import { Loading } from './Loading';
@@ -29,16 +28,10 @@ export const CardContainer: React.FC<CardContainerType> = (props) => {
 
   return (
     <Container>
-      {TransactionsOverviews.map(({ amount, title }, id) => (
+      {items.map(({ amount, title }, id) => (
         <Card key={id}>
-          {loading ? (
-            <Loading />
-          ) : (
-            <>
-              <Amount>{amount}</Amount>
-              <Title>{title}</Title>
-            </>
-          )}
+          <Amount>{amount}</Amount>
+          <Title>{title}</Title>
         </Card>
       ))}
     </Container>

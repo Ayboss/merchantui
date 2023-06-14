@@ -1,57 +1,34 @@
 import React, { useState } from 'react';
-import Datepicker from 'react-tailwindcss-datepicker';
+import { VictoryPie } from 'victory';
 import { Card } from '../../../components';
-import { useTransactionsSummaryQuery } from '../../../services/hooks';
-import { CardContainer, CardTransaction, PieCart } from './components';
-import { TabItems } from './mock';
+import { CardContainer, CardTransaction } from './components';
+import { TabItems, TransactionsOverviews } from './mock';
 import {
+  Percentage,
+  PercentageTitle,
   Tab,
   TabItem,
   TabWrapper,
   Title,
   Wrapper,
   WrapperGrid,
-  TopWrapper,
-  DateWrapper
+  WrapperOverlay,
+  WrapperRelative,
+  Box,
+  BoxPercentageTitle,
+  BoxPercentage,
+  FlexWrapper
 } from './styles';
-import { selectedDateType, selectType } from './types';
+import { selectType } from './types';
 
 const Overview = () => {
-  const now = new Date();
-  const [selected, setSelected] = useState<selectType>('banktransfer');
-  const [selectedDate, setSelectedDate] = useState<selectedDateType>({
-    startDate: new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10),
-    endDate: new Date().toISOString().slice(0, 10)
-  });
-
-  const { data: summaryData, isLoading: summaryLoading } = useTransactionsSummaryQuery();
-
-  const handleValueChange = (newValue: any) => {
-    setSelectedDate(newValue);
-  };
+  const [selected, setSelected] = useState<selectType>('card');
 
   const { data: summaryData, isLoading } = useTransactionsSummaryQuery();
 
   return (
     <>
-      <TopWrapper>
-        <Wrapper>
-          <Title>Dashboard</Title>
-          <p>Card Payment statistics for</p>
-        </Wrapper>
-        <Wrapper className={'flex justify-end'}>
-          <DateWrapper>
-            <Datepicker
-              primaryColor={'#6231F4'}
-              value={selectedDate}
-              showShortcuts={true}
-              onChange={handleValueChange}
-            />
-          </DateWrapper>
-        </Wrapper>
-      </TopWrapper>
-
-      <CardContainer loading={summaryLoading} summaryData={summaryData} />
+      <CardContainer items={TransactionsOverviews} />
       <Wrapper className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
         <WrapperGrid>
           <Card>
@@ -70,19 +47,67 @@ const Overview = () => {
                 ))}
               </TabWrapper>
             </Tab>
-            <Wrapper>
-              <CardTransaction
-                startDate={selectedDate.startDate}
-                endDate={selectedDate.endDate}
-                type={selected}
-              />
-            </Wrapper>
+            <Wrapper>{selected === 'card' && <CardTransaction />}</Wrapper>
           </Card>
         </WrapperGrid>
 
         <Card>
           <Title>Activity</Title>
-          <PieCart startDate={selectedDate.startDate} endDate={selectedDate.endDate} />
+          <WrapperRelative>
+            <VictoryPie
+              width={400}
+              height={400}
+              colorScale={['#6231F4', '#F09636', '#F5C544', '#EB5757']}
+              padding={50}
+              data={[
+                { x: 'Card Payment', y: 34 },
+                { x: 'Bank Transfer', y: 32 },
+                { x: 'Qr Code', y: 24 },
+                { x: 'USSD', y: 10 }
+              ]}
+              labelRadius={({ innerRadius }) => (innerRadius ? +innerRadius + 5 : 0)}
+              radius={({ datum }) => (datum.x === 'Card Payment' ? datum.y * 5.2 : 160)}
+              innerRadius={110}
+              style={{ labels: { display: 'none' } }}
+            />
+            <WrapperOverlay>
+              <Percentage>34%</Percentage>
+              <PercentageTitle>Card Transaction</PercentageTitle>
+            </WrapperOverlay>
+          </WrapperRelative>
+
+          <Wrapper>
+            <Wrapper className='grid grid-cols-2 gap-6'>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>Card Transaction</BoxPercentageTitle>
+                  <BoxPercentage>34%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>Bank Transfer</BoxPercentageTitle>
+                  <BoxPercentage>32%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>QR Code</BoxPercentageTitle>
+                  <BoxPercentage>24%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>USSD Payment</BoxPercentageTitle>
+                  <BoxPercentage>10%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+            </Wrapper>
+          </Wrapper>
         </Card>
       </Wrapper>
     </>
