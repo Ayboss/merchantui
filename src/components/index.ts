@@ -25,3 +25,4 @@ export * from './TableEmptyLayout';
 export * from './CountrySelect';
 export * from './LgaSelect';
 export * from './StateSelect';
+export * from './Card';

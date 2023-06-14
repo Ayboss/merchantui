@@ -17,7 +17,7 @@ export const NavLinks = [
     icon: HomeIcon
   },
   {
-    url: '/dashboard',
+    url: '/overview',
     title: 'Dashboard',
     icon: HomeIcon
   },
