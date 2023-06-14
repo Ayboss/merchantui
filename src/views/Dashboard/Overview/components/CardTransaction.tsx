@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useOverviewChartQuery } from '../../../../services/hooks/useOverviewQuery';
 import { ReactComponent as Spinner } from '../../../../assets/icons/spinner.svg';
 import { formatNumber } from '../../../../utils';
@@ -9,11 +9,15 @@ import { CardTransactionType } from './types';
 export const CardTransaction: React.FC<CardTransactionType> = (props) => {
   const { startDate, endDate, type } = props;
 
-  const { data, isLoading } = useOverviewChartQuery({
+  const { data, isLoading, refetch } = useOverviewChartQuery({
     type,
     startDate,
     endDate
   });
+
+  useEffect(() => {
+    (() => refetch())();
+  }, [startDate, endDate, type, refetch]);
 
   return (
     <WrapperRelative>

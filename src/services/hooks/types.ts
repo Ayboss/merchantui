@@ -56,6 +56,12 @@ export interface overViewChartParams {
   startDate?: string;
   endDate?: string;
 }
+
+export interface overViewPieChartParams {
+  startDate?: string;
+  endDate?: string;
+}
+
 export interface CommonTableQueryType<T> {
   responseCode: string;
   responseMessage: string;

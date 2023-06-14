@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { VictoryPie } from 'victory';
 import {
   Box,
@@ -12,16 +12,25 @@ import {
   WrapperRelative
 } from '../styles';
 import { ReactComponent as Spinner } from '../../../../assets/icons/spinner.svg';
+import { useOverviewPieChartQuery } from '../../../../services/hooks/useOverviewQuery';
 import { PieCartType } from './types';
 
 export const PieCart: React.FC<PieCartType> = (props) => {
-  const { data, loading } = props;
+  const { startDate, endDate } = props;
+  const { data, isLoading, refetch } = useOverviewPieChartQuery({
+    startDate,
+    endDate
+  });
+
+  useEffect(() => {
+    (() => refetch())();
+  }, [startDate, endDate, refetch]);
 
   const pieChartData = data?.data?.data ?? [];
 
   return (
     <Wrapper>
-      {loading ? (
+      {isLoading ? (
         <div className={`h-[319px] relative`}>
           <div
             className={`w-full h-full flex flex-col justify-center items-center absolute overlay`}
