@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Button, CustomInput, SelectInput } from '../../../../../../components';
+import Select from 'react-select';
+import { toast } from 'react-toastify';
+import { Button, CustomInput } from '../../../../../../components';
 // import { useGetBanksQuery } from '../../../../../../services/hooks/useGetBanksQuery';
-import { naijaBanks } from '../../../../../../constants/naijaBanks';
+
+import { useGetBanksQuery, useVerifyBankAccount } from '../../../../../../services/hooks';
 import {
   AccountInformationWrapper,
   Header,
@@ -12,7 +18,52 @@ import {
   AccountInformationForm
 } from './styles';
 
+interface FormValues {
+  accountNumber: string;
+}
+
 const AccountInformation = () => {
+  const { register, handleSubmit } = useForm<FormValues>();
+  const { mutateAsync, isLoading, data: bankDetails } = useVerifyBankAccount();
+  const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
+  const [detailsToVerify, setDetailsToVerify] = useState({
+    accountNumber: '',
+    bankName: '',
+    bankCode: ''
+  });
+
+  const { accountNumber, bankName } = detailsToVerify;
+
+  useEffect(() => {
+    if (bankName && accountNumber.length === 10) {
+      mutateAsync({
+        accountNumber,
+        beneficiaryBank: bankName
+      })
+        // eslint-disable-next-line no-console
+        .then(() => toast.success('Account information verfied successfully'))
+        .catch(() => toast.error('Could not verify bank details'));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountNumber, bankName]);
+
+  const bankDataForSelect = useMemo(() => {
+    if (banksData?.data?.banks) {
+      return banksData?.data?.banks.map((bankData: { bankName: any; bankCode: any }) => ({
+        label: bankData?.bankName,
+        value: bankData?.bankCode
+      }));
+    }
+  }, [banksData]);
+
+  const onSubmit: SubmitHandler<FormValues> = (values) => {
+    // const { accountNumber } = values;
+    // const { bankCode, bankName } = detailsToVerify;
+
+    // eslint-disable-next-line no-console
+    console.log(values);
+  };
+
   return (
     <AccountInformationWrapper>
       <Header>
@@ -21,18 +72,60 @@ const AccountInformation = () => {
       </Header>
 
       <FormLabel>CORPORATE BANK ACCOUNT</FormLabel>
-      <AccountInformationForm>
-        <SelectInput label='Bank Name' defaultOption='Select your bank' options={naijaBanks} />
+      <AccountInformationForm onSubmit={handleSubmit(onSubmit)}>
+        <div className='mt-5 '>
+          <p
+            className='text-[#333333]
+            text-[16px]
+            leading-[17px]
+            font-medium'
+          >
+            Bank Name
+          </p>
+          <Select
+            options={bankDataForSelect}
+            classNamePrefix='Select...'
+            isLoading={isLoadingBanks}
+            isSearchable
+            isClearable
+            className='mt-2'
+            onChange={(val) =>
+              setDetailsToVerify({
+                ...detailsToVerify,
+                // @ts-ignore not resolved val type
+                bankName: val?.label,
+                // @ts-ignore not resolved val type
+                bankCode: val?.value
+              })
+            }
+            required
+          />
+        </div>
         <CustomInput
-          name='accountNumber'
+          {...register('accountNumber', {
+            required: true,
+            minLength: 10,
+            maxLength: 10,
+            pattern: /^[0-9]+$/,
+            onChange: (e) =>
+              setDetailsToVerify({
+                ...detailsToVerify,
+                accountNumber: e.target.value
+              })
+          })}
           label='Account Number'
-          placeholder='Enter your account number'
+          placeholder=''
         />
-        <CustomInput
-          name='accountName'
-          label='Account Name'
-          placeholder='Enter your account name'
-        />
+        {isLoading && <FontAwesomeIcon className='mt-[10px] mr-[auto]' icon={faSpinner} spin />}
+        {bankDetails && (
+          <CustomInput
+            name='accountName'
+            label='Account Name'
+            placeholder='Your account name'
+            value={bankDetails?.data?.accountName}
+          />
+        )}
+
         <Button
           name='Save & Continue'
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
