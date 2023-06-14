@@ -11,7 +11,12 @@ export type BvnRequestPayloadType = {
 
 export const useBvnMutation = () => {
   const request = useCallback(async (data: BvnRequestPayloadType) => {
-    const response = await apiInstance('merchant').post('/bvn', data);
+    const response = await apiInstance('merchant').post('/bvn', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+      }
+    });
 
     return response.data;
   }, []);

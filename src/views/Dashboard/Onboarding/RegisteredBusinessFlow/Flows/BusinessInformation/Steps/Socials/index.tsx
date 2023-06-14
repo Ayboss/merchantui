@@ -30,7 +30,7 @@ const SocialInformation = ({ setCurrentStep }: any) => {
     mutateAsync(values)
       .then((data) => {
         toast.success(`Data entry ${data?.responseMessage}`);
-        navigate('/');
+        navigate('/registered-business/account-information');
       })
       .catch((error: any) => {
         toast.error(error.message);
