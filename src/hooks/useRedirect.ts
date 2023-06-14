@@ -14,7 +14,7 @@ export const useRedirect = () => {
         location.pathname as typeof PRIVATE_PATHS.ACCOUNT_INFORMATION
       )
     ) {
-      navigate(-1);
+      navigate('/');
     }
   }, [location.pathname, navigate, token]);
 };
