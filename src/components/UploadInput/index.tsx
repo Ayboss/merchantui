@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DocumentList } from '../../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/BusinessDocuments/styles';
 import { BusinessDocument } from '../../components';
 import {
@@ -11,15 +11,17 @@ import {
 } from './styles';
 import { UploadInputProp } from './type';
 
-export const UploadInput: React.FC<UploadInputProp> = ({ name, onFileSelect }) => {
-  const [selectedFiles, setSelectedFiles] = useState<File | null>(null);
+export const UploadInput: React.FC<UploadInputProp> = ({ name, onChange, selectedFile = [] }) => {
+  // const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files && event.target.files[0];
 
-    setSelectedFiles(file);
-    onFileSelect(file);
-  };
+  //   setSelectedFile(file);
+  //   onFileSelect(file);
+  // };
+  // eslint-disable-next-line no-console
+  // console.log(selectedFile);
 
   return (
     <>
@@ -44,12 +46,22 @@ export const UploadInput: React.FC<UploadInputProp> = ({ name, onFileSelect }) =
             <LabelTitle>Drop your files here or browse</LabelTitle>
             <LabelSubtitle>Max. Size : 20MB</LabelSubtitle>
           </InputContent>
-          <UploadField id='dropzone-file' type='file' name={name} onChange={handleFileChange} />
+          <UploadField
+            id='dropzone-file'
+            type='file'
+            name={name}
+            // value={selectedFile.name}
+            onChange={onChange}
+          />
         </InputLabel>
       </FormGroup>
       <DocumentList>
-        {selectedFiles && (
-          <BusinessDocument name={selectedFiles.name} onDelete={() => setSelectedFiles(null)} />
+        {selectedFile && (
+          <BusinessDocument
+            name={selectedFile.name}
+
+            // onDelete={() => setSelectedFiles(null)}
+          />
         )}
       </DocumentList>
     </>
