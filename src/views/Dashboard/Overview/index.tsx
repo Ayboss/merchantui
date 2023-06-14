@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 import { Card } from '../../../components';
 import { useTransactionsSummaryQuery } from '../../../services/hooks';
-import { useOverviewPieChartQuery } from '../../../services/hooks/useOverviewQuery';
 import { CardContainer, CardTransaction, PieCart } from './components';
 import { TabItems } from './mock';
 import {
@@ -26,7 +25,6 @@ const Overview = () => {
   });
 
   const { data: summaryData, isLoading: summaryLoading } = useTransactionsSummaryQuery();
-  const { data: pieData, isLoading: pieLoading } = useOverviewPieChartQuery();
 
   const handleValueChange = (newValue: any) => {
     setSelectedDate(newValue);
@@ -41,7 +39,12 @@ const Overview = () => {
         </Wrapper>
         <Wrapper className={'flex justify-end'}>
           <DateWrapper>
-            <Datepicker value={selectedDate} showShortcuts={true} onChange={handleValueChange} />
+            <Datepicker
+              primaryColor={'#6231F4'}
+              value={selectedDate}
+              showShortcuts={true}
+              onChange={handleValueChange}
+            />
           </DateWrapper>
         </Wrapper>
       </TopWrapper>
@@ -77,7 +80,7 @@ const Overview = () => {
 
         <Card>
           <Title>Activity</Title>
-          <PieCart loading={pieLoading} data={pieData} />
+          <PieCart startDate={selectedDate.startDate} endDate={selectedDate.endDate} />
         </Card>
       </Wrapper>
     </>
