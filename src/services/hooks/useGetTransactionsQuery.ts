@@ -24,7 +24,7 @@ export type TransactionItemType = {
   excessPayment: number;
   id: string;
   onusReference: string;
-  paymentStatus: 'PENDING' | 'SUCCESSFUL' | 'FAILED' | 'Successful';
+  paymentStatus: 'PENDING' | 'SUCCESSFUL' | 'FAILED' | 'Successful' | 'SUCCESS';
   reference: string;
   vat: null | number;
 };
