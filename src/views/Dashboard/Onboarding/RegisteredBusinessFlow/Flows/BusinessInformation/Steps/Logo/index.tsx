@@ -12,19 +12,11 @@ const LogoInformation = ({ onNext, setCurrentStep }: any) => {
   const { isLoading, mutateAsync } = useUploadMutationsQuery();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
-  // eslint-disable-next-line no-console
-  console.log(uploadedFile);
   const handleUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateAsync(uploadedFile as UploadRequestPayloadType)
-      .then((data) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      });
+      .then(() => {})
+      .catch(() => {});
 
     onNext();
   };

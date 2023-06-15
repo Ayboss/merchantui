@@ -47,7 +47,6 @@ const AccountInformation = () => {
         accountNumber,
         beneficiaryBank: bankName
       })
-        // eslint-disable-next-line no-console
         .then(() => toast.success('Account information verfied successfully'))
         .catch(() => toast.error('Could not verify bank details'));
     }
