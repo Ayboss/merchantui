@@ -21,7 +21,7 @@ export const Box = tw.div`
 w-[20px]
 h-[20px]
 mr-3
-border-radius-[2px];
+border-radius-[2px]
 `;
 
 export const WrapperGrid = tw.div`
