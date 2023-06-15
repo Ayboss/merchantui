@@ -8,9 +8,9 @@ export const PAYOUTS_TAB_ITEMS = [
   {
     url: PRIVATE_PATHS.PAYOUT_HISTORY,
     label: 'Payout History'
-  },
-  {
-    url: PRIVATE_PATHS.PAYOUT_BENEFICIARIES,
-    label: 'Manage Beneficiaries'
   }
+  // {
+  //   url: PRIVATE_PATHS.PAYOUT_BENEFICIARIES,
+  //   label: 'Manage Beneficiaries'
+  // }
 ];

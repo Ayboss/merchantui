@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MultiStepContainer, StepProgress } from '../../../../../../components';
 import AddressInformation from './Steps/AddressInformation';
 import BasicInformation from './Steps/BasicInformation';
@@ -7,8 +7,6 @@ import SocialInformation from './Steps/Socials';
 import { BusinessInformationContainer, Header, Title, SubTitle, StepsContainer } from './styles';
 
 const BusinessInformation = () => {
-  const [currentStep, setCurrentStep] = useState('1');
-
   return (
     <BusinessInformationContainer>
       <Header>
@@ -16,12 +14,12 @@ const BusinessInformation = () => {
         <SubTitle>Manage your Business Information here</SubTitle>
       </Header>
       <StepsContainer>
-        <StepProgress activeStep={currentStep} />
+        <StepProgress activeStep='1' />
         <MultiStepContainer>
-          <BasicInformation setCurrentStep={setCurrentStep} />
-          <AddressInformation setCurrentStep={setCurrentStep} />
-          <LogoInformation setCurrentStep={setCurrentStep} />
-          <SocialInformation setCurrentStep={setCurrentStep} />
+          <BasicInformation />
+          <AddressInformation />
+          <LogoInformation />
+          <SocialInformation />
         </MultiStepContainer>
       </StepsContainer>
     </BusinessInformationContainer>

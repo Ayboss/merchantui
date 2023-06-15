@@ -1,20 +1,17 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { FormGroup, InputLabel, Input, Container, SocialIcons } from './styles';
 import { URLInputProps } from './type';
 
-export const URLInput: React.FC<URLInputProps> = forwardRef((props, ref) => {
-  const { label, name, placeholder, icon, ...rest } = props;
-
+export const URLInput: React.FC<URLInputProps> = ({ label, name, placeholder, icon }) => {
   return (
     <FormGroup>
       <InputLabel>{label}</InputLabel>
       <Container>
         <SocialIcons src={icon} alt='social icon' />
-        {/* @ts-ignore no overload matches for the ref */}
-        <Input name={name} type='url' placeholder={placeholder} ref={ref} {...rest} />
+        <Input name={name} placeholder={placeholder} />
       </Container>
     </FormGroup>
   );
-});
+};
 
 export default URLInput;

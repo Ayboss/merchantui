@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { Title } from '../BasicInformation/styles';
-import {
-  Button,
-  TextAreaInput,
-  CountrySelectInput,
-  StateSelectInput,
-  LgaSelect
-} from '../../../../../../../../components';
+import { Button, TextAreaInput } from '../../../../../../../../components';
 import { useKycDataContext } from '../../../../../../../../context/MerchantKycProvider';
-
+import CountrySelect from '../../../../../../../../components/CountrySelect';
+import StateSelect from '../../../../../../../../components/StateSelect';
+import LgaSelect from '../../../../../../../../components/LgaSelect';
 import {
   useProfileMutation,
   ProfileRequestPayloadType
 } from '../../../../../../../../services/hooks/useProfileMutation';
 import { AddressInformationContainer, AddressInformationForm } from './styles';
 
-const AddressInformation = ({ onNext, setCurrentStep }: any) => {
-  setCurrentStep('2');
+const AddressInformation = ({ onNext }: any) => {
   const { kycData, setKycData } = useKycDataContext();
   const { isLoading, mutateAsync } = useProfileMutation();
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -26,6 +21,8 @@ const AddressInformation = ({ onNext, setCurrentStep }: any) => {
   const [selectedStateId, setSelectedStateId] = useState('');
   const [selectedLga, setSelectedLga] = useState('');
   const [address, setAddress] = useState('');
+  // console.log(kycData);
+  // console.log();
 
   const handleCountryChange = (id: string, values: string) => {
     setSelectedCountry(values);
@@ -39,13 +36,13 @@ const AddressInformation = ({ onNext, setCurrentStep }: any) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateAsync(kycData as ProfileRequestPayloadType)
-      .then((data) => {
-        toast.success(`Data entry ${data?.responseMessage}`);
-        onNext();
+      .then(() => {
+        // console.log(data);
       })
-      .catch((error) => {
-        toast.error(error?.response?.data?.responseMessage);
+      .catch(() => {
+        // console.log(error);
       });
+    onNext();
   };
 
   useEffect(() => {
@@ -56,20 +53,19 @@ const AddressInformation = ({ onNext, setCurrentStep }: any) => {
       state: selectedState,
       lga: selectedLga
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCountry, selectedState, selectedLga, address]);
+  }, []);
 
   return (
     <AddressInformationContainer>
       <Title>ADDRESS</Title>
       <AddressInformationForm onSubmit={handleSubmit}>
-        <CountrySelectInput
+        <CountrySelect
           label='Select country'
           placeholder='Enter your country'
           value={selectedCountry}
           onChange={(e) => handleCountryChange(e.id, e.name)}
         />
-        <StateSelectInput
+        <StateSelect
           label='Select State'
           placeholder='Enter your state'
           value={selectedState}
@@ -95,10 +91,15 @@ const AddressInformation = ({ onNext, setCurrentStep }: any) => {
           name='Save & Continue'
           isBusy={isLoading}
           className='bg-[#D3D3D3] text-[#2A2A2A] text-[16px] font-bold'
+          // onClick={onNext}
           type='submit'
-          disabled={!(selectedCountry.length > 0 && selectedState.length > 0 && address.length > 0)}
         />
       </AddressInformationForm>
+      <div className='text-center my-5'>
+        <Link to='/' className='text-[16px] font-semibold leading-[20px] '>
+          Do this later
+        </Link>
+      </div>
     </AddressInformationContainer>
   );
 };

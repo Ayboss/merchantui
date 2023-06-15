@@ -17,11 +17,10 @@ export const SelectButton: React.FC<SelectButtonProps> = ({
   subtitle,
   onSelect,
   selectBtnIcon,
-  activeButton,
-  value
+  activeButton
 }) => {
   return (
-    <SelectButtonContainer className={activeButton === value ? activeStyle : ''} onClick={onSelect}>
+    <SelectButtonContainer className={activeButton === title ? activeStyle : ''} onClick={onSelect}>
       <FlexContainer>
         <SelectButtonIcon src={selectBtnIcon} />
         <ContentWrapper>
@@ -32,7 +31,7 @@ export const SelectButton: React.FC<SelectButtonProps> = ({
       <CheckboxIcon
         // className={activeButton === title ? checkboxActive : ""}
         style={{
-          backgroundImage: activeButton === value ? `url(${activeCheckIcon})` : 'none',
+          backgroundImage: activeButton === title ? `url(${activeCheckIcon})` : 'none',
           backgroundPosition: 'center'
         }}
       ></CheckboxIcon>
