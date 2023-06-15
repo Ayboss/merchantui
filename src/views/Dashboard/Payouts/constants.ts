@@ -6,7 +6,7 @@ export const PAYOUTS_TAB_ITEMS = [
     label: 'Payout Options'
   },
   {
-    url: PRIVATE_PATHS.PAYOUT__HISTORY,
+    url: PRIVATE_PATHS.PAYOUT_HISTORY,
     label: 'Payout History'
   },
   {
