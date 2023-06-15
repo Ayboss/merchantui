@@ -5,4 +5,5 @@ export type CustomInputProps = {
   placeholder: string;
   className?: string;
   value?: string;
+  readOnly?: boolean;
 };

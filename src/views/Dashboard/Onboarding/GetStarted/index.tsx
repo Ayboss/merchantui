@@ -32,8 +32,9 @@ const GetStarted = () => {
               key={id}
               selectBtnIcon={businessType.selectIcon}
               title={businessType.title}
+              value={businessType.value}
               subtitle={businessType.subtitle}
-              onSelect={() => setMerchchantBusinessType(businessType.title)}
+              onSelect={() => setMerchchantBusinessType(businessType.value)}
               activeButton={merchchantBusinessType}
             />
           ))}

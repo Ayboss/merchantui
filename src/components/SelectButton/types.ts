@@ -4,4 +4,5 @@ export interface SelectButtonProps {
   onSelect: () => void;
   selectBtnIcon: string;
   activeButton: string;
+  value: string;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Datepicker from 'react-tailwindcss-datepicker';
 import { Card } from '../../../components';
 import { useTransactionsSummaryQuery } from '../../../services/hooks';
 import { CardContainer, CardTransaction, PieCart } from './components';
@@ -11,45 +10,20 @@ import {
   Title,
   Wrapper,
   WrapperGrid,
-  TopWrapper,
-  DateWrapper
+  Box,
+  BoxPercentageTitle,
+  BoxPercentage,
+  FlexWrapper
 } from './styles';
-import { selectedDateType, selectType } from './types';
-
+import { selectType } from './types';
 const Overview = () => {
-  const now = new Date();
-  const [selected, setSelected] = useState<selectType>('banktransfer');
-  const [selectedDate, setSelectedDate] = useState<selectedDateType>({
-    startDate: new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10),
-    endDate: new Date().toISOString().slice(0, 10)
-  });
+  const [selected, setSelected] = useState<selectType>('card');
 
-  const { data: summaryData, isLoading: summaryLoading } = useTransactionsSummaryQuery();
-
-  const handleValueChange = (newValue: any) => {
-    setSelectedDate(newValue);
-  };
+  const { data: summaryData, isLoading } = useTransactionsSummaryQuery();
 
   return (
     <>
-      <TopWrapper>
-        <Wrapper>
-          <Title>Dashboard</Title>
-          <p>Card Payment statistics for</p>
-        </Wrapper>
-        <Wrapper className={'flex justify-end'}>
-          <DateWrapper>
-            <Datepicker
-              primaryColor={'#6231F4'}
-              value={selectedDate}
-              showShortcuts={true}
-              onChange={handleValueChange}
-            />
-          </DateWrapper>
-        </Wrapper>
-      </TopWrapper>
-
-      <CardContainer loading={summaryLoading} summaryData={summaryData} />
+      <CardContainer loading={isLoading} summaryData={summaryData} />
       <Wrapper className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
         <WrapperGrid>
           <Card>
@@ -68,19 +42,46 @@ const Overview = () => {
                 ))}
               </TabWrapper>
             </Tab>
-            <Wrapper>
-              <CardTransaction
-                startDate={selectedDate.startDate}
-                endDate={selectedDate.endDate}
-                type={selected}
-              />
-            </Wrapper>
+            <Wrapper>{selected === 'card' && <CardTransaction />}</Wrapper>
           </Card>
         </WrapperGrid>
 
         <Card>
           <Title>Activity</Title>
-          <PieCart startDate={selectedDate.startDate} endDate={selectedDate.endDate} />
+          <PieCart />
+
+          <Wrapper>
+            <Wrapper className='grid grid-cols-2 gap-6'>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>Card Transaction</BoxPercentageTitle>
+                  <BoxPercentage>34%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>Bank Transfer</BoxPercentageTitle>
+                  <BoxPercentage>32%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>QR Code</BoxPercentageTitle>
+                  <BoxPercentage>24%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+              <FlexWrapper>
+                <Box className={`bg-[#F09636]`} />
+                <Wrapper>
+                  <BoxPercentageTitle>USSD Payment</BoxPercentageTitle>
+                  <BoxPercentage>10%</BoxPercentage>
+                </Wrapper>
+              </FlexWrapper>
+            </Wrapper>
+          </Wrapper>
         </Card>
       </Wrapper>
     </>

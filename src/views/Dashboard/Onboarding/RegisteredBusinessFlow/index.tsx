@@ -33,7 +33,7 @@ export const RegisteredBusinessFlow = () => {
           <TitleContainer className='headerCardBoxShadow'>
             <FlexContainer>
               <Title>Registered Business Activation</Title>
-              <ProgressTracker>20% COMPLETED</ProgressTracker>
+              <ProgressTracker>INCOMPLETE</ProgressTracker>
             </FlexContainer>
             <ProgressBar />
           </TitleContainer>

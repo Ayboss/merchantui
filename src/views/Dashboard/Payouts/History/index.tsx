@@ -1,15 +1,17 @@
-import React, { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { formatDate, formatNumber } from '../../../../utils';
-import { CustomTable, LoaderControl, Paginator, TableEmptyLayout } from '../../../../components';
-import { PayoutItemType, useGetPayoutsQuery } from '../../../../services/hooks';
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { formatNumber } from '../../../../utils';
+import { CustomTable, LoaderControl, TableEmptyLayout } from '../../../../components';
+// import { useGetPayoutsQuery } from '../../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../../routes/paths';
 import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
 import { ReactComponent as Icon } from './icons/balance.svg';
-import { PAYOUT_HISTORY_HEADER } from './constants';
-import { PayoutItem } from './components/PayoutItem';
+import { MOCK_PAYOUT_DATA, MOCK_PAYOUT_HISTORY_HEADER } from './mock';
 
 export const PayoutHistory: React.FC = () => {
+  //   const { data } = useGetPayoutsQuery();
+  const navigate = useNavigate();
+
   const payoutCardsData: Array<PayoutSummaryCardPropsType> = [
     {
       amount: `₦${formatNumber(0)}`,
@@ -33,35 +35,6 @@ export const PayoutHistory: React.FC = () => {
     }
   ];
 
-  const [query, setQuery] = useState({
-    page: 0
-  });
-  const [currentDetails, setCurrentDetails] = useState<PayoutItemType | null>(null);
-  const [showPayoutDetails, setShowPayoutDetails] = useState(false);
-  const { data, isError, refetch, isFetching } = useGetPayoutsQuery();
-  const navigate = useNavigate();
-
-  const handlePageChange = (current: number) => {
-    setQuery({ ...query, page: current - 1 });
-  };
-
-  const transformData = useMemo(() => {
-    if (data?.data?.content) {
-      const contents = data?.data?.content;
-
-      return contents.map((item: PayoutItemType, id: number) => {
-        return {
-          ...item,
-          index: id + 1,
-          created: formatDate(item?.created),
-          transactionAmount: formatNumber(item?.transactionAmount)
-        };
-      });
-    } else {
-      return [];
-    }
-  }, [data?.data?.content]);
-
   return (
     <div className='w-full mt-[33px]'>
       <div className='flex items-center mb-[40px] gap-[20px]'>
@@ -73,22 +46,22 @@ export const PayoutHistory: React.FC = () => {
         <h3 className='text-[#000000] text-[20px] font-semi-bold'>Recent Payout</h3>
       </div>
       <LoaderControl
-        loading={isFetching}
-        error={isError}
-        overlay={isFetching}
+        loading={false}
+        error={false}
+        overlay={false}
         errorTitle='Something went wrong'
         errorSubTitle="Sorry, we couldn't load your payouts, try reloading"
         minHeight={'400px'}
-        errorControlOnClick={() => refetch()}
+        errorControlOnClick={() => {}}
       >
         <CustomTable
-          onRowClick={(detail) => {
+          onRowClick={() => {
             // @ts-ignore incompatible amount and created type
-            setCurrentDetails(detail);
-            setShowPayoutDetails(true);
+            // setCurrentDetails(detail);
+            // setShowTransactionItemDetail(true);
           }}
-          data={transformData}
-          headers={PAYOUT_HISTORY_HEADER}
+          data={MOCK_PAYOUT_DATA}
+          headers={MOCK_PAYOUT_HISTORY_HEADER}
           emptyLayout={
             <TableEmptyLayout
               containerHeight='300px'
@@ -100,16 +73,6 @@ export const PayoutHistory: React.FC = () => {
           }
         />
       </LoaderControl>
-      {!isError && (
-        <Paginator
-          total={data?.data?.totalElements || 1}
-          pageSize={data?.data?.size || 1}
-          onChange={handlePageChange}
-        />
-      )}
-      {showPayoutDetails && (
-        <PayoutItem {...currentDetails} onClose={() => setShowPayoutDetails(false)} />
-      )}
     </div>
   );
 };

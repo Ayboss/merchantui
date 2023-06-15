@@ -7,13 +7,8 @@ import {
   WrapperOverlayLeft,
   WrapperRelative
 } from './styles';
-import { LineChartType } from './types';
 
-export const LineChart: React.FC<LineChartType> = (props) => {
-  const { data } = props;
-
-  const chartData = data?.data?.data ?? [];
-
+export const LineChart = () => {
   return (
     <WrapperRelative>
       <Wrapper className={'ml-4'}>
@@ -58,7 +53,35 @@ export const LineChart: React.FC<LineChartType> = (props) => {
                   data: { fill: 'url(#myGradient)', stroke: '#6231F4' }
                 }}
                 interpolation='natural'
-                data={chartData}
+                data={[
+                  { x: 1, y: 63 },
+                  { x: 2, y: 32 },
+                  { x: 3, y: 51 },
+                  { x: 4, y: 44 },
+                  { x: 5, y: 66 },
+                  { x: 6, y: 66 },
+                  { x: 7, y: 32 },
+                  { x: 8, y: 51 },
+                  { x: 9, y: 43 },
+                  { x: 10, y: 88 },
+                  { x: 11, y: 66 },
+                  { x: 12, y: 66 },
+                  { x: 13, y: 51 },
+                  { x: 14, y: 42 },
+                  { x: 15, y: 66 },
+                  { x: 16, y: 66 },
+                  { x: 17, y: 32 },
+                  { x: 18, y: 51 },
+                  { x: 19, y: 41 },
+                  { x: 20, y: 66 },
+                  { x: 21, y: 66 },
+                  { x: 23, y: 66 },
+                  { x: 24, y: 44 },
+                  { x: 25, y: 66 },
+                  { x: 26, y: 66 },
+                  { x: 27, y: 32 },
+                  { x: 28, y: 51 }
+                ]}
               />
             </VictoryGroup>
           </VictoryStack>

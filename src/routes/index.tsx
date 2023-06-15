@@ -11,9 +11,9 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
-import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
+import Overview from '../views/Dashboard/Overview';
 import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
 import { useRedirect } from '../hooks';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
@@ -63,8 +63,8 @@ export const AppRouter = () => {
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
-          <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
+          <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
         </Route>
       </Route>
       <Route path={LOGIN} element={<Login />} />
