@@ -21,6 +21,7 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
     switch (paymentStatus) {
       case 'SUCCESSFUL':
       case 'Successful':
+      case 'SUCCESS':
         return 'text-[#3DA536]';
       case 'FAILED':
         return 'text-[#DC362E]';

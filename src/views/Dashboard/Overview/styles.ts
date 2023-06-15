@@ -58,18 +58,18 @@ export const Percentage = tw.h3`
 export const BoxPercentage = tw.h3`
     font-semi-bold
     text-[#28313A]
-    text-[20px]
+    text-[15px]
 `;
 
 export const PercentageTitle = tw.p`
     text-[#16181D]
-    text-[22px]
+    text-[17px]
     leading-[22px]
 `;
 
 export const BoxPercentageTitle = tw.p`
     text-[#16181D]
-    text-[14px]
+    text-[13px]
     leading-[22px]
     -mb-[6px]
 `;
