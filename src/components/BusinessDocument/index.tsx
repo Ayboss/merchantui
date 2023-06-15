@@ -12,14 +12,13 @@ import {
   DeleteIcon,
   FlexContainer
 } from './styles';
-import { BusinessDocumentProps } from './types';
 
-export const BusinessDocument: React.FC<BusinessDocumentProps> = ({
-  label,
-  name,
-  format,
-  onDelete
-}) => {
+interface BusinessDocumentProps {
+  label: string;
+  name: string;
+}
+
+export const BusinessDocument: React.FC<BusinessDocumentProps> = ({ label, name }) => {
   return (
     <BusinessDocumentWrapper>
       <BusinessDocumentLabel>{label}</BusinessDocumentLabel>
@@ -28,10 +27,10 @@ export const BusinessDocument: React.FC<BusinessDocumentProps> = ({
           <FileIcon src={fileIcon} alt='File icon' />
           <Container>
             <DocumentName>{name}</DocumentName>
-            <DocumentSize>{format}</DocumentSize>
+            <DocumentSize>JPEG, 20MB</DocumentSize>
           </Container>
         </FlexContainer>
-        <DeleteIcon src={deleteIcon} alt='Delte icon' onClick={onDelete} />
+        <DeleteIcon src={deleteIcon} alt='Delte icon' />
       </DocumentContainer>
     </BusinessDocumentWrapper>
   );

@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { apiInstance } from '..';
+import { getFromLocal } from '../../utils';
 
 export const PROFILE_MUTATION_KEY = ['profile'];
+const token = getFromLocal('user');
 
 export type ProfileRequestPayloadType = {
   businessType: string;
@@ -20,7 +22,7 @@ export const useProfileMutation = () => {
     const response = await apiInstance('merchant').post('/profile', data, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+        Authorization: `Bearer ${token}`
       }
     });
 
