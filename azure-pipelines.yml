@@ -3,16 +3,16 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-  - master
+  - sub-main
 
 resources:
   - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '9143b04e-480c-4ca1-9900-4cdbd2efaff3'
+  dockerRegistryServiceConnection: 'e1bd7962-b113-4509-99f4-65eed0ab346c'
   imageRepository: 'payonus-docker'
-  containerRegistry: 'payonus.azurecr.io'
+  containerRegistry: 'payonuslive.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: 'payonus-merchant-web'
 
