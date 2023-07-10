@@ -13,11 +13,12 @@ import {
 } from '../styles';
 import { ReactComponent as Spinner } from '../../../../assets/icons/spinner.svg';
 import { useOverviewPieChartQuery } from '../../../../services/hooks/useOverviewQuery';
+import { colorBars, colorKey, pieDefault } from '../mock';
 import { PieCartType } from './types';
 
 export const PieCart: React.FC<PieCartType> = (props) => {
   const { startDate, endDate } = props;
-  const { data, isLoading, refetch } = useOverviewPieChartQuery({
+  const { data, isLoading, refetch, isRefetching } = useOverviewPieChartQuery({
     startDate,
     endDate
   });
@@ -26,11 +27,17 @@ export const PieCart: React.FC<PieCartType> = (props) => {
     (() => refetch())();
   }, [startDate, endDate, refetch]);
 
-  const pieChartData = data?.data?.data ?? [];
+  let pieChartData = data?.data?.data ?? [];
+
+  pieChartData = pieChartData.length === 0 ? pieDefault : pieChartData;
+
+  const handleDataColorAttach = () => {
+    return pieChartData.map((data) => colorBars[data.x as colorKey]);
+  };
 
   return (
     <Wrapper>
-      {isLoading ? (
+      {isLoading || isRefetching ? (
         <div className={`h-[319px] relative`}>
           <div
             className={`w-full h-full flex flex-col justify-center items-center absolute overlay`}
@@ -45,26 +52,31 @@ export const PieCart: React.FC<PieCartType> = (props) => {
               animate={{
                 duration: 1000
               }}
-              width={400}
-              height={400}
-              colorScale={['#6231F4', '#F09636', '#F5C544', '#EB5757']}
+              width={380}
+              height={380}
+              colorScale={handleDataColorAttach()}
               padding={50}
               data={pieChartData}
               labelRadius={({ innerRadius }) => (innerRadius ? +innerRadius + 5 : 0)}
-              radius={({ datum }) => (datum.x === 'BANKTRANSFER' ? 180 : 160)}
+              radius={({ datum }) => (datum.x === 'BANKTRANSFER' ? 162 : 150)}
               innerRadius={110}
               style={{ labels: { display: 'none' } }}
             />
             <WrapperOverlay>
               <Percentage>0%</Percentage>
-              <PercentageTitle>Card Transaction</PercentageTitle>
+              <PercentageTitle>
+                Card <br /> Transaction
+              </PercentageTitle>
             </WrapperOverlay>
           </WrapperRelative>
           <Wrapper>
-            <Wrapper className='grid grid-cols-2 gap-2'>
+            <Wrapper className='grid grid-cols-1'>
               {pieChartData.map((pieChart, id) => (
                 <FlexWrapper key={id}>
-                  <Box className={`bg-[#F09636]`} />
+                  <Box
+                    className={`w-[20px] h-[20px] mr-3 border-radius-[2px]`}
+                    style={{ backgroundColor: colorBars[pieChart.x as colorKey] }}
+                  />
                   <Wrapper>
                     <BoxPercentageTitle>{pieChart.x}</BoxPercentageTitle>
                     <BoxPercentage>{pieChart.y}%</BoxPercentage>
