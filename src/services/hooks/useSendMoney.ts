@@ -17,7 +17,7 @@ export type SendMoneyRequestType = {
 
 export const useSendMoney = () => {
   const load = useCallback(async (data: SendMoneyRequestType) => {
-    const response = await apiInstance('settlement').post('/send-money', data, {
+    const response = await apiInstance('settlement/admin').post('/send-money', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

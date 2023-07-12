@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
+// import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import bellIcon from '../../assets/icons/bell-icon.svg';
 import { REGULAR_PATHS } from '../../routes/paths';
 import { useAuth } from '../../hooks';
@@ -32,12 +32,12 @@ export const DashboardTopbar = () => {
       <WelcomeContainer>
         <WelcomeNote>Welcome {auth?.firstName} !</WelcomeNote>
         <Breadcrumb>
-          <span> Dashboard</span>
-          <FontAwesomeIcon
+          {/* <span> Dashboard</span> */}
+          {/* <FontAwesomeIcon
             icon={faGreaterThan}
             className='font-light mx-2 text-[10px] text-[#3A3A3AB2]'
           />
-          <span className='font-medium text-[#6231F4]'>Business activation</span>
+          <span className='font-medium text-[#6231F4]'>Business activation</span> */}
         </Breadcrumb>
       </WelcomeContainer>
       <CTAContainer>

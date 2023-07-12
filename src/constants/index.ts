@@ -11,11 +11,11 @@ import SelectButtonIcon1 from '../assets/icons/selectButton-icon1.svg';
 import SelectButtonIcon2 from '../assets/icons/selectButton-icon2.svg';
 
 export const NavLinks = [
-  {
-    url: '/',
-    title: 'Get Started',
-    icon: HomeIcon
-  },
+  // {
+  //   url: '/',
+  //   title: 'Get Started',
+  //   icon: HomeIcon
+  // },
   {
     url: '/overview',
     title: 'Dashboard',
@@ -27,7 +27,7 @@ export const NavLinks = [
     icon: TransactionsIcon
   },
   {
-    url: '/payouts/options',
+    url: '/payouts/history',
     title: 'Payouts',
     icon: PaymentsIcon
   }

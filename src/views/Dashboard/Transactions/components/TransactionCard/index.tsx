@@ -35,7 +35,7 @@ const TransactionCardContainer = tw.div`
 const Amount = tw.h3`
     font-semi-bold
     text-[#28313A]
-    text-[24px]
+    text-[18px]
     text-center
 `;
 

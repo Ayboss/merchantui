@@ -21,7 +21,7 @@ export const Box = tw.div`
 w-[20px]
 h-[20px]
 mr-3
-border-radius-[2px];
+border-radius-[2px]
 `;
 
 export const WrapperGrid = tw.div`
@@ -41,7 +41,7 @@ text-sm font-medium text-center text-gray-500 border-gray-200 dark:text-gray-400
 `;
 
 export const TabItem = tw.div<TabItemType>`
-inline-block py-4 border-b-2 mr-[32px] border-transparent rounded-t-lg hover:text-gray-600 cursor-pointer
+inline-block py-1 border-b-2 mr-[32px] border-transparent rounded-t-lg hover:text-gray-600 cursor-pointer
 ${(p) => p.$current === p.$selected && 'border-b-[#6231F4] font-semi-bold text-[#252122]'}
 `;
 

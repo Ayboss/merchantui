@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
+import { endOfDay, format, subMonths } from 'date-fns';
 import { Card } from '../../../components';
 import { useTransactionsSummaryQuery } from '../../../services/hooks';
 import { CardContainer, CardTransaction, PieCart } from './components';
@@ -17,11 +18,11 @@ import {
 import { selectedDateType, selectType } from './types';
 
 const Overview = () => {
-  const now = new Date();
+  const now = endOfDay(new Date());
   const [selected, setSelected] = useState<selectType>('banktransfer');
   const [selectedDate, setSelectedDate] = useState<selectedDateType>({
-    startDate: new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10),
-    endDate: new Date().toISOString().slice(0, 10)
+    startDate: format(subMonths(now, 6), 'yyyy-MM-dd'),
+    endDate: format(now, 'yyyy-MM-dd')
   });
 
   const { data: summaryData, isLoading: summaryLoading } = useTransactionsSummaryQuery();
