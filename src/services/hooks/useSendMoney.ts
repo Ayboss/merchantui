@@ -13,6 +13,8 @@ export type SendMoneyRequestType = {
   transactionAmount: string;
   currencyCode: string;
   narration: string;
+  reference: string;
+  pin?: string;
 };
 
 export const useSendMoney = () => {

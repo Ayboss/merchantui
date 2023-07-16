@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <ReactQueryDevtools />
           </QueryClientProvider>
         </Router>
-        <ToastContainer />
+        <ToastContainer autoClose={4000} hideProgressBar icon closeOnClick newestOnTop />
       </MerchantKycProvider>
     </AuthProvider>
   </React.StrictMode>

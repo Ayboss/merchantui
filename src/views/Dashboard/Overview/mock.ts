@@ -18,3 +18,27 @@ export const TabItems: TabItemType = [
     title: 'QR Code'
   }
 ];
+
+export const pieDefault: { x: string; y: string }[] = [
+  {
+    x: 'BANKTRANSFER',
+    y: '0'
+  },
+  {
+    x: 'PAYOUTTRANSFERIN',
+    y: '0'
+  },
+  {
+    x: 'CARD',
+    y: '0'
+  }
+];
+
+// export const colorBars = ['#6231F4', '#F09636', '#F5C544', '#EB5757']
+export const colorBars: { BANKTRANSFER: string; PAYOUTTRANSFERIN: string; CARD: string } = {
+  BANKTRANSFER: '#6231F4',
+  PAYOUTTRANSFERIN: '#F5C544',
+  CARD: '#F09636'
+};
+
+export type colorKey = keyof typeof colorBars;

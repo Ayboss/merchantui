@@ -40,12 +40,7 @@ const Overview = () => {
         </Wrapper>
         <Wrapper className={'flex justify-end'}>
           <DateWrapper>
-            <Datepicker
-              primaryColor={'#6231F4'}
-              value={selectedDate}
-              showShortcuts={true}
-              onChange={handleValueChange}
-            />
+            <Datepicker value={selectedDate} showShortcuts={true} onChange={handleValueChange} />
           </DateWrapper>
         </Wrapper>
       </TopWrapper>
@@ -59,7 +54,7 @@ const Overview = () => {
               <TabWrapper>
                 {TabItems.map((item, id) => (
                   <TabItem
-                    key={id}
+                    key={`${id}`}
                     $current={item.key}
                     $selected={selected}
                     onClick={() => setSelected(item.key)}

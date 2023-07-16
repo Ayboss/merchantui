@@ -5,31 +5,48 @@ import { toast } from 'react-toastify';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
+import { v4 as uuidv4 } from 'uuid';
 import { Button, CustomInput } from '../../../../../components';
 import {
+  SendMoneyRequestType,
   useGetBanksQuery,
-  useSendMoney,
+  useGetMerchantAccountQuery,
   useVerifyBankAccount
 } from '../../../../../services/hooks';
 
 import './styles.css';
+import { PinPopup } from '../../PinPopup';
 
 interface FormValues {
   amount: string;
   accountNumber: string;
   narration: string;
 }
+export interface IAccountInfo {
+  accountName: string;
+  accountNumber: string;
+  bankName: string;
+  created: string;
+  currencyCode: string;
+}
 
 export const SinglePayout: React.FC = () => {
   const { register, handleSubmit } = useForm<FormValues>();
   const { mutateAsync, isLoading, data: bankDetails } = useVerifyBankAccount();
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
-  const { mutateAsync: sendMoney, isLoading: sending } = useSendMoney();
+  const [showPin, setShowPin] = useState(false);
+  const { data: merchantAccount, isLoading: merchantAccountLoading } = useGetMerchantAccountQuery({
+    page: 1,
+    pageSize: 20
+  });
+
   const [detailsToVerify, setDetailsToVerify] = useState({
     accountNumber: '',
     bankName: '',
     bankCode: ''
   });
+  const [sourceAccountNumber, setSourceAccountNumber] = useState('');
+  const [dataToSend, setDataToSend] = useState<SendMoneyRequestType>({} as SendMoneyRequestType);
 
   const { accountNumber, bankName } = detailsToVerify;
 
@@ -55,23 +72,36 @@ export const SinglePayout: React.FC = () => {
     }
   }, [banksData]);
 
+  const merchantSourceAccountNumberForSelect = useMemo(() => {
+    if (merchantAccount?.data?.content) {
+      return merchantAccount?.data?.content.map((accountItem: IAccountInfo) => ({
+        label: `${accountItem.accountNumber} | ${accountItem.bankName}`,
+        value: accountItem.accountNumber
+      }));
+    }
+  }, [merchantAccount]);
+
   const handleSubmitClick: SubmitHandler<FormValues> = (values) => {
     const { accountNumber, amount, narration } = values;
     const { bankCode, bankName } = detailsToVerify;
 
+    if (!bankDetails?.data?.accountName) {
+      toast.warn('Beneficiary details not verified');
+    }
+
     if (amount.length > 0 && bankCode && bankDetails?.data?.accountName) {
-      sendMoney({
+      setShowPin(true);
+      setDataToSend({
         beneficiaryAccountName: bankDetails?.data?.accountName,
         beneficiaryAccountNumber: accountNumber,
         beneficiaryBankName: bankName,
         beneficiaryBankCode: bankCode,
-        sourceAccountNumber: '',
+        sourceAccountNumber,
         transactionAmount: amount,
         currencyCode: 'NGN',
-        narration
-      })
-        .then((result) => console.log(result))
-        .catch((err) => console.error(err));
+        narration,
+        reference: uuidv4()
+      });
     }
   };
 
@@ -98,7 +128,28 @@ export const SinglePayout: React.FC = () => {
             font-medium'
           >
             {' '}
-            Bank Name
+            Choose Own Account
+          </p>
+          <Select
+            options={merchantSourceAccountNumberForSelect}
+            classNamePrefix='Select...'
+            isLoading={merchantAccountLoading}
+            isSearchable
+            isClearable
+            className='mt-2'
+            onChange={(val: any) => setSourceAccountNumber(val?.value)}
+            required
+          />
+        </div>
+        <div className='mt-5 '>
+          <p
+            className='text-[#333333]
+            text-[16px]
+            leading-[17px]
+            font-medium'
+          >
+            {' '}
+            Beneficiary Bank Name
           </p>
           <Select
             options={bankDataForSelect}
@@ -131,7 +182,7 @@ export const SinglePayout: React.FC = () => {
                 accountNumber: e.target.value
               })
           })}
-          label='Account Number'
+          label='Beneficairy Account Number'
           placeholder=''
         />
         {isLoading && <FontAwesomeIcon className='mt-[10px] mr-[auto]' icon={faSpinner} spin />}
@@ -150,11 +201,11 @@ export const SinglePayout: React.FC = () => {
         <Button
           name='Confirm Single Payout'
           className='w-full font-semi-bold'
-          isBusy={sending}
+          isBusy={false}
           type={'submit'}
-          disabled={sending}
         />
       </form>
+      {showPin && <PinPopup dataToSend={dataToSend} onClose={() => setShowPin(false)} />}
     </div>
   );
 };

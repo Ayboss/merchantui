@@ -9,7 +9,7 @@ import { CardTransactionType } from './types';
 export const CardTransaction: React.FC<CardTransactionType> = (props) => {
   const { startDate, endDate, type } = props;
 
-  const { data, isLoading, refetch } = useOverviewChartQuery({
+  const { data, isLoading, refetch, isRefetching } = useOverviewChartQuery({
     type,
     startDate,
     endDate
@@ -21,7 +21,7 @@ export const CardTransaction: React.FC<CardTransactionType> = (props) => {
 
   return (
     <WrapperRelative>
-      {isLoading ? (
+      {isLoading || isRefetching ? (
         <div className={`h-[319px] relative`}>
           <div
             className={`w-full h-full flex flex-col justify-center items-center absolute overlay`}

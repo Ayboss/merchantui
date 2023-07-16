@@ -13,11 +13,12 @@ import {
 } from '../styles';
 import { ReactComponent as Spinner } from '../../../../assets/icons/spinner.svg';
 import { useOverviewPieChartQuery } from '../../../../services/hooks/useOverviewQuery';
+import { colorBars, colorKey } from '../mock';
 import { PieCartType } from './types';
 
 export const PieCart: React.FC<PieCartType> = (props) => {
   const { startDate, endDate } = props;
-  const { data, isLoading, refetch } = useOverviewPieChartQuery({
+  const { data, isLoading, refetch, isRefetching } = useOverviewPieChartQuery({
     startDate,
     endDate
   });
@@ -25,11 +26,6 @@ export const PieCart: React.FC<PieCartType> = (props) => {
   useEffect(() => {
     (() => refetch())();
   }, [startDate, endDate, refetch]);
-
-  const pieChartData = data?.data?.data ?? [];
-  const uniquePieChartData = Array.from(
-    new Map(pieChartData.map((item) => [item?.x, item])).values()
-  );
 
   const getBoxColor = (type: string) => {
     switch (type) {
@@ -44,9 +40,19 @@ export const PieCart: React.FC<PieCartType> = (props) => {
     }
   };
 
+  const pieChartData = data?.data?.data ?? [];
+
+  const uniquePieChartData = Array.from(
+    new Map(pieChartData.map((item) => [item?.x, item])).values()
+  );
+
+  const handleDataColorAttach = () => {
+    return uniquePieChartData.map((data) => colorBars[data.x as colorKey]);
+  };
+
   return (
     <Wrapper>
-      {isLoading ? (
+      {isLoading || isRefetching ? (
         <div className={`h-[319px] relative`}>
           <div
             className={`w-full h-full flex flex-col justify-center items-center absolute overlay`}
@@ -61,13 +67,13 @@ export const PieCart: React.FC<PieCartType> = (props) => {
               animate={{
                 duration: 1000
               }}
-              width={400}
-              height={400}
-              colorScale={['#6231F4', '#F09636', '#F5C544']}
+              width={380}
+              height={380}
+              colorScale={handleDataColorAttach()}
               padding={50}
               data={uniquePieChartData}
               labelRadius={({ innerRadius }) => (innerRadius ? +innerRadius + 5 : 0)}
-              radius={({ datum }) => (datum.x === 'BANKTRANSFER' ? 180 : 160)}
+              radius={({ datum }) => (datum.x === 'BANKTRANSFER' ? 162 : 150)}
               innerRadius={110}
               style={{ labels: { display: 'none' } }}
               categories={{ x: ['BANKTRANSFER', 'CARD', 'PAYOUTTRANSFERIN'] }}
@@ -83,7 +89,7 @@ export const PieCart: React.FC<PieCartType> = (props) => {
                 const color = getBoxColor(pieChart?.x);
 
                 return (
-                  <FlexWrapper key={id}>
+                  <FlexWrapper key={`${id}`}>
                     <Box className={color} />
                     <Wrapper>
                       <BoxPercentageTitle>{pieChart.x}</BoxPercentageTitle>

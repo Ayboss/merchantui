@@ -14,7 +14,7 @@ grid grid-cols-2 gap-4 mb-8
 
 export const FlexWrapper = tw.div`
 flex
- items-center mb-4
+ items-center mb-3
 `;
 
 export const Box = tw.div`
