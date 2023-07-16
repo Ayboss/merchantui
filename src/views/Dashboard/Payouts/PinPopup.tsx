@@ -17,7 +17,10 @@ export const PinPopup = ({
 
   const onClick = () => {
     mutateAsync({ ...dataToSend, pin })
-      .then(() => toast.success('Transaction completed successfully'))
+      .then(() => {
+        toast.success('Transaction completed successfully');
+        onClose();
+      })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.errors)) {
           const errorMessages = error?.response?.data?.errors;
