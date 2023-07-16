@@ -89,7 +89,6 @@
     "vite": "^4.2.0",
     "vite-tsconfig-paths": "^4.2.0"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged --concurrently 1"
