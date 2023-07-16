@@ -16,14 +16,14 @@ import { LoginRequestPayloadType, useLoginMuation } from '../../../services/hook
 import { setToLocal } from '../../../utils';
 import { AuthLayout } from '../../../layouts';
 import { Button, CustomInput, PasswordInput } from '../../../components';
-import { REGULAR_PATHS } from '../../../routes/paths';
+import { REGULAR_PATHS, PRIVATE_PATHS } from '../../../routes/paths';
 import { LoginResponseType } from '../../../services/hooks/types';
 
 export const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || PRIVATE_PATHS.OVERVIEW;
   const { register, handleSubmit } = useForm();
 
   const { isLoading, mutateAsync } = useLoginMuation();

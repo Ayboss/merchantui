@@ -6,3 +6,5 @@ export * from './useVerifyBankAccount';
 export * from './useGetBanksQuery';
 export * from './useSendMoney';
 export * from './useCreateWallet';
+export * from './useMerchantStatsQuery';
+export * from './useGetMerchantAccount';

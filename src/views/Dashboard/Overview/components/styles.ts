@@ -11,7 +11,7 @@ export const Container = tw.div`
 export const Amount = tw.h3`
     font-semi-bold
     text-[#28313A]
-    text-[24px]
+    text-[18px]
 `;
 
 export const Title = tw.p`

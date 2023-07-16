@@ -35,17 +35,17 @@ const Transactions: React.FC = () => {
       text: 'All Transactions volume for a specific duration'
     },
     {
-      amount: formatNumber(summaryData?.data?.transactionVolume ?? 0),
+      amount: summaryData?.data?.transactionVolume ?? 0,
       title: 'Transaction Volume',
       text: 'All Transactions value for a specific duration'
     },
     {
-      amount: formatNumber(summaryData?.data?.successfulTransaction ?? 0),
+      amount: summaryData?.data?.successfulTransaction ?? 0,
       title: 'Successful Transaction',
       text: 'All payment that was successfully transacted'
     },
     {
-      amount: formatNumber(summaryData?.data?.failedTransaction ?? 0),
+      amount: summaryData?.data?.failedTransaction ?? 0,
       title: 'Failed Transaction',
       text: 'All payment that was unsuccessfully transacted'
     }

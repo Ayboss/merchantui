@@ -6,7 +6,7 @@ export const getBankQueryKey = ['getBanks'];
 
 export const useGetBanksQuery = () => {
   const load = useCallback(async () => {
-    const response = await apiInstance('settlement').get('/get-list-of-banks', {
+    const response = await apiInstance('settlement/transfer').get('/get-list-of-banks', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

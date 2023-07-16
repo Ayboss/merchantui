@@ -37,8 +37,8 @@ export const pieDefault: { x: string; y: string }[] = [
 // export const colorBars = ['#6231F4', '#F09636', '#F5C544', '#EB5757']
 export const colorBars: { BANKTRANSFER: string; PAYOUTTRANSFERIN: string; CARD: string } = {
   BANKTRANSFER: '#6231F4',
-  PAYOUTTRANSFERIN: '#F09636',
-  CARD: '#EB5757'
+  PAYOUTTRANSFERIN: '#F5C544',
+  CARD: '#F09636'
 };
 
 export type colorKey = keyof typeof colorBars;

@@ -31,22 +31,24 @@ export const CardTransaction: React.FC<CardTransactionType> = (props) => {
         </div>
       ) : (
         <>
-          <Wrapper className={'py-[34px]'}>
+          <Wrapper className={'py-[14px]'}>
             <Wrapper className={'flex'}>
               <Wrapper className={'pr-[34px]'}>
-                <Amount>N {formatNumber(data?.data?.totalVolume ?? 0)}</Amount>
+                <Amount className='text-[14px]'>
+                  ₦‎ {formatNumber(data?.data?.totalVolume ?? 0)}
+                </Amount>
                 <Title>Volume</Title>
               </Wrapper>
               <Wrapper className={'px-[34px] border-y-1 border-[#000000]'}>
-                <Amount>N {formatNumber(data?.data?.totalValue ?? 0)}</Amount>
+                <Amount className='text-[14px]'>{data?.data?.totalValue ?? 0}</Amount>
                 <Title>Value</Title>
               </Wrapper>
               <Wrapper className={'px-[34px] border-y-1 border-[#000000]'}>
-                <Amount>{formatNumber(data?.data?.successfulTransactions ?? 0)}</Amount>
+                <Amount className='text-[14px]'>{data?.data?.successfulTransactions ?? 0}</Amount>
                 <Title>Successful</Title>
               </Wrapper>
               <Wrapper className={'px-[34px]'}>
-                <Amount>{formatNumber(data?.data?.failedTransactions ?? 0)}</Amount>
+                <Amount className='text-[14px]'>{data?.data?.failedTransactions ?? 0}</Amount>
                 <Title>Failed</Title>
               </Wrapper>
             </Wrapper>
