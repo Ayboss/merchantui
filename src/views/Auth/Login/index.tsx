@@ -38,7 +38,7 @@ export const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error: any) => {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message || error?.response?.data?.responseMessage);
       });
   };
 
