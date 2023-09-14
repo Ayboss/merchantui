@@ -1,34 +1,35 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { AuthFooter, AuthHeader } from '../../components';
-import { AuthLayoutContainer, AuthBody, AuthHero, Title, Subtitle, AuthLine } from './styles';
+import { PayonusIcon } from '../../components/PayonusIcon';
+import { RadialBackground } from './RadialBackgroud';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 export const AuthLayout = ({ children }: AuthLayoutProps) => {
-  const location = useLocation();
-
   return (
-    <AuthLayoutContainer>
-      <AuthHeader ctaUrl={location.pathname} />
-      <AuthBody>
-        <AuthHero>
-          <AuthLine />
-          <Title>
-            Endless <br /> possibilities for <br /> online and offline <br /> payments in Africa
-          </Title>
-          <Subtitle>
-            OnUs finacial services enable African businesses to be <br /> paid by anyone, anywhere
-            in the world.
-          </Subtitle>
-        </AuthHero>
-        {children}
-      </AuthBody>
-      <AuthFooter />
-    </AuthLayoutContainer>
+    <div className='h-full w-full p-10 flex items-center gap-14'>
+      <AuthLayoutLeft />
+      {children}
+    </div>
   );
 };
 
-export default AuthLayout;
+const AuthLayoutLeft: React.FC<any> = () => {
+  return (
+    <div className='bg-[#5329D3] relative rounded-[10px] h-full max-h-[1000px] w-full max-w-[550px] text-white px-[50px] py-[60px]'>
+      <PayonusIcon />
+
+      <div className='flex flex-col gap-[30px] w-full mt-36'>
+        <h2 className='font-semibold leading-[70px] text-white text-6xl'>
+          Start your journey with us.
+        </h2>
+        <p className='text-[#F5F6FA] text-lg font-normal '>
+          Discover Endless possibilities for online payments in Africa, for B2B and B2C Businesses
+        </p>
+      </div>
+
+      <RadialBackground className='absolute left-[-20%] bottom-[-17%]' />
+    </div>
+  );
+};

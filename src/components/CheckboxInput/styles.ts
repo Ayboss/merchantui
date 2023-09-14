@@ -7,9 +7,8 @@ mt-5
 `;
 
 export const Checkbox = tw.input`
-w-[20px]
-h-[20px]
-mr-3
+w-4
+h-4
 inline-block
 `;
 

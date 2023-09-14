@@ -1,23 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {
-  AuthContainer,
-  AuthForm,
-  FormHeader,
-  Title,
-  Subtitle,
-  FormBody,
-  FormLink
-} from '../styles';
+import clsx from 'clsx';
+import { AuthForm, FormHeader, Title, Subtitle } from '../styles';
 import { useAuth } from '../../../hooks';
 import { LoginRequestPayloadType, useLoginMuation } from '../../../services/hooks';
 import { setToLocal } from '../../../utils';
 import { AuthLayout } from '../../../layouts';
-import { Button, CustomInput, PasswordInput } from '../../../components';
-import { REGULAR_PATHS, PRIVATE_PATHS } from '../../../routes/paths';
+import { Button, CustomInput, inlineButtonClass } from '../../../components';
+import { PRIVATE_PATHS, REGULAR_PATHS } from '../../../routes/paths';
 import { LoginResponseType } from '../../../services/hooks/types';
+import { Checkbox } from '../../../components/CheckboxInput/styles';
 
 export const Login = () => {
   const { setAuth } = useAuth();
@@ -44,45 +38,57 @@ export const Login = () => {
 
   return (
     <AuthLayout>
-      <AuthContainer>
-        <AuthForm onSubmit={handleSubmit(onSubmit)}>
-          <FormHeader>
-            <Title>Log in</Title>
-            <Subtitle>Provide Credentials below to login to your account</Subtitle>
-          </FormHeader>
-          <FormBody>
-            <CustomInput
-              label='Email Address'
-              type='email'
-              placeholder='e.g yourmail@mail.com'
-              {...register('username', { required: true })}
-            />
-            <PasswordInput
-              label='Password'
-              placeholder='Password'
-              {...register('password', { required: true })}
-            />
-            <div className='text-right mt-3'>
-              <Link to={REGULAR_PATHS.FORGOT_PASSWORD} className='text-[#6231F4]'>
-                Forgot Password?
-              </Link>
-            </div>
-
+      <AuthForm className='w-full max-w-[500px]' onSubmit={handleSubmit(onSubmit)}>
+        <FormHeader className='flex flex-col'>
+          <Title>Welcome Back!</Title>
+          <Subtitle>
+            Dont have an account?{' '}
             <Button
-              name='Login'
-              isBusy={isLoading}
-              type='submit'
-              className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
-            />
-            <FormLink>
-              Don’t have an account ?{' '}
-              <Link to='/signup' className='font-bold'>
-                Sign Up now !
-              </Link>{' '}
-            </FormLink>
-          </FormBody>
-        </AuthForm>
-      </AuthContainer>
+              type={'button'}
+              name={'Sign Up'}
+              onClick={() => navigate(REGULAR_PATHS.SIGN_UP)}
+              className={clsx('text-[#5329D3]', inlineButtonClass)}
+            />{' '}
+          </Subtitle>
+        </FormHeader>
+        <div className='flex w-full flex-col mt-[50px] gap-[30px]'>
+          <CustomInput
+            {...register('username', { required: true })}
+            label='Email Address'
+            placeholder='sample@mail.com'
+          />
+          <CustomInput
+            {...register('password', { required: true })}
+            type='password'
+            label='Password'
+            placeholder=''
+          />
+        </div>
+        <p className='text-[#6F7482] text-sm leading-[19px] tracking-tight font-normal mt-5'>
+          Forgot password?{' '}
+          <Button
+            type={'button'}
+            name={'Reset Password'}
+            onClick={() => navigate(REGULAR_PATHS.RESET_PASSWORD)}
+            className={clsx(inlineButtonClass, 'text-red-400 text-sm')}
+          />
+        </p>
+        <div className='flex w-fit  mt-5 gap-2'>
+          <Checkbox id='rememberMe' className='border-[#B8BCCA] cursor-pointer' type='checkbox' />
+          <label
+            htmlFor='rememberMe'
+            className='text-sm select-none text-neutral-700 cursor-pointer font-medium leading-tight'
+          >
+            Remember me for 10 days
+          </label>
+        </div>
+        <Button
+          type={'submit'}
+          isBusy={isLoading}
+          className='text-base text-white w-[210px] font-medium'
+          name={'Sign In'}
+        />
+      </AuthForm>
     </AuthLayout>
   );
 };

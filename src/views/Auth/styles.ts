@@ -10,35 +10,19 @@ lg:justify-end
 `;
 
 export const AuthForm = tw.form`
-bg-[#fff]
-w-full
-lg:w-[500px]
-absolute
-z-10
-top-[90px]
-rounded
-lg:p-[50px]
 `;
 
 export const FormHeader = tw.div`
-text-left
 `;
 
 export const Title = tw.h3`
-font-semibold
-text-[40px]
-leading-[40px]
-mb-[18px]
+text-[40px] font-bold text-[#444]
 `;
 
 export const Subtitle = tw.p`
-text-[15px]
-leading-[26px]
+text-[#6F7482] text-[18px] font-semibold font-normal
 `;
 export const FormBody = tw.div`
-mt-5
-mb-[60px]
-lg:mb-0
 `;
 
 export const FormLink = tw.p`

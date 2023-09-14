@@ -12,7 +12,7 @@ import {
   Title
 } from '../styles';
 import { ForgotPasswordPayloadType, useForgotPasswordMutation } from '../../../services/hooks';
-import AuthLayout from '../../../layouts/AuthLayout';
+import { AuthLayout } from '../../../layouts/AuthLayout';
 import { Button, CustomInput } from '../../../components';
 
 export const ForgetPassword = () => {

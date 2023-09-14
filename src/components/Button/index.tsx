@@ -4,6 +4,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { ButtonPropsType } from './types';
 import { CustomButton } from './styles';
 
+export const inlineButtonClass = 'inline-block p-0 m-0 h-auto w-auto bg-transparent font-semibold';
+
 export const Button: React.FC<ButtonPropsType> = (props) => {
   const { name, onClick, isBusy, disabled, className, type, icon } = props;
 
