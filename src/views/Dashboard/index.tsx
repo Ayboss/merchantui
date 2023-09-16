@@ -1,19 +1,17 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import { DashboardLayout } from '../../layouts';
-import { DashboardSideNav, DashboardTopbar } from '../../components';
-import { DashboardBody, DashboardContent } from './styles';
 
 const MerchantsDashboard = () => {
   return (
     <DashboardLayout>
-      <DashboardSideNav />
+      {/* <DashboardSideNav />
       <DashboardBody>
         <DashboardTopbar />
         <DashboardContent>
           <Outlet />
         </DashboardContent>
-      </DashboardBody>
+      </DashboardBody> */}
     </DashboardLayout>
   );
 };

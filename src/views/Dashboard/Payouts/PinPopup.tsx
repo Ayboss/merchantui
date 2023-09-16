@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { Button, Popup } from '../../../components';
 import { SendMoneyRequestType, useSendMoney } from '../../../services/hooks';
 import { FormGroup, Input } from '../../../components/CustomInput/styles';

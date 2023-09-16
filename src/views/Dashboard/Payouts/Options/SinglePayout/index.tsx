@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
@@ -86,7 +86,7 @@ export const SinglePayout: React.FC = () => {
     const { bankCode, bankName } = detailsToVerify;
 
     if (!bankDetails?.data?.accountName) {
-      toast.warn('Beneficiary details not verified');
+      toast.error('Beneficiary details not verified');
     }
 
     if (amount.length > 0 && bankCode && bankDetails?.data?.accountName) {

@@ -13,6 +13,7 @@ export enum PRIVATE_PATHS {
   //   ---------------------- //
   TRANSACTIONS = '/transactions',
   SETTINGS = '/settings',
+  SETTLEMENTS = '/settlements',
   PAYOUTS = '/payouts',
   PAYOUT_OPTIONS = '/payouts/options',
   PAYOUT_HISTORY = '/payouts/history',

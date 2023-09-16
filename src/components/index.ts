@@ -5,7 +5,6 @@ export * from './Button';
 export * from './CheckboxInput';
 export * from './CustomInput';
 export * from './DashboardTopbar';
-export * from './MessageToast';
 export * from './MultiStepContainer';
 export * from './NavigatorButton';
 export * from './PasswordInput';

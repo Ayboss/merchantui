@@ -33,7 +33,8 @@ export const AppRouter = () => {
     HOME,
     PAYOUTS,
     PAYOUT_HISTORY,
-    PAYOUT_OPTIONS
+    PAYOUT_OPTIONS,
+    SETTLEMENTS
   } = PRIVATE_PATHS;
 
   const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
@@ -61,6 +62,7 @@ export const AppRouter = () => {
           <Route path={OTHERS} element={<Others />} />
         </Route>
         <Route path={TRANSACTIONS} element={<Transactions />} />
+        <Route path={SETTLEMENTS} element={<Transactions />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />

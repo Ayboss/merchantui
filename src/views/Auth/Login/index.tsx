@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import clsx from 'clsx';
 import { AuthForm, FormHeader, Title, Subtitle } from '../styles';
 import { useAuth } from '../../../hooks';
@@ -40,20 +40,23 @@ export const Login = () => {
     <AuthLayout>
       <AuthForm className='w-full max-w-[500px]' onSubmit={handleSubmit(onSubmit)}>
         <FormHeader className='flex flex-col'>
-          <Title>Welcome Back!</Title>
+          <Title className='text-[#444] text-[40px] font-bold'>Welcome Back!</Title>
           <Subtitle>
-            Dont have an account?{' '}
+            Don't have an account?{' '}
             <Button
-              type={'button'}
+              type={'link'}
               name={'Sign Up'}
-              onClick={() => navigate(REGULAR_PATHS.SIGN_UP)}
+              href={REGULAR_PATHS.SIGN_UP}
               className={clsx('text-[#5329D3]', inlineButtonClass)}
             />{' '}
           </Subtitle>
         </FormHeader>
         <div className='flex w-full flex-col mt-[50px] gap-[30px]'>
           <CustomInput
-            {...register('username', { required: true })}
+            {...register('username', {
+              required: true,
+              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            })}
             label='Email Address'
             placeholder='sample@mail.com'
           />
@@ -67,9 +70,9 @@ export const Login = () => {
         <p className='text-[#6F7482] text-sm leading-[19px] tracking-tight font-normal mt-5'>
           Forgot password?{' '}
           <Button
-            type={'button'}
+            type={'link'}
             name={'Reset Password'}
-            onClick={() => navigate(REGULAR_PATHS.RESET_PASSWORD)}
+            href={REGULAR_PATHS.RESET_PASSWORD}
             className={clsx(inlineButtonClass, 'text-red-400 text-sm')}
           />
         </p>

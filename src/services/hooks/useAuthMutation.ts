@@ -15,12 +15,11 @@ export type LoginRequestPayloadType = {
 
 export type SignupRequestPayloadType = {
   email: string;
-  name: string;
   password: string;
   passwordConfirmation: string;
   phone: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  surname: string;
 };
 
 export type ForgotPasswordPayloadType = {

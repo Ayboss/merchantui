@@ -8,7 +8,7 @@ text-[#fff]
 text-[16px]
 leading-[20px]
 font-bold
-mt-10
+mt-6
 rounded-[4px]
 cursor-[pointer]
 disabled:bg-[#6231F44D]

@@ -6,7 +6,7 @@ import { FormGroup, InputLabel, Input } from './styles';
 import { CustomInputProps } from './types';
 
 export const CustomInput: React.FC<CustomInputProps> = forwardRef((props, ref) => {
-  const { label, type, placeholder, className, ...rest } = props;
+  const { label, type, placeholder, className, errorText, ...rest } = props;
 
   const [inputType, setInputType] = useState<string>('text');
 
@@ -22,7 +22,7 @@ export const CustomInput: React.FC<CustomInputProps> = forwardRef((props, ref) =
         {label}
       </InputLabel>
       <Input
-        className='h-[48px] w-full border-[#B8BCCA] border-[1px] rounded text-[#3B4256] bg-white text-[14px] leading-[17px] font-normal p-3 focus:outline-[#0048D9]'
+        className='h-[48px] placeholder:text-[#B8BCCA] placeholder:text-[14px] placeholder:tracking-[0.14px] w-full border-[#B8BCCA] border-[1px] rounded text-[#3B4256] bg-white text-[14px] leading-[17px] font-normal p-3 focus:outline-[#0048D9]'
         type={inputType}
         placeholder={placeholder}
         /* @ts-ignore no overload matches for the ref */
@@ -36,6 +36,11 @@ export const CustomInput: React.FC<CustomInputProps> = forwardRef((props, ref) =
           icon={icon}
           style={{ color: '#b8bcca' }}
         />
+      )}
+      {errorText && (
+        <span className='text-[#F04438] absolute bottom-[-20px] text-[12px] font-normal'>
+          {errorText}
+        </span>
       )}
     </FormGroup>
   );

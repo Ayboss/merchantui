@@ -14,6 +14,9 @@ export default {
         }
       }
     },
+    fontFamily: {
+      sans: ['Metropolis-Regular']
+    },
     screens: {
       360: '360px',
       480: '480px',

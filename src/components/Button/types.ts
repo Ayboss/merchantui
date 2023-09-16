@@ -8,4 +8,5 @@ export type ButtonPropsType = {
   disabled?: boolean;
   type?: any;
   icon?: any;
+  href?: string;
 };
