@@ -1,18 +1,25 @@
 import React from 'react';
 import { faArrowRightFromBracket, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
-import { PRIVATE_PATHS } from '../../routes/paths';
+import { PRIVATE_PATHS, REGULAR_PATHS } from '../../routes/paths';
 import { NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
 import { DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
 
 export const DashboardSideNav = () => {
+  const navigate = useNavigate();
   const NavGroups = Object.keys(NavLinkList) as unknown as NavGroupType[];
+
+  const handleLogOut = () => {
+    localStorage.removeItem('key');
+    navigate(REGULAR_PATHS.LOGIN);
+  };
 
   return (
     <div className='h-full w-[280px] pl-[44px] pr-[22px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
       <Button
-        className='bg-[#6231F4] mb-[37px] w-[186px] rounded-[10px]'
+        className='bg-[#6231F4] mb-[37px] mt-0 w-[186px] rounded-[10px]'
         name={
           <span className=' text-[13px] flex items-center gap-[10px] justify-center  font-extrabold'>
             <FontAwesomeIcon icon={faPlus} style={{ color: '#f9fafb' }} />
@@ -32,6 +39,7 @@ export const DashboardSideNav = () => {
       <div className='border-solid border-t border-[#E4E4E7] w-full mt-[20px] pb-[30px]'>
         <Button
           className='bg-[#F04949] w-[186px] rounded-[6px] h-10'
+          onClick={handleLogOut}
           name={
             <span className=' text-[13px] flex items-center gap-[10px] justify-center  font-extrabold'>
               <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ color: '#ffffff' }} />

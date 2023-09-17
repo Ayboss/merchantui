@@ -54,7 +54,7 @@ export const NavLinkList: NavLinkListType = {
     },
     {
       text: 'Payouts',
-      path: PRIVATE_PATHS.PAYOUTS,
+      path: PRIVATE_PATHS.PAYOUT_HISTORY,
       icon: (
         <svg
           width='18'
