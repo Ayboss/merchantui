@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Button from '../Button';
 
 interface TableEmptyLayoutProps {
@@ -5,6 +6,7 @@ interface TableEmptyLayoutProps {
   minHeight?: string;
   shouldFit?: boolean;
   containerHeight: string;
+  className?: string;
 
   title?: string;
   subTitle?: string;
@@ -13,12 +15,21 @@ interface TableEmptyLayoutProps {
 }
 
 export const TableEmptyLayout = (props: TableEmptyLayoutProps) => {
-  const { size, shouldFit, buttonText, subTitle, title, containerHeight, onControlClick } = props;
+  const {
+    size,
+    shouldFit,
+    buttonText,
+    subTitle,
+    title,
+    containerHeight,
+    onControlClick,
+    className
+  } = props;
 
   return (
     <div
       style={{ height: containerHeight, fontSize: size, width: shouldFit ? 'fit-content' : '100%' }}
-      className='w-full relative'
+      className={clsx('w-full relative', className)}
     >
       <div className='w-full h-full absolute flex flex-col items-center justify-center'>
         <div className='text-[16px] font-semi-bold text-[rgba(0, 0, 0, 0.8)] mb-[8px]'>{title}</div>

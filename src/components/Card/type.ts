@@ -1,5 +1,4 @@
-import React from 'react';
-
 export interface CardType {
-  children?: React.ReactNode;
+  title: string;
+  amount: string;
 }

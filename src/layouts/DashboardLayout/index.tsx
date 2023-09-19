@@ -11,9 +11,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
   return (
     <DashboardLayoutContainer className='flex-col bg-[#FAFAFB]'>
       <TopBar />
-      <div className='w-full h-full flex items-start gap-10'>
+      <div className='w-full h-full flex items-start overflow-auto gap-10'>
         <DashboardSideNav />
-        <div className='flex flex-col py-[20px]'>{children}</div>
+        <div className='flex flex-col py-[20px] w-full h-full pr-[40px]'>{children}</div>
       </div>
     </DashboardLayoutContainer>
   );

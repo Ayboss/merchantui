@@ -4,8 +4,7 @@ export const Container = tw.div`
   grid
   grid-cols-2
   md:grid-cols-4
-  gap-4
-  mb-5
+  gap-5
 `;
 
 export const Amount = tw.h3`

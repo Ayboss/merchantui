@@ -17,7 +17,7 @@ export const DashboardSideNav = () => {
   };
 
   return (
-    <div className='h-full w-[280px] pl-[44px] pr-[22px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
+    <div className='h-screen w-[280px] pl-[44px] pr-[22px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
       <Button
         className='bg-[#6231F4] mb-[37px] mt-0 w-[186px] rounded-[10px]'
         name={
