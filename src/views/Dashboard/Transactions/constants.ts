@@ -1,22 +1,26 @@
 import { HeadersPropsType } from '../../../components';
 
-export const TransactionsHeader: Array<HeadersPropsType> = [
+export const RecentTransactionsHeader: Array<HeadersPropsType> = [
   {
-    title: 'S/N',
-    responseMatch: 'index'
+    title: 'Status',
+    responseMatch: 'paymentStatus'
   },
   {
-    title: 'Transaction ID',
-    responseMatch: 'onusReference'
-  },
-  {
-    title: 'Channel',
+    title: 'Method',
     responseMatch: 'channel'
   },
   {
     title: 'Amount ',
     responseMatch: 'amount'
   },
+  {
+    title: 'Transaction ID',
+    responseMatch: 'onusReference'
+  }
+];
+
+export const TransactionsHeader: Array<HeadersPropsType> = [
+  ...RecentTransactionsHeader,
   {
     title: 'Email',
     responseMatch: 'customerEmail'
@@ -28,9 +32,5 @@ export const TransactionsHeader: Array<HeadersPropsType> = [
   {
     title: 'Date ',
     responseMatch: 'created'
-  },
-  {
-    title: 'Status',
-    responseMatch: 'paymentStatus'
   }
 ];

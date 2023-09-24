@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Popup } from '../../../../../components';
+import React from 'react';
+import { Popup, StatusTag, statusMap } from '../../../../../components';
 import { TransactionItemType } from '../../../../../services/hooks';
 
 export type PopupTransactionItemType = Partial<TransactionItemType> & { onClose: () => void };
@@ -16,21 +16,6 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
     balanceToPay,
     onusReference
   } = props;
-
-  const statusColor = useMemo(() => {
-    switch (paymentStatus) {
-      case 'SUCCESSFUL':
-      case 'Successful':
-      case 'SUCCESS':
-        return 'text-[#3DA536]';
-      case 'FAILED':
-        return 'text-[#DC362E]';
-      case 'PENDING':
-        return 'text-[#D6A32E]';
-      default:
-        return 'text-[rgba(149, 149, 149, 1)]';
-    }
-  }, [paymentStatus]);
 
   return (
     <Popup onClose={onClose}>
@@ -50,9 +35,8 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
             />
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
-            <TwoRowInfo
-              element={<p className={`${statusColor} text-[14px] font-medium`}>{paymentStatus}</p>}
-            />
+            {/* @ts-ignore */}
+            <TwoRowInfo element={<StatusTag type={statusMap[paymentStatus]} />} />
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo

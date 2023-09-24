@@ -1,4 +1,4 @@
 export interface CardType {
   title: string;
-  amount: string;
+  amount: string | number;
 }

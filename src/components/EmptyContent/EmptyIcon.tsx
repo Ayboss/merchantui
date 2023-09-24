@@ -41,7 +41,7 @@ export const EmptyIcon = ({ onClick }: { onClick?: () => void }) => {
           width='152'
           height='104'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'
+          colorInterpolationFilters='sRGB'
         >
           <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
@@ -100,7 +100,7 @@ export const EmptyIcon = ({ onClick }: { onClick?: () => void }) => {
           width='64'
           height='64'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'
+          colorInterpolationFilters='sRGB'
         >
           <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feGaussianBlur in='BackgroundImageFix' stdDeviation='4' />

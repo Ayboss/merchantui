@@ -7,7 +7,7 @@ export const Card: React.FC<CardType> = ({ title, amount }) => {
       <span className=' text-[#6F7482] font-medium tracking-[1px] uppercase text-[11px]'>
         {title}
       </span>
-      <h4 className=' text-[21px] text-[#444] font-bold'>{amount}</h4>
+      <h4 className=' text-[15px] text-[#444] font-bold'>{amount}</h4>
     </div>
   );
 };

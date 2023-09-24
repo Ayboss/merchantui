@@ -82,7 +82,7 @@ export const Login = () => {
             htmlFor='rememberMe'
             className='text-sm select-none text-neutral-700 cursor-pointer font-medium leading-tight'
           >
-            Remember me for 10 days
+            Keep me logged in
           </label>
         </div>
         <Button

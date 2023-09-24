@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 
+import clsx from 'clsx';
 import { faArrowRotateRight } from '@fortawesome/free-solid-svg-icons';
-import Button from '../Button';
+import Button, { inlineButtonClass } from '../Button';
 import { ReactComponent as Spinner } from '../../assets/icons/spinner.svg';
 
 import './styles.css';
@@ -79,7 +80,7 @@ export const LoaderControl = (props: LoaderProps) => {
                 name={errorControlText || 'Refresh'}
                 icon={errorControlShowIcon ? faArrowRotateRight : undefined}
                 onClick={errorControlOnClick}
-                className='m-0 w-[200px] h-[40px] rounded-[4px] text-[13px]'
+                className={clsx(inlineButtonClass, 'text-[#6231F4] text-sm')}
               />
             </div>
           )}

@@ -29,22 +29,24 @@ export type PermissionsType =
 
 export type UserRoleType = 'Admin' | 'Merchant';
 
+export type UserDetails = {
+  admin: boolean;
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  mobileNumber: string;
+  permission: Array<PermissionsType>;
+  role: UserRoleType;
+  superAdmin: boolean;
+  token: string;
+  tokenType: string;
+  username: string;
+  verified: boolean;
+};
+
 export type LoginResponseType = {
-  data: {
-    admin: boolean;
-    email: string;
-    firstName: string;
-    id: string;
-    lastName: string;
-    mobileNumber: string;
-    permission: Array<PermissionsType>;
-    role: UserRoleType;
-    superAdmin: boolean;
-    token: string;
-    tokenType: string;
-    username: string;
-    verified: boolean;
-  };
+  data: UserDetails;
   message: string;
   status: boolean;
   statusCode: 200;

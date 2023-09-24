@@ -69,7 +69,7 @@ export const Signup = () => {
     };
 
     mutateAsync({
-      data
+      ...data
     } as unknown as SignupRequestPayloadType)
       .then((data: any) => {
         toast.success(data?.responseMessage);

@@ -19,8 +19,6 @@ export const DashboardCardContainer = tw.div`
 `;
 
 export const TransactionsTableTitleWithFilter = tw.div`
-    mt-[40px]
-    mb-[24px]
     w-full
     flex
     justify-between

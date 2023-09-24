@@ -1,18 +1,14 @@
 
 
-thead tr th {
-    text-align: left;
-    padding-left: 20px;
-}
-
 .table-wrapper{
     position: relative;
-    overflow-x: auto;
+    overflow-y: auto;
     max-height: 600px;
 }
 
 .table-wrapper::-webkit-scrollbar{
     height: 8px;
+    width: 0;
 }
 
 .table-body-tr{
