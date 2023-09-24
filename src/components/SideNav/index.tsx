@@ -34,6 +34,7 @@ export const DashboardSideNav = () => {
         text='Dashboard'
       />
       {NavGroups.map((group, idx) => (
+        // @ts-ignore
         <NavGroupItem group={group} key={`${group}-${idx}`} items={NavLinkList[group]} />
       ))}
       <div className='border-solid border-t border-[#E4E4E7] w-full mt-[20px] pb-[30px]'>
@@ -52,15 +53,16 @@ export const DashboardSideNav = () => {
   );
 };
 
-export const NavGroupItem: React.FC<{ items: NavLinkItemPropsType[] } & { group: NavGroupType }> = (
-  props
-) => {
+export const NavGroupItem: React.FC<
+  { items: Partial<NavLinkItemPropsType>[] } & { group: NavGroupType }
+> = (props) => {
   const { group, items } = props;
 
   return (
     <div className='w-full pt-5 pb-[25px] flex flex-col items-start gap-[15px] border-solid border-t border-[#E4E4E7]'>
       <p className=' uppercase text-[10px] text-gray-400 font-bold tracking-[1px]'>{group}</p>
       {items.map((item, idx) => (
+        // @ts-ignore
         <NavLinkItem key={`${group}-${idx}`} {...item} />
       ))}
     </div>

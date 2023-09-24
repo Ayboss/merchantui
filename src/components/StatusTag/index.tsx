@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import clsx from 'clsx';
 
 export type StatusTagPropsType = {
-  type: 'Completed' | 'Pending' | 'Canceled';
+  type: 'Completed' | 'Pending' | 'Canceled' | 'PROCESSING' | 'FAILED';
 };
 
 export const StatusTag: React.FC<StatusTagPropsType> = (props) => {
@@ -17,16 +17,24 @@ export const StatusTag: React.FC<StatusTagPropsType> = (props) => {
           color: 'text-[#22C55E]'
         };
       case 'Pending':
+      case 'PROCESSING':
         return {
           background: 'bg-[#FEF9C3]',
           fill: 'bg-[#FACC15]',
           color: 'text-[#713F12]'
         };
       case 'Canceled':
+      case 'FAILED':
         return {
           background: 'bg-[#FEE2E2]',
           fill: 'bg-[#EF4444]',
           color: 'text-[#7F1D1D]'
+        };
+      default:
+        return {
+          background: 'bg-[#FEF9C3]',
+          fill: 'bg-[#FACC15]',
+          color: 'text-[#713F12]'
         };
     }
   }, [type]);

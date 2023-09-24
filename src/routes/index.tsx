@@ -16,6 +16,7 @@ import { Payouts } from '../views/Dashboard/Payouts';
 import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
 import { useRedirect } from '../hooks';
+import Settlements from '../views/Dashboard/Settlements';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -62,7 +63,7 @@ export const AppRouter = () => {
           <Route path={OTHERS} element={<Others />} />
         </Route>
         <Route path={TRANSACTIONS} element={<Transactions />} />
-        <Route path={SETTLEMENTS} element={<Transactions />} />
+        <Route path={SETTLEMENTS} element={<Settlements />} />
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PAYOUTS} element={<Payouts />}>
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
