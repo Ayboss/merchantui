@@ -11,18 +11,31 @@ import {
 } from '../../../components';
 import { AlertBar } from '../../../components/AlertBar';
 import { PRIVATE_PATHS } from '../../../routes/paths';
-import { TransactionItemType, useGetTransactionsQuery } from '../../../services/hooks';
+import {
+  PayoutItemType,
+  TransactionItemType,
+  useGetPayoutsQuery,
+  useGetTransactionsQuery
+} from '../../../services/hooks';
 import { RecentTransactionsHeader } from '../Transactions/constants';
 import { formatDate, formatNumber } from '../../../utils';
+import { RecentPayoutsHeader } from '../Payouts/History/constants';
 import { CardContainer } from './components';
 import { ListContainer, WhiteBGContainer } from './components/ListContainer';
 const Overview = () => {
   const {
     data,
     isError: isTransactionsError,
-    refetch: isTransactionsRefetch,
+    refetch: refetchTransactions,
     isLoading: isTransactionsLoading
-  } = useGetTransactionsQuery({ page: 1 });
+  } = useGetTransactionsQuery({ page: 0 });
+
+  const {
+    data: payoutList,
+    isError: isPayoutError,
+    refetch: refetchPayouts,
+    isLoading: isPayoutsLoading
+  } = useGetPayoutsQuery({ page: 1 });
 
   const transformTransactionsData = useMemo(() => {
     if (data?.data?.content) {
@@ -40,6 +53,23 @@ const Overview = () => {
       return [];
     }
   }, [data?.data?.content]);
+
+  const transformPayoutsData = useMemo(() => {
+    if (payoutList?.data?.content) {
+      const contents = payoutList?.data?.content;
+
+      return contents.map((item: PayoutItemType, id: number) => {
+        return {
+          ...item,
+          index: id + 1,
+          created: formatDate(item?.created),
+          transactionAmount: `₦${formatNumber(item?.transactionAmount)}`
+        };
+      });
+    } else {
+      return [];
+    }
+  }, [payoutList?.data?.content]);
 
   return (
     <div className='w-full h-full'>
@@ -91,7 +121,7 @@ const Overview = () => {
               errorTitle='Something went wrong'
               errorSubTitle="Sorry, we couldn't load your transactions, try reloading"
               minHeight={'350px'}
-              errorControlOnClick={() => isTransactionsRefetch()}
+              errorControlOnClick={() => refetchTransactions()}
             >
               <CustomTable
                 data={transformTransactionsData}
@@ -111,24 +141,54 @@ const Overview = () => {
         <div className='flex items-stretch gap-5 '>
           <ListContainer
             type='payouts'
-            className=' w-[70%] flex-grow'
+            className=' w-full flex-grow'
             renderCta={(className) => (
               <Button
                 className={clsx(className)}
                 type='link'
                 href={PRIVATE_PATHS.PAYOUT_HISTORY}
                 name={
-                  <span className='text-[#B8BCCA] text-[12px] font-medium'>
-                    See All Settlements{' '}
-                    <FontAwesomeIcon icon={faAngleRight} style={{ color: '#b8bcca' }} />
+                  <span
+                    className={clsx(
+                      'text-[12px] font-medium',
+                      transformPayoutsData.length > 0 ? 'text-[#6231F4]' : 'text-[#B8BCCA]'
+                    )}
+                  >
+                    See All Payouts{' '}
+                    <FontAwesomeIcon
+                      icon={faAngleRight}
+                      className={clsx(
+                        transformPayoutsData.length > 0 ? 'fill-[#6231F4]' : 'fill-[#b8bcca]'
+                      )}
+                    />
                   </span>
                 }
               />
             )}
           >
-            <EmptyContent />
+            <LoaderControl
+              loading={isPayoutsLoading}
+              error={isPayoutError}
+              overlay={isPayoutsLoading}
+              errorTitle='Something went wrong'
+              errorSubTitle="Sorry, we couldn't load your payouts, try reloading"
+              minHeight={'350px'}
+              errorControlOnClick={() => refetchPayouts()}
+            >
+              <CustomTable
+                data={transformPayoutsData}
+                headers={RecentPayoutsHeader}
+                length={5}
+                emptyLayout={
+                  <EmptyContent
+                    className='mt-[50px]'
+                    text='No recent payouts. Looks like you haven’t made any payout, no worries! '
+                  />
+                }
+              />
+            </LoaderControl>
           </ListContainer>
-          <WhiteBGContainer className='w-[30%] flex-grow min-h-[350px]'></WhiteBGContainer>
+          {/* <WhiteBGContainer className='w-[30%] flex-grow min-h-[350px]'></WhiteBGContainer> */}
         </div>
       </div>
     </div>

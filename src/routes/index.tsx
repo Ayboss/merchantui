@@ -17,6 +17,7 @@ import { PayoutHistory } from '../views/Dashboard/Payouts/History';
 import { PayoutOptions } from '../views/Dashboard/Payouts/Options';
 import { useRedirect } from '../hooks';
 import Settlements from '../views/Dashboard/Settlements';
+import { KycVerification } from '../views/KYC';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -35,7 +36,8 @@ export const AppRouter = () => {
     PAYOUTS,
     PAYOUT_HISTORY,
     PAYOUT_OPTIONS,
-    SETTLEMENTS
+    SETTLEMENTS,
+    KYC_VERIFICATION
   } = PRIVATE_PATHS;
 
   const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
@@ -69,6 +71,7 @@ export const AppRouter = () => {
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />
         </Route>
+        <Route path={KYC_VERIFICATION} element={<KycVerification />} />
       </Route>
       <Route path={LOGIN} element={<Login />} />
       <Route path={FORGOT_PASSWORD} element={<ForgetPassword />} />

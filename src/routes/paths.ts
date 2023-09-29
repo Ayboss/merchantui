@@ -17,7 +17,11 @@ export enum PRIVATE_PATHS {
   PAYOUTS = '/payouts',
   PAYOUT_OPTIONS = '/payouts/options',
   PAYOUT_HISTORY = '/payouts/history',
-  PAYOUT_BENEFICIARIES = '/payouts/beneficaries'
+  PAYOUT_BENEFICIARIES = '/payouts/beneficaries',
+
+  // ................//
+
+  KYC_VERIFICATION = '/verify-kyc'
 }
 
 export enum REGULAR_PATHS {

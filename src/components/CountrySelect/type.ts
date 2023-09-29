@@ -3,4 +3,7 @@ export type CountrySelectProps = {
   value?: string;
   placeholder: string;
   onChange?: (e: any) => void;
+  className?: string;
+  type: 'country' | 'state';
+  countryId?: number;
 };

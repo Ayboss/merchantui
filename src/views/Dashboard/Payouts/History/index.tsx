@@ -34,7 +34,7 @@ export const PayoutHistory: React.FC = () => {
   ];
 
   const [query, setQuery] = useState({
-    page: 0
+    page: 1
   });
   const [currentDetails, setCurrentDetails] = useState<PayoutItemType | null>(null);
   const [showPayoutDetails, setShowPayoutDetails] = useState(false);
@@ -42,7 +42,7 @@ export const PayoutHistory: React.FC = () => {
   const navigate = useNavigate();
 
   const handlePageChange = (current: number) => {
-    setQuery({ ...query, page: current - 1 });
+    setQuery({ ...query, page: current });
   };
 
   const transformData = useMemo(() => {

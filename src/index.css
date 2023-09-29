@@ -116,3 +116,55 @@ p {
 .fade-in {
   animation: fade-in 0.2s linear;
 }
+
+#RFS-Connector{
+  border-radius: 40px;
+}
+
+#RFS-StepperContainer{
+  padding: 0;
+}
+
+.stsearch-box input{
+  font-size: 14px !important;
+  color: #3B4256 !important;
+  border: none !important;
+  outline: none !important;
+}
+.stsearch-box input:focus-visible{
+  border: none !important;
+}
+
+.stdropdown-tool > svg{
+  stroke: white !important;
+}
+
+.Bank__indicator-separator{
+  display: none !important;
+}
+
+.Bank__value-container{
+  height: 40px !important;
+  cursor: text !important;
+  color: #444 !important;
+  font-size: 14px !important;
+}
+
+.Bank__option{
+  color: #444 !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 144% !important;
+  letter-spacing: 0.14px  !important;
+  cursor: pointer !important;
+}
+
+.Bank__option--is-selected{
+  background-color: #DEEBFF !important;
+}
+
+.Bank__indicator > svg{
+  stroke: white;
+  cursor: pointer;
+}

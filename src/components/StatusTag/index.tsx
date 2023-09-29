@@ -42,7 +42,7 @@ export const StatusTag: React.FC<StatusTagPropsType> = (props) => {
   return (
     <div
       className={clsx(
-        'rounded-[40px] w-[96px] justify-center items-center flex gap-2  h-[26px]',
+        'rounded-[40px] w-[115px] justify-center items-center flex gap-2  h-[26px]',
         statusTheme.background
       )}
     >

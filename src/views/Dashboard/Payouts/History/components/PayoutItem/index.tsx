@@ -58,7 +58,7 @@ export const PayoutItem: React.FC<PopupPayoutItemType> = (props) => {
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo
               topText='Transaction Amount'
-              bottomText={`₦${transactionAmount ?? 0}`}
+              bottomText={`${transactionAmount ?? 0}`}
               align='items-start'
             />
             <TwoRowInfo topText='Transaction Date' bottomText={created ?? ''} align='items-end' />

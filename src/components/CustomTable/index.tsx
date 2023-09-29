@@ -11,7 +11,8 @@ export const statusMap = {
   PENDING: 'Pending',
   Pending: 'Pending',
   FAILED: 'FAILED',
-  Failed: 'Failed'
+  Failed: 'Failed',
+  PROCESSING: 'PROCESSING'
 };
 
 export type HeadersPropsType = {

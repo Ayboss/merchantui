@@ -1,4 +1,9 @@
+import clsx from 'clsx';
 import { parseISO, format } from 'date-fns';
+import { twMerge } from 'tailwind-merge';
+export function cn(classNames: string) {
+  return twMerge(clsx(classNames));
+}
 
 export const getFromLocal = (key: string) => {
   if (localStorage) {
