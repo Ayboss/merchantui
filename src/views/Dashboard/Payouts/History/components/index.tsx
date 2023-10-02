@@ -14,7 +14,7 @@ export const PayoutSummaryCard: React.FC<PayoutSummaryCardPropsType> = (props) =
     <PayoutSummaryCardContainer>
       {icon}
       <div className='flex flex-col '>
-        <Amount>{amount}</Amount>
+        <Amount className='text-[15px] font-medium'>{amount}</Amount>
         <Text>{text}</Text>
       </div>
     </PayoutSummaryCardContainer>
@@ -27,7 +27,7 @@ const PayoutSummaryCardContainer = tw.div`
   border-[1px solid rgba(221, 224, 226, 0.25)]
   flex
   items-center
-  gap-[20px]
+  gap-[10px]
   h-[119px]
   px-[24px]
   w-full

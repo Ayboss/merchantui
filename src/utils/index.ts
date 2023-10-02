@@ -42,10 +42,10 @@ export const formatDate = (date: string | null, dateFormat?: string) => {
   return format(parsedDate, dateFormat ?? 'dd-MM-yyyy');
 };
 
-export const formatNumber = (value: number): string => {
+export const formatNumber = (value: number, mfd?: number): string => {
   return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: mfd ?? 2,
+    maximumFractionDigits: mfd ?? 2,
     useGrouping: true
   }).format(value);
 };

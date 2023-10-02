@@ -14,7 +14,10 @@ export const PayoutItem: React.FC<PopupPayoutItemType> = (props) => {
     created,
     narration,
     beneficiaryAccountNumber,
-    beneficiaryBank
+    beneficiaryBank,
+    responseCode,
+    responseMessage,
+    sessionId
   } = props;
 
   const statusColor = useMemo(() => {
@@ -73,6 +76,17 @@ export const PayoutItem: React.FC<PopupPayoutItemType> = (props) => {
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo topText='Narration' bottomText={narration ?? ''} align='items-start' />
+            <TwoRowInfo topText='Response Code' bottomText={responseCode} align='items-end' />
+          </div>
+          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
+            <TwoRowInfo topText='Session ID' bottomText={sessionId} align='items-start' />
+          </div>
+          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
+            <TwoRowInfo
+              topText='Response Message'
+              bottomText={responseMessage}
+              align='items-start'
+            />
           </div>
         </div>
       </div>

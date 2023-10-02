@@ -9,7 +9,11 @@ import {
   LoaderControl,
   Paginator
 } from '../../../../components';
-import { PayoutItemType, useGetPayoutsQuery } from '../../../../services/hooks';
+import {
+  PayoutItemType,
+  useGetPayoutsQuery,
+  useMerchantStatsQuery
+} from '../../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../../routes/paths';
 import { TransactionsTableTitleWithFilter } from '../../Transactions/styles';
 import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
@@ -18,24 +22,25 @@ import { PAYOUT_HISTORY_HEADER } from './constants';
 import { PayoutItem } from './components/PayoutItem';
 
 export const PayoutHistory: React.FC = () => {
+  const { data: statsData } = useMerchantStatsQuery();
   const payoutCardsData: Array<PayoutSummaryCardPropsType> = [
     {
-      amount: `₦${formatNumber(0)}`,
+      amount: `₦‎${formatNumber(statsData?.data?.walletsBalance ?? 0)}`,
       text: 'Balance',
       icon: <Icon />
     },
     {
-      amount: `₦${formatNumber(0)}`,
+      amount: `₦‎${formatNumber(statsData?.data?.pendingPayoutAmount ?? 0)}`,
       text: 'Pending Payout',
       icon: <Icon />
     },
     {
-      amount: `₦${formatNumber(0)}`,
+      amount: `${formatNumber(statsData?.data?.successfulPayout ?? 0, 0)}`,
       text: 'Successful',
       icon: <Icon />
     },
     {
-      amount: `₦${formatNumber(0)}`,
+      amount: `${formatNumber(statsData?.data?.failedPayout ?? 0, 0)}`,
       text: 'Failed',
       icon: <Icon />
     }
@@ -93,7 +98,7 @@ export const PayoutHistory: React.FC = () => {
 
   useEffect(() => {
     onSearchChange(searchQuery);
-  }, [onSearchChange, searchQuery]);
+  }, [onSearchChange, refetch, searchQuery]);
 
   return (
     <div className='w-full mt-[33px]'>

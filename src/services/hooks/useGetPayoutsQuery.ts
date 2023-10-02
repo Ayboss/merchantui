@@ -16,6 +16,9 @@ export type PayoutItemType = {
   transactionReference: string;
   transactionStatus: string;
   transactionStatusVerified: boolean;
+  responseCode: string;
+  responseMessage: string;
+  sessionId: string;
 };
 
 export type PayoutHistoryResponseType = CommonTableQueryType<PayoutItemType>;
