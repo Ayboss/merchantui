@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Dashboard from '../views/Dashboard';
-import GetStarted from '../views/Dashboard/Onboarding/GetStarted';
+// import GetStarted from '../views/Dashboard/Onboarding/GetStarted';
 import { RegisteredBusinessFlow } from '../views/Dashboard/Onboarding/RegisteredBusinessFlow';
 import BusinessInformation from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/BusinessInformation';
 import AccountInformation from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/AccountInformation';
@@ -30,7 +30,7 @@ export const AppRouter = () => {
     REGISTERED_DOCUMENTS,
     SETTINGS,
     TRANSACTIONS,
-    BUSINESS_ACTIVATION,
+    // BUSINESS_ACTIVATION,
     BUSINESS_INFORMATION,
     HOME,
     PAYOUTS,
@@ -54,8 +54,8 @@ export const AppRouter = () => {
           </PrivateRoute>
         }
       >
-        <Route index element={<GetStarted />} />
-        <Route path={BUSINESS_ACTIVATION} element={<GetStarted />} />
+        {/* <Route path={BUSINESS_ACTIVATION} element={<GetStarted />} /> */}
+        <Route index element={<Overview />} />
         <Route path={OVERVIEW} element={<Overview />} />
         <Route path={REGISTERED_BUSINESS} element={<RegisteredBusinessFlow />}>
           <Route path={BUSINESS_INFORMATION} element={<BusinessInformation />} />

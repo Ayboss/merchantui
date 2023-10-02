@@ -10,7 +10,7 @@ export const KycLayout: React.FC<PropsWithChildren<KycLayoutType>> = ({
   subHeader
 }) => {
   return (
-    <div className=' h-screen overflow-hidden flex flex-col relative items-center gap-[30px]'>
+    <div className=' h-screen overflow-x-hidden flex flex-col relative items-center gap-[30px]'>
       <div className='flex flex-col'>
         <h1 className='text-[#444] text-center text-[24px] font-bold'>{header}</h1>
         <p className='text-[#6F7482] text-[14px] font-normal leading-6 text-center'>{subHeader}</p>

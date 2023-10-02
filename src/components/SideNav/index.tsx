@@ -1,11 +1,12 @@
 import React from 'react';
-import { faArrowRightFromBracket, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 import Button from '../Button';
 import { PRIVATE_PATHS, REGULAR_PATHS } from '../../routes/paths';
 import { NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
-import { DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
+import { ComingSoonTag, DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
 
 export const DashboardSideNav = () => {
   const navigate = useNavigate();
@@ -17,17 +18,17 @@ export const DashboardSideNav = () => {
   };
 
   return (
-    <div className='h-screen z-10 w-[280px] pl-[44px] pr-[22px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
-      <Button
+    <div className='h-screen z-10 w-[280px] pl-[25px] pr-[20px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
+      {/* <Button
         onClick={() => navigate(PRIVATE_PATHS.KYC_VERIFICATION)}
-        className='bg-[#6231F4] mb-[37px] mt-0 w-[186px] rounded-[10px]'
+        className='bg-[#6231F4] mb-[37px] mt-0 w-[186px] h-[45px] rounded-[10px]'
         name={
           <span className=' text-[11px] flex items-center gap-[10px] justify-center  font-extrabold'>
             <FontAwesomeIcon icon={faPlus} style={{ color: '#f9fafb' }} />
             Complete Registration
           </span>
         }
-      />
+      /> */}
       <NavLinkItem
         path={PRIVATE_PATHS.OVERVIEW}
         className=' mb-5'
@@ -59,12 +60,21 @@ export const NavGroupItem: React.FC<
 > = (props) => {
   const { group, items } = props;
 
+  const isAdminOrSupport = group === 'Administration' || group === 'Support';
+
   return (
-    <div className='w-full pt-5 pb-[25px] flex flex-col items-start gap-[15px] border-solid border-t border-[#E4E4E7]'>
-      <p className=' uppercase text-[10px] text-gray-400 font-bold tracking-[1px]'>{group}</p>
+    <div className='w-full pt-5 relative pb-[25px] flex flex-col items-start gap-[15px] border-solid border-t border-[#E4E4E7]'>
+      <p className=' uppercase flex items-center text-[10px] text-gray-400 font-bold tracking-[1px]'>
+        {group} {isAdminOrSupport && <ComingSoonTag className='absolute right-0' />}{' '}
+      </p>
       {items.map((item, idx) => (
-        // @ts-ignore
-        <NavLinkItem key={`${group}-${idx}`} {...item} />
+        <div
+          key={`${group}-${idx}`}
+          className={clsx('w-full', isAdminOrSupport && 'bg-white opacity-10 cursor-default')}
+        >
+          {/* @ts-ignore */}
+          <NavLinkItem isAdminOrSupport={isAdminOrSupport} {...item} />
+        </div>
       ))}
     </div>
   );

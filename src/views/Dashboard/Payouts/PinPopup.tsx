@@ -16,6 +16,10 @@ export const PinPopup = ({
   const { mutateAsync, isLoading } = useSendMoney();
 
   const onClick = () => {
+    if (pin.length < 4) {
+      return toast.error('Please enter pin');
+    }
+
     mutateAsync({ ...dataToSend, pin })
       .then(() => {
         toast.success('Transaction completed successfully');
@@ -29,7 +33,8 @@ export const PinPopup = ({
             toast.error(`${error?.fieldName} ${error?.message}`)
           );
         } else {
-          toast.error(error?.response?.data?.message);
+          console.log(error?.response?.data?.responseMessage, 'Heeelllloooo');
+          toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
         }
       });
   };

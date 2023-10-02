@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   Card,
-  CustomInput,
+  // CustomInput,
   CustomTable,
   EmptyContent,
   LoaderControl,
@@ -20,7 +20,7 @@ import { UserDetails } from '../../../services/hooks/types';
 import {
   DashboardCardContainer,
   TransactionsContainer,
-  TransactionsTableTitleWithFilter,
+  // TransactionsTableTitleWithFilter,
   TransactionsTopFlexWrapper
 } from './styles';
 import { TransactionItem } from './components';
@@ -95,14 +95,14 @@ const Transactions: React.FC = () => {
         <h3 className='text-[#444] text-[16px] font-semibold leading-6 px-5 mb-[18px]'>
           All Transactions
         </h3>
-        <TransactionsTableTitleWithFilter className='px-5 mb-[18px] py-0'>
+        {/* <TransactionsTableTitleWithFilter className='px-5 mb-[18px] py-0'>
           <CustomInput
             className='rounded-[5px] w-full max-w-[500px]'
             placeholder='Search with Customer Name/Transaction ID'
             name='queryString'
             InputClassName='h-[30px]'
           />
-        </TransactionsTableTitleWithFilter>
+        </TransactionsTableTitleWithFilter> */}
         <LoaderControl
           loading={isFetching}
           error={isError}

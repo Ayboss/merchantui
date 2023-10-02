@@ -19,6 +19,12 @@ export enum PRIVATE_PATHS {
   PAYOUT_HISTORY = '/payouts/history',
   PAYOUT_BENEFICIARIES = '/payouts/beneficaries',
 
+  MANAGE_BUSINESS = '/manage-business',
+  MANAGE_CUSTOMERS = '/manage-customers',
+  PAYMENT_LINK = '/payment-links',
+  API_DOCUMENTATION = '/api-documentation',
+  DISPUTES = '/disputes',
+
   // ................//
 
   KYC_VERIFICATION = '/verify-kyc'

@@ -72,7 +72,7 @@ export const Login = () => {
           <Button
             type={'link'}
             name={'Reset Password'}
-            href={REGULAR_PATHS.RESET_PASSWORD}
+            href={REGULAR_PATHS.FORGOT_PASSWORD}
             className={clsx(inlineButtonClass, 'text-red-400 text-sm')}
           />
         </p>

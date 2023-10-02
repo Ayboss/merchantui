@@ -9,6 +9,25 @@ import { BusinessInformation } from './steps/BusinessInformation';
 import { IdentityVerification } from './steps/IdentityVerification';
 import { SettlementBankInfo } from './steps/SettlementBankInfo';
 
+const kycHeaderTexts = [
+  {
+    title: 'Select Business Category',
+    text: 'Lets set up your business so you can start transacting'
+  },
+  {
+    title: 'Business Information',
+    text: 'Provide details about your business and valid documents for verification '
+  },
+  {
+    title: 'Identity Verification',
+    text: 'Provide you identity documents for verification '
+  },
+  {
+    title: 'Settlement Bank Information',
+    text: 'Setup your preferred bank for settlements'
+  }
+];
+
 const steps = new Array(4).fill('');
 
 export type ChildComponentsDefaultProps = {
@@ -26,8 +45,8 @@ export const KycVerification = () => {
 
   return (
     <KycLayout
-      header='New Business Profile'
-      subHeader='Lets set up your business so you can start transacting'
+      header={kycHeaderTexts[activeStep].title}
+      subHeader={kycHeaderTexts[activeStep].text}
     >
       <WhiteBGContainer
         className={cn(

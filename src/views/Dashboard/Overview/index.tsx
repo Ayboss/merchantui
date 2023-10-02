@@ -2,14 +2,15 @@ import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+// import { useNavigate } from 'react-router-dom';
 import {
   Button,
   CustomTable,
   EmptyContent,
-  LoaderControl,
-  inlineButtonClass
+  LoaderControl
+  // inlineButtonClass
 } from '../../../components';
-import { AlertBar } from '../../../components/AlertBar';
+// import { AlertBar } from '../../../components/AlertBar';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 import {
   PayoutItemType,
@@ -21,8 +22,10 @@ import { RecentTransactionsHeader } from '../Transactions/constants';
 import { formatDate, formatNumber } from '../../../utils';
 import { RecentPayoutsHeader } from '../Payouts/History/constants';
 import { CardContainer } from './components';
-import { ListContainer, WhiteBGContainer } from './components/ListContainer';
+import { ListContainer } from './components/ListContainer';
 const Overview = () => {
+  // const navigate = useNavigate();
+
   const {
     data,
     isError: isTransactionsError,
@@ -74,22 +77,23 @@ const Overview = () => {
   return (
     <div className='w-full h-full'>
       <div className='flex w-full justify-between mb-[14px]'>
-        <AlertBar
+        {/* <AlertBar
           text='Please Complete your KYC'
           cta={
             <Button
               name={'Complete KYC'}
+              onClick={() => navigate(PRIVATE_PATHS.KYC_VERIFICATION)}
               className={clsx(inlineButtonClass, 'text-[#F2B00F] text-base font-medium underline')}
             />
           }
-        />
+        /> */}
       </div>
       <div className='flex flex-col gap-5 w-full'>
         <CardContainer />
         <div className='flex items-stretch gap-5 '>
           <ListContainer
             type='transactions'
-            className=' w-[70%] flex-grow'
+            className=' w-full flex-grow'
             renderCta={(className) => (
               <Button
                 className={clsx(className)}
@@ -136,7 +140,7 @@ const Overview = () => {
               />
             </LoaderControl>
           </ListContainer>
-          <WhiteBGContainer className='w-[30%] flex-grow min-h-[350px]'></WhiteBGContainer>
+          {/* <WhiteBGContainer className='w-[30%] flex-grow min-h-[350px]'></WhiteBGContainer> */}
         </div>
         <div className='flex items-stretch gap-5 '>
           <ListContainer

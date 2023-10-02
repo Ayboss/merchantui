@@ -1,9 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import _ from 'lodash';
 import { formatDate, formatNumber } from '../../../../utils';
-import { CustomTable, EmptyContent, LoaderControl, Paginator } from '../../../../components';
+import {
+  CustomInput,
+  CustomTable,
+  EmptyContent,
+  LoaderControl,
+  Paginator
+} from '../../../../components';
 import { PayoutItemType, useGetPayoutsQuery } from '../../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../../routes/paths';
+import { TransactionsTableTitleWithFilter } from '../../Transactions/styles';
 import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
 import { ReactComponent as Icon } from './icons/balance.svg';
 import { PAYOUT_HISTORY_HEADER } from './constants';
@@ -34,10 +42,12 @@ export const PayoutHistory: React.FC = () => {
   ];
 
   const [query, setQuery] = useState({
-    page: 1
+    page: 1,
+    reference: ''
   });
   const [currentDetails, setCurrentDetails] = useState<PayoutItemType | null>(null);
   const [showPayoutDetails, setShowPayoutDetails] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const { data, isError, refetch, isFetching } = useGetPayoutsQuery({ ...query });
   const navigate = useNavigate();
 
@@ -62,6 +72,29 @@ export const PayoutHistory: React.FC = () => {
     }
   }, [data?.data?.content]);
 
+  const onSearchChange = useCallback((value: string) => {
+    setQuery({
+      ...query,
+      reference: value
+    });
+  }, []);
+
+  const onEnterKeyPress = (event: any) => {
+    if (event.key === 'Enter') {
+      refetch();
+    }
+  };
+
+  const onKeyDownCapture = (event: any) => {
+    if (event.key === 'Backspace' && searchQuery.length < 1) {
+      refetch();
+    }
+  };
+
+  useEffect(() => {
+    onSearchChange(searchQuery);
+  }, [onSearchChange, searchQuery]);
+
   return (
     <div className='w-full mt-[33px]'>
       <div className='flex items-center mb-[40px] gap-[20px]'>
@@ -69,9 +102,21 @@ export const PayoutHistory: React.FC = () => {
           <PayoutSummaryCard {...item} key={item.text} />
         ))}
       </div>
-      <div className='mt-[40px] mb-[24px] w-full flex justify-between'>
-        <h3 className='text-[#000000] text-[20px] font-semi-bold'>Recent Payout</h3>
+      <div className='mt-[40px] mb-[15px] w-full flex justify-between'>
+        <h3 className='text-[#444] text-[18px] font-semibold'>Recent Payout</h3>
       </div>
+      <TransactionsTableTitleWithFilter className=' mb-[18px]'>
+        <CustomInput
+          className='rounded-[5px] w-full max-w-[500px]'
+          placeholder='Search with reference, narration, account name or account number'
+          name='queryString'
+          InputClassName='h-[30px]'
+          value={searchQuery}
+          onKeyDown={onEnterKeyPress}
+          onKeyDownCapture={onKeyDownCapture}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </TransactionsTableTitleWithFilter>
       <LoaderControl
         loading={isFetching}
         error={isError}

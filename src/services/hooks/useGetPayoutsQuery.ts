@@ -20,7 +20,12 @@ export type PayoutItemType = {
 
 export type PayoutHistoryResponseType = CommonTableQueryType<PayoutItemType>;
 
-export type PayoutQueryParamsType = { page?: number; size?: number; sort?: Array<string> };
+export type PayoutQueryParamsType = {
+  page?: number;
+  size?: number;
+  sort?: Array<string>;
+  reference?: string;
+};
 
 export const payoutQueryKey = ['payout-results'];
 

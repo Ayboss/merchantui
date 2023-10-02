@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import clsx from 'clsx';
+import toast from 'react-hot-toast';
 import { Button } from '../../../components';
 import { cn } from '../../../utils';
 import { ChildComponentsDefaultProps } from '..';
+import { useProfileMutation } from '../../../services/hooks/useProfileMutation';
 
 const BusinessTypes: Omit<BusinessItemRadioPropType, 'onClick' | 'isActive'>[] = [
   {
@@ -28,6 +30,30 @@ export const ChooseBusinessType: React.FC<Partial<ChildComponentsDefaultProps>> 
 }) => {
   const [activeBox, setActiveBox] = useState(-1);
 
+  const { mutateAsync, isLoading } = useProfileMutation();
+
+  const businessType = useMemo(() => {
+    if (activeBox === 0) {
+      return 'STARTER';
+    }
+
+    return 'REGISTERED';
+  }, [activeBox]);
+
+  const handleSubmitClick = () => {
+    if (activeBox < 0) {
+      return toast.error('Please select a valid business category');
+    }
+    mutateAsync({
+      businessCategory: businessType
+    })
+      .then(() => {
+        toast.success('Business Category selected successfully');
+        handleNext?.();
+      })
+      .catch(() => toast.error('Error choosing business category. Please try again'));
+  };
+
   return (
     <div className='w-full flex flex-col items-start gap-5'>
       {BusinessTypes.map((item, index) => (
@@ -40,7 +66,8 @@ export const ChooseBusinessType: React.FC<Partial<ChildComponentsDefaultProps>> 
       ))}
 
       <Button
-        onClick={handleNext}
+        onClick={handleSubmitClick}
+        isBusy={isLoading}
         name='Choose Business Type'
         className='max-w-[180px] h-[50px] text-[12px] font-medium mb-[30px]'
       />

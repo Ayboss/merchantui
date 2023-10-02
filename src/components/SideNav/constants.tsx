@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { PRIVATE_PATHS } from '../../routes/paths';
 import { NavLinkItemPropsType } from './NavLinkItem';
 
@@ -6,6 +7,19 @@ export type NavGroupType = 'Analytics' | 'Administration' | 'Support';
 
 export type NavLinkListType = {
   [K in NavGroupType]: NavLinkItemPropsType[];
+};
+
+export const ComingSoonTag = ({ className }: { className?: string }) => {
+  return (
+    <span
+      className={clsx(
+        'text-[7px] border-[1px] flex flex-col items-center justify-center p-2 text-[#F04949] bg-[#FFF4F4] h-[17px] uppercase rounded-[35px]  border-solid border-[#F04949]',
+        className
+      )}
+    >
+      soon
+    </span>
+  );
 };
 
 export const NavLinkList: Partial<NavLinkListType> = {
@@ -31,27 +45,28 @@ export const NavLinkList: Partial<NavLinkListType> = {
         </svg>
       )
     },
-    {
-      text: 'Settlement',
-      path: PRIVATE_PATHS.SETTLEMENTS,
-      icon: (
-        <svg
-          width='18'
-          height='18'
-          viewBox='0 0 18 18'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            d='M11.25 11.2498L9.74999 14.9998L6.74999 6.74982L15 9.74982L11.25 11.2498ZM11.25 11.2498L15 14.9998M5.39117 1.67871L5.97351 3.85204M3.85217 5.97336L1.67883 5.39102M10.4623 3.03754L8.87128 4.62853M4.62872 8.87109L3.03773 10.4621'
-            stroke='#444444'
-            strokeWidth='1.2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
-      )
-    },
+    // {
+    //   text: 'Settlement',
+    //   path: PRIVATE_PATHS.SETTLEMENTS,
+    //   icon: (
+    //     <svg
+    //       width='18'
+    //       height='18'
+    //       viewBox='0 0 18 18'
+    //       fill='none'
+    //       xmlns='http://www.w3.org/2000/svg'
+    //     >
+    //       <path
+    //         d='M11.25 11.2498L9.74999 14.9998L6.74999 6.74982L15 9.74982L11.25 11.2498ZM11.25 11.2498L15 14.9998M5.39117 1.67871L5.97351 3.85204M3.85217 5.97336L1.67883 5.39102M10.4623 3.03754L8.87128 4.62853M4.62872 8.87109L3.03773 10.4621'
+    //         stroke='#444444'
+    //         strokeWidth='1.2'
+    //         strokeLinecap='round'
+    //         strokeLinejoin='round'
+    //       />
+    //     </svg>
+    //   ),
+    //   tag: <ComingSoonTag />
+    // },
     {
       text: 'Payouts',
       path: PRIVATE_PATHS.PAYOUT_HISTORY,
@@ -106,7 +121,7 @@ export const NavLinkList: Partial<NavLinkListType> = {
   Administration: [
     {
       text: 'Manage Business',
-      path: PRIVATE_PATHS.TRANSACTIONS,
+      path: PRIVATE_PATHS.MANAGE_BUSINESS,
       icon: (
         <svg
           width='18'
@@ -123,11 +138,12 @@ export const NavLinkList: Partial<NavLinkListType> = {
             strokeLinejoin='round'
           />
         </svg>
-      )
+      ),
+      tag: <ComingSoonTag />
     },
     {
       text: 'Manage Customers',
-      path: PRIVATE_PATHS.TRANSACTIONS,
+      path: PRIVATE_PATHS.MANAGE_CUSTOMERS,
       icon: (
         <svg
           width='18'
@@ -144,11 +160,12 @@ export const NavLinkList: Partial<NavLinkListType> = {
             strokeLinejoin='round'
           />
         </svg>
-      )
+      ),
+      tag: <ComingSoonTag />
     },
     {
       text: 'Payment Link',
-      path: PRIVATE_PATHS.TRANSACTIONS,
+      path: PRIVATE_PATHS.PAYMENT_LINK,
       icon: (
         <svg
           width='18'
@@ -162,11 +179,12 @@ export const NavLinkList: Partial<NavLinkListType> = {
             fill='#444444'
           />
         </svg>
-      )
+      ),
+      tag: <ComingSoonTag />
     },
     {
       text: 'API Documentation',
-      path: PRIVATE_PATHS.TRANSACTIONS,
+      path: PRIVATE_PATHS.API_DOCUMENTATION,
       icon: (
         <svg
           width='18'
@@ -182,41 +200,42 @@ export const NavLinkList: Partial<NavLinkListType> = {
             strokeLinejoin='round'
           />
         </svg>
-      )
-    },
-    {
-      text: 'Settings',
-      path: PRIVATE_PATHS.SETTINGS,
-      icon: (
-        <svg
-          width='18'
-          height='18'
-          viewBox='0 0 18 18'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            d='M7.74347 3.23798C8.06327 1.92067 9.93673 1.92067 10.2565 3.23798C10.4631 4.08895 11.4381 4.49278 12.1859 4.03714C13.3435 3.33179 14.6682 4.65653 13.9629 5.81414C13.5072 6.56194 13.9111 7.53688 14.762 7.74347C16.0793 8.06327 16.0793 9.93673 14.762 10.2565C13.9111 10.4631 13.5072 11.4381 13.9629 12.1859C14.6682 13.3435 13.3435 14.6682 12.1859 13.9629C11.4381 13.5072 10.4631 13.9111 10.2565 14.762C9.93673 16.0793 8.06327 16.0793 7.74347 14.762C7.53688 13.9111 6.56194 13.5072 5.81414 13.9629C4.65653 14.6682 3.33179 13.3435 4.03714 12.1859C4.49278 11.4381 4.08895 10.4631 3.23798 10.2565C1.92067 9.93673 1.92067 8.06327 3.23798 7.74347C4.08895 7.53688 4.49278 6.56194 4.03714 5.81414C3.33179 4.65653 4.65653 3.33179 5.81414 4.03714C6.56194 4.49278 7.53688 4.08895 7.74347 3.23798Z'
-            stroke='#6231F4'
-            strokeWidth='1.2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-          <path
-            d='M11.25 9C11.25 10.2426 10.2426 11.25 9 11.25C7.75736 11.25 6.75 10.2426 6.75 9C6.75 7.75736 7.75736 6.75 9 6.75C10.2426 6.75 11.25 7.75736 11.25 9Z'
-            stroke='#6231F4'
-            strokeWidth='1.2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
-      )
+      ),
+      tag: <ComingSoonTag />
     }
+    // {
+    //   text: 'Settings',
+    //   path: PRIVATE_PATHS.SETTINGS,
+    //   icon: (
+    //     <svg
+    //       width='18'
+    //       height='18'
+    //       viewBox='0 0 18 18'
+    //       fill='none'
+    //       xmlns='http://www.w3.org/2000/svg'
+    //     >
+    //       <path
+    //         d='M7.74347 3.23798C8.06327 1.92067 9.93673 1.92067 10.2565 3.23798C10.4631 4.08895 11.4381 4.49278 12.1859 4.03714C13.3435 3.33179 14.6682 4.65653 13.9629 5.81414C13.5072 6.56194 13.9111 7.53688 14.762 7.74347C16.0793 8.06327 16.0793 9.93673 14.762 10.2565C13.9111 10.4631 13.5072 11.4381 13.9629 12.1859C14.6682 13.3435 13.3435 14.6682 12.1859 13.9629C11.4381 13.5072 10.4631 13.9111 10.2565 14.762C9.93673 16.0793 8.06327 16.0793 7.74347 14.762C7.53688 13.9111 6.56194 13.5072 5.81414 13.9629C4.65653 14.6682 3.33179 13.3435 4.03714 12.1859C4.49278 11.4381 4.08895 10.4631 3.23798 10.2565C1.92067 9.93673 1.92067 8.06327 3.23798 7.74347C4.08895 7.53688 4.49278 6.56194 4.03714 5.81414C3.33179 4.65653 4.65653 3.33179 5.81414 4.03714C6.56194 4.49278 7.53688 4.08895 7.74347 3.23798Z'
+    //         stroke='#6231F4'
+    //         strokeWidth='1.2'
+    //         strokeLinecap='round'
+    //         strokeLinejoin='round'
+    //       />
+    //       <path
+    //         d='M11.25 9C11.25 10.2426 10.2426 11.25 9 11.25C7.75736 11.25 6.75 10.2426 6.75 9C6.75 7.75736 7.75736 6.75 9 6.75C10.2426 6.75 11.25 7.75736 11.25 9Z'
+    //         stroke='#6231F4'
+    //         strokeWidth='1.2'
+    //         strokeLinecap='round'
+    //         strokeLinejoin='round'
+    //       />
+    //     </svg>
+    //   )
+    // }
   ],
   Support: [
     {
       text: 'Disputes',
-      path: PRIVATE_PATHS.SETTINGS,
+      path: PRIVATE_PATHS.DISPUTES,
       icon: (
         <svg
           width='18'
@@ -256,7 +275,8 @@ export const NavLinkList: Partial<NavLinkListType> = {
           />
           <path d='M12.75 10.25H15' stroke='#444444' strokeLinecap='round' strokeLinejoin='round' />
         </svg>
-      )
+      ),
+      tag: <ComingSoonTag />
     }
   ]
 };

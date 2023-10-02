@@ -33,9 +33,11 @@ export const ForgetPassword = () => {
     <AuthLayout>
       <AuthContainer>
         <AuthForm onSubmit={handleSubmit(onSubmit)}>
-          <FormHeader>
-            <Title>Forget Password</Title>
-            <Subtitle>Provide Credentials below to reset to your account</Subtitle>
+          <FormHeader className='mb-[40px]'>
+            <Title className='text-[#444] text-[40px] font-bold'>Forget Password</Title>
+            <Subtitle className='text-[18px] font-normal text-[#6F7482] tracking-[0.18px]'>
+              Enter your email address to reset your password
+            </Subtitle>
           </FormHeader>
           <FormBody>
             <CustomInput
@@ -52,7 +54,7 @@ export const ForgetPassword = () => {
               className='bg-[#D3D3D3] text-[#2A2A2A] lg:bg-[#6231F4] lg:text-[#fff]'
             />
             <FormLink>
-              <Link to='/login' className='font-semibold'>
+              <Link to='/login' className='text-[#FFF] text-base font-medium w-[210px]'>
                 Login
               </Link>{' '}
             </FormLink>
