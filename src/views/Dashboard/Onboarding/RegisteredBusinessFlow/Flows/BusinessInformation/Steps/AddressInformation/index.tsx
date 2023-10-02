@@ -61,6 +61,7 @@ const AddressInformation = ({ onNext }: any) => {
       <AddressInformationForm onSubmit={handleSubmit}>
         <CountrySelect
           label='Select country'
+          type='country'
           placeholder='Enter your country'
           value={selectedCountry}
           onChange={(e) => handleCountryChange(e.id, e.name)}
