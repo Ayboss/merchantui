@@ -1,5 +1,5 @@
 import React from 'react';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
@@ -19,7 +19,7 @@ export const DashboardSideNav = () => {
 
   return (
     <div className='h-screen z-10 w-[280px] pl-[25px] pr-[20px] py-[30px] shadow-[0px_1px_0px_0px_rgba(18_32_59_0.09)] border-solid border-r border-[#E4E4E7]'>
-      {/* <Button
+      <Button
         onClick={() => navigate(PRIVATE_PATHS.KYC_VERIFICATION)}
         className='bg-[#6231F4] mb-[37px] mt-0 w-[186px] h-[45px] rounded-[10px]'
         name={
@@ -28,7 +28,7 @@ export const DashboardSideNav = () => {
             Complete Registration
           </span>
         }
-      /> */}
+      />
       <NavLinkItem
         path={PRIVATE_PATHS.OVERVIEW}
         className=' mb-5'

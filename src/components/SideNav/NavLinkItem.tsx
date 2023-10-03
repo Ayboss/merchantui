@@ -38,7 +38,7 @@ export const NavLinkItem: React.FC<NavLinkItemPropsType> = (props) => {
         )
       }
       to={path}
-      target={text === 'Payment Link' ? '_blank' : '_self'}
+      target={text === 'API Documentation' ? '_blank' : '_self'}
     >
       <div className='flex text-[12px] items-center gap-[13px] tracking-wider'>
         {icon}
