@@ -15,6 +15,7 @@ import { Checkbox } from '../../../components/CheckboxInput/styles';
 const schema = yup.object({
   firstname: yup.string().required(),
   surname: yup.string().required(),
+  name: yup.string().required(),
   phone: yup
     .string()
     .matches(/^\+\d+$/, 'Must be a valid phone number starting with your country code'),
@@ -53,7 +54,7 @@ export const Signup = () => {
       return;
     }
 
-    const { email, firstname, surname, password, passwordConfirmation, phone } =
+    const { email, firstname, surname, password, passwordConfirmation, phone, name } =
       values as SignupRequestPayloadType;
 
     const data = {
@@ -63,7 +64,7 @@ export const Signup = () => {
       phone,
       firstname,
       lastname: surname,
-      name: firstname,
+      name,
       approvedForProcessing: true,
       sendEmail: true
     };
@@ -114,6 +115,14 @@ export const Signup = () => {
               className='w-full'
             />
           </FormGroup>
+          <CustomInput
+            label='Business Name'
+            type='text'
+            placeholder='Enter your Business name'
+            errorText={errors.name?.message}
+            {...register('name')}
+            className='w-full'
+          />
           <CustomInput
             label='Phone number'
             type='text'

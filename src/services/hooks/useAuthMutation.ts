@@ -20,6 +20,7 @@ export type SignupRequestPayloadType = {
   phone: string;
   firstname: string;
   surname: string;
+  name: string;
 };
 
 export type ForgotPasswordPayloadType = {
