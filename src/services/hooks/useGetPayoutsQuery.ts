@@ -28,6 +28,7 @@ export type PayoutQueryParamsType = {
   size?: number;
   sort?: Array<string>;
   reference?: string;
+  status?: string;
 };
 
 export const payoutQueryKey = ['payout-results'];

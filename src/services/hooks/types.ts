@@ -53,6 +53,40 @@ export type LoginResponseType = {
   validation: unknown;
 };
 
+export type MerchantProfileResponseType = {
+  responseCode: string;
+  status: boolean;
+  responseMessage: string;
+  data: {
+    id: string;
+    businessInformation: string;
+    businessAddress: string;
+    tin: string;
+    country: string;
+    state: string;
+    client: {
+      id: string;
+      name: string;
+      payonusClientId: string;
+      payonusClientSecret: string;
+    };
+    merchant: {
+      id: string;
+      name: string;
+      firstname: string;
+      lastname: string;
+      email: string;
+      phone: string;
+      merchantBvn: string[];
+      created: number[];
+      testEnvironment: boolean;
+    };
+    profileUpdated: boolean;
+    businessCategory: 'STARTER' | 'REGISTERED';
+  };
+  success: boolean;
+};
+
 export interface overViewChartParams {
   type: string;
   startDate?: string;

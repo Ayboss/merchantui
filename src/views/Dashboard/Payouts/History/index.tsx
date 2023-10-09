@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import _ from 'lodash';
+import Dropdown from 'react-dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { formatDate, formatNumber } from '../../../../utils';
 import {
   CustomInput,
@@ -20,6 +23,7 @@ import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
 import { ReactComponent as Icon } from './icons/balance.svg';
 import { PAYOUT_HISTORY_HEADER } from './constants';
 import { PayoutItem } from './components/PayoutItem';
+import 'react-dropdown/style.css';
 
 export const PayoutHistory: React.FC = () => {
   const { data: statsData } = useMerchantStatsQuery();
@@ -48,13 +52,21 @@ export const PayoutHistory: React.FC = () => {
 
   const [query, setQuery] = useState({
     page: 1,
-    reference: ''
+    reference: '',
+    status: ''
   });
   const [currentDetails, setCurrentDetails] = useState<PayoutItemType | null>(null);
   const [showPayoutDetails, setShowPayoutDetails] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { data, isError, refetch, isFetching } = useGetPayoutsQuery({ ...query });
   const navigate = useNavigate();
+
+  const dropdownOption = [
+    { value: '', label: 'ALL' },
+    { value: 'SUCCESSFUL', label: 'COMPLETED' },
+    { value: 'PROCESSING', label: 'PROCESSING' },
+    { value: 'FAILED', label: 'FAILED' }
+  ];
 
   const handlePageChange = (current: number) => {
     setQuery({ ...query, page: current });
@@ -100,6 +112,10 @@ export const PayoutHistory: React.FC = () => {
     onSearchChange(searchQuery);
   }, [onSearchChange, refetch, searchQuery]);
 
+  useEffect(() => {
+    refetch();
+  }, [query.status, refetch]);
+
   return (
     <div className='w-full mt-[33px]'>
       <div className='flex items-center mb-[40px] gap-[20px]'>
@@ -110,7 +126,7 @@ export const PayoutHistory: React.FC = () => {
       <div className='mt-[40px] mb-[15px] w-full flex justify-between'>
         <h3 className='text-[#444] text-[18px] font-semibold'>Recent Payout</h3>
       </div>
-      <TransactionsTableTitleWithFilter className=' mb-[18px]'>
+      <TransactionsTableTitleWithFilter className=' mb-[18px] gap-4 items-end '>
         <CustomInput
           className='rounded-[5px] w-full max-w-[500px]'
           placeholder='Search with reference, narration, account name or account number'
@@ -120,6 +136,21 @@ export const PayoutHistory: React.FC = () => {
           onKeyDown={onEnterKeyPress}
           onKeyDownCapture={onKeyDownCapture}
           onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <Dropdown
+          options={dropdownOption}
+          onChange={({ value }) => {
+            setQuery({
+              ...query,
+              status: value
+            });
+          }}
+          placeholder='Status'
+          className=' rounded-[5px] w-[130px] border-solid border-[#E4E4E7] h-[30px] flex items-center cursor-pointer justify-between border-[1px]'
+          placeholderClassName=' text-[#6F7482] font-medium text-[14px]'
+          menuClassName=' border-solid border-[#E4E4E7] rounded-[5px] rounded-t-none '
+          arrowClosed={<FontAwesomeIcon icon={faAngleDown} style={{ color: '#B8BCCA' }} />}
+          arrowOpen={<FontAwesomeIcon icon={faAngleUp} style={{ color: '#B8BCCA' }} />}
         />
       </TransactionsTableTitleWithFilter>
       <LoaderControl

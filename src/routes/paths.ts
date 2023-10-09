@@ -27,7 +27,8 @@ export enum PRIVATE_PATHS {
 
   // ................//
 
-  KYC_VERIFICATION = '/verify-kyc'
+  KYC_VERIFICATION = '/verify-kyc',
+  WALLET_HISTORY = '/wallet-history'
 }
 
 export enum REGULAR_PATHS {

@@ -21,5 +21,4 @@ export const DashboardCardContainer = tw.div`
 export const TransactionsTableTitleWithFilter = tw.div`
     w-full
     flex
-    justify-between
 `;

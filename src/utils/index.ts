@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { parseISO, format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
+import imageCompression from 'browser-image-compression';
 export function cn(classNames: string) {
   return twMerge(clsx(classNames));
 }
@@ -49,3 +50,17 @@ export const formatNumber = (value: number, mfd?: number): string => {
     useGrouping: true
   }).format(value);
 };
+
+export async function compressImage(file: File) {
+  try {
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true
+    });
+
+    return compressedFile;
+  } catch (error) {
+    console.error(error);
+  }
+}

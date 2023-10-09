@@ -18,9 +18,8 @@ const schema = yup.object({
 });
 
 export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>> = ({
-  handleBack,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  handleNext
+  handleNext,
+  profileDetails
 }) => {
   const [countryId, setCountryId] = useState(0);
   const [businessDetails, setBusinessDetails] = useState({
@@ -35,43 +34,16 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: {
+      businessAddress: profileDetails?.data?.businessInformation,
+      businessInformation: profileDetails?.data?.businessInformation,
+      tin: profileDetails?.data?.tin
+    }
   });
 
-  const fileToBase64 = (file: File) => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-
-      // Read file content on file loaded event
-      reader.onload = function (event) {
-        resolve(event?.target?.result);
-      };
-
-      // Convert data to base64
-      reader.readAsDataURL(file);
-    });
-  };
-
   const onDrop = useCallback((acceptedFiles: any[]) => {
-    const filesWithPreview = acceptedFiles.map((file) => {
-      let data = {
-        ...file,
-        preview: URL.createObjectURL(file)
-      };
-
-      fileToBase64(file).then((result) => {
-        data = {
-          ...data,
-          base64: result
-        };
-      });
-
-      // console.log(data);
-
-      return data;
-    });
-
-    setFiles(filesWithPreview);
+    setFiles(acceptedFiles);
   }, []);
 
   const { mutateAsync, isLoading } = useProfileMutation();
@@ -102,11 +74,14 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
       return toast.error('No files added. Please attach your business document');
     }
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [info, documents] = await Promise.all([
-        mutateAsync(data),
-        documentUploadAsync({ companyProfile: files[0].base64 })
-      ]);
+      const formData = new FormData();
+
+      formData.append('companyProfile', files[0]);
+
+      await Promise.all([mutateAsync(data), documentUploadAsync(formData)]);
+
+      toast.success('Business Information updated successfully 🎉🎉');
+      handleNext?.();
     } catch (error: any) {
       return toast.error(error?.response?.data?.error || error?.response?.data?.message);
     }
@@ -120,11 +95,12 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
           label='Business Name'
           className='w-full'
           errorText={errors.businessInformation?.message}
+          defaultValue={profileDetails?.data?.businessInformation}
           {...register('businessInformation')}
         />
         <CustomInput
           placeholder='e.g. BN 123456'
-          label='Tax Identification Number'
+          label='Tax Identification Number (optional)'
           className='w-full'
           errorText={errors.tin?.message}
           {...register('tin')}
@@ -173,26 +149,18 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
           {files.length > 0 &&
             files.map((file: File) => (
               <FilePreview
+                key={file.name}
                 onCancel={() => {
                   const newFiles = files.filter((item: File) => item.name !== file.name);
 
                   setFiles(newFiles);
                 }}
-                key={file.name}
                 file={file}
               />
             ))}
         </div>
         <div className='w-full flex items-center justify-between'>
-          <Button
-            name='Previous'
-            className={clsx(
-              inlineButtonClass,
-              'h-[40px] border border-solid rounded-[6px] border-[#6231F4] text-[#6231F4] w-[120px] font-medium text-[12px]'
-            )}
-            onClick={handleBack}
-          />
-          <div className='flex gap-5 items-center'>
+          <div className='flex gap-5 w-full justify-between items-center'>
             <Button
               className={clsx(
                 inlineButtonClass,

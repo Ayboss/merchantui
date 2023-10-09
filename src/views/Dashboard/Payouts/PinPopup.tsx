@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { Button, Popup } from '../../../components';
 import { SendMoneyRequestType, useSendMoney } from '../../../services/hooks';
 import { FormGroup, Input } from '../../../components/CustomInput/styles';
+import { PRIVATE_PATHS } from '../../../routes/paths';
 
 export const PinPopup = ({
   onClose,
@@ -15,6 +17,8 @@ export const PinPopup = ({
   const [pin, setPin] = useState('');
   const { mutateAsync, isLoading } = useSendMoney();
 
+  const navigate = useNavigate();
+
   const onClick = () => {
     if (pin.length < 4) {
       return toast.error('Please enter pin');
@@ -24,6 +28,7 @@ export const PinPopup = ({
       .then(() => {
         toast.success('Transaction completed successfully');
         onClose();
+        navigate(PRIVATE_PATHS.PAYOUT_HISTORY);
       })
       .catch((error) => {
         if (Array.isArray(error?.response?.data?.errors)) {

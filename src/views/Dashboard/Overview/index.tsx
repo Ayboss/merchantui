@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 // import { useNavigate } from 'react-router-dom';
 import {
+  // AlertBar,
   Button,
   CustomTable,
   EmptyContent,
   LoaderControl
   // inlineButtonClass
 } from '../../../components';
-// import { AlertBar } from '../../../components/AlertBar';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 import {
   PayoutItemType,
@@ -19,12 +19,17 @@ import {
   useGetTransactionsQuery
 } from '../../../services/hooks';
 import { RecentTransactionsHeader } from '../Transactions/constants';
-import { formatDate, formatNumber } from '../../../utils';
+import { formatDate, formatNumber, getFromLocal } from '../../../utils';
 import { RecentPayoutsHeader } from '../Payouts/History/constants';
+// import { useProfileQuery } from '../../../services/hooks/useGetProfileQuery';
+import { TransactionsTopFlexWrapper } from '../Transactions/styles';
+import { UserDetails } from '../../../services/hooks/types';
 import { CardContainer } from './components';
 import { ListContainer } from './components/ListContainer';
 const Overview = () => {
   // const navigate = useNavigate();
+
+  // const { data: profileDetails } = useProfileQuery();
 
   const {
     data,
@@ -32,6 +37,8 @@ const Overview = () => {
     refetch: refetchTransactions,
     isLoading: isTransactionsLoading
   } = useGetTransactionsQuery({ page: 0 });
+
+  const { firstName } = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
 
   const {
     data: payoutList,
@@ -76,18 +83,29 @@ const Overview = () => {
 
   return (
     <div className='w-full h-full'>
-      <div className='flex w-full justify-between mb-[14px]'>
-        {/* <AlertBar
-          text='Please Complete your KYC'
-          cta={
-            <Button
-              name={'Complete KYC'}
-              onClick={() => navigate(PRIVATE_PATHS.KYC_VERIFICATION)}
-              className={clsx(inlineButtonClass, 'text-[#F2B00F] text-base font-medium underline')}
-            />
-          }
-        /> */}
-      </div>
+      <TransactionsTopFlexWrapper>
+        <p className='text-[#6F7482] font-medium text-base leading-6'>
+          <span className='text-[#444] font-bold leading-6 text-base'>Hello {firstName} - </span>
+          here’s what’s happening with your business today
+        </p>
+      </TransactionsTopFlexWrapper>
+      {/* <div className='flex w-full justify-between mb-[14px]'>
+        {!profileDetails?.data?.profileUpdated && (
+          <AlertBar
+            text='Please Complete your KYC'
+            cta={
+              <Button
+                name={'Complete KYC'}
+                onClick={() => navigate(PRIVATE_PATHS.KYC_VERIFICATION)}
+                className={clsx(
+                  inlineButtonClass,
+                  'text-[#F2B00F] text-base font-medium underline'
+                )}
+              />
+            }
+          />
+        )}
+      </div> */}
       <div className='flex flex-col gap-5 w-full'>
         <CardContainer />
         <div className='flex items-stretch gap-5 '>

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Step, Stepper } from 'react-form-stepper';
 import { v4 as uuidv4 } from 'uuid';
 import { KycLayout } from '../../layouts';
 import { WhiteBGContainer } from '../Dashboard/Overview/components/ListContainer';
 import { cn } from '../../utils';
+import { MerchantProfileResponseType } from '../../services/hooks/types';
+import { useProfileQuery } from '../../services/hooks/useGetProfileQuery';
 import { ChooseBusinessType } from './steps/ChooseBusinessType';
 import { BusinessInformation } from './steps/BusinessInformation';
 import { IdentityVerification } from './steps/IdentityVerification';
@@ -33,6 +35,7 @@ const steps = new Array(4).fill('');
 export type ChildComponentsDefaultProps = {
   handleNext: () => void;
   handleBack: () => void;
+  profileDetails?: MerchantProfileResponseType;
 };
 
 export const KycVerification = () => {
@@ -81,16 +84,7 @@ export const KycVerification = () => {
               stepProps.completed = false;
             }
 
-            return (
-              <Step
-                onClick={() => {
-                  setActiveStep(index);
-                }}
-                className='cursor-default'
-                key={uuidv4()}
-                {...stepProps}
-              />
-            );
+            return <Step className='cursor-default' key={uuidv4()} {...stepProps} />;
           })}
         </Stepper>
         <div className='mt-[40px] mb-[40px] h-[1px] w-full bg-[#D9DBE9]'></div>
@@ -119,6 +113,14 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
   setActiveStep,
   isStepSkipped
 }) => {
+  const { data: profileDetails } = useProfileQuery();
+
+  useEffect(() => {
+    if (profileDetails?.data.businessCategory) {
+      setActiveStep(1);
+    }
+  }, [profileDetails?.data, setActiveStep]);
+
   const handleNext = () => {
     let newSkipped = skipped;
 
@@ -141,7 +143,8 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
     return React.cloneElement(currentForm, {
       // @ts-ignore
       handleNext,
-      handleBack
+      handleBack,
+      profileDetails
     });
   }
 };
