@@ -45,7 +45,8 @@ export const ChooseBusinessType: React.FC<Partial<ChildComponentsDefaultProps>> 
       return toast.error('Please select a valid business category');
     }
     mutateAsync({
-      businessCategory: businessType
+      businessType,
+      businessCategory: BusinessTypes[activeBox].title
     })
       .then(() => {
         toast.success('Business Category selected successfully');

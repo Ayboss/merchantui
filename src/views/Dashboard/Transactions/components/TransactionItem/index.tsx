@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popup, StatusTag, statusMap } from '../../../../../components';
 import { TransactionItemType } from '../../../../../services/hooks';
+import { formatTime } from '../../../../../utils';
 
 export type PopupTransactionItemType = Partial<TransactionItemType> & { onClose: () => void };
 
@@ -14,7 +15,8 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
     created,
     amount,
     balanceToPay,
-    onusReference
+    onusReference,
+    paymentStartDate
   } = props;
 
   return (
@@ -41,7 +43,7 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo
               topText='Transaction Amount'
-              bottomText={`₦${amount ?? 0}`}
+              bottomText={`${amount ?? 0}`}
               align='items-start'
             />
             <TwoRowInfo
@@ -60,7 +62,11 @@ export const TransactionItem: React.FC<PopupTransactionItemType> = (props) => {
               bottomText={customerEmail ?? ''}
               align='items-start'
             />
-            <TwoRowInfo topText='Transaction Date' bottomText={created ?? ''} align='items-end' />
+            <TwoRowInfo
+              topText='Transaction Date / Time'
+              bottomText={`${created} / ${formatTime(paymentStartDate as string)}`}
+              align='items-end'
+            />
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@ import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  // AlertBar,
+  AlertBar,
   Button,
   CustomTable,
   EmptyContent,
-  LoaderControl
-  // inlineButtonClass
+  LoaderControl,
+  inlineButtonClass
 } from '../../../components';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 import {
@@ -21,15 +21,15 @@ import {
 import { RecentTransactionsHeader } from '../Transactions/constants';
 import { formatDate, formatNumber, getFromLocal } from '../../../utils';
 import { RecentPayoutsHeader } from '../Payouts/History/constants';
-// import { useProfileQuery } from '../../../services/hooks/useGetProfileQuery';
+import { useProfileQuery } from '../../../services/hooks/useGetProfileQuery';
 import { TransactionsTopFlexWrapper } from '../Transactions/styles';
 import { UserDetails } from '../../../services/hooks/types';
 import { CardContainer } from './components';
 import { ListContainer } from './components/ListContainer';
 const Overview = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const { data: profileDetails } = useProfileQuery();
+  const { data: profileDetails } = useProfileQuery();
 
   const {
     data,
@@ -89,7 +89,7 @@ const Overview = () => {
           here’s what’s happening with your business today
         </p>
       </TransactionsTopFlexWrapper>
-      {/* <div className='flex w-full justify-between mb-[14px]'>
+      <div className='flex w-full justify-between mb-[14px]'>
         {!profileDetails?.data?.profileUpdated && (
           <AlertBar
             text='Please Complete your KYC'
@@ -105,7 +105,7 @@ const Overview = () => {
             }
           />
         )}
-      </div> */}
+      </div>
       <div className='flex flex-col gap-5 w-full'>
         <CardContainer />
         <div className='flex items-stretch gap-5 '>

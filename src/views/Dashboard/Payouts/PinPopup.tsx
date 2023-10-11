@@ -38,7 +38,6 @@ export const PinPopup = ({
             toast.error(`${error?.fieldName} ${error?.message}`)
           );
         } else {
-          console.log(error?.response?.data?.responseMessage, 'Heeelllloooo');
           toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
         }
       });

@@ -8,3 +8,6 @@ export * from './useSendMoney';
 export * from './useCreateWallet';
 export * from './useMerchantStatsQuery';
 export * from './useGetMerchantAccount';
+export * from './useUploadBvn';
+export * from './useCreateTransactionPin';
+export * from './useCreateSettlementAccount';

@@ -1,15 +1,53 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Select from 'react-select';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import { Button, CustomInput, inlineButtonClass } from '../../../components';
 import { ChildComponentsDefaultProps } from '..';
-import { useGetBanksQuery } from '../../../services/hooks';
+import {
+  CreateTransactionPinRequestPayloadType,
+  useCreateSettlementAccount,
+  useCreateTransactionPin,
+  useGetBanksQuery,
+  useVerifyBankAccount
+} from '../../../services/hooks';
+import { PRIVATE_PATHS } from '../../../routes/paths';
 
-export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> = ({
-  handleBack,
-  handleNext
-}) => {
+export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> = () => {
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
+  const { mutateAsync: verifyBankInfo, isLoading, data: bankDetails } = useVerifyBankAccount();
+  const { mutateAsync: updateSettlementDetails, isLoading: isSettlementLoading } =
+    useCreateSettlementAccount();
+  const { mutateAsync: createPin } = useCreateTransactionPin();
+
+  const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm();
+
+  const [detailsToVerify, setDetailsToVerify] = useState({
+    accountNumber: '',
+    bankName: '',
+    bankCode: ''
+  });
+
+  const { accountNumber, bankName, bankCode } = detailsToVerify;
+
+  useEffect(() => {
+    if (bankName && accountNumber.length === 10) {
+      verifyBankInfo({
+        accountNumber,
+        beneficiaryBank: bankName
+      })
+        // eslint-disable-next-line no-console
+        .then(() => toast.success('Account information verfied successfully'))
+        .catch(() => toast.error('Could not verify bank details'));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountNumber, bankName]);
 
   const bankDataForSelect = useMemo(() => {
     if (banksData?.data?.banks) {
@@ -20,9 +58,40 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
     }
   }, [banksData]);
 
+  const handleSubmitClick: SubmitHandler<CreateTransactionPinRequestPayloadType> = async (
+    values
+  ) => {
+    try {
+      await Promise.all([
+        updateSettlementDetails({
+          bankCode,
+          accountNumber,
+          accountName: bankDetails?.data?.accountName,
+          bank: bankName
+        }),
+        createPin({
+          pin: values.pin,
+          pinConfirmation: values.pinConfirmation
+        })
+      ]);
+
+      toast.success('Settlement Information updated successfully 🎉🎉');
+      navigate(PRIVATE_PATHS.OVERVIEW);
+    } catch (error: any) {
+      if (Array.isArray(error?.response?.data?.errors)) {
+        const errorMessages = error?.response?.data?.errors;
+
+        errorMessages.forEach((error: any) => toast.error(`${error?.fieldName} ${error?.message}`));
+      } else {
+        toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
+      }
+    }
+  };
+
   return (
     <div className='w-full flex flex-col gap-[30px]'>
-      <div className='w-full flex flex-col gap-[30px]'>
+      {/* @ts-ignore */}
+      <form className='w-full flex flex-col gap-[30px]' onSubmit={handleSubmit(handleSubmitClick)}>
         <div className='flex flex-col gap-[5px] relative'>
           <label className='text-[#6F7482] text-[10px] leading-normal font-medium'>Bank Name</label>
           <Select
@@ -32,19 +101,41 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
             isSearchable
             isClearable
             className=' w-full'
+            onChange={(val) =>
+              setDetailsToVerify({
+                ...detailsToVerify,
+                // @ts-ignore not resolved val type
+                bankName: val?.label,
+                // @ts-ignore not resolved val type
+                bankCode: val?.value
+              })
+            }
+            required
           />
         </div>
         <CustomInput
-          name='Account Number'
           placeholder='Enter your account number'
           label='Account Number'
           className='w-full'
           InputClassName=' h-[40px]'
+          {...register('accountNumber', {
+            required: true,
+            minLength: 10,
+            maxLength: 10,
+            pattern: /^[0-9]+$/,
+            onChange: (e) =>
+              setDetailsToVerify({
+                ...detailsToVerify,
+                accountNumber: e.target.value
+              })
+          })}
         />
+        {isLoading && <FontAwesomeIcon className='mt-[-10px] mr-[auto]' icon={faSpinner} spin />}
         <CustomInput
           name='Account Name'
           placeholder=''
           label='Account Name'
+          value={bankDetails?.data?.accountName}
           disabled={true}
           className='w-full'
           InputClassName=' h-[40px]  bg-[#F4F4F5]'
@@ -61,46 +152,43 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
 
         <div className='w-full flex <1024:flex-col gap-5 items-start'>
           <CustomInput
-            name='Transaction Pin'
-            placeholder=''
+            placeholder='* * * *'
             label='Transaction Pin'
             className='w-full'
+            type='password'
             InputClassName=' h-[40px]'
+            {...register('pin', { required: true })}
           />
           <CustomInput
-            name='Re-enter Transaction Pin'
-            placeholder=''
+            placeholder='* * * *'
             label='Re-enter Transaction Pin'
             className='w-full'
             InputClassName=' h-[40px]'
+            type='password'
+            {...register('pinConfirmation', { required: true })}
           />
         </div>
 
         <div className='w-full mt-10 flex items-center justify-between'>
           <Button
-            name='Previous'
             className={clsx(
               inlineButtonClass,
-              'h-[40px] border border-solid rounded-[6px] border-[#6231F4] text-[#6231F4] w-[120px] font-medium text-[12px]'
+              'h-[40px] border border-solid rounded-[6px] border-[#B8BCCA] text-[#B8BCCA] w-[100px] font-medium text-[12px]'
             )}
-            onClick={handleBack}
+            name='Skip for now'
+            type={'button'}
+            onClick={() => navigate(PRIVATE_PATHS.OVERVIEW)}
           />
           <div className='flex gap-5 items-center'>
             <Button
-              className={clsx(
-                inlineButtonClass,
-                'h-[40px] border border-solid rounded-[6px] border-[#B8BCCA] text-[#B8BCCA] w-[100px] font-medium text-[12px]'
-              )}
-              name='Skip for now'
-            />
-            <Button
               name='Submit'
               className='h-[40px] rounded-[6px] w-[100px] font-medium text-[12px] m-0'
-              onClick={handleNext}
+              type={'submit'}
+              isBusy={isSettlementLoading || isLoading}
             />
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

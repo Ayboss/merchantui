@@ -17,6 +17,7 @@ export type TransactionItemType = {
   channel: null | string;
   code: null | string | number;
   created: string | null;
+  paymentStartDate: string | null;
   currency: string;
   customerEmail: string | null;
   customerMobile: string | null;

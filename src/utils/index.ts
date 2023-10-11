@@ -2,6 +2,11 @@ import clsx from 'clsx';
 import { parseISO, format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 import imageCompression from 'browser-image-compression';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+
+dayjs.extend(advancedFormat);
+
 export function cn(classNames: string) {
   return twMerge(clsx(classNames));
 }
@@ -49,6 +54,10 @@ export const formatNumber = (value: number, mfd?: number): string => {
     maximumFractionDigits: mfd ?? 2,
     useGrouping: true
   }).format(value);
+};
+
+export const formatTime = (value: string) => {
+  return dayjs(value).format('hh:mm:ss A');
 };
 
 export async function compressImage(file: File) {

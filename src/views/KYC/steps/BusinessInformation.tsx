@@ -4,12 +4,14 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { Button, CustomInput, inlineButtonClass } from '../../../components';
 import CountrySelectInput from '../../../components/CountrySelect';
 import { FilePreview, FileUploadDropzone } from '../../../components/FileDropzoneUpload';
 import { ChildComponentsDefaultProps } from '..';
 import { useProfileMutation } from '../../../services/hooks/useProfileMutation';
 import { useUploadBusinessDocument } from '../../../services/hooks/useDocumentUpload';
+import { PRIVATE_PATHS } from '../../../routes/paths';
 
 const schema = yup.object({
   businessAddress: yup.string().required(),
@@ -41,6 +43,8 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
       tin: profileDetails?.data?.tin
     }
   });
+
+  const navigate = useNavigate();
 
   const onDrop = useCallback((acceptedFiles: any[]) => {
     setFiles(acceptedFiles);
@@ -167,6 +171,8 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
                 'h-[40px] border border-solid rounded-[6px] border-[#B8BCCA] text-[#B8BCCA] w-[100px] font-medium text-[12px]'
               )}
               name='Skip for now'
+              type={'button'}
+              onClick={() => navigate(PRIVATE_PATHS.OVERVIEW)}
             />
             <Button
               name='Next'

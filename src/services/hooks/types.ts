@@ -83,6 +83,7 @@ export type MerchantProfileResponseType = {
     };
     profileUpdated: boolean;
     businessCategory: 'STARTER' | 'REGISTERED';
+    businessType: string;
   };
   success: boolean;
 };

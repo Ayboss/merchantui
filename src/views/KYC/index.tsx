@@ -115,11 +115,36 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
 }) => {
   const { data: profileDetails } = useProfileQuery();
 
+  const {
+    data: {
+      businessAddress = '',
+      businessCategory = '',
+      businessInformation = '',
+      businessType = '',
+      country = '',
+      state = '',
+      tin = ''
+    } = {}
+  } = profileDetails || ({} as MerchantProfileResponseType);
+
   useEffect(() => {
-    if (profileDetails?.data.businessCategory) {
+    if (businessCategory && businessType) {
       setActiveStep(1);
     }
-  }, [profileDetails?.data, setActiveStep]);
+
+    if (businessAddress && businessInformation && country && state && tin) {
+      setActiveStep(2);
+    }
+  }, [
+    businessAddress,
+    businessCategory,
+    businessInformation,
+    businessType,
+    country,
+    setActiveStep,
+    state,
+    tin
+  ]);
 
   const handleNext = () => {
     let newSkipped = skipped;

@@ -6,9 +6,17 @@ import { FormGroup, InputLabel, Input } from './styles';
 import { CustomInputProps } from './types';
 
 export const CustomInput: React.FC<CustomInputProps> = forwardRef((props, ref) => {
-  const { label, type, placeholder, className, errorText, InputClassName, ...rest } = props;
+  const {
+    label,
+    type = 'text',
+    placeholder,
+    className,
+    errorText,
+    InputClassName,
+    ...rest
+  } = props;
 
-  const [inputType, setInputType] = useState<string>('text');
+  const [inputType, setInputType] = useState<string>(type);
 
   const passToggle = () => {
     setInputType(inputType === 'password' ? 'text' : 'password');
