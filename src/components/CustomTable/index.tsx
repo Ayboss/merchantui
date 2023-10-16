@@ -38,7 +38,7 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
         <div className='w-full bg-white flex justify-between border-[#E4E4E7] border-solid px-5 border-y-[1px]  py-[12px]'>
           {headers.map(({ responseMatch, title }) => (
             <span
-              className='text-left font-semibold text-[11px] uppercase leading-normal text-[#6F7482]'
+              className='text-left font-semibold text-[11px] uppercase w-[20%] leading-normal text-[#6F7482]'
               key={responseMatch}
             >
               {title}
@@ -62,16 +62,17 @@ export const CustomTable = <T,>(props: TablePropsType<T>) => {
                           if (Object.keys(statusMap).includes((item as any)[value])) {
                             // @ts-ignore
                             return (
-                              <StatusTag
-                                key={(item as any)[value]}
-                                // @ts-ignore
-                                type={statusMap[item[value]]}
-                              />
+                              <div key={(item as any)[value]} className='w-[20%]'>
+                                <StatusTag
+                                  // @ts-ignore
+                                  type={statusMap[item[value]]}
+                                />
+                              </div>
                             );
                           } else {
                             return (
                               <span
-                                className='text-[#444] font-medium text-[13px] whitespace-nowrap'
+                                className='text-[#444] w-[20%] font-medium overflow-hidden text-ellipsis text-[13px] whitespace-nowrap'
                                 data-value={[(item as any)[value]]}
                                 key={value}
                               >
