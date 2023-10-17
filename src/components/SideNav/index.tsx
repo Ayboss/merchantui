@@ -1,12 +1,12 @@
 import React from 'react';
 import { faArrowRightFromBracket, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import Button from '../Button';
 import { PRIVATE_PATHS, REGULAR_PATHS } from '../../routes/paths';
 import { useProfileQuery } from '../../services/hooks/useGetProfileQuery';
-import { NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
+import { NavDropdownItem, NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
 import { ComingSoonTag, DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
 
 export const DashboardSideNav = () => {
@@ -65,7 +65,7 @@ export const NavGroupItem: React.FC<
 > = (props) => {
   const { group, items } = props;
 
-  const isAdminOrSupport = group === 'Administration' || group === 'Support';
+  const isAdminOrSupport = group === 'Administration';
 
   return (
     <div className='w-full pt-5 relative pb-[25px] flex flex-col items-start gap-[15px] border-solid border-t border-[#E4E4E7]'>
@@ -77,8 +77,20 @@ export const NavGroupItem: React.FC<
           key={`${group}-${idx}`}
           className={clsx('w-full', isAdminOrSupport && 'bg-white opacity-10 cursor-default')}
         >
-          {/* @ts-ignore */}
-          <NavLinkItem isAdminOrSupport={isAdminOrSupport} {...item} />
+          {item.isDropdown ? (
+            // @ts-ignore
+            <NavDropdownItem {...item}>
+              <NavLink
+                to={PRIVATE_PATHS.PAYOUT_HISTORY}
+                className={'text-[#444] hover:text-[#6231F4] text-[13px] font-medium'}
+              >
+                Payout History
+              </NavLink>
+            </NavDropdownItem>
+          ) : (
+            // @ts-ignore
+            <NavLinkItem isAdminOrSupport={isAdminOrSupport} {...item} />
+          )}
         </div>
       ))}
     </div>
