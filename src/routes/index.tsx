@@ -19,6 +19,7 @@ import { useRedirect } from '../hooks';
 import Settlements from '../views/Dashboard/Settlements';
 import { KycVerification } from '../views/KYC';
 import { ServiceStatus } from '../views/Dashboard/ServiceStatus';
+import { WalletHistory } from '../views/Dashboard/WalletHistory';
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -39,7 +40,8 @@ export const AppRouter = () => {
     PAYOUT_OPTIONS,
     SETTLEMENTS,
     KYC_VERIFICATION,
-    SERVICE_STATUS
+    SERVICE_STATUS,
+    WALLET_HISTORY
   } = PRIVATE_PATHS;
 
   const { FORGOT_PASSWORD, LOGIN, RESET_PASSWORD, SIGN_UP } = REGULAR_PATHS;
@@ -75,6 +77,7 @@ export const AppRouter = () => {
         </Route>
         <Route path={KYC_VERIFICATION} element={<KycVerification />} />
         <Route path={SERVICE_STATUS} element={<ServiceStatus />} />
+        <Route path={WALLET_HISTORY} element={<WalletHistory />} />
       </Route>
       <Route path={LOGIN} element={<Login />} />
       <Route path={FORGOT_PASSWORD} element={<ForgetPassword />} />

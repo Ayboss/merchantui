@@ -10,6 +10,7 @@ import { ChooseBusinessType } from './steps/ChooseBusinessType';
 import { BusinessInformation } from './steps/BusinessInformation';
 import { IdentityVerification } from './steps/IdentityVerification';
 import { SettlementBankInfo } from './steps/SettlementBankInfo';
+import { CompletedSetup } from './steps/CompletedSetup';
 
 const kycHeaderTexts = [
   {
@@ -40,11 +41,7 @@ export type ChildComponentsDefaultProps = {
 
 export const KycVerification = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set<number>());
-
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
+  const [isCompleted, setIsCompleted] = useState(false);
 
   return (
     <KycLayout
@@ -77,23 +74,17 @@ export const KycVerification = () => {
             inactiveTextColor: '#6F6C90'
           }}
         >
-          {steps.map((step, index) => {
+          {steps.map(() => {
             const stepProps: { completed?: boolean } = {};
-
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
 
             return <Step className='cursor-default' key={uuidv4()} {...stepProps} />;
           })}
         </Stepper>
         <div className='mt-[40px] mb-[40px] h-[1px] w-full bg-[#D9DBE9]'></div>
         <KycVerificationContainer
-          skipped={skipped}
           activeStep={activeStep}
-          setSkipped={setSkipped}
           setActiveStep={setActiveStep}
-          isStepSkipped={isStepSkipped}
+          setIsCompleted={setIsCompleted}
         >
           <ChooseBusinessType />
           <BusinessInformation />
@@ -101,17 +92,16 @@ export const KycVerification = () => {
           <SettlementBankInfo />
         </KycVerificationContainer>
       </WhiteBGContainer>
+      {isCompleted && <CompletedSetup />}
     </KycLayout>
   );
 };
 
 export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = ({
   children,
-  skipped,
   activeStep,
-  setSkipped,
   setActiveStep,
-  isStepSkipped
+  setIsCompleted
 }) => {
   const { data: profileDetails } = useProfileQuery();
 
@@ -123,7 +113,9 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
       businessType = '',
       country = '',
       state = '',
-      tin = ''
+      tin = '',
+      profileUpdated,
+      extra
     } = {}
   } = profileDetails || ({} as MerchantProfileResponseType);
 
@@ -135,6 +127,14 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
     if (businessAddress && businessInformation && country && state && tin) {
       setActiveStep(2);
     }
+
+    if (extra?.bvnSet) {
+      setActiveStep(3);
+    }
+
+    if (profileUpdated) {
+      setIsCompleted(true);
+    }
   }, [
     businessAddress,
     businessCategory,
@@ -143,19 +143,14 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
     country,
     setActiveStep,
     state,
-    tin
+    tin,
+    extra,
+    setIsCompleted,
+    profileUpdated
   ]);
 
   const handleNext = () => {
-    let newSkipped = skipped;
-
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {

@@ -6,12 +6,15 @@ import { WhiteBGContainer } from '../../Overview/components/ListContainer';
 import Providus from '../icons/providus.png';
 import Globus from '../icons/globus.png';
 import Wema from '../icons/wema.png';
-import { cn } from '../../../../utils';
+import { cn, formatDate } from '../../../../utils';
+import { ServiceItemType } from '../../../../services/hooks/useGetStatusInfo';
 
 export type ServiceStatusInfoBoxType = {
   title: string;
+  data?: Array<ServiceItemType>;
+  isLoading: boolean;
 };
-export const ServiceStatusInfoBox = ({ title }: ServiceStatusInfoBoxType) => {
+export const ServiceStatusInfoBox = ({ title, data, isLoading }: ServiceStatusInfoBoxType) => {
   return (
     <WhiteBGContainer className=' w-full max-w-[530px] px-5'>
       <h3 className=' text-[#444] text-base font-semibold leading-6'>{title}</h3>
@@ -22,69 +25,87 @@ export const ServiceStatusInfoBox = ({ title }: ServiceStatusInfoBoxType) => {
         <p className='text-[#6F7482] text-[11px] leading-4 uppercase font-semibold'>Status</p>
       </div>
       <div className='flex flex-col items-start'>
-        <ProviderStatusItem bank='Providus' type='Up' />
-        <ProviderStatusItem bank='Globus' type='Down' />
-        <ProviderStatusItem bank='Wema' type='Down' />
+        {isLoading && <ProviderStatusSkeletalItem />}
+        {!isLoading &&
+          data?.map((item) => <ProviderStatusItem key={item.serviceProvider} {...item} />)}
       </div>
     </WhiteBGContainer>
   );
 };
 
 export const ProviderStatusItem = ({
-  type,
-  bank
-}: StatusIndicatorType & { bank: 'Wema' | 'Providus' | 'Globus' }) => {
+  status,
+  serviceProvider,
+  lastUpdatedAt
+}: StatusIndicatorType & { serviceProvider: 'Wema Bank' | 'Providus Bank' | 'Globus Bank' } & {
+  lastUpdatedAt: string;
+}) => {
   return (
     <div
       className={cn(
         clsx(
           'w-full flex items-center justify-between  border-b-[1px] border-solid border-b-[#EBEBED] py-[15px] pr-[48px]',
-          type === 'Down' && 'pr-[30px]'
+          status === 'DOWN' && 'pr-[30px]'
         )
       )}
     >
       <div className='flex items-start gap-[10px]'>
-        <img src={ProviderIcons[bank]} alt='Service Provider' />
+        <img src={ProviderIcons[serviceProvider]} alt='Service Provider' />
         <div className='flex flex-col items-start'>
           <h3 className='text-[#444] text-[14px] font-semibold leading-normal'>Providus Bank</h3>
           <p className='text-[#444] text-[14px] font-normal leading-normal'>
             Last Sync:{' '}
             <span className='text-[#444] text-[14px] font-medium leading-normal'>
-              09 Sept, 2023 11:13:35
+              {formatDate(lastUpdatedAt, 'dd MMM, yyyy HH:mm:ss')}
             </span>{' '}
           </p>
         </div>
       </div>
-      <StatusIndicator type={type} />
+      <StatusIndicator status={status} />
     </div>
   );
 };
 
 export const ProviderIcons = {
-  Providus,
-  Globus,
-  Wema
+  'Providus Bank': Providus,
+  'Globus Bank': Globus,
+  'Wema Bank': Wema
 };
 
 export type StatusIndicatorType = {
-  type: 'Up' | 'Down';
+  status: 'UP' | 'DOWN';
 };
 
-export const StatusIndicator = ({ type = 'Down' }: StatusIndicatorType) => {
-  const color = type === 'Down' ? '#EF4444' : '#22C55E';
+export const StatusIndicator = ({ status = 'DOWN' }: StatusIndicatorType) => {
+  const color = status === 'DOWN' ? '#EF4444' : '#22C55E';
 
   return (
     <div className='flex items-start gap-1'>
-      {type === 'Up' && <FontAwesomeIcon style={{ color }} icon={faArrowUp} />}
-      {type === 'Down' && <FontAwesomeIcon style={{ color }} icon={faArrowDown} />}
+      {status === 'UP' && <FontAwesomeIcon style={{ color }} icon={faArrowUp} />}
+      {status === 'DOWN' && <FontAwesomeIcon style={{ color }} icon={faArrowDown} />}
       <span
         className={clsx(
           ' font-medium text-[12px] text-[#22C55E]',
-          type === 'Down' && 'text-[#EF4444]'
+          status === 'DOWN' && 'text-[#EF4444]'
         )}
       >
-        {type}{' '}
+        {status}{' '}
       </span>
+    </div>
+  );
+};
+
+export const ProviderStatusSkeletalItem = () => {
+  return (
+    <div className='w-full flex items-center justify-between border-b-[1px] border-solid border-b-[#EBEBED] py-[15px] pr-[48px] animate-pulse'>
+      <div className='flex items-start gap-[10px]'>
+        <div className='w-10 h-10 bg-gray-300 rounded'></div>
+        <div className='flex flex-col items-start'>
+          <div className='h-4 bg-gray-300 rounded w-3/4'></div>
+          <div className='h-3 mt-2 bg-gray-300 rounded w-1/2'></div>
+        </div>
+      </div>
+      <div className='h-4 w-16 bg-gray-300 rounded'></div>
     </div>
   );
 };

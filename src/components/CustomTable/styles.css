@@ -21,7 +21,9 @@
 
 .table-body-tr td[data-value='SUCCESSFUL'],
 .table-body-tr td[data-value='SUCCESS'],
-.table-body-tr td[data-value='Successful']
+.table-body-tr td[data-value='Successful'],
+.table-body-tr td[data-value='CREDIT'],
+.table-body-tr td[data-value='Credit']
 {
     color: rgba(33, 150, 83, 1);
     font-weight: 500;
@@ -33,7 +35,9 @@
     font-weight: 500;
 }
 .table-body-tr td[data-value='FAILED'],
-.table-body-tr td[data-value='Failed']
+.table-body-tr td[data-value='Failed'],
+.table-body-tr td[data-value='DEBIT'],
+.table-body-tr td[data-value='Debit']
 {
     color: #DC362E;
     font-weight: 500;

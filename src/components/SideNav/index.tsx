@@ -82,7 +82,7 @@ export const NavGroupItem: React.FC<
             <NavDropdownItem {...item}>
               <NavLink
                 to={PRIVATE_PATHS.PAYOUT_HISTORY}
-                className={'text-[#444] hover:text-[#6231F4] text-[13px] font-medium'}
+                className={'text-[#444] hover:text-[#6231F4] text-[12px] font-medium'}
               >
                 Payout History
               </NavLink>

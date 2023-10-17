@@ -57,7 +57,7 @@ export const useGetTransactionsQuery = (query?: TransactionsQueryParamsType, con
     ({ signal }) => load(signal as AbortSignal),
     {
       ...config,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       keepPreviousData: true
     }
   );

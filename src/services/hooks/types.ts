@@ -84,6 +84,11 @@ export type MerchantProfileResponseType = {
     profileUpdated: boolean;
     businessCategory: 'STARTER' | 'REGISTERED';
     businessType: string;
+    extra: {
+      bvnSet: boolean;
+      hasActiveSettlementAccount: boolean;
+      transactionPinSet: boolean;
+    };
   };
   success: boolean;
 };

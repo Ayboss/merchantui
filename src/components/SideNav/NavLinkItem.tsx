@@ -36,9 +36,9 @@ export const NavLinkItem: React.FC<NavLinkItemPropsType> = (props) => {
       className={({ isActive }) =>
         cn(
           clsx(
-            'flex items-center p-[5px] text-[#444] text-[13px] font-medium',
+            'flex items-center p-[10px] text-[#444] text-[13px] font-medium',
             isActive &&
-              'text-[#6231F4] [&_path]:stroke-[#6231F4] [&_rect]:stroke-[#6231F4] bg-[#EEF2FF] rounded-sm',
+              'text-[#6231F4] [&_path]:stroke-[#6231F4] [&_rect]:stroke-[#6231F4] bg-[#EEF2FF] rounded-[10px]',
             className
           )
         )
@@ -65,15 +65,15 @@ export const NavDropdownItem: React.FC<PropsWithChildren<NavLinkItemPropsType>> 
   const { pathname } = useLocation();
 
   return (
-    <div ref={hoverRef}>
+    <div
+      ref={hoverRef}
+      className={clsx(
+        (isHover || path === pathname) &&
+          'text-[#6231F4] [&_path]:stroke-[#6231F4] [&_rect]:stroke-[#6231F4]  rounded-[10px] bg-[#EEF2FF]'
+      )}
+    >
       <div
-        className={cn(
-          clsx(
-            'flex cursor-pointer items-center p-[5px] text-[13px] font-medium  rounded-sm',
-            (isHover || path === pathname) &&
-              'text-[#6231F4] [&_path]:stroke-[#6231F4] [&_rect]:stroke-[#6231F4] bg-[#EEF2FF]'
-          )
-        )}
+        className={cn(clsx('flex cursor-pointer items-center p-[10px] text-[13px] font-medium'))}
       >
         <div className='flex relative text-[12px] items-center gap-[13px] tracking-wider'>
           {icon}
@@ -88,7 +88,7 @@ export const NavDropdownItem: React.FC<PropsWithChildren<NavLinkItemPropsType>> 
         </div>
       </div>
       {isHover && (
-        <div className='w-full flex flex-col justify-center pb-3 pt-1 rounded-sm gap-2 px-9 items-start bg-[#EEF2FF]'>
+        <div className='w-full flex flex-col justify-center pb-3 pt-1 rounded-[10px] gap-2 px-9 items-start bg-[#EEF2FF]'>
           {children}
         </div>
       )}

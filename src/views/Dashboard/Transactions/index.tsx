@@ -13,23 +13,22 @@ import {
   useGetTransactionsQuery,
   useTransactionsSummaryQuery
 } from '../../../services/hooks';
-import { formatDate, formatNumber, getFromLocal } from '../../../utils';
+import { formatDate, formatNumber } from '../../../utils';
 import { CardType } from '../../../components/Card/type';
 import { WhiteBGContainer } from '../Overview/components/ListContainer';
-import { UserDetails } from '../../../services/hooks/types';
+import { useDashboardTopIntro } from '../../../hooks/useDashboardTopIntro';
 import {
   DashboardCardContainer,
-  TransactionsContainer,
+  TransactionsContainer
   // TransactionsTableTitleWithFilter,
-  TransactionsTopFlexWrapper
 } from './styles';
 import { TransactionItem } from './components';
 import { TransactionsHeader } from './constants';
 
 const Transactions: React.FC = () => {
   const [openTransactionItemDetail, setShowTransactionItemDetail] = useState(false);
-  const { firstName } = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
   const [currentDetails, setCurrentDetails] = useState<TransactionItemType | null>(null);
+  const { TopIntro } = useDashboardTopIntro();
 
   const { data: summaryData } = useTransactionsSummaryQuery();
 
@@ -80,12 +79,7 @@ const Transactions: React.FC = () => {
 
   return (
     <TransactionsContainer>
-      <TransactionsTopFlexWrapper>
-        <p className='text-[#6F7482] font-medium text-base leading-6'>
-          <span className='text-[#444] font-bold leading-6 text-base'>Hello {firstName} - </span>
-          here’s what’s happening with your business today
-        </p>
-      </TransactionsTopFlexWrapper>
+      <TopIntro />
       <DashboardCardContainer>
         {transactionSummaryData.map((detail) => (
           <Card key={detail.title} {...detail} />
