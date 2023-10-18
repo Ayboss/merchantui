@@ -11,7 +11,7 @@ export const verifyBankAccountQueryKey = ['verifyBankAccount'];
 
 export const useVerifyBankAccount = () => {
   const load = useCallback(async (data: VerifyBankAccountRequestType) => {
-    const response = await apiInstance('settlement/transfer').post('/verify-bank-account', data, {
+    const response = await apiInstance('payout/transfer').post('/verify-bank-account', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }
