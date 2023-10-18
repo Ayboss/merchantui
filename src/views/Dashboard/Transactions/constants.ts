@@ -6,7 +6,7 @@ export const RecentTransactionsHeader: Array<HeadersPropsType> = [
     responseMatch: 'paymentStatus'
   },
   {
-    title: 'Method',
+    title: 'Channel',
     responseMatch: 'channel'
   },
   {

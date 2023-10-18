@@ -19,19 +19,25 @@ export const getWalletHistoryQueryKey = ['get_wallet_history_query_key'];
 
 export type WalletHistoryResponseType = CommonTableQueryType<WalletHistroyItemType>;
 
-export const useGetWalletHistory = (params?: { page: number; pageSize?: number }) => {
+export const useGetWalletHistory = (
+  params?: { page: number; pageSize?: number },
+  useNewService?: boolean
+) => {
   const load = useCallback(async () => {
-    const response = await apiInstance('settlement').get('/merchant-wallet-history', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
-      },
-      params
-    });
+    const response = await apiInstance(`${useNewService ? 'payout' : 'settlement'}`).get(
+      '/merchant-wallet-history',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+        },
+        params
+      }
+    );
 
     return response.data;
-  }, [params]);
+  }, [params, useNewService]);
 
-  return useQuery([...getWalletHistoryQueryKey, params?.page], load, {
+  return useQuery([...getWalletHistoryQueryKey, params?.page, useNewService], load, {
     refetchOnWindowFocus: true,
     keepPreviousData: true
   });

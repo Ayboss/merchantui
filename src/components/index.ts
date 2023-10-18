@@ -27,3 +27,4 @@ export * from './AccordionItem';
 export * from './EmptyContent';
 export * from './AlertBar';
 export * from './StatusTag';
+export * from './Toggle';

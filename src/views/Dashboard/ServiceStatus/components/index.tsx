@@ -52,7 +52,9 @@ export const ProviderStatusItem = ({
       <div className='flex items-start gap-[10px]'>
         <img src={ProviderIcons[serviceProvider]} alt='Service Provider' />
         <div className='flex flex-col items-start'>
-          <h3 className='text-[#444] text-[14px] font-semibold leading-normal'>Providus Bank</h3>
+          <h3 className='text-[#444] text-[14px] font-semibold leading-normal'>
+            {serviceProvider}
+          </h3>
           <p className='text-[#444] text-[14px] font-normal leading-normal'>
             Last Sync:{' '}
             <span className='text-[#444] text-[14px] font-medium leading-normal'>

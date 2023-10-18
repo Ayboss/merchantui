@@ -189,3 +189,15 @@ p {
   color: #6F7482 !important;
   font-size: 14px !important;
 }
+
+.react-toggle--checked .react-toggle-track{
+  background-color: #6231F4 !important;
+}
+
+.react-toggle--checked .react-toggle-thumb{
+  border-color: #6231F4 !important;
+}
+
+.react-toggle--focus .react-toggle-thumb{
+  box-shadow:none !important ;
+}

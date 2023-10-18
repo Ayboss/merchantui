@@ -1,6 +1,12 @@
 import { useMemo, useState } from 'react';
-import { CustomTable, EmptyContent, LoaderControl, Paginator } from '../../../components';
-import { useDashboardTopIntro } from '../../../hooks/useDashboardTopIntro';
+import {
+  CustomTable,
+  EmptyContent,
+  LoaderControl,
+  Paginator,
+  PayonusToggle
+} from '../../../components';
+// import { useDashboardTopIntro } from '../../../hooks/useDashboardTopIntro';
 import {
   WalletHistroyItemType,
   useGetWalletHistory
@@ -12,13 +18,14 @@ import { WalletHistoryHeader } from './constants';
 import { WalletHistoryItem } from './WalletHistoryItem';
 
 export const WalletHistory = () => {
-  const { TopIntro } = useDashboardTopIntro();
+  // const { TopIntro } = useDashboardTopIntro();
   const [query, setQuery] = useState({
     page: 1,
     pageSize: 20
   });
 
-  const { data, isFetching, isError, refetch } = useGetWalletHistory({ ...query });
+  const [isChecked, setIsChecked] = useState(false);
+  const { data, isFetching, isError, refetch } = useGetWalletHistory({ ...query }, isChecked);
 
   const [currentDetails, setCurrentDetails] = useState<WalletHistroyItemType | null>(null);
   const [openWalletDetail, setShowWalletDetail] = useState(false);
@@ -47,7 +54,15 @@ export const WalletHistory = () => {
 
   return (
     <TransactionsContainer>
-      <TopIntro />
+      {/* <TopIntro /> */}
+      <div className=' w-full'>
+        <PayonusToggle
+          isChecked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}
+          icons={false}
+          labelText='Toggle to view your Wallet history on the new service'
+        />
+      </div>
       <WhiteBGContainer className='mt-5'>
         <h3 className='text-[#444] text-[16px] font-semibold leading-6 px-5 mb-[18px]'>
           All Wallet History

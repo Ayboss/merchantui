@@ -14,7 +14,8 @@ export const statusMap = {
   Failed: 'Failed',
   PROCESSING: 'PROCESSING',
   CREDIT: 'CREDIT',
-  DEBIT: 'DEBIT'
+  DEBIT: 'DEBIT',
+  REVERSAL: 'REVERSAL'
 };
 
 export type HeadersPropsType = {

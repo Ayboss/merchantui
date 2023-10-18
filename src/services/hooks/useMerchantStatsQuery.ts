@@ -6,7 +6,7 @@ export const getMerchantStatsQueryyKey = ['paymentSummaryQueryKey'];
 
 export const useMerchantStatsQuery = (config?: any) => {
   const load = useCallback(async (signal: AbortSignal) => {
-    const res = await apiInstance('settlement').get('/get-merchant-payouts-stats', {
+    const res = await apiInstance('payout').get('/get-merchant-payouts-stats', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       },
