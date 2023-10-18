@@ -36,7 +36,7 @@ export const payoutQueryKey = ['payout-results'];
 export const useGetPayoutsQuery = (query?: PayoutQueryParamsType, config?: any) => {
   const load = useCallback(
     async (signal: AbortSignal) => {
-      const response = await apiInstance('settlement').get('/merchant-payouts', {
+      const response = await apiInstance('payout').get('/merchant-payouts', {
         params: query,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
