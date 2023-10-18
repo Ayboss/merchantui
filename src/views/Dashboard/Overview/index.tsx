@@ -61,7 +61,8 @@ const Overview = () => {
           ...item,
           index: id + 1,
           created: formatDate(item?.created),
-          amount: `₦${formatNumber(item?.amount)}`
+          amount: `₦${formatNumber(item?.amount)}`,
+          channel: item?.channel === 'PAYOUTTRANSFERIN' ? 'INFLOW' : item?.channel
         };
       });
     } else {
