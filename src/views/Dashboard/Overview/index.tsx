@@ -24,12 +24,17 @@ import { RecentPayoutsHeader } from '../Payouts/History/constants';
 import { useProfileQuery } from '../../../services/hooks/useGetProfileQuery';
 import { TransactionsTopFlexWrapper } from '../Transactions/styles';
 import { UserDetails } from '../../../services/hooks/types';
+import { useGetMerchantWalletBalanceQuery } from '../../../services/hooks/useGetMerchantWalletBalance';
 import { CardContainer } from './components';
-import { ListContainer } from './components/ListContainer';
+import { ListContainer, WhiteBGContainer } from './components/ListContainer';
+import { WalletBalanceItem, WalletBalanceItemSkeleton } from './components/WalletBalanceItem';
 const Overview = () => {
   const navigate = useNavigate();
 
   const { data: profileDetails } = useProfileQuery();
+
+  const { data: walletBalanceData, isLoading: walletBalanceLoading } =
+    useGetMerchantWalletBalanceQuery();
 
   const {
     data,
@@ -111,7 +116,7 @@ const Overview = () => {
         <div className='flex items-stretch gap-5 '>
           <ListContainer
             type='transactions'
-            className=' w-full flex-grow'
+            className=' w-[70%] flex-grow'
             renderCta={(className) => (
               <Button
                 className={clsx(className)}
@@ -158,7 +163,24 @@ const Overview = () => {
               />
             </LoaderControl>
           </ListContainer>
-          {/* <WhiteBGContainer className='w-[30%] flex-grow min-h-[350px]'></WhiteBGContainer> */}
+          <WhiteBGContainer className='w-[30%] overflow-y-auto p-5 flex-grow min-h-[350px]'>
+            <h3 className=' text-[#444] text-base font-semibold tracking-wide'>Wallet Balance</h3>
+            <div className='border-b-[1px] border-solid border-b-[#EBEBED] w-full mt-5' />
+            <div className='flex flex-col items-start'>
+              {!walletBalanceLoading &&
+                walletBalanceData?.data &&
+                walletBalanceData?.data?.map((item) => (
+                  <WalletBalanceItem key={item.accountNumber} {...item} />
+                ))}
+              {walletBalanceLoading && (
+                <>
+                  <WalletBalanceItemSkeleton />
+                  <WalletBalanceItemSkeleton />
+                  <WalletBalanceItemSkeleton />
+                </>
+              )}
+            </div>
+          </WhiteBGContainer>
         </div>
         <div className='flex items-stretch gap-5 '>
           <ListContainer
