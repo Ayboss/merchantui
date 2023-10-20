@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CustomTable,
   EmptyContent,
@@ -11,7 +11,7 @@ import {
   WalletHistroyItemType,
   useGetWalletHistory
 } from '../../../services/hooks/useGetWalletHistory';
-import { formatDate, formatNumber } from '../../../utils';
+import { formatDate, formatNumber, getFromSession, setToSession } from '../../../utils';
 import { WhiteBGContainer } from '../Overview/components/ListContainer';
 import { TransactionsContainer } from '../Transactions/styles';
 import { WalletHistoryHeader } from './constants';
@@ -24,7 +24,9 @@ export const WalletHistory = () => {
     pageSize: 20
   });
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(
+    () => Boolean(getFromSession('new-wallet')) || true
+  );
   const { data, isFetching, isError, refetch } = useGetWalletHistory({ ...query }, isChecked);
 
   const [currentDetails, setCurrentDetails] = useState<WalletHistroyItemType | null>(null);
@@ -32,6 +34,14 @@ export const WalletHistory = () => {
 
   const handlePageChange = (current: number) => {
     setQuery({ ...query, page: current });
+  };
+
+  useEffect(() => {
+    setToSession('new-wallet', isChecked);
+  }, [isChecked]);
+
+  const handleCheckToggle = () => {
+    setIsChecked((prev) => !prev);
   };
 
   const transformData = useMemo(() => {
@@ -55,12 +65,13 @@ export const WalletHistory = () => {
   return (
     <TransactionsContainer>
       {/* <TopIntro /> */}
-      <div className=' w-full'>
+      <div className=' w-fit'>
         <PayonusToggle
           isChecked={isChecked}
-          onChange={() => setIsChecked(!isChecked)}
+          onChange={() => handleCheckToggle()}
           icons={false}
           labelText='Toggle to view your Wallet history on the new service'
+          className='w-auto'
         />
       </div>
       <WhiteBGContainer className='mt-5'>
