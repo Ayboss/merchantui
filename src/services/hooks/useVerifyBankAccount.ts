@@ -7,7 +7,7 @@ export type VerifyBankAccountRequestType = {
   beneficiaryBank: string;
 };
 
-export const verifyBankAccountQueryKey = ['verifyBankAccount'];
+export const verifyBankAccountQueryKey = ['verify-Bank-Account'];
 
 export const useVerifyBankAccount = () => {
   const load = useCallback(async (data: VerifyBankAccountRequestType) => {

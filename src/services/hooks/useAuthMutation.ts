@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
-import { SignupApiInstance, apiInstance } from '..';
+import { apiInstance } from '..';
 import { LoginResponseType } from './types';
 
 export const LOGIN_MUTATION_KEY = ['login'];
@@ -48,7 +48,7 @@ export const useLoginMuation = () => {
 
 export const useSignupMutation = () => {
   const request = useCallback(async (data: SignupRequestPayloadType) => {
-    const response = await SignupApiInstance.post('/register', data);
+    const response = await apiInstance('merchant').post('/register', data);
 
     return response.data;
   }, []);
