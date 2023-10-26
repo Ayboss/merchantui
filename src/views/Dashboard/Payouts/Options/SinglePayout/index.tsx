@@ -48,13 +48,13 @@ export const SinglePayout: React.FC = () => {
   const [sourceAccountNumber, setSourceAccountNumber] = useState('');
   const [dataToSend, setDataToSend] = useState<SendMoneyRequestType>({} as SendMoneyRequestType);
 
-  const { accountNumber, bankName } = detailsToVerify;
+  const { accountNumber, bankName, bankCode } = detailsToVerify;
 
   useEffect(() => {
     if (bankName && accountNumber.length === 10) {
       mutateAsync({
         accountNumber,
-        beneficiaryBank: bankName
+        beneficiaryBank: bankCode
       })
         // eslint-disable-next-line no-console
         .then(() => toast.success('Account information verfied successfully'))
