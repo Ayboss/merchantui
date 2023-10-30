@@ -9,7 +9,7 @@ export type CreateTransactionPinRequestPayloadType = {
 
 export const useCreateTransactionPin = () => {
   const request = useCallback(async (data: CreateTransactionPinRequestPayloadType) => {
-    const response = await apiInstance('settlement').post('/create-merchant-pin', data, {
+    const response = await apiInstance('payout').post('/create-merchant-pin', data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
