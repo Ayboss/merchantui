@@ -13,6 +13,8 @@ export type WalletHistroyItemType = {
   paymentDate: string;
   created: string;
   accountNumber: string;
+  payoutTransactionReference: string;
+  payoutReference: string;
 };
 
 export const getWalletHistoryQueryKey = ['get_wallet_history_query_key'];

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import _ from 'lodash';
 import Dropdown from 'react-dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { formatDate, formatNumber } from '../../../../utils';
 import {
+  Card,
   CustomInput,
   CustomTable,
   EmptyContent,
@@ -19,34 +19,30 @@ import {
 } from '../../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../../routes/paths';
 import { TransactionsTableTitleWithFilter } from '../../Transactions/styles';
-import { PayoutSummaryCard, PayoutSummaryCardPropsType } from './components';
-import { ReactComponent as Icon } from './icons/balance.svg';
 import { PAYOUT_HISTORY_HEADER } from './constants';
 import { PayoutItem } from './components/PayoutItem';
 import 'react-dropdown/style.css';
+// eslint-disable-next-line import/order
+import { CardType } from '../../../../components/Card/type';
 
 export const PayoutHistory: React.FC = () => {
   const { data: statsData } = useMerchantStatsQuery();
-  const payoutCardsData: Array<PayoutSummaryCardPropsType> = [
+  const payoutCardsData: Array<CardType> = [
     {
       amount: `₦‎${formatNumber(statsData?.data?.walletsBalance ?? 0)}`,
-      text: 'Balance',
-      icon: <Icon />
+      title: 'Balance'
     },
     {
       amount: `₦‎${formatNumber(statsData?.data?.pendingPayoutAmount ?? 0)}`,
-      text: 'Pending Payout',
-      icon: <Icon />
+      title: 'Pending Payout'
     },
     {
       amount: `${formatNumber(statsData?.data?.successfulPayout ?? 0, 0)}`,
-      text: 'Successful',
-      icon: <Icon />
+      title: 'Successful'
     },
     {
       amount: `${formatNumber(statsData?.data?.failedPayout ?? 0, 0)}`,
-      text: 'Failed',
-      icon: <Icon />
+      title: 'Failed'
     }
   ];
 
@@ -65,7 +61,8 @@ export const PayoutHistory: React.FC = () => {
     { value: '', label: 'ALL' },
     { value: 'SUCCESSFUL', label: 'COMPLETED' },
     { value: 'PROCESSING', label: 'PROCESSING' },
-    { value: 'FAILED', label: 'FAILED' }
+    { value: 'FAILED', label: 'FAILED' },
+    { value: 'REFUND', label: 'REFUND' }
   ];
 
   const handlePageChange = (current: number) => {
@@ -120,7 +117,7 @@ export const PayoutHistory: React.FC = () => {
     <div className='w-full mt-[33px]'>
       <div className='flex items-center mb-[40px] gap-[20px]'>
         {payoutCardsData.map((item) => (
-          <PayoutSummaryCard {...item} key={item.text} />
+          <Card {...item} key={item.title} />
         ))}
       </div>
       <div className='mt-[40px] mb-[15px] w-full flex justify-between'>

@@ -5,7 +5,8 @@ import { TransactionsTopFlexWrapper } from '../views/Dashboard/Transactions/styl
 export const useDashboardTopIntro = (
   text: string = 'here’s what’s happening with your business today'
 ) => {
-  const { firstName } = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
+  const { firstName = '' } =
+    (JSON.parse(getFromLocal('user') as string) as unknown as UserDetails) || {};
 
   const TopIntro = () => (
     <TransactionsTopFlexWrapper>

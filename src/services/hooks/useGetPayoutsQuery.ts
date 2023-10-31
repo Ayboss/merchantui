@@ -51,7 +51,7 @@ export const useGetPayoutsQuery = (query?: PayoutQueryParamsType, config?: any) 
 
   return useQuery([...payoutQueryKey, query?.page], ({ signal }) => load(signal as AbortSignal), {
     ...config,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     keepPreviousData: true
   });
 };

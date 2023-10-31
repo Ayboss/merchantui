@@ -14,7 +14,8 @@ export const WalletHistoryItem: React.FC<WalletHistoryItemType> = (props) => {
     balanceAfter,
     balanceBefore,
     narration,
-    transactionType
+    transactionType,
+    payoutTransactionReference
   } = props;
 
   return (
@@ -51,6 +52,13 @@ export const WalletHistoryItem: React.FC<WalletHistoryItemType> = (props) => {
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo topText=' Date / Time' bottomText={`${created}`} align='items-start' />
+          </div>
+          <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
+            <TwoRowInfo
+              topText='Payout Transaction Reference'
+              bottomText={`${payoutTransactionReference}`}
+              align='items-start'
+            />
           </div>
           <div className='flex border-solid border-b-[1px] border-[rgba(151, 151, 151, 0.147956)] w-full pb-[16px] justify-between items-center'>
             <TwoRowInfo topText='Narration' bottomText={`${narration}`} align='items-start' />

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { faArrowRightFromBracket, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import Button from '../Button';
+import Button, { inlineButtonClass } from '../Button';
 import { PRIVATE_PATHS, REGULAR_PATHS } from '../../routes/paths';
 import { useProfileQuery } from '../../services/hooks/useGetProfileQuery';
+import { usePopupContext } from '../../context/PopupContext';
 import { NavDropdownItem, NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
 import { ComingSoonTag, DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
 
@@ -14,6 +15,8 @@ export const DashboardSideNav = () => {
   const NavGroups = Object.keys(NavLinkList) as unknown as NavGroupType[];
 
   const { data } = useProfileQuery();
+
+  const { setShowInitiatePopup } = usePopupContext();
 
   const handleLogOut = () => {
     localStorage.removeItem('key');
@@ -42,7 +45,12 @@ export const DashboardSideNav = () => {
       />
       {NavGroups.map((group, idx) => (
         // @ts-ignore
-        <NavGroupItem group={group} key={`${group}-${idx}`} items={NavLinkList[group]} />
+        <NavGroupItem
+          setShowInitiatePopup={setShowInitiatePopup}
+          group={group}
+          key={`${group}-${idx}`}
+          items={NavLinkList[group] || []}
+        />
       ))}
       <div className='border-solid border-t border-[#E4E4E7] w-full mt-[20px] pb-[30px]'>
         <Button
@@ -60,10 +68,14 @@ export const DashboardSideNav = () => {
   );
 };
 
-export const NavGroupItem: React.FC<
-  { items: Partial<NavLinkItemPropsType>[] } & { group: NavGroupType }
-> = (props) => {
-  const { group, items } = props;
+type NavGroupItemProps = {
+  items: Partial<NavLinkItemPropsType>[];
+  group: NavGroupType;
+  setShowInitiatePopup: Dispatch<SetStateAction<boolean>>;
+};
+
+export const NavGroupItem: React.FC<NavGroupItemProps> = (props) => {
+  const { group, items, setShowInitiatePopup } = props;
 
   const isAdminOrSupport = group === 'Administration';
 
@@ -80,6 +92,14 @@ export const NavGroupItem: React.FC<
           {item.isDropdown ? (
             // @ts-ignore
             <NavDropdownItem {...item}>
+              <Button
+                name={'Initiate Payout'}
+                className={clsx(
+                  inlineButtonClass,
+                  'text-[12px] text-[#444] hover:text-[#6231F4]  font-medium'
+                )}
+                onClick={() => setShowInitiatePopup(true)}
+              />
               <NavLink
                 to={PRIVATE_PATHS.PAYOUT_HISTORY}
                 className={'text-[#444] hover:text-[#6231F4] text-[12px] font-medium'}
