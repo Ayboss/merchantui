@@ -211,6 +211,7 @@ export const PaymentPopup = ({ onClose }: { onClose: () => void }) => {
           <CustomInput
             placeholder='****************'
             label='Transaction Pin'
+            type='password'
             className='w-full'
             InputClassName=' h-[40px]'
             {...register('pin', {
