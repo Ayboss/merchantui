@@ -43,7 +43,7 @@ const Overview = () => {
     isLoading: isTransactionsLoading
   } = useGetTransactionsQuery({ page: 0 });
 
-  const { firstName } = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
+  const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
 
   const {
     data: payoutList,
@@ -91,7 +91,9 @@ const Overview = () => {
     <div className='w-full h-full'>
       <TransactionsTopFlexWrapper>
         <p className='text-[#6F7482] font-medium text-base leading-6'>
-          <span className='text-[#444] font-bold leading-6 text-base'>Hello {firstName} - </span>
+          <span className='text-[#444] font-bold leading-6 text-base'>
+            Hello {user?.firstName} -{' '}
+          </span>
           here’s what’s happening with your business today
         </p>
       </TransactionsTopFlexWrapper>

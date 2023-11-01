@@ -5,13 +5,14 @@ import { TransactionsTopFlexWrapper } from '../views/Dashboard/Transactions/styl
 export const useDashboardTopIntro = (
   text: string = 'here’s what’s happening with your business today'
 ) => {
-  const { firstName = '' } =
-    (JSON.parse(getFromLocal('user') as string) as unknown as UserDetails) || {};
+  const user = (JSON.parse(getFromLocal('user') as string) as unknown as UserDetails) || {};
 
   const TopIntro = () => (
     <TransactionsTopFlexWrapper>
       <p className='text-[#6F7482] font-medium text-base leading-6'>
-        <span className='text-[#444] font-bold leading-6 text-base'>Hello {firstName} - </span>
+        <span className='text-[#444] font-bold leading-6 text-base'>
+          Hello {user?.firstName} -{' '}
+        </span>
         {text}
       </p>
     </TransactionsTopFlexWrapper>
