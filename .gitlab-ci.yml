@@ -1,0 +1,63 @@
+## This section imports the main CI base templates which contains most of the CI/CD pipeline logic. This ensures we have a standardised and centralized CI configuration for agile iterations and also ensures that we maintain a DRY configuration for all other CI/CD pipelines across projects.
+include:
+  - project: "$base/devops/build-template"
+    file: "build.yml"
+variables:
+  PORT: "80"
+
+## This section lists the logical order of the application development workflow
+stages:
+#  - maven
+  - build
+  - deploy
+
+
+## This section builds the docker image for dev deployments
+build_image_dev:
+  extends: .build_image
+  environment:
+    name: development
+  only:
+    - dev
+    - dev-cicd
+
+
+## This section builds the docker image for production deployments
+build_image_prod:
+  extends: .build_image
+  environment:
+    name: production
+  only:
+    - main
+    - master
+
+
+
+## This section will trigger ArgoCD to deploy the image to the dev kubernetes cluster for live traffic.
+deploy_dev_app:
+  extends: .deploy_test_app_auto
+  variables:
+    NAME_SPACE: "devns" # you csn change to your namespace
+    APP_ENV: "generic-env"
+  environment:
+    name: production
+  script:
+    - echo "$BUILD_JOB_ID"
+  only:
+    - dev
+    - dev-cicd
+
+## This section will trigger ArgoCD to deploy the image to the production kubernetes cluster for live traffic.
+deploy_prod_app:
+  extends: .deploy_prod_app_auto
+  variables:
+    NAME_SPACE: "prodns" # you csn change to your namespace
+    APP_ENV: "generic-env"
+  environment:
+    name: production
+  script:
+    - echo "$BUILD_JOB_ID"
+  only:
+    - main
+    - master
+
