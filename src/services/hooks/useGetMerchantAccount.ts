@@ -6,7 +6,7 @@ export const getMerchantAccountQueryKey = ['merchant_account_query_key'];
 
 export const useGetMerchantAccountQuery = (params: { page: number; pageSize: number }) => {
   const load = useCallback(async () => {
-    const response = await apiInstance('settlement').get('/merchant-payout-accounts', {
+    const response = await apiInstance('payout').get('/merchant-payout-accounts', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       },

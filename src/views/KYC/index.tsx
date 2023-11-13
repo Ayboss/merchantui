@@ -6,16 +6,21 @@ import { WhiteBGContainer } from '../Dashboard/Overview/components/ListContainer
 import { cn } from '../../utils';
 import { MerchantProfileResponseType } from '../../services/hooks/types';
 import { useProfileQuery } from '../../services/hooks/useGetProfileQuery';
-import { ChooseBusinessType } from './steps/ChooseBusinessType';
+import { ChooseBusinessCategory } from './steps/ChooseBusinessCategory';
 import { BusinessInformation } from './steps/BusinessInformation';
 import { IdentityVerification } from './steps/IdentityVerification';
 import { SettlementBankInfo } from './steps/SettlementBankInfo';
 import { CompletedSetup } from './steps/CompletedSetup';
+import { ChooseBusinessType } from './steps/ChooseBusinessType';
 
 const kycHeaderTexts = [
   {
     title: 'Select Business Category',
     text: 'Lets set up your business so you can start transacting'
+  },
+  {
+    title: 'Select Business Type',
+    text: 'Please choose your business type'
   },
   {
     title: 'Business Information',
@@ -31,7 +36,7 @@ const kycHeaderTexts = [
   }
 ];
 
-const steps = new Array(4).fill('');
+const steps = new Array(5).fill('');
 
 export type ChildComponentsDefaultProps = {
   handleNext: () => void;
@@ -86,6 +91,7 @@ export const KycVerification = () => {
           setActiveStep={setActiveStep}
           setIsCompleted={setIsCompleted}
         >
+          <ChooseBusinessCategory />
           <ChooseBusinessType />
           <BusinessInformation />
           <IdentityVerification />
@@ -120,16 +126,20 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
   } = profileDetails || ({} as MerchantProfileResponseType);
 
   useEffect(() => {
-    if (businessCategory && businessType) {
+    if (businessCategory) {
       setActiveStep(1);
     }
 
-    if (businessAddress && businessInformation && country && state && tin) {
+    if (businessType) {
       setActiveStep(2);
     }
 
-    if (extra?.bvnSet) {
+    if (businessAddress && businessInformation && country && state && tin) {
       setActiveStep(3);
+    }
+
+    if (extra?.bvnSet) {
+      setActiveStep(4);
     }
 
     if (profileUpdated) {

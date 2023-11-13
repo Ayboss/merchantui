@@ -13,6 +13,7 @@ export type ProfileRequestPayloadType = {
   country: string;
   state: string;
   lga: string;
+  categoryId: string;
 };
 
 export const useProfileMutation = () => {
