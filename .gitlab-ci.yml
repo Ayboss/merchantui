@@ -17,8 +17,7 @@ build_image_dev:
   extends: .build_image
   environment:
     name: development
-  only:
-    - dev
+  only: 
     - dev-cicd
 
 
@@ -27,8 +26,7 @@ build_image_prod:
   extends: .build_image
   environment:
     name: production
-  only:
-    - main
+  only: 
     - master
 
 
@@ -43,8 +41,7 @@ deploy_dev_app:
     name: production
   script:
     - echo "$BUILD_JOB_ID"
-  only:
-    - dev
+  only: 
     - dev-cicd
 
 ## This section will trigger ArgoCD to deploy the image to the production kubernetes cluster for live traffic.
@@ -57,7 +54,6 @@ deploy_prod_app:
     name: production
   script:
     - echo "$BUILD_JOB_ID"
-  only:
-    - main
+  only: 
     - master
 
