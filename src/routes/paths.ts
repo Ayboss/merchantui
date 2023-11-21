@@ -13,6 +13,9 @@ export enum PRIVATE_PATHS {
   //   ---------------------- //
   TRANSACTIONS = '/transactions',
   SETTINGS = '/settings',
+  // Under SETTINGS
+  PERSONAL_INFO = '/settings/personal-info',
+  BUSINESS_INFO = '/settings/business-info',
   SETTLEMENTS = '/settlements',
   PAYOUTS = '/payouts',
   PAYOUT_OPTIONS = '/payouts/options',
