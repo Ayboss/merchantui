@@ -3,9 +3,9 @@ import SettingsTop from '../SettingsTop';
 
 const BusinessInfo: React.FC<{}> = () => {
   return (
-    <div>
+    <React.Fragment>
       <SettingsTop />
-    </div>
+    </React.Fragment>
   );
 };
 

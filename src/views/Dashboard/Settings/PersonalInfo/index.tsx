@@ -5,13 +5,13 @@ import ProfileInfo from './ProfileInfo';
 
 const PersonalInfo: React.FC<{}> = () => {
   return (
-    <div>
+    <React.Fragment>
       <SettingsTop />
       <div className='flex items-start'>
         <ProfileCard />
         <ProfileInfo />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

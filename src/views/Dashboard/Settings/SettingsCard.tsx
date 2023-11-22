@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-type settingsCardProps = {
-  icon: JSX.Element;
+interface SettingsCardProps {
+  icon: ReactElement;
   title: string;
   text: string;
   path?: string;
-};
+}
 
-const SettingsCard: React.FC<settingsCardProps> = (props) => {
+const SettingsCard: React.FC<SettingsCardProps> = (props) => {
   const { icon, title, text, path } = props;
 
   return (
