@@ -11,6 +11,7 @@ import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/O
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import PersonalInfo from '../views/Dashboard/Settings/PersonalInfo';
+import BusinessInfo from '../views/Dashboard/Settings/BusinnessInfo/Index';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
@@ -21,7 +22,7 @@ import Settlements from '../views/Dashboard/Settlements';
 import { KycVerification } from '../views/KYC';
 import { ServiceStatus } from '../views/Dashboard/ServiceStatus';
 import { WalletHistory } from '../views/Dashboard/WalletHistory';
-import BusinessInfo from '../views/Dashboard/Settings/BusinnessInfo/Index';
+
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
