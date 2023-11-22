@@ -85,10 +85,7 @@ export const NavGroupItem: React.FC<NavGroupItemProps> = (props) => {
         {group} {isAdminOrSupport && <ComingSoonTag className='absolute right-0' />}{' '}
       </p>
       {items.map((item, idx) => (
-        <div
-          key={`${group}-${idx}`}
-          className={clsx('w-full', isAdminOrSupport && 'bg-white opacity-10 cursor-default')}
-        >
+        <div key={`${group}-${idx}`} className={clsx('w-full')}>
           {item.isDropdown ? (
             // @ts-ignore
             <NavDropdownItem {...item}>
@@ -109,7 +106,7 @@ export const NavGroupItem: React.FC<NavGroupItemProps> = (props) => {
             </NavDropdownItem>
           ) : (
             // @ts-ignore
-            <NavLinkItem isAdminOrSupport={isAdminOrSupport} {...item} />
+            <NavLinkItem {...item} />
           )}
         </div>
       ))}
