@@ -21,6 +21,10 @@ const SettingsTop: React.FC<{}> = () => {
         return 'Account Security';
       case '/settings/manage-users':
         return 'Manage Users';
+      case '/settings/api-keys':
+        return 'API Keys';
+      case '/settings/webhooks':
+        return 'Webhooks';
       default:
         return 'Settings';
     }

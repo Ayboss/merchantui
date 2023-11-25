@@ -20,7 +20,8 @@ export enum PRIVATE_PATHS {
   SETTLEMENT_INFO = '/settings/settlement-info',
   ACCOUNT_SECURITY = '/settings/account-security',
   MANAGE_USERS = '/settings/manage-users',
-
+  API_KEYS = '/settings/api-keys',
+  WEB_HOOKS = '/settings/webhooks',
   //
   SETTLEMENTS = '/settlements',
   PAYOUTS = '/payouts',

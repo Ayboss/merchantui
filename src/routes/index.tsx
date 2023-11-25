@@ -16,6 +16,8 @@ import SettlementInfo from '../views/Dashboard/Settings/SettlementInfo';
 import PaymentMethods from '../views/Dashboard/Settings/PaymentMethods';
 import AccountSecurity from '../views/Dashboard/Settings/AccountSecurity';
 import ManageUsers from '../views/Dashboard/Settings/ManageUsers';
+import WebHooks from '../views/Dashboard/Settings/WebHooks';
+import ApiKeys from '../views/Dashboard/Settings/ApiKeys';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
@@ -44,6 +46,8 @@ export const AppRouter = () => {
     PAYMENT_METHODS,
     ACCOUNT_SECURITY,
     MANAGE_USERS,
+    API_KEYS,
+    WEB_HOOKS,
     TRANSACTIONS,
     // BUSINESS_ACTIVATION,
     BUSINESS_INFORMATION,
@@ -90,6 +94,9 @@ export const AppRouter = () => {
         <Route path={PAYMENT_METHODS} element={<PaymentMethods />} />
         <Route path={ACCOUNT_SECURITY} element={<AccountSecurity />} />
         <Route path={MANAGE_USERS} element={<ManageUsers />} />
+        <Route path={API_KEYS} element={<ApiKeys />} />
+        <Route path={WEB_HOOKS} element={<WebHooks />} />
+
         <Route path={PAYOUTS} element={<Payouts />}>
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />

@@ -5,7 +5,9 @@ const {
   SETTLEMENT_INFO,
   PAYMENT_METHODS,
   ACCOUNT_SECURITY,
-  MANAGE_USERS
+  MANAGE_USERS,
+  API_KEYS,
+  WEB_HOOKS
 } = PRIVATE_PATHS;
 
 export const SettingItems = [
@@ -139,7 +141,8 @@ export const SettingItems = [
       </svg>
     ),
     title: 'API Keys',
-    text: 'Copy and paste live API integration keys and view testcredentials'
+    text: 'Copy and paste live API integration keys and view testcredentials',
+    path: API_KEYS
   },
   {
     icon: (
@@ -157,6 +160,7 @@ export const SettingItems = [
       </svg>
     ),
     title: 'Webhook',
-    text: 'Manage bank account credentials for receiving settlement payments'
+    text: 'Manage bank account credentials for receiving settlement payments',
+    path: WEB_HOOKS
   }
 ];
