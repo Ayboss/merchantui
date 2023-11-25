@@ -12,6 +12,10 @@ import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
 import PersonalInfo from '../views/Dashboard/Settings/PersonalInfo';
 import BusinessInfo from '../views/Dashboard/Settings/BusinnessInfo/Index';
+import SettlementInfo from '../views/Dashboard/Settings/SettlementInfo';
+import PaymentMethods from '../views/Dashboard/Settings/PaymentMethods';
+import AccountSecurity from '../views/Dashboard/Settings/AccountSecurity';
+import ManageUsers from '../views/Dashboard/Settings/ManageUsers';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
@@ -36,6 +40,10 @@ export const AppRouter = () => {
     SETTINGS,
     PERSONAL_INFO,
     BUSINESS_INFO,
+    SETTLEMENT_INFO,
+    PAYMENT_METHODS,
+    ACCOUNT_SECURITY,
+    MANAGE_USERS,
     TRANSACTIONS,
     // BUSINESS_ACTIVATION,
     BUSINESS_INFORMATION,
@@ -78,6 +86,10 @@ export const AppRouter = () => {
         <Route path={SETTINGS} element={<Settings />} />
         <Route path={PERSONAL_INFO} element={<PersonalInfo />} />
         <Route path={BUSINESS_INFO} element={<BusinessInfo />} />
+        <Route path={SETTLEMENT_INFO} element={<SettlementInfo />} />
+        <Route path={PAYMENT_METHODS} element={<PaymentMethods />} />
+        <Route path={ACCOUNT_SECURITY} element={<AccountSecurity />} />
+        <Route path={MANAGE_USERS} element={<ManageUsers />} />
         <Route path={PAYOUTS} element={<Payouts />}>
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />

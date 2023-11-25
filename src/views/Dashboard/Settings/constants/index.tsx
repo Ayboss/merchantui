@@ -1,5 +1,12 @@
 import { PRIVATE_PATHS } from '../../../../routes/paths';
-const { PERSONAL_INFO, BUSINESS_INFO } = PRIVATE_PATHS;
+const {
+  PERSONAL_INFO,
+  BUSINESS_INFO,
+  SETTLEMENT_INFO,
+  PAYMENT_METHODS,
+  ACCOUNT_SECURITY,
+  MANAGE_USERS
+} = PRIVATE_PATHS;
 
 export const SettingItems = [
   {
@@ -56,7 +63,8 @@ export const SettingItems = [
       </svg>
     ),
     title: 'Settlement Info',
-    text: 'Manage bank account credentials for receiving settlement payments'
+    text: 'Manage bank account credentials for receiving settlement payments',
+    path: SETTLEMENT_INFO
   },
   {
     icon: (
@@ -74,7 +82,8 @@ export const SettingItems = [
       </svg>
     ),
     title: 'Payment Methods',
-    text: 'Setup your preferred payment method for your business.'
+    text: 'Setup your preferred payment method for your business.',
+    path: PAYMENT_METHODS
   },
   {
     icon: (
@@ -92,7 +101,8 @@ export const SettingItems = [
       </svg>
     ),
     title: 'Account Security',
-    text: 'Manage bank account credentials for receiving settlement payments'
+    text: 'Manage bank account credentials for receiving settlement payments',
+    path: ACCOUNT_SECURITY
   },
   {
     icon: (
@@ -110,7 +120,8 @@ export const SettingItems = [
       </svg>
     ),
     title: 'Manage Users',
-    text: 'Manage bank account credentials for receiving settlement payments'
+    text: 'Manage bank account credentials for receiving settlement payments',
+    path: MANAGE_USERS
   },
   {
     icon: (
