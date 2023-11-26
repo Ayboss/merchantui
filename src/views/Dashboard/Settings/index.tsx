@@ -5,10 +5,10 @@ import SettingsCard from './SettingsCard';
 const Settings = () => {
   return (
     <div>
-      <h1 className='mb-8 text-[#444] text-[32px] font-medium'>Account Settings</h1>
+      <h1 className='mb-8 text-[#444] text-[25px] font-medium'>Account Settings</h1>
       <div className='flex flex-wrap'>
-        {SettingItems.map((item, index) => (
-          <SettingsCard key={index} {...item} />
+        {SettingItems.map((item) => (
+          <SettingsCard key={item.title} {...item} />
         ))}
       </div>
     </div>
