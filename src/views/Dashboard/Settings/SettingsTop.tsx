@@ -13,6 +13,18 @@ const SettingsTop: React.FC<{}> = () => {
         return 'Personal Info';
       case '/settings/business-info':
         return 'Business Info';
+      case '/settings/settlement-info':
+        return 'Settlement Info';
+      case '/settings/payment-method':
+        return 'Payment Options';
+      case '/settings/account-security':
+        return 'Account Security';
+      case '/settings/manage-users':
+        return 'Manage Users';
+      case '/settings/api-keys':
+        return 'API Keys';
+      case '/settings/webhooks':
+        return 'Webhooks';
       default:
         return 'Settings';
     }
