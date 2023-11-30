@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import HomeIcon from '../../../assets/icons/homePage-icon.svg';
 import ForwardIcon from '../../../assets/icons/forwardArrow-icon.svg';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 
@@ -33,8 +32,6 @@ const SettingsTop: React.FC<{}> = () => {
 
   return (
     <div className='flex items-center mb-8'>
-      <img src={HomeIcon} alt='Home icon' className='h-[16px] w-[16px] mr-2' />
-      <img src={ForwardIcon} alt='Forward icon' className='h-[24px] w-[24px] mr-2' />
       <p className='text-[#444444] text-[14px] font-normal mr-2'>
         <NavLink to={PRIVATE_PATHS.SETTINGS}>Settings</NavLink>
       </p>

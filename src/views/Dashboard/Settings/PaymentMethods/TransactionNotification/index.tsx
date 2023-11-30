@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleSwitch from '../ToggleContent2';
+import ToggleSwitch from '../ToggleContent';
 const TransNotification: React.FC = () => {
   return (
     <React.Fragment>

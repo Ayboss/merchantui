@@ -24,13 +24,12 @@ export default defineConfig({
     setupFiles: './setupTests.js'
   },
   server: {
-    hmr:{overlay: false},
+    hmr: { overlay: false },
     watch: {
       usePolling: true
-      ,
     },
     host: true,
-    staticPort:true,
-    port: 5173, // This is the port which we will use in docker
+    staticPort: true,
+    port: 5173 // This is the port which we will use in docker
   }
 } as VitestConfigExport);

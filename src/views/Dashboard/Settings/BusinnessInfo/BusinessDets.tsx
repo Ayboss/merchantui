@@ -2,7 +2,7 @@ import React from 'react';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import EditIcon from '../../../../assets/img/edit_Icon.png';
 
-const ProfileInfo: React.FC<{}> = () => {
+const ProfileInfo: React.FC = () => {
   return (
     <div className='w-[746px] h-[600px] rounded-[5px] bg-white border border-solid border-[#F5F5F8]'>
       <p className='pt-7 pl-7 text-[#444] text-[21px] font-semibold'>My Business</p>
