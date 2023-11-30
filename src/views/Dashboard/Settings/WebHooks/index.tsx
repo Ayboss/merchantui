@@ -5,8 +5,9 @@ import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import ToggleSwitch from '../PaymentMethods/ToggleContent2';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
+import { Button } from '../../../../components';
 
-const WebHooks: React.FC<{}> = () => {
+const WebHooks: React.FC = () => {
   return (
     <React.Fragment>
       <SettingsTop />
@@ -37,10 +38,15 @@ const WebHooks: React.FC<{}> = () => {
             <ToggleSwitch title='Test Webhook' text='https://testwebhookurl.com' />
           </div>
           <BorderDivider />
-          <div className='flex items-center justify-center h-[45px] w-[188px] bg-[#6231F4] rounded-[6px] ml-7 mt-8'>
-            <img src={SaveSVG} alt='' />
-            <button className='py-4 text-white text-[14px] font-medium ml-2'>Save Changes</button>
-          </div>
+          <Button
+            className='bg-[#6231F4] ml-7 mt-8 w-[188px] h-[45px] rounded-[10px]'
+            name={
+              <span className=' text-[11px] flex items-center gap-[10px] justify-center  font-extrabold'>
+                <img src={SaveSVG} alt='' />
+                Save Changes
+              </span>
+            }
+          />
         </div>
       </div>
     </React.Fragment>

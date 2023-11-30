@@ -4,6 +4,7 @@ interface RadioButtonOption {
   title: string;
   description: string;
   statements: string[];
+  id: number;
 }
 
 interface RadioButtonProps {
@@ -23,7 +24,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({ options, onChange }) => {
     <div>
       {options.map((option, index) => (
         <div
-          key={index}
+          key={option.id}
           className='mb-6 pl-4 py-4 bg-white border border-solid border-[#E4E4E7] rounded-[5px] w-[550px] '
         >
           <label className='flex items-center space-x-4'>

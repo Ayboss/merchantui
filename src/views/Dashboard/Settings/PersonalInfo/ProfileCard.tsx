@@ -2,7 +2,7 @@ import React from 'react';
 import { getFromLocal } from '../../../../utils';
 import { UserDetails } from '../../../../services/hooks/types';
 
-const ProfileCard: React.FC<{}> = () => {
+const ProfileCard: React.FC = () => {
   const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
 
   return (

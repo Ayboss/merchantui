@@ -3,7 +3,7 @@ import SettingsTop from '../SettingsTop';
 import ProfileCard from './ProfileCard';
 import ProfileInfo from './ProfileInfo';
 
-const PersonalInfo: React.FC<{}> = () => {
+const PersonalInfo: React.FC = () => {
   return (
     <React.Fragment>
       <SettingsTop />

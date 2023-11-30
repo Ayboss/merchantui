@@ -2,10 +2,12 @@ interface RadioButtonOption {
   title: string;
   description: string;
   statements: string[];
+  id: number;
 }
 
 export const options: RadioButtonOption[] = [
   {
+    id: 1,
     title: 'My Wallet',
     description: 'This is an account we have provided for you at no extra cost.',
     statements: [
@@ -15,6 +17,7 @@ export const options: RadioButtonOption[] = [
     ]
   },
   {
+    id: 2,
     title: 'My Bank Account',
     description: 'This is a your personal business account.',
     statements: [

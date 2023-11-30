@@ -2,13 +2,12 @@ import React from 'react';
 import SettingsTop from '../SettingsTop';
 import PaymentSVG from '../../../../assets/icons/payment-icon.svg';
 import TabsContainer from './TabsContainer';
-// import Header from '../Header';
 
-const PaymentMethods = () => {
+const PaymentMethods: React.FC = () => {
   return (
     <React.Fragment>
       <SettingsTop />
-      <div className='flex items-start'>
+      <div className='flex items-start gap-10'>
         <div className='w-[300px] h-[281px] bg-white rounded-[5px] border border-[#F4F4F5] flex flex-col items-center justify-center '>
           <img src={PaymentSVG} alt='Payment Icon' className='h-[50px] w-[50px] mb-5' />
           <div className='bg-[#F5F5F8] w-[250px] h-[161px] flex flex-col items-center justify-center py-5 px-2'>
@@ -18,7 +17,7 @@ const PaymentMethods = () => {
             </p>
           </div>
         </div>
-        <div className='w-[746px] h-[754px] bg-white rounded-[12px] ml-7 pt-8'>
+        <div className='w-[746px] h-[754px] bg-white rounded-[12px]  pt-8'>
           <h3 className='text-[#444] text-[21px] pl-7 mb-10 font-semibold'>
             Payment Configuration
           </h3>
