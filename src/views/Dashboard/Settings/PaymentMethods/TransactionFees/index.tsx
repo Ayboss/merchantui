@@ -2,7 +2,7 @@ import React from 'react';
 import SaveSVG from '../../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../../components';
 import BorderDivider from '../../BorderDIvider';
-import ToggleSwitch from '../ToggleContent2';
+import ToggleSwitch from '../ToggleContent';
 
 const TransactionFees: React.FC = () => {
   return (

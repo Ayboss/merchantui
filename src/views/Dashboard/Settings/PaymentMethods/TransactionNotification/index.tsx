@@ -1,8 +1,8 @@
 import React from 'react';
-import ToggleSwitch from '../ToggleContent2';
 import SaveSVG from '../../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../../components';
 import BorderDivider from '../../BorderDIvider';
+import ToggleSwitch from '../ToggleContent';
 const TransNotification: React.FC = () => {
   return (
     <div>

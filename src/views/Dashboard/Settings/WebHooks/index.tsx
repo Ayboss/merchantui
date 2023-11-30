@@ -3,9 +3,9 @@ import SettingsTop from '../SettingsTop';
 import WebHookSVG from '../../../../assets/icons/webhook-icon.svg';
 import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
-import ToggleSwitch from '../PaymentMethods/ToggleContent2';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../components';
+import ToggleSwitch from '../PaymentMethods/ToggleContent';
 
 const WebHooks: React.FC = () => {
   return (

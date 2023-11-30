@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
 
 interface ToggleSwitchProps {
   title: string;
+  text?: string;
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ title }) => {
+const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ title, text }) => {
   const [isPaymentOn, setIsPaymentOn] = useState(false);
 
   const handleToggle = () => {
@@ -29,8 +29,8 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ title }) => {
           </div>
         </label>
         <div className='ml-4'>
-          <p className={clsx(isPaymentOn ? 'text-gray-700' : 'text-grey-400')}>
-            Payment Option {isPaymentOn ? 'On' : 'Off'}
+          <p className={`text-${isPaymentOn ? 'gray-700' : 'gray-400'}`}>
+            {text || `Payment Option ${isPaymentOn ? 'On' : 'Off'} `}
           </p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getFromLocal } from '../../../../utils';
+import defaultProfile from '../../../../assets/icons/defaultProfile.svg';
 import { UserDetails } from '../../../../services/hooks/types';
 import { Button } from '../../../../components';
 
@@ -9,7 +10,11 @@ const BusinessCard: React.FC<{}> = () => {
   return (
     <div>
       <div className='flex flex-col justify-center items-center w-[300px] h-[423px] rounded-[5px] bg-white border border-solid border-[#F5F5F8] mr-6 pt-6'>
-        <img src='' alt='' className='h-[120px] w-[120px] rounded-[120px]' />
+        <img
+          src={defaultProfile}
+          alt='defaultProfile'
+          className='h-[120px] w-[120px] rounded-[120px]'
+        />
         <p className='text-[20px] text-[#444] font-semibold mt-5 mb-2'>
           {user?.firstName} {user?.lastName}
         </p>

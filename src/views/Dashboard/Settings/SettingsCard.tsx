@@ -18,7 +18,7 @@ const SettingsCard: React.FC<SettingsCardProps> = (props) => {
     >
       <div className='pl-6 pt-6'>
         <div className='h-[50px] w-[50px] mb-8'>{icon}</div>
-        <h3 className='text-[#444] text-[18px] font-medium'>{title}</h3>
+        <h3 className='text-[#444] text-base font-medium'>{title}</h3>
         <p className='text-[#A1A1AA] text-[14px] font-normal w-[278px]'>{text}</p>
       </div>
     </Link>
