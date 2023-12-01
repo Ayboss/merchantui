@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { getFromLocal } from '../../../../utils';
 import defaultProfile from '../../../../assets/icons/defaultProfile.svg';
 import { UserDetails } from '../../../../services/hooks/types';
 
 const ProfileCard: React.FC = () => {
   const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
+  const [files, setFiles] = useState([]);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png']
+    },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        ) as any
+      );
+    }
+  });
 
   return (
     <div
@@ -13,11 +31,15 @@ const ProfileCard: React.FC = () => {
       }}
       className='flex flex-col justify-center items-center w-[300px] h-[423px] rounded-[5px] bg-white border border-solid border-[#F5F5F8] mr-6 pt-6'
     >
-      <img
-        src={defaultProfile}
-        alt='defaultProfile'
-        className='h-[120px] w-[120px] rounded-[120px]'
-      />
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <img
+          // @ts-ignore
+          src={files[0]?.preview ?? defaultProfile}
+          alt='defaultProfile'
+          className='h-[120px] w-[120px] cursor-pointer rounded-[120px] object-cover object-center '
+        />
+      </div>
       <p className='text-[20px] text-[#444] font-semibold mt-5 mb-2'>
         {user?.firstName} {user?.lastName}
       </p>

@@ -4,7 +4,7 @@ export interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputEle
   label?: string;
   name: string;
   type?: string;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
   value?: string;
   errorText?: any;

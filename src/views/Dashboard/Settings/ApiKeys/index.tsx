@@ -1,14 +1,33 @@
 import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import toast from 'react-hot-toast';
 import SettingsTop from '../SettingsTop';
 import ApiSVG from '../../../../assets/icons/api-icon.svg';
 import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import ResetIconSVG from '../../../../assets/icons/reset-icon.svg';
-import CopyIconSVG from '../../../../assets/icons/copy-icon.svg';
 import { Button } from '../../../../components';
 
+const CopyIcon = () => (
+  <svg
+    className=' cursor-pointer'
+    xmlns='http://www.w3.org/2000/svg'
+    width='24'
+    height='25'
+    viewBox='0 0 24 25'
+    fill='none'
+  >
+    <rect x='8' y='7.5' width='12' height='14' stroke='#6231F4' strokeLinejoin='round' />
+    <path d='M4 17.5C4 17.5 4 4.5 4 3.5H16' stroke='#6231F4' strokeLinecap='round' />
+  </svg>
+);
+
 const ApiKeys: React.FC = () => {
+  const onCopy = () => {
+    toast.success('Copied successfully');
+  };
+
   return (
     <React.Fragment>
       <SettingsTop />
@@ -31,12 +50,30 @@ const ApiKeys: React.FC = () => {
             <TwoRowText
               label='Test Secret Key'
               value='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
-              image={CopyIconSVG}
+              render={
+                <CopyToClipboard
+                  onCopy={onCopy}
+                  text='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
+                >
+                  <button>
+                    <CopyIcon />
+                  </button>
+                </CopyToClipboard>
+              }
             />
             <TwoRowText
               label='Live Secret Key'
               value='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
-              image={CopyIconSVG}
+              render={
+                <CopyToClipboard
+                  onCopy={onCopy}
+                  text='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
+                >
+                  <button>
+                    <CopyIcon />
+                  </button>
+                </CopyToClipboard>
+              }
             />
           </div>
           <BorderDivider />

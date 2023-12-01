@@ -4,9 +4,10 @@ interface TwoRowTextProps {
   label: string;
   value: string;
   image?: string;
+  render?: JSX.Element;
 }
 
-const TwoRowText: React.FC<TwoRowTextProps> = ({ label, value, image }) => {
+const TwoRowText: React.FC<TwoRowTextProps> = ({ label, value, image, render }) => {
   return (
     <div className='mb-6'>
       <label className='text-[10px] text-[#6F7482] font-medium mb-1'>{label}</label>
@@ -15,6 +16,7 @@ const TwoRowText: React.FC<TwoRowTextProps> = ({ label, value, image }) => {
         {image && (
           <img src={image} style={{ fill: '#6231F4' }} alt='Image' className='ml-4 h-8 w-8 ' />
         )}
+        {render}
       </div>
     </div>
   );

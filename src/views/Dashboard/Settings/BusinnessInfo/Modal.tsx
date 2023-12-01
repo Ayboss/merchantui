@@ -16,7 +16,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   };
 
   return (
-    <Popup title='Update Contact & Password' onClose={onClose}>
+    <Popup title='Update Business Description' onClose={onClose}>
       <BorderDivider />
       <div className='mt-8 '>
         <p className='text-[10px] text-[#6F7482] font-medium mb-1'>Business Description</p>
@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
         <BorderDivider />
         <Button
           className='bg-[#6231F4]  mt-8 w-[180px] h-[50px] rounded-[10px] text-[11px] font-extrabold'
-          name='Save Profile'
+          name='Save'
         />
       </div>
     </Popup>
