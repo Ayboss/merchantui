@@ -3,7 +3,7 @@ import { getFromLocal } from '../../../../utils';
 import { UserDetails } from '../../../../services/hooks/types';
 import TwoRowText from './TwoRowText';
 
-const ProfileInfo: React.FC<{}> = () => {
+const ProfileInfo: React.FC = () => {
   const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
 
   return (

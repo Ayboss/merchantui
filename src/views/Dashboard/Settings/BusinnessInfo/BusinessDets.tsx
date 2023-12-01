@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import EditIcon from '../../../../assets/img/edit_Icon.png';
+import { Button } from '../../../../components';
+import Modal from './Modal';
 
-const ProfileInfo: React.FC = () => {
+const ProfileInfo: React.FC<{}> = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className='w-[746px] h-[600px] rounded-[5px] bg-white border border-solid border-[#F5F5F8]'>
       <p className='pt-7 pl-7 text-[#444] text-[21px] font-semibold'>My Business</p>
@@ -31,10 +43,17 @@ const ProfileInfo: React.FC = () => {
         />
       </div>
       <div className='border border-solid border-[#F5F6FA] my-3'></div>
-      <div className='ml-7 mt-10 flex items-center justify-center h-[45px] w-[188px] bg-[#6231F4] rounded-[10px]'>
-        <img src={EditIcon} alt='' />
-        <button className='py-4 text-white text-[13px] font-medium ml-2'>Edit Description</button>
-      </div>
+      <Button
+        onClick={() => handleEditClick()}
+        className='bg-[#6231F4] ml-7 mt-5 w-[188px] h-[45px] rounded-[10px]'
+        name={
+          <span className=' text-[11px] flex items-center gap-[10px] justify-center  font-extrabold'>
+            <img src={EditIcon} alt='' />
+            Edit Description
+          </span>
+        }
+      />
+      {isModalOpen && <Modal onClose={closeModal} />}
     </div>
   );
 };

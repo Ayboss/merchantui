@@ -2,6 +2,7 @@ import React from 'react';
 import { getFromLocal } from '../../../../utils';
 import defaultProfile from '../../../../assets/icons/defaultProfile.svg';
 import { UserDetails } from '../../../../services/hooks/types';
+import { Button } from '../../../../components';
 
 const BusinessCard: React.FC<{}> = () => {
   const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
@@ -18,9 +19,11 @@ const BusinessCard: React.FC<{}> = () => {
           {user?.firstName} {user?.lastName}
         </p>
         <p className='text-[13px] text-[#A1A1AA] font-medium'>{user?.email}</p>
-        <div className='h-[40px] w-[180px] bg-[#6231F4] rounded-[10px] flex items-center justify-center mt-7'>
-          <button className=' py-4 text-white text-[13px] font-bold'>Upload Brand Identity</button>
-        </div>
+        <Button
+          // onClick={() => }
+          className='bg-[#6231F4] mt-5 w-[180px] h-[40px] rounded-[10px] text-[11px] font-extrabold'
+          name='Upload Brand Identity '
+        />
         <div className='mt-5 w-[250px] h-[62px] bg-[#F5F5F8] flex justify-center items-center'>
           <p className='text-[#A1A1AA] text-center text-[11px]'>
             Larger images will be resized automatically. Maximum upload size is 1 MB

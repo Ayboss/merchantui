@@ -4,7 +4,7 @@ import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import InfoBox from './InfoBox';
 
-const AccountSecurity = () => {
+const AccountSecurity: React.FC = () => {
   return (
     <React.Fragment>
       <SettingsTop />

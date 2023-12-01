@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import PinModal from './PinModal';
 
 interface InfoBoxProps {
   title: string;
@@ -29,7 +30,13 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, text, buttonText }) => {
           </button>
         </div>
       </div>
-      {isModalOpen && <Modal onClose={closeModal} />}
+      {isModalOpen &&
+        (title.toLowerCase().includes('password') ? (
+          <Modal onClose={closeModal} />
+        ) : (
+          <PinModal onClose={closeModal} />
+        ))}
+      {/* {isModalOpen && <Modal onClose={closeModal} />} */}
     </div>
   );
 };

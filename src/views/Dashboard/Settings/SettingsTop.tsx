@@ -3,27 +3,27 @@ import { NavLink, useLocation } from 'react-router-dom';
 import ForwardIcon from '../../../assets/icons/forwardArrow-icon.svg';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 
-const SettingsTop: React.FC<{}> = () => {
+const SettingsTop: React.FC = () => {
   const location = useLocation();
   const dynamicTitle = useMemo(() => {
     const pathname = location.pathname;
 
     switch (pathname) {
-      case '/settings/personal-info':
+      case PRIVATE_PATHS.PERSONAL_INFO:
         return 'Personal Info';
-      case '/settings/business-info':
+      case PRIVATE_PATHS.BUSINESS_INFO:
         return 'Business Info';
-      case '/settings/settlement-info':
+      case PRIVATE_PATHS.SETTLEMENT_INFO:
         return 'Settlement Info';
-      case '/settings/payment-method':
+      case PRIVATE_PATHS.PAYMENT_METHODS:
         return 'Payment Options';
-      case '/settings/account-security':
+      case PRIVATE_PATHS.ACCOUNT_SECURITY:
         return 'Account Security';
-      case '/settings/manage-users':
+      case PRIVATE_PATHS.MANAGE_USERS:
         return 'Manage Users';
-      case '/settings/api-keys':
+      case PRIVATE_PATHS.API_KEYS:
         return 'API Keys';
-      case '/settings/webhooks':
+      case 'PRIVATE_PATHS.WEB_HOOKS':
         return 'Webhooks';
       default:
         return 'Settings';
