@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import toast from 'react-hot-toast';
 import { getFromLocal } from '../../../../utils';
 import defaultProfile from '../../../../assets/icons/defaultProfile.svg';
 import { UserDetails } from '../../../../services/hooks/types';
+import { useGetProfilePhoto, useUploadProflePhoto } from '../../../../services/hooks';
 
 const ProfileCard: React.FC = () => {
   const user = JSON.parse(getFromLocal('user') as string) as unknown as UserDetails;
-  const [files, setFiles] = useState([]);
+  const [preview, setPreview] = useState([]);
+
+  const { mutateAsync } = useUploadProflePhoto();
+  const { data: profileImage } = useGetProfilePhoto();
+
+  const handlePhotoUpload = async (files: Array<any>) => {
+    try {
+      const formData = new FormData();
+
+      formData.append('profilePhoto', files[0]);
+
+      await Promise.all([mutateAsync(formData)]);
+
+      toast.success('Profile photo updated successfully 🎉🎉');
+    } catch (error: any) {
+      return toast.error(error?.response?.data?.error || error?.response?.data?.message);
+    }
+  };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -14,14 +33,16 @@ const ProfileCard: React.FC = () => {
     },
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
-      setFiles(
+      setPreview(
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file)
           })
         ) as any
       );
-    }
+      handlePhotoUpload(acceptedFiles);
+    },
+    maxSize: 1000000
   });
 
   return (
@@ -35,7 +56,7 @@ const ProfileCard: React.FC = () => {
         <input {...getInputProps()} />
         <img
           // @ts-ignore
-          src={files[0]?.preview ?? defaultProfile}
+          src={profileImage?.data ?? preview[0]?.preview ?? defaultProfile}
           alt='defaultProfile'
           className='h-[120px] w-[120px] cursor-pointer rounded-[120px] object-cover object-center '
         />
@@ -44,7 +65,11 @@ const ProfileCard: React.FC = () => {
         {user?.firstName} {user?.lastName}
       </p>
       <p className='text-[13px] text-[#A1A1AA] font-medium'>{user?.email}</p>
-      <div className='h-[40px] w-[180px] bg-[#6231F4] rounded-[10px] flex items-center justify-center mt-7'>
+      <div
+        {...getRootProps()}
+        className='h-[40px] w-[180px] bg-[#6231F4] rounded-[10px] flex items-center justify-center mt-7'
+      >
+        <input {...getInputProps()} />
         <button className=' py-4 text-white text-[13px] font-bold'>Upload New Photo</button>
       </div>
       <div className='mt-5 w-[250px] h-[62px] bg-[#F5F5F8] flex justify-center items-center'>

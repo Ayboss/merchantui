@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import EditIcon from '../../../../assets/img/edit_Icon.png';
 import { Button } from '../../../../components';
+import { useProfileQuery } from '../../../../services/hooks/useGetProfileQuery';
 import Modal from './Modal';
 
 const ProfileInfo: React.FC<{}> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data } = useProfileQuery();
 
   const handleEditClick = () => {
     setIsModalOpen(true);
@@ -22,25 +25,22 @@ const ProfileInfo: React.FC<{}> = () => {
       <div className='px-7'>
         <div className='flex items-center w-full'>
           <div className='w-1/2 mr-4'>
-            <TwoRowText label='Business Name' value='Global Ventures' />
+            <TwoRowText label='Business Name' value={data?.data?.client?.name} />
           </div>
           <div className='w-1/2'>
-            <TwoRowText label='Business Registration Number' value='1234567' />
+            <TwoRowText label='Tax Identification Number' value={data?.data?.tin} />
           </div>
         </div>
         <div className='flex items-center w-full'>
           <div className='w-1/2 mr-4'>
-            <TwoRowText label='Business Country' value='Nigeria' />
+            <TwoRowText label='Business Country' value={data?.data?.country} />
           </div>
           <div className='w-1/2'>
-            <TwoRowText label='Business State/Region' value='Lagos' />
+            <TwoRowText label='Business State/Region' value={data?.data?.state} />
           </div>
         </div>
-        <TwoRowText label='Business Address' value='123, Sample street, Lagos ' />
-        <TwoRowText
-          label='Business Description'
-          value='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
-        />
+        <TwoRowText label='Business Address' value={data?.data?.businessAddress} />
+        <TwoRowText label='Business Description' value={data?.data?.businessInformation} />
       </div>
       <div className='border border-solid border-[#F5F6FA] my-3'></div>
       <Button

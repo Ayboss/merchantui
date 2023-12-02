@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Popup, Button } from '../../../../components';
 import BorderDivider from '../../Settings/BorderDIvider';
+import { useProfileMutation } from '../../../../services/hooks/useProfileMutation';
 
 interface ModalProps {
   onClose: () => void;
@@ -9,10 +11,23 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClose }) => {
   const [text, setText] = useState<string>('');
 
+  const { mutateAsync, isLoading } = useProfileMutation();
+
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputText = event.target.value.slice(0, 250);
 
     setText(inputText);
+  };
+
+  const handleSubmit = () => {
+    mutateAsync({ businessInformation: text })
+      .then(() => {
+        toast.success('Business description updated successfully 🎉🎉');
+        onClose();
+      })
+      .catch((error: any) => {
+        return toast.error(error?.response?.data?.error || error?.response?.data?.message);
+      });
   };
 
   return (
@@ -39,6 +54,8 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
         <Button
           className='bg-[#6231F4]  mt-8 w-[180px] h-[50px] rounded-[10px] text-[11px] font-extrabold'
           name='Save'
+          isBusy={isLoading}
+          onClick={handleSubmit}
         />
       </div>
     </Popup>

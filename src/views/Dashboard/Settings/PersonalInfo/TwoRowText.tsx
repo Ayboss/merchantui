@@ -2,7 +2,7 @@ import React from 'react';
 
 interface TwoRowTextProps {
   label: string;
-  value: string;
+  value: string | number | undefined;
   image?: string;
   render?: JSX.Element;
 }

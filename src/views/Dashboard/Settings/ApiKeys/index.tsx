@@ -8,6 +8,7 @@ import BorderDivider from '../BorderDIvider';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import ResetIconSVG from '../../../../assets/icons/reset-icon.svg';
 import { Button } from '../../../../components';
+// import { useGetApiKeys } from '../../../../services/hooks/useGetApiKeys';
 
 const CopyIcon = () => (
   <svg
@@ -24,6 +25,8 @@ const CopyIcon = () => (
 );
 
 const ApiKeys: React.FC = () => {
+  // const { data } = useGetApiKeys();
+
   const onCopy = () => {
     toast.success('Copied successfully');
   };
