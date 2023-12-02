@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SettingsTop from '../SettingsTop';
 import WebHookSVG from '../../../../assets/icons/webhook-icon.svg';
 import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../components';
-import ToggleSwitch from '../PaymentMethods/ToggleContent';
+import InputContainer from './InputContainer';
 
 const WebHooks: React.FC = () => {
+  const [liveWebhookUrl, setLiveWebhookUrl] = useState('');
+  const [testWebhookUrl, setTestWebhookUrl] = useState('');
+
+  const handleWebhookUrlChange1 = (newValue: string) => {
+    setLiveWebhookUrl(newValue);
+  };
+
+  const handleWebhookUrlChange2 = (newValue: string) => {
+    setTestWebhookUrl(newValue);
+  };
+
   return (
     <React.Fragment>
       <SettingsTop />
@@ -34,8 +45,18 @@ const WebHooks: React.FC = () => {
               <br /> of the associated event.
             </p>
             <h3 className='font-bold mb-10'>Turn on to activate Webhooks</h3>
-            <ToggleSwitch title='Live Webhook' text='https://livewebhookurl.com' />
-            <ToggleSwitch title='Test Webhook' text='https://testwebhookurl.com' />
+            <InputContainer
+              label='Live Webhook'
+              value={liveWebhookUrl}
+              placeholder='https://livewebhookurl.com'
+              onSave={handleWebhookUrlChange1}
+            />
+            <InputContainer
+              label='Test Webhook'
+              value={testWebhookUrl}
+              placeholder='https://testwebhookurl.com'
+              onSave={handleWebhookUrlChange2}
+            />
           </div>
           <BorderDivider />
           <Button
