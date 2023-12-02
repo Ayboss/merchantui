@@ -22,7 +22,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ title, text }) => {
           <input type='checkbox' checked={isPaymentOn} onChange={handleToggle} className='hidden' />
           <div className='toggle-switch relative w-10 h-5 bg-gray-300 rounded-full p-1'>
             <div
-              className={`toggle-slider absolute w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ${
+              className={`toggle-slider absolute w-3 h-3 bg-white rounded-full transform transition-transform duration-300 ${
                 isPaymentOn ? 'translate-x-5' : 'translate-x-0'
               }`}
             ></div>
