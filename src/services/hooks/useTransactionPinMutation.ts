@@ -11,7 +11,7 @@ export const TRANSACTION_PIN_QUERY_KEY = ['TRANSACTION_PIN_QUERY_KEY'];
 
 export const useTransactionPinMutation = () => {
   const load = useCallback(async (data: TransactionPinRequestType) => {
-    const response = await apiInstance('merchant').put('/change-merchant-pin', data, {
+    const response = await apiInstance('payout').put('/change-merchant-pin', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

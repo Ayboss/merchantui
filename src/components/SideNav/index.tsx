@@ -8,7 +8,7 @@ import { PRIVATE_PATHS, REGULAR_PATHS } from '../../routes/paths';
 import { useProfileQuery } from '../../services/hooks/useGetProfileQuery';
 import { usePopupContext } from '../../context/PopupContext';
 import { NavDropdownItem, NavLinkItem, NavLinkItemPropsType } from './NavLinkItem';
-import { ComingSoonTag, DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
+import { DashboardNavLinkItemIcon, NavGroupType, NavLinkList } from './constants';
 
 export const DashboardSideNav = () => {
   const navigate = useNavigate();
@@ -77,12 +77,12 @@ type NavGroupItemProps = {
 export const NavGroupItem: React.FC<NavGroupItemProps> = (props) => {
   const { group, items, setShowInitiatePopup } = props;
 
-  const isAdminOrSupport = group === 'Administration';
+  // const isAdminOrSupport = group === 'Administration';
 
   return (
     <div className='w-full pt-5 relative pb-[25px] flex flex-col items-start gap-[15px] border-solid border-t border-[#E4E4E7]'>
       <p className=' uppercase flex items-center text-[10px] text-gray-400 font-bold tracking-[1px]'>
-        {group} {isAdminOrSupport && <ComingSoonTag className='absolute right-0' />}{' '}
+        {group}{' '}
       </p>
       {items.map((item, idx) => (
         <div key={`${group}-${idx}`} className={clsx('w-full')}>

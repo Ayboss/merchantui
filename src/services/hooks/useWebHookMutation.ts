@@ -10,7 +10,7 @@ export const WEB_HOOK_QUERY_KEY = ['WEB_HOOK_QUERY_KEY'];
 
 export const useWebHookMutation = () => {
   const load = useCallback(async (data: webHookRequestType) => {
-    const response = await apiInstance('merchant').post('/settings/webhooks', data, {
+    const response = await apiInstance('merchant').post('/settings/update-webhooks', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

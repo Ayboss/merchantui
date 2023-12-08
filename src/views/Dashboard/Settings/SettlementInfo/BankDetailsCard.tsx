@@ -2,8 +2,13 @@ import React from 'react';
 import CopySVG from '../../../../assets/icons/copy-icon.svg';
 import { Button } from '../../../../components';
 import FlexRow from './FlexRow';
+import EmptyWalletCard from './EmptyWallet';
 
-const BankDetailsCard: React.FC = () => {
+const BankDetailsCard: React.FC<any> = ({ merchantAccount }: { merchantAccount: any }) => {
+  if (merchantAccount?.data?.content?.length < 1) {
+    return <EmptyWalletCard />;
+  }
+
   return (
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
       <p className='text-[#444] text-[16px] font-semibold'>My Bank Account Details</p>

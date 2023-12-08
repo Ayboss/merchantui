@@ -8,7 +8,7 @@ import BorderDivider from '../BorderDIvider';
 import TwoRowText from '../PersonalInfo/TwoRowText';
 import ResetIconSVG from '../../../../assets/icons/reset-icon.svg';
 import { Button } from '../../../../components';
-// import { useGetApiKeys } from '../../../../services/hooks/useGetApiKeys';
+import { useGetApiKeys } from '../../../../services/hooks/useGetApiKeys';
 
 const CopyIcon = () => (
   <svg
@@ -25,7 +25,7 @@ const CopyIcon = () => (
 );
 
 const ApiKeys: React.FC = () => {
-  // const { data } = useGetApiKeys();
+  const { data } = useGetApiKeys();
 
   const onCopy = () => {
     toast.success('Copied successfully');
@@ -52,12 +52,9 @@ const ApiKeys: React.FC = () => {
           <div className='text-[16px] text-[444] mx-7 mt-7 mb-36'>
             <TwoRowText
               label='Test Secret Key'
-              value='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
+              value={data?.data?.sandboxKey! ?? '* * * * * * * * * * * * * * * * * * * * * *'}
               render={
-                <CopyToClipboard
-                  onCopy={onCopy}
-                  text='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
-                >
+                <CopyToClipboard onCopy={onCopy} text={data?.data?.sandboxKey!}>
                   <button>
                     <CopyIcon />
                   </button>
@@ -66,12 +63,9 @@ const ApiKeys: React.FC = () => {
             />
             <TwoRowText
               label='Live Secret Key'
-              value='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
+              value={data?.data?.liveKey ?? '* * * * * * * * * * * * * * * * * * * * * *'}
               render={
-                <CopyToClipboard
-                  onCopy={onCopy}
-                  text='000123_zxcfgvhbjkldewfyujiyokjhgnbmdfghRYSGS567890'
-                >
+                <CopyToClipboard onCopy={onCopy} text={data?.data?.liveKey!}>
                   <button>
                     <CopyIcon />
                   </button>

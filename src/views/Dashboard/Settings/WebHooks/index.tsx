@@ -1,23 +1,71 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import SettingsTop from '../SettingsTop';
 import WebHookSVG from '../../../../assets/icons/webhook-icon.svg';
 import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../components';
+import { useGetWebHooks, useWebHookMutation } from '../../../../services/hooks';
 import InputContainer from './InputContainer';
 
 const WebHooks: React.FC = () => {
-  const [liveWebhookUrl, setLiveWebhookUrl] = useState('');
-  const [testWebhookUrl, setTestWebhookUrl] = useState('');
+  const { data: initalWebhookData, isLoading: isGetWebhookLoading } = useGetWebHooks();
 
-  const handleWebhookUrlChange1 = (newValue: string) => {
-    setLiveWebhookUrl(newValue);
+  const [webhookUrls, setWebhookUrls] = useState({
+    liveUrl: '',
+    testUrl: ''
+  });
+
+  useEffect(() => {
+    if (initalWebhookData?.data?.liveUrl || initalWebhookData?.data?.testUrl) {
+      setWebhookUrls({
+        liveUrl: initalWebhookData?.data?.liveUrl,
+        testUrl: initalWebhookData?.data?.testUrl
+      });
+    }
+  }, [initalWebhookData?.data]);
+
+  const { liveUrl, testUrl } = webhookUrls;
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    setWebhookUrls({
+      ...webhookUrls,
+      [name]: value
+    });
   };
 
-  const handleWebhookUrlChange2 = (newValue: string) => {
-    setTestWebhookUrl(newValue);
+  const { mutateAsync, isLoading } = useWebHookMutation();
+
+  const handleSubmit = () => {
+    if (!liveUrl && !testUrl) {
+      return;
+    }
+
+    mutateAsync({
+      ...webhookUrls
+    })
+      .then(() => {
+        toast.success('Webhook updated successfully 🎉🎉');
+      })
+      .catch((error: any) => {
+        if (Array.isArray(error?.response?.data?.errors)) {
+          const errorMessages = error?.response?.data?.errors;
+
+          errorMessages.forEach((error: any) =>
+            toast.error(`${error?.fieldName} ${error?.message}`)
+          );
+        } else {
+          toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
+        }
+      });
   };
+
+  if (isGetWebhookLoading) {
+    return <WebhooksSkeleton />;
+  }
 
   return (
     <React.Fragment>
@@ -46,16 +94,18 @@ const WebHooks: React.FC = () => {
             </p>
             <h3 className='font-bold mb-10'>Turn on to activate Webhooks</h3>
             <InputContainer
+              name='liveUrl'
               label='Live Webhook'
-              value={liveWebhookUrl}
+              value={liveUrl}
               placeholder='https://livewebhookurl.com'
-              onSave={handleWebhookUrlChange1}
+              onChange={onChange}
             />
             <InputContainer
+              name='testUrl'
               label='Test Webhook'
-              value={testWebhookUrl}
+              value={testUrl}
               placeholder='https://testwebhookurl.com'
-              onSave={handleWebhookUrlChange2}
+              onChange={onChange}
             />
           </div>
           <BorderDivider />
@@ -67,6 +117,9 @@ const WebHooks: React.FC = () => {
                 Save Changes
               </span>
             }
+            type='button'
+            isBusy={isLoading}
+            onClick={handleSubmit}
           />
         </div>
       </div>
@@ -75,3 +128,20 @@ const WebHooks: React.FC = () => {
 };
 
 export default WebHooks;
+
+export const WebhooksSkeleton: React.FC = () => {
+  return (
+    <div className='animate-pulse'>
+      <div className='flex items-start space-x-7'>
+        <div className='w-[300px] h-[425px] bg-gray-200 rounded-[5px]'></div>
+        <div className='flex flex-col w-[746px] h-[633px] bg-gray-200 rounded-[12px] pt-8'>
+          <div className='h-6 bg-gray-200 rounded w-1/4'></div>
+          <div className='h-1 bg-gray-200 rounded w-full mt-4'></div>
+          <div className='h-64 bg-gray-200 rounded w-full mt-7'></div>
+          <div className='h-1 bg-gray-200 rounded w-full mt-12'></div>
+          <div className='h-12 bg-gray-200 rounded w-1/4 mt-8 ml-7'></div>
+        </div>
+      </div>
+    </div>
+  );
+};

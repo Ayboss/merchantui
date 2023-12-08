@@ -10,7 +10,7 @@ import { MerchantKycProvider } from './context/MerchantKycProvider';
 import App from './App';
 import { PopupContextProvider } from './context/PopupContext';
 
-export const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -34,3 +34,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </AuthProvider>
   </React.StrictMode>
 );
+
+export { queryClient };

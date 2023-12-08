@@ -5,13 +5,15 @@ import { apiInstance } from '..';
 export const GET_WEB_HOOK_QUERY_KEY = ['GET_WEB_HOOK_QUERY_KEY'];
 
 export type WebHooksResponseType = {
-  liveURL: string;
-  testUrl: string;
+  data: {
+    liveUrl: string;
+    testUrl: string;
+  };
 };
 
 export const useGetWebHooks = () => {
   const load = useCallback(async () => {
-    const response = await apiInstance('merchant').get('/settings/webhooks', {
+    const response = await apiInstance('merchant').get('/settings/fetch-webhooks', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

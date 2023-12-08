@@ -5,13 +5,15 @@ import { apiInstance } from '..';
 export const GET_API_QUERY_KEY = ['GET_API_QUERY_KEY'];
 
 export type ApiKeysResponseType = {
-  liveKey: string;
-  sandboxKey: string;
+  data: {
+    liveKey: string;
+    sandboxKey: string;
+  };
 };
 
 export const useGetApiKeys = () => {
   const load = useCallback(async () => {
-    const response = await apiInstance('merchant').get('/settings/api-keys', {
+    const response = await apiInstance('merchant').get('/settings/api-keys/info', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

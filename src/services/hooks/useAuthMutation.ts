@@ -7,6 +7,7 @@ export const LOGIN_MUTATION_KEY = ['login'];
 export const SIGNUP_MUTATION_KEY = ['signup'];
 export const FORGOT_PASSWORD_MUTATION_KEY = ['forgotPassword'];
 export const RESET_PASSWORD_MUTATION_KEY = ['resetPassword'];
+export const CHANGE_PASSWORD_MUTATION_KEY = ['changePassword'];
 
 export type LoginRequestPayloadType = {
   username: string;
@@ -82,5 +83,22 @@ export const useResetPasswordMutation = () => {
   return useMutation({
     mutationFn: request,
     mutationKey: RESET_PASSWORD_MUTATION_KEY
+  });
+};
+
+export const useChangePasswordMutation = () => {
+  const request = useCallback(async (data: any) => {
+    const response = await apiInstance('auth').post('/accounts/change-password', data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
+      }
+    });
+
+    return response.data;
+  }, []);
+
+  return useMutation({
+    mutationFn: request,
+    mutationKey: CHANGE_PASSWORD_MUTATION_KEY
   });
 };
