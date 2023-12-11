@@ -6,7 +6,7 @@ export const RESET_API_QUERY_KEY = ['RESET_API_QUERY_KEY'];
 
 export const useResetApiMutation = () => {
   const load = useCallback(async (data: any) => {
-    const response = await apiInstance('payout').put('/api/settings/api-keys/reset', data, {
+    const response = await apiInstance('payout').put('/settings/api-keys/reset', data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }
