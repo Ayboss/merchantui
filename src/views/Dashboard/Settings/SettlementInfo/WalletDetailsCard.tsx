@@ -1,13 +1,26 @@
 import React from 'react';
 import CopySVG from '../../../../assets/icons/copy-icon.svg';
 import { Button } from '../../../../components';
+import { AccountCardPicker } from '../../../../components/AccountCardPicker';
 import FlexRow from './FlexRow';
 
 const WalletDetailsCard: React.FC = () => {
+  // const [activeWallet, setActiveWallet] = useState<any>(null);
   return (
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
-      <p className='text-[#444] text-[16px] font-semibold'>My Wallet Details</p>
-      <div className='border border-[#E4E4E7] mt-5 mb-7'></div>
+      <p className='text-[#444] text-[16px] font-semibold'>Virtual Account Details</p>
+      <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
+      <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
+        <AccountCardPicker
+        // key={item.accountNumber}
+        // currency={item.currency}
+        // account={item.accountNumber}
+        // active={item.accountNumber === activeWallet?.accountNumber}
+        // onClick={() => setActiveWallet(item)}
+        />
+        <AccountCardPicker />
+      </div>
+      <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
       <FlexRow leftItem='Bank Name' rightItem='Wema' />
       <FlexRow leftItem='Account Number' rightItem='1234567890' />
       <FlexRow leftItem='Account Name' rightItem='Sample Business Name' />
