@@ -33,7 +33,7 @@ export const CREATE_USER_QUERY_KEY = ['CREATE_USER_QUERY_KEY'];
 
 export const useCreateUser = () => {
   const request = useCallback(async (data: CreateUserRequestPayloadType) => {
-    const response = await apiInstance('auth').post('/api/v1/users/create', data, {
+    const response = await apiInstance('auth').post('/users/create', data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
