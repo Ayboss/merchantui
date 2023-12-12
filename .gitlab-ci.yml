@@ -18,7 +18,7 @@ build_image_dev:
   environment:
     name: development
   only: 
-    - dev-cicd
+    - dev
 
 
 ## This section builds the docker image for production deployments
@@ -42,7 +42,7 @@ deploy_dev_app:
   script:
     - echo "$BUILD_JOB_ID"
   only: 
-    - dev-cicd
+    - dev
 
 ## This section will trigger ArgoCD to deploy the image to the production kubernetes cluster for live traffic.
 deploy_prod_app:
