@@ -35,7 +35,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   });
   const { mutateAsync, isLoading } = useChangePasswordMutation();
 
-  const onSubmit: SubmitHandler<FormValues> = (values) => {
+  const onSubmit: SubmitHandler<any> = (values) => {
     mutateAsync({
       ...values
     })
