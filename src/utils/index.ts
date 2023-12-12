@@ -73,3 +73,11 @@ export async function compressImage(file: File) {
     console.error(error);
   }
 }
+
+export const formatTimeArray = (date: Array<number>) => {
+  date[1] -= 1; // adjust month index to be 0-based
+  // @ts-ignore
+  const newDate = new Date(Date.UTC(...date));
+
+  return newDate.toUTCString();
+};

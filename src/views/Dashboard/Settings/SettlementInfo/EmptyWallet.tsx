@@ -17,7 +17,7 @@ const EmptyWalletCard: React.FC = () => {
 
   return (
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
-      <p className='text-[#444] text-[16px] font-semibold'>My Wallet Details</p>
+      <p className='text-[#444] text-[16px] font-semibold'>My Bank Details</p>
       <div className='border border-[#E4E4E7] mt-5 mb-7'></div>
       <div className='flex flex-col items-center justify-center'>
         <img src={Cloud} alt='' />

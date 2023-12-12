@@ -17,7 +17,9 @@ import {
 } from '../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../routes/paths';
 
-export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> = () => {
+export const SettlementBankInfo: React.FC<
+  Partial<ChildComponentsDefaultProps> & { onlySettlmentInfo?: boolean }
+> = ({ onlySettlmentInfo }) => {
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
   const { mutateAsync: verifyBankInfo, isLoading, data: bankDetails } = useVerifyBankAccount();
   const { mutateAsync: updateSettlementDetails, isLoading: isSettlementLoading } =
@@ -62,18 +64,29 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
     values
   ) => {
     try {
-      await Promise.all([
-        updateSettlementDetails({
-          bankCode,
-          accountNumber,
-          accountName: bankDetails?.data?.accountName,
-          bank: bankName
-        }),
-        createPin({
-          pin: values.pin,
-          pinConfirmation: values.pinConfirmation
-        })
-      ]);
+      if (onlySettlmentInfo) {
+        await Promise.all([
+          updateSettlementDetails({
+            bankCode,
+            accountNumber,
+            accountName: bankDetails?.data?.accountName,
+            bank: bankName
+          })
+        ]);
+      } else {
+        await Promise.all([
+          updateSettlementDetails({
+            bankCode,
+            accountNumber,
+            accountName: bankDetails?.data?.accountName,
+            bank: bankName
+          }),
+          createPin({
+            pin: values.pin,
+            pinConfirmation: values.pinConfirmation
+          })
+        ]);
+      }
 
       toast.success('Settlement Information updated successfully 🎉🎉');
       navigate(PRIVATE_PATHS.OVERVIEW);
@@ -141,33 +154,37 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
           InputClassName=' h-[40px]  bg-[#F4F4F5]'
         />
 
-        <div className='w-full'>
-          <h3 className='text-[#444] text-base font-bold tracking-[0.18px]'>
-            Setup Transaction Pin
-          </h3>
-          <p className='text-[#6F7482] font-normal leading-[24px] text-[12px]'>
-            This pin will be required for every payout you initiate
-          </p>
-        </div>
+        {!onlySettlmentInfo && (
+          <div className='w-full'>
+            <h3 className='text-[#444] text-base font-bold tracking-[0.18px]'>
+              Setup Transaction Pin
+            </h3>
+            <p className='text-[#6F7482] font-normal leading-[24px] text-[12px]'>
+              This pin will be required for every payout you initiate
+            </p>
+          </div>
+        )}
 
-        <div className='w-full flex <1024:flex-col gap-5 items-start'>
-          <CustomInput
-            placeholder='* * * *'
-            label='Transaction Pin'
-            className='w-full'
-            type='password'
-            InputClassName=' h-[40px]'
-            {...register('pin', { required: true })}
-          />
-          <CustomInput
-            placeholder='* * * *'
-            label='Re-enter Transaction Pin'
-            className='w-full'
-            InputClassName=' h-[40px]'
-            type='password'
-            {...register('pinConfirmation', { required: true })}
-          />
-        </div>
+        {!onlySettlmentInfo && (
+          <div className='w-full flex <1024:flex-col gap-5 items-start'>
+            <CustomInput
+              placeholder='* * * *'
+              label='Transaction Pin'
+              className='w-full'
+              type='password'
+              InputClassName=' h-[40px]'
+              {...register('pin', { required: true })}
+            />
+            <CustomInput
+              placeholder='* * * *'
+              label='Re-enter Transaction Pin'
+              className='w-full'
+              InputClassName=' h-[40px]'
+              type='password'
+              {...register('pinConfirmation', { required: true })}
+            />
+          </div>
+        )}
 
         <div className='w-full mt-10 flex items-center justify-between'>
           <Button

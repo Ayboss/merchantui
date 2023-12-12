@@ -24,7 +24,7 @@ export type GetUsersResponseType = {
 
 export const useGetAllUsers = () => {
   const load = useCallback(async () => {
-    const response = await apiInstance('auth').get('/users/list', {
+    const response = await apiInstance('merchant').get('/users/list', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('key')?.replace(/"/g, '')}`
       }

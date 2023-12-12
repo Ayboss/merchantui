@@ -25,9 +25,10 @@ const RadioButton: React.FC<RadioButtonProps> = ({ options, onChange }) => {
       {options.map((option, index) => (
         <div
           key={option.id}
-          className='mb-6 pl-4 py-4 bg-white border border-solid border-[#E4E4E7] rounded-[5px] w-[550px] '
+          onClick={() => handleOptionChange(index)}
+          className='mb-6 pl-4 py-4 cursor-pointer bg-white border border-solid border-[#E4E4E7] rounded-[5px] w-[550px] '
         >
-          <label className='flex items-center space-x-4'>
+          <label className='flex items-center cursor-pointer space-x-4'>
             <input
               type='radio'
               value={index}

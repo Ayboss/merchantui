@@ -9,6 +9,7 @@ import TwoRowText from '../PersonalInfo/TwoRowText';
 import ResetIconSVG from '../../../../assets/icons/reset-icon.svg';
 import { Button } from '../../../../components';
 import { useGetApiKeys } from '../../../../services/hooks/useGetApiKeys';
+import { useResetApiMutation } from '../../../../services/hooks';
 
 const CopyIcon = () => (
   <svg
@@ -27,8 +28,20 @@ const CopyIcon = () => (
 const ApiKeys: React.FC = () => {
   const { data } = useGetApiKeys();
 
+  const { mutateAsync, isLoading } = useResetApiMutation();
+
   const onCopy = () => {
     toast.success('Copied successfully');
+  };
+
+  const onReset = () => {
+    mutateAsync()
+      .then(() => {
+        toast.success('Keys resetted successfully 🎉🎉');
+      })
+      .catch((error: any) => {
+        return toast.error(error?.response?.data?.error || error?.response?.data?.message);
+      });
   };
 
   return (
@@ -77,6 +90,8 @@ const ApiKeys: React.FC = () => {
 
           <Button
             className='bg-[#6231F4] mt-10 ml-7 h-[45px] w-[188px] rounded-[10px]'
+            isBusy={isLoading}
+            onClick={onReset}
             name={
               <span className=' text-[11px] flex items-center gap-[10px] justify-center  font-extrabold'>
                 <img src={ResetIconSVG} alt='Reset icon' />

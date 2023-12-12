@@ -9,6 +9,8 @@ export type CreateSettlementAccountRequestPayloadType = {
   bank: string;
 };
 
+export const createSettlementAccountQueryKey = ['create-merchant-settlement-account'];
+
 export const useCreateSettlementAccount = () => {
   const request = useCallback(async (data: CreateSettlementAccountRequestPayloadType) => {
     const response = await apiInstance('settlement').post(
@@ -26,7 +28,7 @@ export const useCreateSettlementAccount = () => {
   }, []);
 
   return useMutation({
-    mutationKey: ['create-merchant-settlement-account'],
+    mutationKey: createSettlementAccountQueryKey,
     mutationFn: request
   });
 };
