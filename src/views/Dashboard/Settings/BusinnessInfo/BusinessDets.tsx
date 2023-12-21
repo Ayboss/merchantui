@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TwoRowText from '../PersonalInfo/TwoRowText';
-import EditIcon from '../../../../assets/img/edit_Icon.png';
-import { Button } from '../../../../components';
+// import EditIcon from '../../../../assets/img/edit_Icon.png';
+// import { Button } from '../../../../components';
 import { useProfileQuery } from '../../../../services/hooks/useGetProfileQuery';
 import Modal from './Modal';
 
@@ -10,9 +10,9 @@ const ProfileInfo: React.FC<{}> = () => {
 
   const { data } = useProfileQuery();
 
-  const handleEditClick = () => {
-    setIsModalOpen(true);
-  };
+  // const handleEditClick = () => {
+  //   setIsModalOpen(true);
+  // };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -43,7 +43,7 @@ const ProfileInfo: React.FC<{}> = () => {
         <TwoRowText label='Business Description' value={data?.data?.businessInformation} />
       </div>
       <div className='border border-solid border-[#F5F6FA] my-3'></div>
-      <Button
+      {/* <Button
         onClick={() => handleEditClick()}
         className='bg-[#6231F4] ml-7 mt-5 w-[188px] h-[45px] rounded-[10px]'
         name={
@@ -52,7 +52,7 @@ const ProfileInfo: React.FC<{}> = () => {
             Edit Description
           </span>
         }
-      />
+      /> */}
       {isModalOpen && <Modal onClose={closeModal} />}
     </div>
   );

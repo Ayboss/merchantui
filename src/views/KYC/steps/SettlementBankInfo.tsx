@@ -18,8 +18,8 @@ import {
 import { PRIVATE_PATHS } from '../../../routes/paths';
 
 export const SettlementBankInfo: React.FC<
-  Partial<ChildComponentsDefaultProps> & { onlySettlmentInfo?: boolean }
-> = ({ onlySettlmentInfo }) => {
+  Partial<ChildComponentsDefaultProps> & { onlySettlmentInfo?: boolean; onClose?: () => void }
+> = ({ onlySettlmentInfo, onClose }) => {
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
   const { mutateAsync: verifyBankInfo, isLoading, data: bankDetails } = useVerifyBankAccount();
   const { mutateAsync: updateSettlementDetails, isLoading: isSettlementLoading } =
@@ -89,7 +89,11 @@ export const SettlementBankInfo: React.FC<
       }
 
       toast.success('Settlement Information updated successfully 🎉🎉');
-      navigate(PRIVATE_PATHS.OVERVIEW);
+      if (onlySettlmentInfo) {
+        onClose!();
+      } else {
+        navigate(PRIVATE_PATHS.OVERVIEW);
+      }
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.errors)) {
         const errorMessages = error?.response?.data?.errors;

@@ -10,7 +10,7 @@ const AddBank: React.FC<AddBankProps> = ({ onClose }) => {
   return (
     <Popup title='Settlement Bank Information' onClose={onClose}>
       <p className='text-[#6F7482] text-[16px] mb-10'>Setup your preferred bank for settlements</p>
-      <SettlementBankInfo onlySettlmentInfo />
+      <SettlementBankInfo onClose={onClose} onlySettlmentInfo />
     </Popup>
   );
 };
