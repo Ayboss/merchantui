@@ -7,6 +7,7 @@ import BorderDivider from '../BorderDIvider';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
 import { Button } from '../../../../components';
 import { useGetWebHooks, useWebHookMutation } from '../../../../services/hooks';
+import { CustomToastBody } from '../../../../components/CustomToastBody';
 import InputContainer from './InputContainer';
 
 const WebHooks: React.FC = () => {
@@ -48,7 +49,19 @@ const WebHooks: React.FC = () => {
       ...webhookUrls
     })
       .then(() => {
-        toast.success('Webhook updated successfully 🎉🎉');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Webhook updated successfully 🎉🎉'
+              toastId={t.id}
+              type='success'
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
       })
       .catch((error: any) => {
         if (Array.isArray(error?.response?.data?.errors)) {
