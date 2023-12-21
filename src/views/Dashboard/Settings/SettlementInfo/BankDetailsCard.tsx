@@ -35,7 +35,7 @@ const BankDetailsCard: React.FC<any> = () => {
     }
   }, [settlementDetails?.data]);
 
-  if (settlementDetailsLoading || settlementDetails?.data?.length! < 1) {
+  if (!settlementDetailsLoading && settlementDetails?.data?.length! < 1) {
     return <EmptyWalletCard />;
   }
 
@@ -71,10 +71,8 @@ const BankDetailsCard: React.FC<any> = () => {
       <div className='w-full flex gap-3 items-center'>
         <CopyToClipboard
           onCopy={onCopy}
-          text={JSON.stringify({
-            accountNumber: activeWallet?.accountNumber,
-            bankName: activeWallet?.bank
-          })}
+          text={`accountNumber: ${activeWallet?.accountNumber}
+                  bank: ${activeWallet?.bank}`}
         >
           <Button
             isBusy={settlementDetailsLoading}

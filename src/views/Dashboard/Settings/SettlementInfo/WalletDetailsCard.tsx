@@ -24,6 +24,17 @@ const WalletDetailsCard: React.FC = () => {
     }
   }, [merchantAccount?.data?.content]);
 
+  if (merchantAccount?.data?.content?.length! < 1 && !merchantAccountLoading) {
+    return (
+      <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
+        <p className='text-[#444] text-[16px] font-semibold'>Virtual Account Details</p>
+        <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
+        <FlexRow leftItem='No Wallet Found' rightItem='' />
+        <div className='border border-[#E4E4E7] mt-3 mb-5'></div>
+      </div>
+    );
+  }
+
   return (
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
       <p className='text-[#444] text-[16px] font-semibold'>Virtual Account Details</p>
@@ -56,10 +67,10 @@ const WalletDetailsCard: React.FC = () => {
       <div className='border border-[#E4E4E7] mt-3 mb-5'></div>
       <CopyToClipboard
         onCopy={onCopy}
-        text={JSON.stringify({
-          accountNumber: activeWallet?.accountNumber,
-          bankName: activeWallet?.bankName
-        })}
+        text={`
+          accountNumber: ${activeWallet?.accountNumber},
+          bank: ${activeWallet?.bankName}
+        `}
       >
         <Button
           isBusy={merchantAccountLoading}
