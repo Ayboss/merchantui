@@ -3,8 +3,9 @@ import toast from 'react-hot-toast';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import CopySVG from '../../../../assets/icons/copy-icon.svg';
 import AddSVG from '../../../../assets/icons/Add-icon.svg';
-import { Button, CurrencyCardPicker, CurrencyCardPickerSkeleton } from '../../../../components';
+import { Button, CurrencyCardPicker, LoaderControl } from '../../../../components';
 import { useGetSettlementAccounts } from '../../../../services/hooks/useGetSettlementAccounts';
+import { CustomToastBody } from '../../../../components/CustomToastBody';
 import FlexRow from './FlexRow';
 import EmptyWalletCard from './EmptyWallet';
 import AddBank from './AddBank';
@@ -26,7 +27,20 @@ const BankDetailsCard: React.FC<any> = () => {
   const [activeWallet, setActiveWallet] = useState<any>(null);
 
   const onCopy = () => {
-    toast.success('Copied successfully');
+    toast.custom(
+      (t) => (
+        <CustomToastBody
+          text='Copied successfully 🎉🎉'
+          toastId={t.id}
+          type='success'
+          className='mt-[140px]  ml-[690px] w-[400px] '
+        />
+      ),
+      {
+        duration: 7000,
+        position: 'top-center'
+      }
+    );
   };
 
   useEffect(() => {
@@ -43,31 +57,35 @@ const BankDetailsCard: React.FC<any> = () => {
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
       <p className='text-[#444] text-[16px] font-semibold'>My Bank Account Details</p>
       <div className='border border-[#E4E4E7] mt-5 mb-7'></div>
-      <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
-        {!settlementDetailsLoading &&
-          settlementDetails?.data &&
-          settlementDetails?.data?.map((item: any, idx: number) => (
-            <CurrencyCardPicker
-              key={item.accountNumber + '' + idx}
-              currency={item.currencyCode}
-              topText='Account Number'
-              amount={item.accountNumber}
-              active={item.accountNumber === activeWallet?.accountNumber}
-              onClick={() => setActiveWallet(item)}
-            />
-          ))}
-        {settlementDetailsLoading && (
-          <>
-            <CurrencyCardPickerSkeleton />
-            <CurrencyCardPickerSkeleton />
-            <CurrencyCardPickerSkeleton />
-          </>
-        )}
-      </div>
-      <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
-      <FlexRow leftItem='Bank Name' rightItem={activeWallet?.bank} />
-      <FlexRow leftItem='Account Number' rightItem={activeWallet?.accountNumber} />
-      <FlexRow leftItem='Account Name' rightItem={activeWallet?.accountName} />
+      <LoaderControl
+        loading={settlementDetailsLoading}
+        error={settlementDetailsLoading}
+        // overlay={settlementDetailsLoading}
+        errorTitle='Something went wrong'
+        errorSubTitle='Sorry, try reloading'
+        minHeight={'400px'}
+        // errorControlOnClick={() => refetch()}
+      >
+        <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
+          {!settlementDetailsLoading &&
+            settlementDetails?.data &&
+            settlementDetails?.data?.map((item: any, idx: number) => (
+              <CurrencyCardPicker
+                key={item.accountNumber + '' + idx}
+                currency={item.currencyCode}
+                topText='Account Number'
+                amount={item.accountNumber}
+                active={item.accountNumber === activeWallet?.accountNumber}
+                onClick={() => setActiveWallet(item)}
+              />
+            ))}
+        </div>
+        <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
+        <FlexRow leftItem='Bank Name' rightItem={activeWallet?.bank} />
+        <FlexRow leftItem='Account Number' rightItem={activeWallet?.accountNumber} />
+        <FlexRow leftItem='Account Name' rightItem={activeWallet?.accountName} />
+      </LoaderControl>
+
       <div className='w-full flex gap-3 items-center'>
         <CopyToClipboard
           onCopy={onCopy}

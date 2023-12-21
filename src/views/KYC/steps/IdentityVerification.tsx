@@ -8,6 +8,7 @@ import { Button, CustomInput, inlineButtonClass } from '../../../components';
 import { ChildComponentsDefaultProps } from '..';
 import { UploadBvnRequestPayloadType, useUploadBvn } from '../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../routes/paths';
+import { CustomToastBody } from '../../../components/CustomToastBody';
 
 export const IdentityVerification: React.FC<Partial<ChildComponentsDefaultProps>> = ({
   handleNext
@@ -21,7 +22,20 @@ export const IdentityVerification: React.FC<Partial<ChildComponentsDefaultProps>
   const onSubmit = (values: unknown) => {
     mutateAsync(values as UploadBvnRequestPayloadType)
       .then(() => {
-        toast.success('BVN uploaded successfully');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='BVN uploaded successfully'
+              toastId={t.id}
+              type='success'
+              className='mt-[140px]  ml-[230px] w-[500px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
         localStorage.setItem('isBVNSubmitted', 'true');
         handleNext?.();
       })
@@ -33,7 +47,20 @@ export const IdentityVerification: React.FC<Partial<ChildComponentsDefaultProps>
             toast.error(`${error?.fieldName} ${error?.message}`)
           );
         } else {
-          toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
+          toast.custom(
+            (t) => (
+              <CustomToastBody
+                text={error?.response?.data?.responseMessage || error?.response?.data?.message}
+                toastId={t.id}
+                type='error'
+                className='mt-[140px]  ml-[230px] w-[500px] '
+              />
+            ),
+            {
+              duration: 7000,
+              position: 'top-center'
+            }
+          );
         }
       });
   };
