@@ -54,7 +54,7 @@ export const ChooseBusinessCategory: React.FC<Partial<ChildComponentsDefaultProp
       <Button
         onClick={handleSubmitClick}
         isBusy={isLoading}
-        name='Choose Business Category'
+        name='Continue'
         className='max-w-[180px] ml-auto h-[50px] text-[12px] font-medium mb-[30px]'
       />
     </div>
@@ -76,7 +76,7 @@ export const BusinessItemRadio: React.FC<BusinessItemRadioPropType> = ({
       onClick={onClick}
       className={cn(
         clsx(
-          'bg-white border-[2px] p-[13px] items-start border-gray-200 rounded-lg relative  h-16 w-full flex gap-[15px] cursor-pointer',
+          'bg-white border-[2px] p-[13px] items-center border-gray-200 rounded-lg relative  h-16 w-full flex gap-[15px] cursor-pointer',
           isActive && 'border-[#4A3AFF]'
         )
       )}

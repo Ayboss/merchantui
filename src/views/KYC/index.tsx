@@ -55,7 +55,7 @@ export const KycVerification = () => {
     >
       <WhiteBGContainer
         className={cn(
-          'px-[30px] z-10 pt-[20px] border-[#EFF0F6] shadow-[0px_5px_16px_0px_rgba(8,_15,_52,_0.06)] w-full max-w-[500px] fade-in'
+          'px-[30px] z-10 pt-[20px] border-[#EFF0F6] shadow-[0px_5px_16px_0px_rgba(8,_15,_52,_0.06)] w-full max-w-[500px] fade-in max-h-[600px] overflow-y-auto'
         )}
       >
         <Stepper
@@ -130,7 +130,7 @@ export const KycVerificationContainer: React.FC<React.PropsWithChildren<any>> = 
       setActiveStep(1);
     }
 
-    if (businessType) {
+    if (businessType && businessCategory) {
       setActiveStep(2);
     }
 
