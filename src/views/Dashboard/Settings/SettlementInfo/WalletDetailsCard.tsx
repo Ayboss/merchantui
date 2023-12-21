@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import toast from 'react-hot-toast';
 import CopySVG from '../../../../assets/icons/copy-icon.svg';
-import { Button, CurrencyCardPicker, CurrencyCardPickerSkeleton } from '../../../../components';
+import { Button, CurrencyCardPicker, LoaderControl } from '../../../../components';
+import { CustomToastBody } from '../../../../components/CustomToastBody';
 import { useGetMerchantAccountQuery } from '../../../../services/hooks';
 import FlexRow from './FlexRow';
 
@@ -15,7 +16,20 @@ const WalletDetailsCard: React.FC = () => {
   const [activeWallet, setActiveWallet] = useState<any>(null);
 
   const onCopy = () => {
-    toast.success('Copied successfully');
+    toast.custom(
+      (t) => (
+        <CustomToastBody
+          text='Copied successfully 🎉🎉'
+          toastId={t.id}
+          type='success'
+          className='mt-[140px]  ml-[690px] w-[400px] '
+        />
+      ),
+      {
+        duration: 7000,
+        position: 'top-center'
+      }
+    );
   };
 
   useEffect(() => {
@@ -39,31 +53,35 @@ const WalletDetailsCard: React.FC = () => {
     <div className='w-[450px] border border-[#E4E4E7] bg-white rounded-[5px] ml-10 px-6 py-10 '>
       <p className='text-[#444] text-[16px] font-semibold'>Virtual Account Details</p>
       <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
-      <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
-        {!merchantAccountLoading &&
-          merchantAccount?.data?.content &&
-          merchantAccount?.data?.content?.map((item: any) => (
-            <CurrencyCardPicker
-              key={item.accountNumber}
-              currency={item.currencyCode}
-              topText='Account Number'
-              amount={item.accountNumber}
-              active={item.accountNumber === activeWallet?.accountNumber}
-              onClick={() => setActiveWallet(item)}
-            />
-          ))}
-        {merchantAccountLoading && (
-          <>
-            <CurrencyCardPickerSkeleton />
-            <CurrencyCardPickerSkeleton />
-            <CurrencyCardPickerSkeleton />
-          </>
-        )}
-      </div>
-      <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
-      <FlexRow leftItem='Bank Name' rightItem={activeWallet?.bankName} />
-      <FlexRow leftItem='Account Number' rightItem={activeWallet?.accountNumber} />
-      <FlexRow leftItem='Account Name' rightItem={activeWallet?.accountName} />
+      <LoaderControl
+        loading={merchantAccountLoading}
+        error={merchantAccountLoading}
+        // overlay={merchantAccountLoading}
+        errorTitle='Something went wrong'
+        errorSubTitle='Sorry, try reloading'
+        minHeight={'400px'}
+        // errorControlOnClick={() => refetch()}
+      >
+        <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
+          {!merchantAccountLoading &&
+            merchantAccount?.data?.content &&
+            merchantAccount?.data?.content?.map((item: any) => (
+              <CurrencyCardPicker
+                key={item.accountNumber}
+                currency={item.currencyCode}
+                topText='Account Number'
+                amount={item.accountNumber}
+                active={item.accountNumber === activeWallet?.accountNumber}
+                onClick={() => setActiveWallet(item)}
+              />
+            ))}
+        </div>
+        <div className='border border-[#E4E4E7] mt-5 mb-5'></div>
+        <FlexRow leftItem='Bank Name' rightItem={activeWallet?.bankName} />
+        <FlexRow leftItem='Account Number' rightItem={activeWallet?.accountNumber} />
+        <FlexRow leftItem='Account Name' rightItem={activeWallet?.accountName} />
+      </LoaderControl>
+
       <div className='border border-[#E4E4E7] mt-3 mb-5'></div>
       <CopyToClipboard
         onCopy={onCopy}

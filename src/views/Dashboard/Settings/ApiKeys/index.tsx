@@ -10,6 +10,7 @@ import ResetIconSVG from '../../../../assets/icons/reset-icon.svg';
 import { Button } from '../../../../components';
 import { useGetApiKeys } from '../../../../services/hooks/useGetApiKeys';
 import { useResetApiMutation } from '../../../../services/hooks';
+import { CustomToastBody } from '../../../../components/CustomToastBody';
 
 const CopyIcon = () => (
   <svg
@@ -37,7 +38,20 @@ const ApiKeys: React.FC = () => {
   const onReset = () => {
     mutateAsync()
       .then(() => {
-        toast.success('Keys resetted successfully 🎉🎉');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='API Keys reset was successful 🎉🎉'
+              toastId={t.id}
+              type='success'
+              className='mt-[70px]  ml-[460px] w-[700px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
       })
       .catch((error: any) => {
         return toast.error(error?.response?.data?.error || error?.response?.data?.message);
