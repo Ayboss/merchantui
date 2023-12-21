@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { ChildComponentsDefaultProps } from '..';
 import { useProfileMutation } from '../../../services/hooks/useProfileMutation';
 import { Button } from '../../../components';
+import { CustomToastBody } from '../../../components/CustomToastBody';
 import { BusinessItemRadio } from './ChooseBusinessCategory';
 
 const BUSINESS_TYPE = {
@@ -19,17 +20,58 @@ export const ChooseBusinessType: React.FC<Partial<ChildComponentsDefaultProps>> 
 
   const handleSubmitClick = () => {
     if (businessType === '') {
-      return toast.error('Please select a valid business type');
+      return toast.custom(
+        (t) => (
+          <CustomToastBody
+            text='Please select a valid business type'
+            toastId={t.id}
+            type='error'
+            className='mt-[140px]  ml-[230px] w-[500px] '
+          />
+        ),
+        {
+          duration: 7000,
+          position: 'top-center'
+        }
+      );
     }
     mutateAsync({
       // @ts-expect-error
       businessType
     })
       .then(() => {
-        toast.success('Business Type selected successfully');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Business Type selected successfully'
+              toastId={t.id}
+              type='success'
+              className='mt-[140px]  ml-[230px] w-[500px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
         handleNext?.();
       })
-      .catch(() => toast.error('Error choosing business type. Please try again'));
+      .catch(() =>
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Error choosing business type. Please try again'
+              toastId={t.id}
+              type='error'
+              className='mt-[140px]  ml-[230px] w-[500px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        )
+      );
   };
 
   return (

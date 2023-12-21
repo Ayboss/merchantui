@@ -9,6 +9,7 @@ import {
   BusinessCatgoryResponseType,
   useGetBusinessCategory
 } from '../../../services/hooks/useGetBusinessCategory';
+import { CustomToastBody } from '../../../components/CustomToastBody';
 
 const BusinessTypes = [null, null, null, null, null];
 
@@ -24,17 +25,58 @@ export const ChooseBusinessCategory: React.FC<Partial<ChildComponentsDefaultProp
 
   const handleSubmitClick = () => {
     if (activeBox < 0) {
-      return toast.error('Please select a valid business category');
+      return toast.custom(
+        (t) => (
+          <CustomToastBody
+            text='Please select a valid business category'
+            toastId={t.id}
+            type='error'
+            className='mt-[140px]  ml-[230px] w-[500px] '
+          />
+        ),
+        {
+          duration: 7000,
+          position: 'top-center'
+        }
+      );
     }
     mutateAsync({
       businessCategory: businessCategoryData?.data![activeBox].name,
       categoryId: businessCategoryData?.data![activeBox].id
     })
       .then(() => {
-        toast.success('Business Category selected successfully');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Business Category selected successfully'
+              toastId={t.id}
+              type='success'
+              className='mt-[140px]  ml-[230px] w-[500px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
         handleNext?.();
       })
-      .catch(() => toast.error('Error choosing business category. Please try again'));
+      .catch(() =>
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Error choosing business category. Please try again'
+              toastId={t.id}
+              type='error'
+              className='mt-[140px]  ml-[230px] w-[500px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        )
+      );
   };
 
   return (
