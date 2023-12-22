@@ -12,6 +12,7 @@ import { ChildComponentsDefaultProps } from '..';
 import { useProfileMutation } from '../../../services/hooks/useProfileMutation';
 import { useUploadBusinessDocument } from '../../../services/hooks/useDocumentUpload';
 import { PRIVATE_PATHS } from '../../../routes/paths';
+import { CustomToastBody } from '../../../components/CustomToastBody';
 
 const schema = yup.object({
   businessAddress: yup.string().required(),
@@ -84,10 +85,37 @@ export const BusinessInformation: React.FC<Partial<ChildComponentsDefaultProps>>
 
       await Promise.all([mutateAsync(data), documentUploadAsync(formData)]);
 
-      toast.success('Business Information updated successfully 🎉🎉');
+      toast.custom(
+        (t) => (
+          <CustomToastBody
+            text='Business Information updated successfully 🎉🎉'
+            toastId={t.id}
+            type='success'
+            className='mt-[140px]  ml-[230px] w-[500px] '
+          />
+        ),
+        {
+          duration: 7000,
+          position: 'top-center'
+        }
+      );
+
       handleNext?.();
     } catch (error: any) {
-      return toast.error(error?.response?.data?.error || error?.response?.data?.message);
+      return toast.custom(
+        (t) => (
+          <CustomToastBody
+            text={error?.response?.data?.error || error?.response?.data?.message}
+            toastId={t.id}
+            type='error'
+            className='mt-[180px]  ml-[230px] w-[500px]'
+          />
+        ),
+        {
+          duration: 7000,
+          position: 'top-center'
+        }
+      );
     }
   };
 

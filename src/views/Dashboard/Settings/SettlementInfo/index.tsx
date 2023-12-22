@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SettingsTop from '../SettingsTop';
 import { useGetMerchantAccountQuery } from '../../../../services/hooks';
-import { WebhooksSkeleton } from '../WebHooks';
 import RadioButton from './RadioButtonContainer';
 import { options } from './constants';
 import WalletDetailsCard from './WalletDetailsCard';
@@ -10,14 +9,10 @@ import BankDetailsCard from './BankDetailsCard';
 const SetlmentInfo: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<number>(0);
 
-  const { data: merchantAccount, isLoading: merchantAccountLoading } = useGetMerchantAccountQuery({
+  const { data: merchantAccount } = useGetMerchantAccountQuery({
     page: 1,
     pageSize: 20
   });
-
-  if (merchantAccountLoading) {
-    return <WebhooksSkeleton />;
-  }
 
   const handleOptionChange = (index: number) => {
     setSelectedOption(index);

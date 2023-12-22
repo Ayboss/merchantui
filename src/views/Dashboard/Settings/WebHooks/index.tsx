@@ -5,8 +5,9 @@ import WebHookSVG from '../../../../assets/icons/webhook-icon.svg';
 import Header from '../Header';
 import BorderDivider from '../BorderDIvider';
 import SaveSVG from '../../../../assets/icons/save-icon.svg';
-import { Button } from '../../../../components';
+import { Button, LoaderControl } from '../../../../components';
 import { useGetWebHooks, useWebHookMutation } from '../../../../services/hooks';
+import { CustomToastBody } from '../../../../components/CustomToastBody';
 import InputContainer from './InputContainer';
 
 const WebHooks: React.FC = () => {
@@ -48,7 +49,19 @@ const WebHooks: React.FC = () => {
       ...webhookUrls
     })
       .then(() => {
-        toast.success('Webhook updated successfully 🎉🎉');
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text='Webhook updated successfully 🎉🎉'
+              toastId={t.id}
+              type='success'
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
       })
       .catch((error: any) => {
         if (Array.isArray(error?.response?.data?.errors)) {
@@ -63,9 +76,9 @@ const WebHooks: React.FC = () => {
       });
   };
 
-  if (isGetWebhookLoading) {
-    return <WebhooksSkeleton />;
-  }
+  // if (isGetWebhookLoading) {
+  //   return <WebhooksSkeleton />;
+  // }
 
   return (
     <React.Fragment>
@@ -93,20 +106,30 @@ const WebHooks: React.FC = () => {
               <br /> of the associated event.
             </p>
             <h3 className='font-bold mb-10'>Turn on to activate Webhooks</h3>
-            <InputContainer
-              name='liveUrl'
-              label='Live Webhook'
-              value={liveUrl}
-              placeholder='https://livewebhookurl.com'
-              onChange={onChange}
-            />
-            <InputContainer
-              name='testUrl'
-              label='Test Webhook'
-              value={testUrl}
-              placeholder='https://testwebhookurl.com'
-              onChange={onChange}
-            />
+            <LoaderControl
+              loading={isGetWebhookLoading}
+              // error={isError}
+              overlay={isGetWebhookLoading}
+              errorTitle='Something went wrong'
+              errorSubTitle="Sorry, we couldn't load your transactions, try reloading"
+              minHeight={'400px'}
+              // errorControlOnClick={() => refetch()}
+            >
+              <InputContainer
+                name='liveUrl'
+                label='Live Webhook'
+                value={liveUrl}
+                placeholder='https://livewebhookurl.com'
+                onChange={onChange}
+              />
+              <InputContainer
+                name='testUrl'
+                label='Test Webhook'
+                value={testUrl}
+                placeholder='https://testwebhookurl.com'
+                onChange={onChange}
+              />
+            </LoaderControl>
           </div>
           <BorderDivider />
           <Button
