@@ -166,7 +166,7 @@ const Overview = () => {
               />
             </LoaderControl>
           </ListContainer>
-          <WhiteBGContainer className='w-[30%] overflow-y-auto p-5 flex-grow min-h-[350px]'>
+          <WhiteBGContainer className='w-[30%] overflow-y-auto p-5 flex-grow min-h-[350px] max-h-[500px]'>
             <h3 className=' text-[#444] text-base font-semibold tracking-wide'>Wallet Balance</h3>
             <div className='border-b-[1px] border-solid border-b-[#EBEBED] w-full mt-5' />
             <div className='flex flex-col items-start'>
