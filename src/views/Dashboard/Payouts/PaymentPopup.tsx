@@ -123,8 +123,18 @@ export const PaymentPopup = ({ onClose }: { onClose: () => void }) => {
         <div className='w-full h-[2px] bg-[#F5F6FA] my-4' />
         <p className='text-[#000] text-base font-medium'>Select account to withdraw from</p>
         <div className='w-full overflow-x-auto overflow-y-clip my-4 grid grid-flow-col gap-[15px]'>
+          {walletBalanceLoading && (
+            <>
+              <CurrencyCardPickerSkeleton />
+              <CurrencyCardPickerSkeleton />
+              <CurrencyCardPickerSkeleton />
+            </>
+          )}
+          {walletBalanceData?.data?.length! < 1 && (
+            <p className='text-[#EF4444] text-base font-medium'>No wallet found.</p>
+          )}
           {!walletBalanceLoading &&
-            walletBalanceData?.data &&
+            walletBalanceData?.data?.length! > 1 &&
             walletBalanceData?.data?.map((item) => (
               <CurrencyCardPicker
                 key={item.accountNumber}
@@ -134,13 +144,6 @@ export const PaymentPopup = ({ onClose }: { onClose: () => void }) => {
                 onClick={() => setActiveWallet(item)}
               />
             ))}
-          {walletBalanceLoading && (
-            <>
-              <CurrencyCardPickerSkeleton />
-              <CurrencyCardPickerSkeleton />
-              <CurrencyCardPickerSkeleton />
-            </>
-          )}
         </div>
         <form onSubmit={handleSubmit(handleSubmitClick)} className='flex flex-col gap-[25px]'>
           <CustomInput
@@ -230,6 +233,7 @@ export const PaymentPopup = ({ onClose }: { onClose: () => void }) => {
               isBusy={isMoneySending}
               type={'submit'}
               name='Process Payout'
+              disabled={walletBalanceData?.data?.length! < 1}
               className=' w-[200px] h-[50px] font-medium'
             />
           </div>

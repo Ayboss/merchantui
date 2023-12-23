@@ -4,15 +4,20 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthForm, FormBody, FormHeader, Subtitle, Title } from '../styles';
+import { AuthForm, FormBody, FormHeader, Title } from '../styles';
 import { ResetPasswordPayloadType, useResetPasswordMutation } from '../../../services/hooks';
 import { AuthLayout } from '../../../layouts';
 import { Button, CustomInput } from '../../../components';
 
 const schema = yup.object({
-  email: yup
+  password: yup
     .string()
-    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Must be a valid email address')
+    .required('Password is required')
+    .min(8, 'Password is too short - should be 8 characters minimum.')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase char')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase char')
+    .matches(/[a-zA-Z]+[^a-zA-Z\s]+/, 'at least 1 number or special char (@,!,#, etc).'),
+  password2: yup.string().oneOf([yup.ref('password')], 'Passwords must match')
 });
 
 export const ResetPassword = () => {
@@ -37,7 +42,7 @@ export const ResetPassword = () => {
     mutateAsync(fields as ResetPasswordPayloadType)
       .then((data: any) => {
         toast.success(data?.data);
-        navigate('/login', { replace: true });
+        navigate('/login');
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.message || error?.response?.data?.responseMessage);
@@ -49,16 +54,28 @@ export const ResetPassword = () => {
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
         <FormHeader className='mb-[40px]'>
           <Title className='text-[#444] text-[40px] font-bold'>Reset Password</Title>
-          <Subtitle className='text-[18px] font-normal text-[#6F7482] tracking-[0.18px]'>
-            Enter your email address to reset your password
-          </Subtitle>
+          {/* <Subtitle className='text-[18px] font-normal text-[#6F7482] tracking-[0.18px]'>
+            Enter your new password
+          </Subtitle> */}
         </FormHeader>
-        <FormBody>
+        <FormBody className='gap-5 flex flex-col'>
           <CustomInput
-            label='Email Address'
-            placeholder='sample@email.com'
-            errorText={errors.email?.message}
-            {...register('email')}
+            errorText={errors.password?.message}
+            type='password'
+            label='New Password'
+            {...register('password', {
+              required: true,
+              pattern: /^[0-9]+$/
+            })}
+          />
+          <CustomInput
+            errorText={errors.password2?.message}
+            type='password'
+            label='Confirm Password'
+            {...register('password2', {
+              required: true,
+              pattern: /^[0-9]+$/
+            })}
           />
           <Button
             name='Reset Password'

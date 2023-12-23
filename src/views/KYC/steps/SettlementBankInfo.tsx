@@ -16,8 +16,11 @@ import {
   useVerifyBankAccount
 } from '../../../services/hooks';
 import { PRIVATE_PATHS } from '../../../routes/paths';
+import { CustomToastBody } from '../../../components/CustomToastBody';
 
-export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> = () => {
+export const SettlementBankInfo: React.FC<
+  Partial<ChildComponentsDefaultProps> & { onlySettlmentInfo?: boolean; onClose?: () => void }
+> = ({ onlySettlmentInfo, onClose }) => {
   const { data: banksData, isLoading: isLoadingBanks } = useGetBanksQuery();
   const { mutateAsync: verifyBankInfo, isLoading, data: bankDetails } = useVerifyBankAccount();
   const { mutateAsync: updateSettlementDetails, isLoading: isSettlementLoading } =
@@ -43,8 +46,38 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
         beneficiaryBank: bankName
       })
         // eslint-disable-next-line no-console
-        .then(() => toast.success('Account information verfied successfully'))
-        .catch(() => toast.error('Could not verify bank details'));
+        .then(() =>
+          toast.custom(
+            (t) => (
+              <CustomToastBody
+                text='Account information verfied successfully'
+                toastId={t.id}
+                type='success'
+                className='mt-[140px]  ml-[200px] w-[500px] '
+              />
+            ),
+            {
+              duration: 7000,
+              position: 'top-center'
+            }
+          )
+        )
+        .catch(() =>
+          toast.custom(
+            (t) => (
+              <CustomToastBody
+                text='Could not verify bank details'
+                toastId={t.id}
+                type='error'
+                className='mt-[140px]  ml-[200px] w-[500px] '
+              />
+            ),
+            {
+              duration: 7000,
+              position: 'top-center'
+            }
+          )
+        );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountNumber, bankName]);
@@ -62,28 +95,70 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
     values
   ) => {
     try {
-      await Promise.all([
-        updateSettlementDetails({
-          bankCode,
-          accountNumber,
-          accountName: bankDetails?.data?.accountName,
-          bank: bankName
-        }),
-        createPin({
-          pin: values.pin,
-          pinConfirmation: values.pinConfirmation
-        })
-      ]);
+      if (onlySettlmentInfo) {
+        await Promise.all([
+          updateSettlementDetails({
+            bankCode,
+            accountNumber,
+            accountName: bankDetails?.data?.accountName,
+            bank: bankName
+          })
+        ]);
+      } else {
+        await Promise.all([
+          updateSettlementDetails({
+            bankCode,
+            accountNumber,
+            accountName: bankDetails?.data?.accountName,
+            bank: bankName
+          }),
+          createPin({
+            pin: values.pin,
+            pinConfirmation: values.pinConfirmation
+          })
+        ]);
+      }
 
-      toast.success('Settlement Information updated successfully 🎉🎉');
-      navigate(PRIVATE_PATHS.OVERVIEW);
+      toast.custom(
+        (t) => (
+          <CustomToastBody
+            text='Settlement Information updated successfully 🎉🎉'
+            toastId={t.id}
+            type='success'
+            className='mt-[140px]  ml-[230px] w-[400px] '
+          />
+        ),
+        {
+          duration: 7000,
+          position: 'top-center'
+        }
+      );
+
+      if (onlySettlmentInfo) {
+        onClose!();
+      } else {
+        navigate(PRIVATE_PATHS.OVERVIEW);
+      }
     } catch (error: any) {
       if (Array.isArray(error?.response?.data?.errors)) {
         const errorMessages = error?.response?.data?.errors;
 
         errorMessages.forEach((error: any) => toast.error(`${error?.fieldName} ${error?.message}`));
       } else {
-        toast.error(error?.response?.data?.responseMessage || error?.response?.data?.message);
+        toast.custom(
+          (t) => (
+            <CustomToastBody
+              text={error?.response?.data?.responseMessage || error?.response?.data?.message}
+              toastId={t.id}
+              type='error'
+              className='mt-[140px]  ml-[230px] w-[400px] '
+            />
+          ),
+          {
+            duration: 7000,
+            position: 'top-center'
+          }
+        );
       }
     }
   };
@@ -141,33 +216,37 @@ export const SettlementBankInfo: React.FC<Partial<ChildComponentsDefaultProps>> 
           InputClassName=' h-[40px]  bg-[#F4F4F5]'
         />
 
-        <div className='w-full'>
-          <h3 className='text-[#444] text-base font-bold tracking-[0.18px]'>
-            Setup Transaction Pin
-          </h3>
-          <p className='text-[#6F7482] font-normal leading-[24px] text-[12px]'>
-            This pin will be required for every payout you initiate
-          </p>
-        </div>
+        {!onlySettlmentInfo && (
+          <div className='w-full'>
+            <h3 className='text-[#444] text-base font-bold tracking-[0.18px]'>
+              Setup Transaction Pin
+            </h3>
+            <p className='text-[#6F7482] font-normal leading-[24px] text-[12px]'>
+              This pin will be required for every payout you initiate
+            </p>
+          </div>
+        )}
 
-        <div className='w-full flex <1024:flex-col gap-5 items-start'>
-          <CustomInput
-            placeholder='* * * *'
-            label='Transaction Pin'
-            className='w-full'
-            type='password'
-            InputClassName=' h-[40px]'
-            {...register('pin', { required: true })}
-          />
-          <CustomInput
-            placeholder='* * * *'
-            label='Re-enter Transaction Pin'
-            className='w-full'
-            InputClassName=' h-[40px]'
-            type='password'
-            {...register('pinConfirmation', { required: true })}
-          />
-        </div>
+        {!onlySettlmentInfo && (
+          <div className='w-full flex <1024:flex-col gap-5 items-start'>
+            <CustomInput
+              placeholder='* * * *'
+              label='Transaction Pin'
+              className='w-full'
+              type='password'
+              InputClassName=' h-[40px]'
+              {...register('pin', { required: true })}
+            />
+            <CustomInput
+              placeholder='* * * *'
+              label='Re-enter Transaction Pin'
+              className='w-full'
+              InputClassName=' h-[40px]'
+              type='password'
+              {...register('pinConfirmation', { required: true })}
+            />
+          </div>
+        )}
 
         <div className='w-full mt-10 flex items-center justify-between'>
           <Button

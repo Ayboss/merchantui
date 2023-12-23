@@ -10,11 +10,12 @@ export type CurrencyCardPickerPropsType = {
   currency: 'NGN';
   active: boolean;
   amount: number;
+  topText?: string;
   onClick: () => void;
 };
 
 export const CurrencyCardPicker: React.FC<Partial<CurrencyCardPickerPropsType>> = (props) => {
-  const { amount = 0, currency = 'NGN', active = true, onClick } = props;
+  const { amount = 0, currency = 'NGN', active = true, onClick, topText } = props;
 
   return (
     <button
@@ -29,10 +30,16 @@ export const CurrencyCardPicker: React.FC<Partial<CurrencyCardPickerPropsType>> 
       <div className='flex items-center gap-[10px] py-[25px] px-[10px] '>
         <img className=' h-10 w-10' src={CurrencyToFlagMap[currency]} alt='Country Flag' />
         <div className='flex items-start flex-col'>
-          <p className='text-[#6F7482] font-semibold text-[14px] tracking-[1px]'>NGN Balance</p>
-          <p className='text-[#444] text-base font-bold leading-normal'>{`${
-            CurrencyToSymbolMap[currency]
-          }${formatNumber(amount)}`}</p>
+          <p className='text-[#6F7482] font-semibold text-[14px] tracking-[1px]'>
+            {topText ?? 'NGN Balance'}
+          </p>
+          {topText ? (
+            <p className='text-[#444] text-base font-bold leading-normal'>{amount}</p>
+          ) : (
+            <p className='text-[#444] text-base font-bold leading-normal'>{`${
+              CurrencyToSymbolMap[currency]
+            }${formatNumber(amount)}`}</p>
+          )}
         </div>
         <div
           className={cn(

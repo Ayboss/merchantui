@@ -13,6 +13,16 @@ export enum PRIVATE_PATHS {
   //   ---------------------- //
   TRANSACTIONS = '/transactions',
   SETTINGS = '/settings',
+  // Under SETTINGS
+  PERSONAL_INFO = '/settings/personal-info',
+  BUSINESS_INFO = '/settings/business-info',
+  PAYMENT_METHODS = '/settings/payment-method',
+  SETTLEMENT_INFO = '/settings/settlement-info',
+  ACCOUNT_SECURITY = '/settings/account-security',
+  MANAGE_USERS = '/settings/manage-users',
+  API_KEYS = '/settings/api-keys',
+  WEB_HOOKS = '/settings/webhooks',
+  //
   SETTLEMENTS = '/settlements',
   PAYOUTS = '/payouts',
   PAYOUT_OPTIONS = '/payouts/options',

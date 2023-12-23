@@ -10,6 +10,14 @@ import Bvn from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/Bvn'
 import Others from '../views/Dashboard/Onboarding/RegisteredBusinessFlow/Flows/Others';
 import Transactions from '../views/Dashboard/Transactions/index';
 import Settings from '../views/Dashboard/Settings/index';
+import PersonalInfo from '../views/Dashboard/Settings/PersonalInfo';
+import BusinessInfo from '../views/Dashboard/Settings/BusinnessInfo/Index';
+import SettlementInfo from '../views/Dashboard/Settings/SettlementInfo';
+import PaymentMethods from '../views/Dashboard/Settings/PaymentMethods';
+import AccountSecurity from '../views/Dashboard/Settings/AccountSecurity';
+import ManageUsers from '../views/Dashboard/Settings/ManageUsers';
+import WebHooks from '../views/Dashboard/Settings/WebHooks';
+import ApiKeys from '../views/Dashboard/Settings/ApiKeys';
 import { ForgetPassword, Login, ResetPassword, Signup } from '../views/Auth';
 import Overview from '../views/Dashboard/Overview';
 import { Payouts } from '../views/Dashboard/Payouts';
@@ -20,6 +28,7 @@ import Settlements from '../views/Dashboard/Settlements';
 import { KycVerification } from '../views/KYC';
 import { ServiceStatus } from '../views/Dashboard/ServiceStatus';
 import { WalletHistory } from '../views/Dashboard/WalletHistory';
+
 import { PRIVATE_PATHS, REGULAR_PATHS } from './paths';
 
 export const AppRouter = () => {
@@ -31,6 +40,14 @@ export const AppRouter = () => {
     REGISTERED_BUSINESS,
     REGISTERED_DOCUMENTS,
     SETTINGS,
+    PERSONAL_INFO,
+    BUSINESS_INFO,
+    SETTLEMENT_INFO,
+    PAYMENT_METHODS,
+    ACCOUNT_SECURITY,
+    MANAGE_USERS,
+    API_KEYS,
+    WEB_HOOKS,
     TRANSACTIONS,
     // BUSINESS_ACTIVATION,
     BUSINESS_INFORMATION,
@@ -71,6 +88,15 @@ export const AppRouter = () => {
         <Route path={TRANSACTIONS} element={<Transactions />} />
         <Route path={SETTLEMENTS} element={<Settlements />} />
         <Route path={SETTINGS} element={<Settings />} />
+        <Route path={PERSONAL_INFO} element={<PersonalInfo />} />
+        <Route path={BUSINESS_INFO} element={<BusinessInfo />} />
+        <Route path={SETTLEMENT_INFO} element={<SettlementInfo />} />
+        <Route path={PAYMENT_METHODS} element={<PaymentMethods />} />
+        <Route path={ACCOUNT_SECURITY} element={<AccountSecurity />} />
+        <Route path={MANAGE_USERS} element={<ManageUsers />} />
+        <Route path={API_KEYS} element={<ApiKeys />} />
+        <Route path={WEB_HOOKS} element={<WebHooks />} />
+
         <Route path={PAYOUTS} element={<Payouts />}>
           <Route path={PAYOUT_OPTIONS} element={<PayoutOptions />} />
           <Route path={PAYOUT_HISTORY} element={<PayoutHistory />} />

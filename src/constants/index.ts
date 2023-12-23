@@ -1,11 +1,8 @@
 import HomeIcon from '../assets/icons/home-icon.svg';
 import TransactionsIcon from '../assets/icons/transactions-icon.svg';
 import PaymentsIcon from '../assets/icons/payments-icon.svg';
-// import ProductsIcon from '../assets/icons/products-icon.svg';
-// import AccountIcon from '../assets/icons/accounts-icon.svg';
-// import StorefrontIcon from '../assets/icons/storefront-icon.svg';
-// import DevelopersIcon from '../assets/icons/developers-icon.svg';
-// import SettingsIcon from '../assets/icons/settings-icon.svg';
+
+import SettingsIcon from '../assets/icons/settings-icon.svg';
 
 import SelectButtonIcon1 from '../assets/icons/selectButton-icon1.svg';
 import SelectButtonIcon2 from '../assets/icons/selectButton-icon2.svg';
@@ -30,7 +27,7 @@ export const NavLinks = [
     url: '/payouts/history',
     title: 'Payouts',
     icon: PaymentsIcon
-  }
+  },
   // {
   //   url: '/products',
   //   title: 'Products',
@@ -51,11 +48,11 @@ export const NavLinks = [
   //   title: 'Developers',
   //   icon: DevelopersIcon
   // },
-  // {
-  //   url: '/settings',
-  //   title: 'Settings',
-  //   icon: SettingsIcon
-  // }
+  {
+    url: '/settings',
+    title: 'Settings',
+    icon: SettingsIcon
+  }
 ];
 
 export const BusinessTypes = [
