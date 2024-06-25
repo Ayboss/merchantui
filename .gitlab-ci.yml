@@ -28,6 +28,7 @@ build_image_prod:
     name: production
   only: 
     - master
+    - main
 
 
 
@@ -56,4 +57,5 @@ deploy_prod_app:
     - echo "$BUILD_JOB_ID"
   only: 
     - master
+    - main
 
