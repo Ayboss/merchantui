@@ -22,7 +22,7 @@ const SettingsTop: React.FC = () => {
       case PRIVATE_PATHS.MANAGE_USERS:
         return 'Manage Users';
       case PRIVATE_PATHS.API_KEYS:
-        return 'API Keys';
+        return 'API Client Credentials';
       case 'PRIVATE_PATHS.WEB_HOOKS':
         return 'Webhooks';
       default:

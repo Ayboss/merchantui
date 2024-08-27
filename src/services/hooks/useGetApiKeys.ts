@@ -7,7 +7,9 @@ export const GET_API_QUERY_KEY = ['GET_API_QUERY_KEY'];
 export type ApiKeysResponseType = {
   data: {
     liveKey: string;
+    liveClientId: string;
     sandboxKey: string;
+    sandboxClientId: string;
   };
 };
 

@@ -67,10 +67,38 @@ const ApiKeys: React.FC = () => {
           <div className='bg-[#F5F5F8] w-[250px]  flex flex-col items-center py-5 px-5'>
             <h2 className='text-[16px] text-[#444] font-semibold mb-5'>About API Keys</h2>
             <p className='text-[16px] text-[#444] font-normal text-center pb-2'>
-              Your API Keys are an essential part of your business with us. Your API Key will be
+              Your API Client Credentials are an essential part of your business with us. Your API Key will be
               required before you can make calls to any of our services or receive payments linked
               to this account. This applies to both test and live transactions
             </p>
+          </div>
+        </div>
+        <div className='w-[746px] h-[560px] bg-white rounded-[12px] ml-7 pt-8'>
+          <Header title='Client IDs' />
+          <BorderDivider />
+          <div className='text-[16px] text-[444] mx-7 mt-7 mb-36'>
+            <TwoRowText
+              label='Test Client ID'
+              value={data?.data?.sandboxClientId! ?? '* * * * * * * * * * * * * * * * * * * * * *'}
+              render={
+                <CopyToClipboard onCopy={onCopy} text={data?.data?.sandboxClientId!}>
+                  <button>
+                    <CopyIcon />
+                  </button>
+                </CopyToClipboard>
+              }
+            />
+            <TwoRowText
+              label='Live Client ID'
+              value={data?.data?.liveClientId ?? '* * * * * * * * * * * * * * * * * * * * * *'}
+              render={
+                <CopyToClipboard onCopy={onCopy} text={data?.data?.liveClientId!}>
+                  <button>
+                    <CopyIcon />
+                  </button>
+                </CopyToClipboard>
+              }
+            />
           </div>
         </div>
         <div className='w-[746px] h-[560px] bg-white rounded-[12px] ml-7 pt-8'>
