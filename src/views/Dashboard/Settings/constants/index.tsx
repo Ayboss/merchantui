@@ -140,8 +140,8 @@ export const SettingItems = [
         />
       </svg>
     ),
-    title: 'API Keys',
-    text: 'Copy and paste live API integration keys and view testcredentials',
+    title: 'API Client Credentials',
+    text: 'View Live and Sandbox client credentials',
     path: API_KEYS
   },
   {
